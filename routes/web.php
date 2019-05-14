@@ -11,12 +11,31 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home');
 });
 
+Route::get('/home/about', function () {
+    return view('about');
+});
+
+Route::get('/start-sampling', function () {
+    return view('start_sampling');
+});
+
+Route::get('/data-management', function () {
+	return view('data_management');
+});
+
+Route::get('/qr-codes', function() {
+	return view('qr_code');
+});
+
+Route::get('/downloads', function() {
+	return view('downloads');
+});
 

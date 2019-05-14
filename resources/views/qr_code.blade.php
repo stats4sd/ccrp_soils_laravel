@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <title>CCRP Soils Data Platform</title>
+  <title>QR Codes-CCRP Soils Data Platform</title>
 </head>
 
 <body>
@@ -63,33 +63,25 @@
 
     <div class="btn dropdown">
     <a href="/groups/create/step/group-details/" style="color:black;">Create a Project<b class="caret"></b></a>
-
-
-
-
-</section>
-<section class="content mb-5" id="introduction">
-  <h1>Introduction</h1>
-  <p>This data platform is intended to help CCRP research projects collect and organise their soil sample data.</p>
-  <p>Using the tools within the platform will help you:</p>
-  <ul>
-    <li>Uniquely identify each soil sample your project collects with a QR code.</li>
-    <li>Enter data about the soil samples, such as location, date of sampling and other key information.</li>
-    <li>Enter readings from your soil analyses and automatically calculate the results.</li>
-    <li>Save the readings and results to a secure database.</li>
-    <li>Automatically merge results from different analyses with your main sample information into a single dataset.</li>
-  </ul>
-  <p>If you work with soils, and are interested in using the Soil Health Assessment Toolkit developed by the team at <a href="https://smallholder-sha.org/"><u>smallholder-sha.org</u></a>, we recommend exploring this platform to see how these tools can help your workflow.</p>
 </section>
 
 
-<section class="content mb-5" id="whoweare">
-  <h3><strong>Who are we?</strong></h3>
-  <p>The platform is a collaboration between the Research Methods Support team at <a href="https://stats4sd.org/"><u>Stats4SD</u></a> and the Cross-cutting Soils project funded by the McKnight foundation’s <a href="http://ccrp.org/"><u>Collaborative Crop Research Program (CCRP)</u></a>.</p>
-  <p>This website and associated resources are created by the CCRP Research Methods Support team and Cross-cutting Soils Project, in association with the <a href="http://ccrp.org/"><u>Collaborative Crop Research Program</u></a>. All data present in the platform remains the property of the individual projects using the platform.</p>
+
+<section class="content mb-5" id="generate_qr_code">
+  <h3 class="mb-5"><b>Generate QR Codes</b></h3>
+  <p>Use this page to generate QR codes that aren't linked to a specific location or farmer. This is used if you are getting quickly setup, or are mainly using the toolkit to aid with analysis of samples, and are managing your data elsewhere.</p>
+  <p>Click the button below to generate a sheet of 6 sample codes for printing. Every code will be unique within the system. Simply generate and print as many sheets as you need for your work.</p>
+  
 </section>
+<section>
+  <button type="button" class="btn btn-dark"><b>GENERATE CODE SHEET FOR PRINTING</b></button>
+</section>
+
 </div>
 </div>
+
+
+
 
 <div class="row">
   <div class="container">

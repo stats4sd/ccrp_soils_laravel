@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <title>CCRP Soils Data Platform</title>
+  <title>Start Sampling-CCRP Soils Data Platform</title>
 </head>
 
 <body>
@@ -69,24 +69,22 @@
 
 </section>
 <section class="content mb-5" id="introduction">
-  <h1>Introduction</h1>
-  <p>This data platform is intended to help CCRP research projects collect and organise their soil sample data.</p>
-  <p>Using the tools within the platform will help you:</p>
+  <h1 class="mb-5"><strong>Start Sampling</strong></h1>
+  <h3><strong>Option 1 – use this data platform</strong></h3>
+  <p>For more information on the platform, how it’s built and how it can help your data collection and processing for soil data, see the About page.</p>
+  <p>To collect data through this platform, please do the following:</p>
+  <ol>
+    <li>Check that you have added your Kobotoolbox username to your project.</li>
+    <li>Go to the Data Management page, to create a set of forms and see data you have collected.</li>
+  </ol>
+
+  <h3 class="mt-5"><strong>Option 2 – use your own system</strong></h3>
+  <p>To start sampling using our forms within your own data management system, you will need to:</p>
   <ul>
-    <li>Uniquely identify each soil sample your project collects with a QR code.</li>
-    <li>Enter data about the soil samples, such as location, date of sampling and other key information.</li>
-    <li>Enter readings from your soil analyses and automatically calculate the results.</li>
-    <li>Save the readings and results to a secure database.</li>
-    <li>Automatically merge results from different analyses with your main sample information into a single dataset.</li>
+    <li>Download the XLS forms from our downloads page</li>
+    <li>Upload them to your ODK Aggregate service. (e.g. Kobotoolbox, Ona.io, SurveyCTO).</li>
+    <li>Use our QR generation tool to create QR codes for your soil samples.</li>
   </ul>
-  <p>If you work with soils, and are interested in using the Soil Health Assessment Toolkit developed by the team at <a href="https://smallholder-sha.org/"><u>smallholder-sha.org</u></a>, we recommend exploring this platform to see how these tools can help your workflow.</p>
-</section>
-
-
-<section class="content mb-5" id="whoweare">
-  <h3><strong>Who are we?</strong></h3>
-  <p>The platform is a collaboration between the Research Methods Support team at <a href="https://stats4sd.org/"><u>Stats4SD</u></a> and the Cross-cutting Soils project funded by the McKnight foundation’s <a href="http://ccrp.org/"><u>Collaborative Crop Research Program (CCRP)</u></a>.</p>
-  <p>This website and associated resources are created by the CCRP Research Methods Support team and Cross-cutting Soils Project, in association with the <a href="http://ccrp.org/"><u>Collaborative Crop Research Program</u></a>. All data present in the platform remains the property of the individual projects using the platform.</p>
 </section>
 </div>
 </div>

@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <title>CCRP Soils Data Platform</title>
+  <title>Data Management-CCRP Soils Data Platform</title>
 </head>
 
 <body>
@@ -63,33 +63,44 @@
 
     <div class="btn dropdown">
     <a href="/groups/create/step/group-details/" style="color:black;">Create a Project<b class="caret"></b></a>
-
-
-
-
-</section>
-<section class="content mb-5" id="introduction">
-  <h1>Introduction</h1>
-  <p>This data platform is intended to help CCRP research projects collect and organise their soil sample data.</p>
-  <p>Using the tools within the platform will help you:</p>
-  <ul>
-    <li>Uniquely identify each soil sample your project collects with a QR code.</li>
-    <li>Enter data about the soil samples, such as location, date of sampling and other key information.</li>
-    <li>Enter readings from your soil analyses and automatically calculate the results.</li>
-    <li>Save the readings and results to a secure database.</li>
-    <li>Automatically merge results from different analyses with your main sample information into a single dataset.</li>
-  </ul>
-  <p>If you work with soils, and are interested in using the Soil Health Assessment Toolkit developed by the team at <a href="https://smallholder-sha.org/"><u>smallholder-sha.org</u></a>, we recommend exploring this platform to see how these tools can help your workflow.</p>
 </section>
 
 
-<section class="content mb-5" id="whoweare">
-  <h3><strong>Who are we?</strong></h3>
-  <p>The platform is a collaboration between the Research Methods Support team at <a href="https://stats4sd.org/"><u>Stats4SD</u></a> and the Cross-cutting Soils project funded by the McKnight foundation’s <a href="http://ccrp.org/"><u>Collaborative Crop Research Program (CCRP)</u></a>.</p>
-  <p>This website and associated resources are created by the CCRP Research Methods Support team and Cross-cutting Soils Project, in association with the <a href="http://ccrp.org/"><u>Collaborative Crop Research Program</u></a>. All data present in the platform remains the property of the individual projects using the platform.</p>
+
+<section class="content mb-5" id="form_data_management">
+  <div class="alert alert-info">
+    To view data for a project you must first be invited to the group. Please either go to the projects page and request membership for your project, or contact rms@stats4sd.org.
+  </div>
+
+  <h1 class="mb-5"><strong>Form and Data Management</strong></h1>
+  <p>This page is where you manage the forms that are shared with you through Kobotoolbox, and review and download data collected through those forms.</p>
+  <p>To collect data through this platform, please do the following:</p>
+  <div class="card card-login mx-5 mt-5">
+    <div class="card-header"><h3><strong>Instructions</strong></h3></div>
+      <div class="card-body">
+        <h4><b>1. Sync Forms to Kobotoolbox</b></h4>
+          <p>The table below shows the forms available for your project. Deployed forms are shared with your Kobotoolbox account - you should be able to see them by logging into Kobotools using your project account. To deploy a form, click the button in the Status column.</p>
+        <h4 class="mt-5"><b>2. Collect Data</b></h4>
+          <p>With your forms deployed, you can collect data via Kobotoolbox / ODK Collect in the normal way. To pull new records from Kobotoolbox, click the button above. This will update the table with the number of records collected with each form.</p>
+        <h4 class="mt-5"><b>3. Merge and download data</b></h4>
+          <p>You can download data from Kobotoolbox directly, but this will give you one data file per form. Using this platform, you can get a merged dataset, containing 1 row per soil sample and data from all the forms above.</p>
+      </div>
+    </div>
+</section>
+<section>
+  <div class="card card-login mx-5 mt-5">
+    <div class="card-header"><h3><b>Forms and Data</b></h3></div>
+      <div class="card-body">
+        
+      </div>
+    
+  </div>
 </section>
 </div>
 </div>
+
+
+
 
 <div class="row">
   <div class="container">

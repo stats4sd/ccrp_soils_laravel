@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <title>CCRP Soils Data Platform</title>
+  <title>Downloads-CCRP Soils Data Platform</title>
 </head>
 
 <body>
@@ -63,33 +63,28 @@
 
     <div class="btn dropdown">
     <a href="/groups/create/step/group-details/" style="color:black;">Create a Project<b class="caret"></b></a>
-
-
-
-
-</section>
-<section class="content mb-5" id="introduction">
-  <h1>Introduction</h1>
-  <p>This data platform is intended to help CCRP research projects collect and organise their soil sample data.</p>
-  <p>Using the tools within the platform will help you:</p>
-  <ul>
-    <li>Uniquely identify each soil sample your project collects with a QR code.</li>
-    <li>Enter data about the soil samples, such as location, date of sampling and other key information.</li>
-    <li>Enter readings from your soil analyses and automatically calculate the results.</li>
-    <li>Save the readings and results to a secure database.</li>
-    <li>Automatically merge results from different analyses with your main sample information into a single dataset.</li>
-  </ul>
-  <p>If you work with soils, and are interested in using the Soil Health Assessment Toolkit developed by the team at <a href="https://smallholder-sha.org/"><u>smallholder-sha.org</u></a>, we recommend exploring this platform to see how these tools can help your workflow.</p>
 </section>
 
 
-<section class="content mb-5" id="whoweare">
-  <h3><strong>Who are we?</strong></h3>
-  <p>The platform is a collaboration between the Research Methods Support team at <a href="https://stats4sd.org/"><u>Stats4SD</u></a> and the Cross-cutting Soils project funded by the McKnight foundation’s <a href="http://ccrp.org/"><u>Collaborative Crop Research Program (CCRP)</u></a>.</p>
-  <p>This website and associated resources are created by the CCRP Research Methods Support team and Cross-cutting Soils Project, in association with the <a href="http://ccrp.org/"><u>Collaborative Crop Research Program</u></a>. All data present in the platform remains the property of the individual projects using the platform.</p>
+
+<section class="content mb-5" id="generate_qr_code">
+  <h3 class="mb-5"><b>Downloads</b></h3>
+  <p>This page contains links to find and download resources to help you during your soil analysis. Full details of each analysis process can be found at <a href="https://smallholder-sha.org/"> https://smallholder-sha.org/</a>.</p>
 </section>
+<section>
+  <h4>Sample Intake Process</h4>
+  <p>There are 2 versions of the intake form available. The first is a “quick” version – this form is ready-to-go, but does not include any customisation for entering your own community lists.</p>
+  <p>The second is a version that allows you to add your own community listing. This is designed to be used with this platform’s location management, but it is also a good template if you want to use it with your own project’s data management system. This version requires you to edit the XLS form by adding the choice lists for the communities and farmers that you work with.</p>
+  <p><a href="">Download quick version.</a></p>
+  <p><a href="">Download community list version</a></p>
+ 
+</section>
+
 </div>
 </div>
+
+
+
 
 <div class="row">
   <div class="container">
