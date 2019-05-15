@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<section class="card mt-5">
+<section class="card">
 <div class="row">
 
 <div class="card-body">
@@ -68,6 +68,7 @@
 <!-- Modify the content after this comment -->
 
 </section>
+<div class="col-sm-8">
 <section class="content mb-5" id="introduction">
   <h1>How the platform works</h1>
   <p>There are three main components to this data platform:</p>
@@ -96,6 +97,7 @@
 </section>
 </div>
 </div>
+</div>
 
 <div class="row">
   <div class="container">
@@ -117,7 +119,7 @@
                  <input class="form-check-input" type="checkbox"> Remember Password</label>
              </div>
            </div>
-           <button type="submit" class="btn btn-primary btn-block" name="login_user">Login</button>
+           <button type="submit" class="btn btn-dark btn-block" name="login_user">Login</button>
          </form>
          <div class="text-center">
            <a class="d-block small mt-3" href="register.php">Register an Account</a>
@@ -142,7 +144,7 @@
 
 <style type="text/css">
 body{
-  background-color: #734d26;
+  background-color: #806d5d;
 }
 .dropdown-toggle{
   color:black;
@@ -153,6 +155,19 @@ body{
   position: relative;
   display: inline-block;
 }
+.card {
+        margin:  20px; /* Added */
+        float: auto; /* Added */
+        margin-bottom: 20px; /* Added */
+        margin-top: 20px;
+}
+.card-login {
+  float: auto;
+  right: 250px;
+  top: 250px;
+  display: flex;
+}
+
 </style>
 
 

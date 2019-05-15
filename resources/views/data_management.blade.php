@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<section class="card mt-5">
+<section class="card">
 <div class="row">
 
 <div class="card-body">
@@ -66,16 +66,16 @@
 </section>
 
 
-
+<div class="col-sm-8">
 <section class="content mb-5" id="form_data_management">
   <div class="alert alert-info">
     To view data for a project you must first be invited to the group. Please either go to the projects page and request membership for your project, or contact rms@stats4sd.org.
   </div>
 
-  <h1 class="mb-5"><strong>Form and Data Management</strong></h1>
+  <h2 class="mb-5"><strong>Form and Data Management</strong></h2>
   <p>This page is where you manage the forms that are shared with you through Kobotoolbox, and review and download data collected through those forms.</p>
   <p>To collect data through this platform, please do the following:</p>
-  <div class="card card-login mx-5 mt-5">
+  <div class="card mx-5 mt-5">
     <div class="card-header"><h3><strong>Instructions</strong></h3></div>
       <div class="card-body">
         <h4><b>1. Sync Forms to Kobotoolbox</b></h4>
@@ -88,7 +88,7 @@
     </div>
 </section>
 <section>
-  <div class="card card-login mx-5 mt-5">
+  <div class="card mx-5 mt-5">
     <div class="card-header"><h3><b>Forms and Data</b></h3></div>
       <div class="card-body">
         
@@ -96,6 +96,7 @@
     
   </div>
 </section>
+</div>
 </div>
 </div>
 
@@ -122,7 +123,7 @@
                  <input class="form-check-input" type="checkbox"> Remember Password</label>
              </div>
            </div>
-           <button type="submit" class="btn btn-primary btn-block" name="login_user">Login</button>
+           <button type="submit" class="btn btn-dark btn-block" name="login_user">Login</button>
          </form>
          <div class="text-center">
            <a class="d-block small mt-3" href="register.php">Register an Account</a>
@@ -144,10 +145,9 @@
 
 </body>
 
-
 <style type="text/css">
 body{
-  background-color: #734d26;
+  background-color: #806d5d;
 }
 .dropdown-toggle{
   color:black;
@@ -158,6 +158,21 @@ body{
   position: relative;
   display: inline-block;
 }
+
+.card {
+  margin:  20px; /* Added */
+  float: auto; /* Added */
+  margin-bottom: 20px; /* Added */
+  margin-top: 20px;
+}
+
+.card-login {
+  float: auto;
+  right: 250px;
+  top: 250px;
+  display: flex;
+}
+
 </style>
 
 

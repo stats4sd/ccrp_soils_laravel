@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<section class="card mt-5">
+<section class="card">
 <div class="row">
 
 <div class="card-body">
@@ -66,23 +66,43 @@
 </section>
 
 
-
+<div class="col-sm-8">
 <section class="content mb-5" id="generate_qr_code">
   <h3 class="mb-5"><b>Downloads</b></h3>
   <p>This page contains links to find and download resources to help you during your soil analysis. Full details of each analysis process can be found at <a href="https://smallholder-sha.org/"> https://smallholder-sha.org/</a>.</p>
 </section>
-<section>
-  <h4>Sample Intake Process</h4>
+<section class="mb-5">
+  <h4 class="mb-4"><b>Sample Intake Process</b></h4>
   <p>There are 2 versions of the intake form available. The first is a “quick” version – this form is ready-to-go, but does not include any customisation for entering your own community lists.</p>
   <p>The second is a version that allows you to add your own community listing. This is designed to be used with this platform’s location management, but it is also a good template if you want to use it with your own project’s data management system. This version requires you to edit the XLS form by adding the choice lists for the communities and farmers that you work with.</p>
-  <p><a href="">Download quick version.</a></p>
-  <p><a href="">Download community list version</a></p>
- 
+  <p><a href=""><u>Download quick version.</u></a></p>
+  <p><a href=""><u>Download community list version</u></a></p>
+</section>
+<section class="mb-5">
+  <h4 class="mb-4"><b>Analysis Forms</b></h4>
+  <p>The following forms are available to assist with data entry and calculations during the analysis. These forms are designed to be used with the above intake form, and require you to have a QR code attached to each sample for identification purposes.</p>
+  <p><a href=""><u>Download Full Protocol as pdf file</u></a> (includes all analyses)</p>
+</section>
+<section class="mb-5">
+  <h4 class="mb-4"><b>Active carbon:</b></h4>
+  <p><a href="https://smallholder-sha.org/protocol-1/active-carbon/"><u>View protocol online</u></a> (redirects to smallholder.sha.org)</p>
+  <p><a href=""><u>Download Active Carbon (POXC) form</u></a></p>
+</section>
+<section class="mb-5">
+  <h4 class="mb-4"><b>Soil pH:</b></h4>
+  <p><a href="https://smallholder-sha.org/protocol-1/soil_ph/"><u>View protocol online</u></a> (redirects to smallholder.sha.org)</p>
+  <p><a href=""><u>ccrp_soils-ph-analysis</u></a></p>
+</section>
+<section class="mb-5">
+  <h4 class="mb-4"><b>Available Phosphorus:</b></h4>
+  <p><a href="https://smallholder-sha.org/protocol-1/available-phosphorus/"><u>View protocol online</u></a> (redirects to smallholder.sha.org)</p>
+  <p><a href=""><u>ccrp_soils-p-analysis</u></a></p>
+  
 </section>
 
 </div>
 </div>
-
+</div>
 
 
 
@@ -106,7 +126,7 @@
                  <input class="form-check-input" type="checkbox"> Remember Password</label>
              </div>
            </div>
-           <button type="submit" class="btn btn-primary btn-block" name="login_user">Login</button>
+           <button type="submit" class="btn btn-dark btn-block" name="login_user">Login</button>
          </form>
          <div class="text-center">
            <a class="d-block small mt-3" href="register.php">Register an Account</a>
@@ -131,7 +151,7 @@
 
 <style type="text/css">
 body{
-  background-color: #734d26;
+  background-color: #806d5d;
 }
 .dropdown-toggle{
   color:black;
@@ -141,6 +161,20 @@ body{
 .dropdown {
   position: relative;
   display: inline-block;
+}
+
+.card {
+  margin:  20px; /* Added */
+  float: auto; /* Added */
+  margin-bottom: 20px; /* Added */
+  margin-top: 20px;
+}
+
+.card-login {
+  float: auto;
+  right: 250px;
+  top: 250px;
+  display: flex;
 }
 </style>
 
