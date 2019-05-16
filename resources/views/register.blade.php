@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <title>CCRP Soils Data Platform</title>
+  <title>Create an Account-CCRP Soils Data Platform</title>
 </head>
 
 <body>
@@ -71,30 +71,65 @@
 
 
   
-<div class="col-sm-8">
+    <div class="col-sm-8">
 
-<section class="content mb-5" id="introduction">
-  <h1>Introduction</h1>
-  <p>This data platform is intended to help CCRP research projects collect and organise their soil sample data.</p>
-  <p>Using the tools within the platform will help you:</p>
-  <ul>
-    <li>Uniquely identify each soil sample your project collects with a QR code.</li>
-    <li>Enter data about the soil samples, such as location, date of sampling and other key information.</li>
-    <li>Enter readings from your soil analyses and automatically calculate the results.</li>
-    <li>Save the readings and results to a secure database.</li>
-    <li>Automatically merge results from different analyses with your main sample information into a single dataset.</li>
-  </ul>
-  <p>If you work with soils, and are interested in using the Soil Health Assessment Toolkit developed by the team at <a href="https://smallholder-sha.org/"><u>smallholder-sha.org</u></a>, we recommend exploring this platform to see how these tools can help your workflow.</p>
-</section>
+    <section class="content mb-5" id="create_account">
+      <h1><b>Create an Account</b></h1>
+      <p>Registering for this site is easy. Just fill in the fields below, and we'll get a new account set up for you in no time.</p>
+      <div class="row">
+      <div class="col-sm-6">
+        <h3 class="content mb-3"><b>Account Details</b></h3>
+        <form method="post" action="{{ url('home/checklogin')}}">
+          {{csrf_field()}}
+           <div class="form-group">
+             <label><b>Username (required)</b></label>
+             <input class="form-control"  type="text" name="username">
+           </div>
+           <div class="form-group">
+             <label ><b>Email Address (required)</b></label>
+             <input class="form-control"  type="email" name="email">
+           </div>
+           <div class="form-group">
+            <label><b>Choose a Password (required)</b></label>
+            <input class="form-control" type="password" name="password">
+           </div>
+           <div class="form-group">
+            <label><b>Confirm Password (required)</b></label>
+            <input class="form-control" type="password" name="password">
+           </div>
+           <button type="submit" class="btn btn-dark btn-block" name="sign_up">Complete Sign Up</button>
+         </form>
+
+      </div>
+        <div class="col-sm-6">
+          <h3 class="content mb-3"><b>Profile Details</b></h3>
+          <div class="form-group">
+          <label><b>Name (required)</b></label>
+            <input class="form-control"  type="text" name="username">
+          </div>
+          <label style="color: grey;"><em><b>This field can be seen by:</em> Everyone</b></label> <button type="button" style="color: grey;" class="btn-xs">change</button>
+          <label><b>Who can see this field?</b></label>
+          <div class="choice">
+            <input id="choice_1" type="radio" name="choice" value="everyone" />
+            <label for="choice_1">Everyone</label>
+          </div>
+
+          <div class="choice">
+            <input id="choice_2" type="radio" name="choice" value="only_me" />
+            <label for="choice_2">Only Me</label>
+          </div>
+
+          <div class="choice">    
+            <input id="choice_3" type="radio" name="choice" value="all_members" />
+            <label for="choice_3">All Members</label>
+          </div>
 
 
-<section class="content mb-5" id="whoweare">
-  <h3><strong>Who are we?</strong></h3>
-  <p>The platform is a collaboration between the Research Methods Support team at <a href="https://stats4sd.org/"><u>Stats4SD</u></a> and the Cross-cutting Soils project funded by the McKnight foundation’s <a href="http://ccrp.org/"><u>Collaborative Crop Research Program (CCRP)</u></a>.</p>
-  <p>This website and associated resources are created by the CCRP Research Methods Support team and Cross-cutting Soils Project, in association with the <a href="http://ccrp.org/"><u>Collaborative Crop Research Program</u></a>. All data present in the platform remains the property of the individual projects using the platform.</p>
-</section>
-</div>
-</div>
+        </div>
+    
+    </div>
+  </div>
+  </div>
 
 </div>
 
@@ -141,7 +176,7 @@
            <button type="submit" class="btn btn-dark btn-block" name="login">Login</button>
          </form>
          <div class="text-center">
-           <a class="d-block small mt-3" href="/register">Register an Account</a>
+           <a class="d-block small mt-3" href="register">Register an Account</a>
         <!-- <a class="d-block small" href="forgot-password.php">Forgot Password?</a>-->
 
          </div>
@@ -149,15 +184,15 @@
      </div>
    </div>
 
-        @if(isset(Auth::user()->email))
+       <!--  @if(isset(Auth::user()->email))
           <div class="alert alert-danger success-block">
             <strong>Welcome {{Auth::user()->email}}</strong>
             <br/>
           </div>
           <a href="{{ url('/home/logout')}}">Logout</a>
         @else
-          <script>window.location = "/home;</script>
-        @endif
+          <script>window.location = "/home";</script>
+        @endif -->
 
           
 
@@ -195,5 +230,4 @@ body{
 }
 
 </style>
-
 

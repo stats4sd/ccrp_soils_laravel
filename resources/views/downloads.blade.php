@@ -25,7 +25,7 @@
     <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Home<b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li><a href="/home">Introduction</a></li>
-        <li><a href="/home/about/">About</a></li>
+        <li><a href="/home/about">About</a></li>
       </ul>
     </div>
 
@@ -40,8 +40,8 @@
     <div class="dropdown">
     <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Tools<b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a href="/qr-codes/">QR Codes</a></li>
-        <li><a href="/downloads/">Downloads</a></li>
+        <li><a href="/qr-codes">QR Codes</a></li>
+        <li><a href="/downloads">Downloads</a></li>
       </ul>
     </div>
 
@@ -58,11 +58,11 @@
 
 
     <div class="btn dropdown">
-    <a href="/groups/" style="color:black;">All Projects<b class="caret"></b></a>
+    <a href="/groups" style="color:black;">All Projects<b class="caret"></b></a>
     </div>
 
     <div class="btn dropdown">
-    <a href="/groups/create/step/group-details/" style="color:black;">Create a Project<b class="caret"></b></a>
+    <a href="/groups/create/step/group-details" style="color:black;">Create a Project<b class="caret"></b></a>
 </section>
 
 
@@ -129,18 +129,12 @@
            <button type="submit" class="btn btn-dark btn-block" name="login_user">Login</button>
          </form>
          <div class="text-center">
-           <a class="d-block small mt-3" href="register.php">Register an Account</a>
+           <a class="d-block small mt-3" href="/register">Register an Account</a>
         <!-- <a class="d-block small" href="forgot-password.php">Forgot Password?</a>-->
          </div>
        </div>
      </div>
    </div>
- <!-- Bootstrap core JavaScript-->
- <script src="vendor/jquery/jquery.min.js"></script>
- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
- <!-- Core plugin JavaScript-->
- <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
 
 </div>
 
@@ -175,6 +169,7 @@ body{
   right: 250px;
   top: 250px;
   display: flex;
+  width: 300px;
 }
 </style>
 
