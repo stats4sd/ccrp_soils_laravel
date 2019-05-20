@@ -63,6 +63,11 @@
 
     <div class="btn dropdown">
     <a href="/groups/create/step/group-details" style="color:black;">Create a Project<b class="caret"></b></a>
+    </div>
+
+    <div class="btn dropdown">
+    <a href="/admin" style="color:black;">Admin<b class="caret"></b></a>
+    </div>
 
 
 
