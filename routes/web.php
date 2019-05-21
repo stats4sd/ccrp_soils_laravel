@@ -48,6 +48,7 @@ Route::get('/home', 'HomeController@index');
 Route::post('/home/checklogin', 'HomeController@checklogin');
 Route::get('/home/successlogin', 'HomeController@successlogin');
 Route::get('/home/logout', 'HomeController@logout');
+Route::get('/downloads', 'DownloadsController@index');
 
 
 

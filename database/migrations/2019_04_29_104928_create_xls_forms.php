@@ -20,6 +20,7 @@ class CreateXlsForms extends Migration
             $table->string('default_language')->nullable();
             $table->dateTimeTz('version');
             $table->string('instance_name')->nullable();
+            $table->string('link_page')->nullable();
             $table->timestamps();
 
         });

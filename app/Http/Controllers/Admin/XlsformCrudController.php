@@ -38,7 +38,7 @@ class XlsformCrudController extends CrudController
         // add asterisk for fields that are required in XlsformRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
-        $this->crud->addColumns([
+        $this->crud->setColumns([
             [
                 'name' => 'form_title',
                 'label' => 'Form Title',
@@ -52,14 +52,26 @@ class XlsformCrudController extends CrudController
             [
                 'name' => 'version',
                 'label' => 'Version',
-                'type' => 'text',
+                'type' => 'date',
+
             ],
             [
                 'name' => 'form_id',
                 'label' => 'File',
-                'type' => 'upload',
-                'upload' => true,
-                'disk' => 'uploads',
+                'type' => 'closure',
+                'function' => function($entry){
+                    $file = $entry->form_id;
+                    return '<a href="'.url('/uploads/'.$file.'').'" target="_blank">'.$file.'</a>';
+                } 
+            ],
+            [
+                'name' => 'link_page',
+                'label' => 'Page',
+                'type' => "closure",
+                'function' => function($entry){
+                    $page = $entry->link_page;
+                    return '<a href="'.url(''.$page.'').'" target="_blank">'.$page.'</a>';
+                } 
             ],
         ]);
 
@@ -88,8 +100,8 @@ class XlsformCrudController extends CrudController
             [
                 'name' => 'version',
                 'label' => 'Version',
-                'type' => 'dateTime',
-                'default' => now(),
+                'type' => 'date',
+                'default' => today(),
 
             ],
             [   // Upload
@@ -98,6 +110,11 @@ class XlsformCrudController extends CrudController
                 'type' => 'upload',
                 'upload' => true,
                 'disk' => 'uploads' // if you store files in the /public folder, please ommit this; if you store them in /storage or S3, please specify it;
+            ],
+            [
+                'name' => 'link_page',
+                'label' => 'Page',
+                'type' => 'url',
             ],
         ]);
     }

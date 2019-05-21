@@ -64,10 +64,11 @@
     <div class="btn dropdown">
     <a href="/groups/create/step/group-details" style="color:black;">Create a Project<b class="caret"></b></a>
     </div>
-
+    @if(backpack_user()->email=='lucia@stats4sd.org' || backpack_user()->email=='d.e.mills@stats4sd.org' || backpack_user()->email=='c.e.barahona@stats4sd.org')
     <div class="btn dropdown">
     <a href="/admin" style="color:black;">Admin<b class="caret"></b></a>
     </div>
+    @endif
 </section>
 
 
@@ -90,19 +91,19 @@
 </section>
 <section class="mb-5">
   <h4 class="mb-4"><b>Active carbon:</b></h4>
-  <p><a href="https://smallholder-sha.org/protocol-1/active-carbon/"><u>View protocol online</u></a> (redirects to smallholder.sha.org)</p>
-  <p><a href=""><u>Download Active Carbon (POXC) form</u></a></p>
+  <p><a href="{{$xlsform[1]->link_page}}"><u>View protocol online</u></a> (redirects to smallholder.sha.org)</p>
+  <p><a href="uploads/{{$xlsform[1]->form_id}}"><u>Download Active Carbon (POXC) form</u></a></p>
 </section>
 <section class="mb-5">
   <h4 class="mb-4"><b>Soil pH:</b></h4>
-  <p><a href="https://smallholder-sha.org/protocol-1/soil_ph/"><u>View protocol online</u></a> (redirects to smallholder.sha.org)</p>
-  <p><a href=""><u>ccrp_soils-ph-analysis</u></a></p>
+  <p><a href="{{$xlsform[2]->link_page}}"><u>View protocol online</u></a> (redirects to smallholder.sha.org)</p>
+  <p><a href="uploads/{{$xlsform[2]->form_id}}"><u>ccrp_soils-ph-analysis</u></a></p>
 </section>
 <section class="mb-5">
   <h4 class="mb-4"><b>Available Phosphorus:</b></h4>
-  <p><a href="https://smallholder-sha.org/protocol-1/available-phosphorus/"><u>View protocol online</u></a> (redirects to smallholder.sha.org)</p>
-  <p><a href=""><u>ccrp_soils-p-analysis</u></a></p>
-  
+  <p><a href="{{$xlsform[3]->link_page}}"><u>View protocol online</u></a> (redirects to smallholder.sha.org)</p>
+  <p><a href="uploads/{{$xlsform[3]->form_id}}"><u>ccrp_soils-p-analysis</u></a></p>
+ 
 </section>
 
 </div>
