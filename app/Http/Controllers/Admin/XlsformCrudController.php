@@ -73,21 +73,24 @@ class XlsformCrudController extends CrudController
                     return '<a href="'.url(''.$page.'').'" target="_blank">'.$page.'</a>';
                 } 
             ],
+            [
+                'name' => 'description',
+                'label' => 'Description',
+                'type' => 'text',
+            ],
         ]);
-
+        
+    
         $this->crud->addFields([
 
-            // [
-            //     'name' => 'form_title',
-            //     'label' => 'Form Title',
-            //     'type' => 'select_from_array',
-            //     'options' => Xlsform::get()->pluck('form_title', 'id')->toArray(),
-            //     'priority' => 1,
-            // ],
             [
                 'name' => 'form_title',
                 'label' => 'Form Title',
                 'type' => 'text',
+                'hint' => '<b>Choose a title for the downloads page</b>',
+                'attributes' => [
+                'required' => true,
+            ],
             ],
             [
                 'name' => 'default_language',
@@ -102,6 +105,11 @@ class XlsformCrudController extends CrudController
                 'label' => 'Version',
                 'type' => 'date',
                 'default' => today(),
+                'hint' => '<b>Insert the date of uploading the new form</b>',
+                'attributes' => [
+                'required' => true,
+            ],
+
 
             ],
             [   // Upload
@@ -109,12 +117,20 @@ class XlsformCrudController extends CrudController
                 'label' => 'File',
                 'type' => 'upload',
                 'upload' => true,
-                'disk' => 'uploads' // if you store files in the /public folder, please ommit this; if you store them in /storage or S3, please specify it;
+                'disk' => 'uploads' ,
+                'hint' => '<b>Upload the file that you want to download from the downloads page</b>',
             ],
             [
                 'name' => 'link_page',
                 'label' => 'Page',
                 'type' => 'url',
+                'hint' => '<b>Insert the page tha you want to link from the downloads page</b>',
+            ],
+            [   // CKEditor
+                'name' => 'description',
+                'label' => 'Description',
+                'type' => 'simplemde',
+                'hint' => '<b>Insert a description that you want to display for the form</b>',
             ],
         ]);
     }

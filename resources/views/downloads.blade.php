@@ -46,7 +46,7 @@
     </div>
 
     <div class="dropdown">
-    <a href="/login" style="color:black;">Log In<b class="caret"></b></a>
+    <a href="/admin/login" style="color:black;">Log In<b class="caret"></b></a>
     </div>
 
     <div class="dropdown">
@@ -64,11 +64,9 @@
     <div class="btn dropdown">
     <a href="/groups/create/step/group-details" style="color:black;">Create a Project<b class="caret"></b></a>
     </div>
-    @if(backpack_user()->email=='lucia@stats4sd.org' || backpack_user()->email=='d.e.mills@stats4sd.org' || backpack_user()->email=='c.e.barahona@stats4sd.org')
     <div class="btn dropdown">
     <a href="/admin" style="color:black;">Admin<b class="caret"></b></a>
     </div>
-    @endif
 </section>
 
 
@@ -77,34 +75,14 @@
   <h3 class="mb-5"><b>Downloads</b></h3>
   <p>This page contains links to find and download resources to help you during your soil analysis. Full details of each analysis process can be found at <a href="https://smallholder-sha.org/"> https://smallholder-sha.org/</a>.</p>
 </section>
+@foreach($xlsforms as $xlsform)
 <section class="mb-5">
-  <h4 class="mb-4"><b>Sample Intake Process</b></h4>
-  <p>There are 2 versions of the intake form available. The first is a “quick” version – this form is ready-to-go, but does not include any customisation for entering your own community lists.</p>
-  <p>The second is a version that allows you to add your own community listing. This is designed to be used with this platform’s location management, but it is also a good template if you want to use it with your own project’s data management system. This version requires you to edit the XLS form by adding the choice lists for the communities and farmers that you work with.</p>
-  <p><a href=""><u>Download quick version.</u></a></p>
-  <p><a href=""><u>Download community list version</u></a></p>
+  <h4 class="mb-4"><b>{{$xlsform->form_title}}:</b></h4>
+  <p>{{$xlsform->description}}</p>
+  <p><a href="{{$xlsform->link_page}}"><u>View protocol online</u></a> (redirects to smallholder.sha.org)</p>
+  <p><a href="uploads/{{$xlsform->form_id}}"><u>Download {{$xlsform->form_title}} form</u></a></p> 
 </section>
-<section class="mb-5">
-  <h4 class="mb-4"><b>Analysis Forms</b></h4>
-  <p>The following forms are available to assist with data entry and calculations during the analysis. These forms are designed to be used with the above intake form, and require you to have a QR code attached to each sample for identification purposes.</p>
-  <p><a href=""><u>Download Full Protocol as pdf file</u></a> (includes all analyses)</p>
-</section>
-<section class="mb-5">
-  <h4 class="mb-4"><b>Active carbon:</b></h4>
-  <p><a href="{{$xlsform[1]->link_page}}"><u>View protocol online</u></a> (redirects to smallholder.sha.org)</p>
-  <p><a href="uploads/{{$xlsform[1]->form_id}}"><u>Download Active Carbon (POXC) form</u></a></p>
-</section>
-<section class="mb-5">
-  <h4 class="mb-4"><b>Soil pH:</b></h4>
-  <p><a href="{{$xlsform[2]->link_page}}"><u>View protocol online</u></a> (redirects to smallholder.sha.org)</p>
-  <p><a href="uploads/{{$xlsform[2]->form_id}}"><u>ccrp_soils-ph-analysis</u></a></p>
-</section>
-<section class="mb-5">
-  <h4 class="mb-4"><b>Available Phosphorus:</b></h4>
-  <p><a href="{{$xlsform[3]->link_page}}"><u>View protocol online</u></a> (redirects to smallholder.sha.org)</p>
-  <p><a href="uploads/{{$xlsform[3]->form_id}}"><u>ccrp_soils-p-analysis</u></a></p>
- 
-</section>
+@endforeach
 
 </div>
 </div>
@@ -112,12 +90,14 @@
 
 
 
-<div class="row">
-  <div class="container">
-     <div class="card card-login mx-5 mt-5">
+<div class="row justify-content-center">
+  <div class="container ">
+
+     <div class="card card-login mx-5 mt-5 sticky-top">
        <div class="card-header"><strong>MY ACCOUNT</strong></div>
        <div class="card-body">
-         <form method="post" action="login.php">
+         <form method="post" action="admin/login">
+          <!-- @csrf -->
            <div class="form-group">
              <label for="exampleInputEmail1">Username</label>
              <input class="form-control"  type="text" name="username">
@@ -135,7 +115,7 @@
            <button type="submit" class="btn btn-dark btn-block" name="login_user">Login</button>
          </form>
          <div class="text-center">
-           <a class="d-block small mt-3" href="/register">Register an Account</a>
+           <a class="d-block small mt-3" href="admin/register">Register an Account</a>
         <!-- <a class="d-block small" href="forgot-password.php">Forgot Password?</a>-->
          </div>
        </div>
@@ -146,8 +126,7 @@
 
 </div>
 
-</body>
-
+</body> 
 
 <style type="text/css">
 body{
@@ -165,16 +144,16 @@ body{
 
 .card {
   margin:  20px; /* Added */
-  float: auto; /* Added */
+  /*float: auto; /* Added */*/
   margin-bottom: 20px; /* Added */
   margin-top: 20px;
 }
 
 .card-login {
-  float: auto;
-  right: 250px;
+  /*float: auto;
+  right: 100px;*/
   top: 250px;
-  display: flex;
+  /*display: flex;*/
   width: 300px;
 }
 </style>
