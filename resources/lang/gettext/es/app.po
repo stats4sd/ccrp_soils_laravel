@@ -1,0 +1,123 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Laravel\n"
+"Report-Msgid-Bugs-To: contact@translation.io\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-06-24T13:28:03+00:00\n"
+"PO-Revision-Date: 2019-06-24 15:28+0200\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: resources/views/home.blade.php:22
+msgid "CCRP Soils Data Platform"
+msgstr ""
+
+#: resources/views/home.blade.php:25
+msgid "Home"
+msgstr ""
+
+#: resources/views/home.blade.php:27
+#: resources/views/home.blade.php:78
+msgid "Introduction"
+msgstr ""
+
+#: resources/views/home.blade.php:28
+msgid "About"
+msgstr ""
+
+#: resources/views/home.blade.php:33
+#: resources/views/home.blade.php:35
+msgid "Start Sampling"
+msgstr ""
+
+#: resources/views/home.blade.php:36
+msgid "Data Management"
+msgstr ""
+
+#: resources/views/home.blade.php:41
+msgid "Tools"
+msgstr ""
+
+#: resources/views/home.blade.php:43
+msgid "QR Codes"
+msgstr ""
+
+#: resources/views/home.blade.php:44
+msgid "Downloads"
+msgstr ""
+
+#: resources/views/home.blade.php:49
+msgid "Log In"
+msgstr ""
+
+#: resources/views/home.blade.php:61
+msgid "All Projects"
+msgstr ""
+
+#: resources/views/home.blade.php:65
+msgid "Create a Project"
+msgstr ""
+
+#: resources/views/home.blade.php:69
+msgid "Admin"
+msgstr ""
+
+#: resources/views/home.blade.php:79
+msgid "This data platform is intended to help CCRP research projects collect and organise their soil sample data."
+msgstr ""
+
+#: resources/views/home.blade.php:80
+msgid "Using the tools within the platform will help you:"
+msgstr ""
+
+#: resources/views/home.blade.php:82
+msgid "Uniquely identify each soil sample your project collects with a QR code."
+msgstr ""
+
+#: resources/views/home.blade.php:83
+msgid "Enter data about the soil samples, such as location, date of sampling and other key information."
+msgstr ""
+
+#: resources/views/home.blade.php:84
+msgid "Enter readings from your soil analyses and automatically calculate the results."
+msgstr ""
+
+#: resources/views/home.blade.php:85
+msgid "Save the readings and results to a secure database."
+msgstr ""
+
+#: resources/views/home.blade.php:86
+msgid "Automatically merge results from different analyses with your main sample information into a single dataset."
+msgstr ""
+
+#: resources/views/home.blade.php:88
+msgid "If you work with soils, and are interested in using the Soil Health Assessment Toolkit developed by the team at <a href='https://smallholder-sha.org/'><u>smallholder-sha.org</u></a>, we recommend exploring this platform to see how these tools can help your workflow."
+msgstr ""
+
+#: resources/views/home.blade.php:95
+msgid "This website and associated resources are created by the CCRP Research Methods Support team and Cross-cutting Soils Project, in association with the <a href='http://ccrp.org/'><u>Collaborative Crop Research Program</u></a>. All data present in the platform remains the property of the individual projects using the platform."
+msgstr ""
+
+#: resources/views/home.blade.php:105
+msgid "MY ACCOUNT"
+msgstr ""
+
+#: resources/views/home.blade.php:130
+msgid "Username"
+msgstr ""
+
+#: resources/views/home.blade.php:134
+msgid "Password"
+msgstr ""
+
+#: resources/views/home.blade.php:143
+msgid "Login"
+msgstr ""
+
+#: resources/views/home.blade.php:146
+msgid "Register an Account"
+msgstr ""

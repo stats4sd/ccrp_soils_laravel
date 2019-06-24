@@ -11,13 +11,7 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/home', function () {
-//     return view('home');
-// });
+Route::prefix('{locale?}')->middleware('set.locale')->group(function() {
 
 Route::get('/home/about', function () {
     return view('about');
@@ -44,11 +38,13 @@ Route::get('/register', function() {
 });
 
 Route::get('/home', 'HomeController@index');
+
 ##Login and logout
 Route::post('/home/checklogin', 'HomeController@checklogin');
 Route::get('/home/successlogin', 'HomeController@successlogin');
 Route::get('/home/logout', 'HomeController@logout');
 
 
-
+    Route::get('/', 'HomeController@index');
+});
 
