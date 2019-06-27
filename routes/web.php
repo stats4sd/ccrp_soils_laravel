@@ -12,8 +12,9 @@
 */
 
 Route::prefix('{locale?}')->middleware('set.locale')->group(function() {
+	
 
-Route::get('/home/about', function () {
+Route::get('/about', function () {
     return view('about');
 });
 
@@ -31,6 +32,10 @@ Route::get('/qr-codes', function() {
 
 Route::get('/downloads', function() {
 	return view('downloads');
+});
+
+Route::get('/projects', function() {
+	return view('projects');
 });
 
 Route::get('/register', function() {
