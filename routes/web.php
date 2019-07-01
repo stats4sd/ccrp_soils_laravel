@@ -42,6 +42,10 @@ Route::get('/register', function() {
 	return view('register');
 });
 
+Route::get('/create-project', function() {
+	return view('create_project');
+});
+
 Route::get('/home', 'HomeController@index');
 
 ##Login and logout
