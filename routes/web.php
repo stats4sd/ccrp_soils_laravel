@@ -42,9 +42,9 @@ Route::get('/register', function() {
 	return view('register');
 });
 
-Route::get('/create-project', function() {
-	return view('create_project');
-});
+Route::get('/create-project', 'CreateProjectController@index');
+
+Route::post('/create-project', 'CreateProjectController@upload');
 
 Route::get('/home', 'HomeController@index');
 
