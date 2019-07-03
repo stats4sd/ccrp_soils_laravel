@@ -144,21 +144,21 @@
 	<div id="Invites" class="tabcontent">
 		<div class="container">
 		<label>Search for members to invite:</label>
-	  <input type="text" id="myInput" onkeyup="search()" placeholder="Search for names..">
+	  	<input type="text" id="myInput" onkeyup="search()" placeholder="Search for names..">
 
-		<table id="myTable">
-			<ul>
-				@foreach($users as $user)
-				<li>{{$user->name}}</li>
-				@endforeach
-			</ul>
-			
-		</table>
-			
+		  	<div class="scroll_list">
+			<table id="myTable" class="table table-hover">
+				<tbody>
+					@foreach($users as $user)
+					<tr>
+						<td><input type="checkbox" name="type_group" id="hidden_group"> {{$user->name}}</td>		
+					</tr>
+					@endforeach
+				</tbody>
+			</table>
+			</div>	
 		</div>
 	</div>
-
-
 
   </section>
  

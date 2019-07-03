@@ -146,3 +146,12 @@ body {font-family: Arial}
   /* Add a grey background color to the table header and on hover */
   background-color: #f1f1f1;
 }
+
+//Scroll list for invitation
+
+div.scroll_list {
+  width: 200px;
+  height: 300px;
+  overflow: auto;
+}
+

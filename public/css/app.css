@@ -10835,3 +10835,9 @@ body {
   background-color: #f1f1f1;
 }
 
+div.scroll_list {
+  width: 200px;
+  height: 300px;
+  overflow: auto;
+}
+
