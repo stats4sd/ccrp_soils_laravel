@@ -62,11 +62,11 @@
             </div>
 
             <div class="btn dropdown">
-              <a href="en/projects" style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
+              <a href="/groups" style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
             </div>
 
             <div class="btn dropdown">
-              <a href="en/groups/create/step/group-details" style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
+              <a href="/create-project" style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
             </div>
 
             <div class="btn dropdown">

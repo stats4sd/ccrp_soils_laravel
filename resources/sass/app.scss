@@ -45,8 +45,9 @@ body{
 }
 
 .card-login {
+  position: relative;
   float: auto;
-  right: 250px;
+  right: 100px;
   top: 250px;
   display: flex;
   width: 300px;
@@ -115,11 +116,10 @@ body {font-family: Arial}
 */
 
 #myInput {
-  background-image: url('/css/searchicon.png'); /* Add a search icon to input */
   background-position: 10px 12px; /* Position the search icon */
   background-repeat: no-repeat; /* Do not repeat the icon image */
   width: 100%; /* Full-width */
-  font-size: 16px; /* Increase font-size */
+  
   padding: 12px 20px 12px 40px; /* Add some padding */
   border: 1px solid #ddd; /* Add a grey border */
   margin-bottom: 12px; /* Add some space below the input */
@@ -129,7 +129,7 @@ body {font-family: Arial}
   border-collapse: collapse; /* Collapse borders */
   width: 100%; /* Full-width */
   border: 1px solid #ddd; /* Add a grey border */
-  font-size: 18px; /* Increase font-size */
+  
 }
 
 #myTable th, #myTable td {
@@ -150,8 +150,53 @@ body {font-family: Arial}
 //Scroll list for invitation
 
 div.scroll_list {
-  width: 200px;
+  
   height: 300px;
   overflow: auto;
 }
 
+//Show selected from invitation list
+
+#myDIV {
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: lightblue;
+  margin-top: 20px;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Rounded Images
+|--------------------------------------------------------------------------
+*/
+
+.img_group img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.img_group_default img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Group
+|--------------------------------------------------------------------------
+*/
+
+.admin_group img {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  left: 150px;
+}

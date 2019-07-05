@@ -2,10 +2,10 @@
 @extends('layouts.layout')
 
 @section('content')
-<link rel="stylesheet" href="https://unpkg.com/jcrop/dist/jcrop.css">
+
 <body>
 <div class="col-sm-8">
-  <section class="content mb-5" id="generate_qr_code">
+  <section class="content mb-5" id="group">
     <h1 class="mb-5"><b>{{ t("Group") }}</b></h1>
 	<!-- Tab links -->
 	<div class="tab">
@@ -19,20 +19,28 @@
 		<div class="row">
   			<div class="container">
 
-		        <form method="post" action="login.php" id="group_details">
+		        <form method="post" action="{{ url('en/create-project/validateValue')}}" id="group_details">
+		        	 @csrf
 		           	<div class="form-group">
+		           			@if(count($errors)>0)
+						  	<div class="alert alert-danger">Create Group Validation Error<br><br>
+						  		<ul>
+						  			@foreach( $errors->all() as $error)
+						  			<li>{{ $error }}</li>
+						  			@endforeach
+						  		</ul>
+						  	</div>
+						  	@endif
 		             	<label for="exampleInputEmail1"><b>{{ t("Group Name (required)") }}</b></label>
 		             	<input class="form-control"  type="text" name="group_name">
 		           	</div>
 		           	<div class="form-group">
 		             	<label for="exampleInputEmail1"><b>{{ t("Group Description (required)") }}</b></label>
-		             	<textarea class="form-control"  rows="4" cols="50" name="comment" form="group_details"></textarea>
+		             	<textarea class="form-control"  rows="4" cols="50" name="description" form="group_details"></textarea>
 		           	</div>
 		   
 		          
 		           <button type="submit"  onclick="openPage(event, 'Settings')" class="btn btn-dark btn-sm" name="create_group">{{ t("CREATE A GROUP AND CONTINUE") }}</button>
-		        </form>
-         
  			</div>
    		</div>
 	</div>
@@ -41,8 +49,9 @@
 		<!-- <form method="post" action="login.php" id="group_details"> -->
 		 	<!-- <div class="form-group"> -->
 		<h3><b>Privacy Options</b></h3>
+		<div class="form-group">
 		<div>
-			<input type="radio" name="type_group" id="public_group" checked> 
+			<input type="radio" name="type_group" value="public_group" checked> 
 			<label for="public_group" style="color: grey"> This is a public group</label>
 			<ul>
 				<li>Any site member can join this group.</li>
@@ -52,7 +61,7 @@
 		</div>
 
 		<div>
-			<input type="radio" name="type_group" id="private_group"> 
+			<input type="radio" name="type_group" value="private_group"> 
 			<label for="private_group" style="color: grey"> This is a private group</label>
 			<ul>
 				<li>Only users who request membership and are accepted can join the group.</li>
@@ -62,7 +71,7 @@
 		</div>
 
 		<div>
-			<input type="radio" name="type_group" id="hidden_group"> 
+			<input type="radio" name="type_group" value="hidden_group"> 
 			<label for="private_group" style="color: grey"> This is a hidden group</label>
 			<ul>
 				<li>Only users who are invited can join the group.</li>
@@ -70,20 +79,23 @@
 				<li>Group content and activity will only be visible to members of the group.</li>
 			</ul>
 		</div>
+		</div>
 
 		<h3><b>Group Invitations</b></h3>
 		<p>Which members of this group are allowed to invite others?</p>
+		<div class="form-group">
 		<div>
-			<input type="radio" name="group_invitations" id="group_invitations" checked> 
+			<input type="radio" name="group_invitations" value="all_members" checked> 
 			<label for="group_invitations" style="color: grey"> All group members</label>
 		</div>
 		<div>
-			<input type="radio" name="group_invitations" id="group_invitations"> 
+			<input type="radio" name="group_invitations" value="group_admins_and_mods"> 
 			<label for="group_invitations" style="color: grey"> Group admins and mods only</label>
 		</div>
 		<div>
-			<input type="radio" name="group_invitations" id="group_invitations"> 
+			<input type="radio" name="group_invitations" value="group_admins"> 
 			<label for="group_invitations" style="color: grey"> Group admins only</label>
+		</div>
 		</div>
 
 		<a href="#" onclick="openPage(event, 'Details')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
@@ -93,12 +105,30 @@
 	</div>
 
 	<div id="Photo" class="tabcontent">
-	  
-	  <p>Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.</p>
-	  <p>To skip the group profile photo upload process, hit the "Next Step" button.</p>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="container-fluid">
+	  				<div class="img_group_default">
+  					 	@if($message = Session::get('success'))
+  					 	<img src="/images/{{ Session::get('path') }}">
+  					 	@else
+					  	<img src={{url("images/mystery-group.png")}} >
+					  	@endif
+
+					</div>
+				</div>
+				</div>
+				<div class="col-sm-8">
+					<p>Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.</p>
+				  <p>To skip the group profile photo upload process, hit the "Next Step" button.</p>
+				</div>
+			</div>
+		</div>
+
 
 	  <div class="container">
-	  	<h3 align="center">Upload File</h3>
+	  	<h4 align="center"><b>Upload Photo</b></h4>
 	  	<br/>
 	  	@if(count($errors)>0)
 	  	<div class="alert alert-danger">Upload Validation Error<br><br>
@@ -114,52 +144,81 @@
 	  		<button type="button"  class="close" date-dismiss="alert">x</button>
 	  		<strong>{{ $message }}</strong>
 	  	</div>
-	  	<img src="/images/{{ Session::get('path') }}" id="jcrop_target" width="300"/>
 	  	@endif
 
-	  	<form method="post" action="{{ url('en/create-project')}}" enctype="multipart/form-data">
-	  		{{ csrf_field() }}
+	  	<!-- <form method="post" action="{{ url('en/create-project')}}" enctype="multipart/form-data"> -->
+	  		<!-- {{ csrf_field() }} -->
 	  		<div class="form-group">
-	  			<table class="table">
-	  				<tr>
-	  					<td width="40%" align="right"><label>Select File for Upload</label></td>
-	  					<td width="30"><input type="file" name="select_file"></td>
-	  					<td width="30%" align="left"><input type="submit" name="upload" class="btn btn-dark btn-sm" value="Upload"></td>
-	  				</tr>
-	  				<tr>
-	  					
-	  					<td width="30"><span class="text-muted">jpeg, jpg, png, gif</span></td>
-	  					<td width="30%" align="left"></td>
-	  				</tr>
-	  				
-	  			</table>
+
+			
+				<label>  Select Photo for Upload  </label><br>
+				<input type="file" name="select_file">
+				<input type="submit" name="upload" class="btn btn-dark btn-sm" value="Upload">
+
+
+	  			
 	  			
 	  		</div>
+	  		<a href="#" onclick="openPage(event, 'Settings')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
+			<a href="#" onclick="openPage(event, 'Invites')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("NEXT STEP") }}</a>	
+			<button type="submit" class="btn btn-dark btn-sm">FINISH</button>
+
+
 	  	</form>
 
-
+		
+	  				
 	</div>
 	</div>
 
 	<div id="Invites" class="tabcontent">
-		<div class="container">
-		<label>Search for members to invite:</label>
-	  	<input type="text" id="myInput" onkeyup="search()" placeholder="Search for names..">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-6">
+					<label>Search for members to invite:</label>
+				  	<input type="text" id="myInput" onkeyup="search()" placeholder="Search for names..">
+				  	<div class="scroll_list">
+						<table id="myTable" class="table table-hover">
+							<tbody>
+								@foreach($users as $user)
+								<tr>
+									<td><input type="checkbox" class="name_selected" id="check_invitation" value="{{$user->name}}" > {{$user->name}}</td>		
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+		
+					<form action="/action_page.php">
+						<div class="form-group">
+							<label for="email">Insert email to invite not members</label>
+			    			<input style="width: 100%;" type="email" class="form-control" id="email">
+			    		</div>
+			    		<a href="#" onclick="openPage(event, 'Photo')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
+			    		<button type="submit" class="btn btn-dark btn-sm">FINISH</button>
 
-		  	<div class="scroll_list">
-			<table id="myTable" class="table table-hover">
-				<tbody>
+			    		
+					</form>
+				</div>
+				<div class="col-sm-6">
+					<div class="alert alert-info">
+						<strong> Select people to invite from your friends list.</strong>
+					</div>	
 					@foreach($users as $user)
-					<tr>
-						<td><input type="checkbox" name="type_group" id="hidden_group"> {{$user->name}}</td>		
-					</tr>
-					@endforeach
-				</tbody>
-			</table>
-			</div>	
+					<br>
+
+					<div class="container" id="myDIV">
+						<div class="img_group">
+						<img src={{url("images/535015583.jpg")}} id="avatar" >
+						{{$user->name}}
+						</div>
+					<a href="">Remove invite</a>
+					</div>
+				@endforeach	
+				</div>	
+			</div>
 		</div>
 	</div>
-
   </section>
  
 
@@ -208,4 +267,24 @@ function search() {
     } 
   }
 }
+// Display selected person
+
+document.addEventListener("change", function (e) {
+	 var x = document.getElementById("myDIV");
+    if (e.target.type === "checkbox") {
+        console.log(e.target.value);
+
+        x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+
+
+    
+});
+
+
+
+
+
 </script>

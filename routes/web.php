@@ -34,18 +34,18 @@ Route::get('/downloads', function() {
 	return view('downloads');
 });
 
-Route::get('/projects', function() {
-	return view('projects');
-});
+
 
 Route::get('/register', function() {
 	return view('register');
 });
-
 Route::get('/create-project', 'CreateProjectController@index');
+Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
+Route::post('/created-group', 'CreateProjectController@store');
 
 Route::post('/create-project', 'CreateProjectController@upload');
 
+Route::get('/groups', 'ProjectController@index');
 Route::get('/home', 'HomeController@index');
 
 ##Login and logout
