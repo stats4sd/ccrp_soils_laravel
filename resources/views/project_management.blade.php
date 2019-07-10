@@ -7,8 +7,8 @@
 	<div class="col-sm-12">
 	 	<section class="content mb-5" id="group">
 
-	 		@foreach ($groups as $group)
-		    	<h1 class="mb-5"><b>{{$group->name}}</b></h1>
+	 		@foreach ($projects as $project)
+		    	<h1 class="mb-5"><b>{{$project->name}}</b></h1>
 	    	@endforeach
 
 	    	<div class="container-fluid">
@@ -21,8 +21,8 @@
 					<div class="col-sm-6">
 
 						<div id="description">
-							@foreach ($groups as $group)
-						    	<p>{{$group->description}}</p>
+							@foreach ($projects as $project)
+						    	<p>{{$project->description}}</p>
 					    	@endforeach
 
 						</div>
@@ -55,7 +55,27 @@
 			<div id="Form_data" class="tabcontent">
 				<div class="row">
 		  			<div class="container">
-		  				<table>
+		  				<table class="table table-striped">
+		  					<thead>
+		  						<tr>
+		  							<th>Form Name</th>
+		  							<th>Kototools Form ID</th>
+		  							<th>Number of Collected Records</th>
+		  							<th>Status</th>
+		  							<th>Action</th>
+		  						</tr>
+		  					</thead>
+		  					<tbody>
+		  						@foreach($xls_forms as $xls_form)
+		  						<tr>
+		  							<td>{{ $xls_form->form_title}}</td>
+		  							<td>{{ $xls_form->form_id}}</td>
+		  							<td></td>
+		  							<td></td>
+		  							<td></td>
+		  						</tr>
+		  						@endforeach
+		  					</tbody>
 		  					
 		  				</table>
 

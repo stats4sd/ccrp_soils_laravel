@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 
-class Group extends Model
+class ProjectMeta extends Model
 {
     use CrudTrait;
 
@@ -15,7 +15,7 @@ class Group extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'groups';
+    protected $table = 'projects_projectmeta';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];

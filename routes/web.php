@@ -34,18 +34,12 @@ Route::get('/downloads', function() {
 	return view('downloads');
 });
 
-
-
 Route::get('/register', function() {
 	return view('register');
 });
-Route::get('/create-project', 'CreateProjectController@index');
-Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
-Route::post('/created-group', 'CreateProjectController@store');
 
-Route::post('/create-project', 'CreateProjectController@upload');
 
-Route::get('/groups', 'ProjectController@index');
+
 Route::get('/home', 'HomeController@index');
 
 ##Login and logout
@@ -54,7 +48,15 @@ Route::get('/home/successlogin', 'HomeController@successlogin');
 Route::get('/home/logout', 'HomeController@logout');
 Route::get('/downloads', 'DownloadsController@index');
 
+// Route::get('/', 'HomeController@index');
 
-    Route::get('/', 'HomeController@index');
+Route::get('/create-project', 'ProjectController@index');
+Route::post('/create-project/validateValue', 'ProjectController@validateValue');
+Route::post('/created-group', 'ProjectController@store');
+
+Route::post('/create-project/upload', 'ProjectController@upload');
+
+Route::get('/projects', 'ProjectMemberController@index');
+
 });
 

@@ -31,6 +31,7 @@ class CreateProjectController extends Controller
 
     public function upload(Request $request)
     {
+    	//dd($request);
     	$this->validate($request, [
     		'select_file' => 'required|image|mimes:jpeg,png,jpg'
     	]);

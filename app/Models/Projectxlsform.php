@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 
-class Project extends Model
+class Projectxlsform extends Model
 {
     use CrudTrait;
 
@@ -15,7 +15,7 @@ class Project extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'projects';
+    protected $table = 'projectxlsforms';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
@@ -34,18 +34,6 @@ class Project extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    public function xls_forms ()
-    {
-        return $this->belongToMany(Xlsform::class)->using(Projectxlsform::class)
-        ->withPivot([
-            'form_id',
-            'form_kobo_id',
-            'deployed',
-            'records',
-            'form_kobo_id_string'
-        ]);
-    }
 
     /*
     |--------------------------------------------------------------------------

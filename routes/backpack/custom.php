@@ -13,4 +13,12 @@ Route::group([
 ], function () { // custom admin routes
     CRUD::resource('form', 'FormCrudController');
     CRUD::resource('xlsform', 'XlsFormCrudController');
+    CRUD::resource('activity', 'ActivityCrudController');
+    CRUD::resource('activity_meta', 'Activity_metaCrudController');
+    CRUD::resource('projectxlsform', 'ProjectxlsformCrudController');
+    CRUD::resource('project', 'ProjectCrudController');
+    CRUD::resource('projectMeta', 'ProjectMetaCrudController');
+    CRUD::resource('projectMember', 'ProjectMemberCrudController');
+
+
 }); // this should be the absolute last line of this file

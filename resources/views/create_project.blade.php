@@ -2,11 +2,13 @@
 @extends('layouts.layout')
 
 @section('content')
-
+<!-- <head>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+</head> -->
 <body>
 <div class="col-sm-8">
   <section class="content mb-5" id="group">
-    <h1 class="mb-5"><b>{{ t("Group") }}</b></h1>
+    <h1 class="mb-5"><b>{{ t("Project") }}</b></h1>
 	<!-- Tab links -->
 	<div class="tab">
 	  <button class="tablinks" onclick="openPage(event, 'Details')" id="defaultOpen"><font size="2">{{ t("1.Details") }}</font></button>
@@ -22,15 +24,10 @@
 		        <form method="post" action="{{ url('en/create-project/validateValue')}}" id="group_details">
 		        	 @csrf
 		           	<div class="form-group">
-		           			@if(count($errors)>0)
-						  	<div class="alert alert-danger">Create Group Validation Error<br><br>
-						  		<ul>
-						  			@foreach( $errors->all() as $error)
-						  			<li>{{ $error }}</li>
-						  			@endforeach
-						  		</ul>
-						  	</div>
-						  	@endif
+
+		           			
+						  	<div class="alert alert-danger alert-block" id="validate_details"></div>
+						  	
 		             	<label for="exampleInputEmail1"><b>{{ t("Group Name (required)") }}</b></label>
 		             	<input class="form-control"  type="text" name="group_name">
 		           	</div>
@@ -40,7 +37,7 @@
 		           	</div>
 		   
 		          
-		           <button type="submit"  onclick="openPage(event, 'Settings')" class="btn btn-dark btn-sm" name="create_group">{{ t("CREATE A GROUP AND CONTINUE") }}</button>
+		           <button type="submit" id="group_name_descrip" class="btn btn-dark btn-sm" name="create_group">{{ t("CREATE A GROUP AND CONTINUE") }}</button>
  			</div>
    		</div>
 	</div>
@@ -101,23 +98,22 @@
 		<a href="#" onclick="openPage(event, 'Details')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
 		<a href="#" onclick="openPage(event, 'Photo')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("NEXT STEP") }}</a>
 		 <!-- </div> -->
-		<!-- </form> -->
+		</form>
 	</div>
+
+
 
 	<div id="Photo" class="tabcontent">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-4">
 					<div class="container-fluid">
-	  				<div class="img_group_default">
-  					 	@if($message = Session::get('success'))
-  					 	<img src="/images/{{ Session::get('path') }}">
-  					 	@else
-					  	<img src={{url("images/mystery-group.png")}} >
-					  	@endif
-
+		  				<div class="img_group_default">
+	  					
+						  	<img id='image' src={{url("images/mystery-group.png")}} >
+						  
+						</div>
 					</div>
-				</div>
 				</div>
 				<div class="col-sm-8">
 					<p>Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.</p>
@@ -130,46 +126,34 @@
 	  <div class="container">
 	  	<h4 align="center"><b>Upload Photo</b></h4>
 	  	<br/>
-	  	@if(count($errors)>0)
-	  	<div class="alert alert-danger">Upload Validation Error<br><br>
-	  		<ul>
-	  			@foreach( $errors->all() as $error)
-	  			<li>{{ $error }}</li>
-	  			@endforeach
-	  		</ul>
+	  	
+	  	<div class="alert alert-danger alert-block" id="error"></div>
+	  	
+	  	<div class="alert alert-success alert-block" id="success"></div>
+	  
+
+		  	<form method="post" action="{{ url('en/create-project/upload')}}" name="Upload" id="upload_image" enctype="multipart/form-data">
+		  		{{ csrf_field() }}
+		  		<div class="form-group">
+				
+					<label>  Select Photo for Upload  </label><br>
+					<input type="file" id="file" name="select_file">
+					<input type="submit" id="Upload" name="upload" class="btn btn-dark btn-sm" value="Upload">
+				</div>
+			</form>
+		
 	  	</div>
-	  	@endif
-	  	@if($message = Session::get('success'))
-	  	<div class="alert alert-success alert-block">
-	  		<button type="button"  class="close" date-dismiss="alert">x</button>
-	  		<strong>{{ $message }}</strong>
-	  	</div>
-	  	@endif
 
-	  	<!-- <form method="post" action="{{ url('en/create-project')}}" enctype="multipart/form-data"> -->
-	  		<!-- {{ csrf_field() }} -->
-	  		<div class="form-group">
-
-			
-				<label>  Select Photo for Upload  </label><br>
-				<input type="file" name="select_file">
-				<input type="submit" name="upload" class="btn btn-dark btn-sm" value="Upload">
-
-
-	  			
-	  			
-	  		</div>
 	  		<a href="#" onclick="openPage(event, 'Settings')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
 			<a href="#" onclick="openPage(event, 'Invites')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("NEXT STEP") }}</a>	
-			<button type="submit" class="btn btn-dark btn-sm">FINISH</button>
-
-
-	  	</form>
-
 		
-	  				
+		
+		<button type="submit" form="form1" class="btn btn-dark btn-sm">FINISH</button>
+
 	</div>
-	</div>
+	<!-- </div> -->
+
+
 
 	<div id="Invites" class="tabcontent">
 		<div class="container-fluid">
@@ -182,7 +166,7 @@
 							<tbody>
 								@foreach($users as $user)
 								<tr>
-									<td><input type="checkbox" class="name_selected" id="check_invitation" value="{{$user->name}}" > {{$user->name}}</td>		
+									<td><input type="checkbox" class="name_selected" id="{{$user->name}}" value="{{$user->name}}" > {{$user->name}}</td>		
 								</tr>
 								@endforeach
 							</tbody>
@@ -226,8 +210,10 @@
 </body>
 
 @endsection
-
+@section('script')
 <script type="text/javascript">	
+
+
 function openPage(evt, pageName) {
 	var i, tabcontent, tablinks;
 	tabcontent = document.getElementsByClassName("tabcontent");
@@ -278,13 +264,81 @@ document.addEventListener("change", function (e) {
   } else {
     x.style.display = "none";
   }
-
-
     
 });
+//validation group name and group description
+jQuery(document).ready(function(){
+	jQuery('#validate_details').hide();
+	
+	jQuery("#group_name_descrip").click(function(event){
+		event.preventDefault();
+		var form = document.getElementById('group_details');
+		var form_data = new FormData(form);
+		console.log(form_data);
+		$.ajax({
+		        url : 'create-project/validateValue', 
+		        type : 'POST',
+		        data : form_data,
+		        processData: false, 
+		        contentType: false,
+		        success : function(result){
+		        	var type = result.type;
+		        	var message = result.message;
+		        	console.log(result);
+		        	if(type == 'error'){
+		        		jQuery('#validate_details').show();
+		        		jQuery("#validate_details").html(message);
+					} else {
+						openPage(event, 'Settings');
+					}
+		        }
+		    });
+		});
+});
 
+//send an HTTP Get request to CreateProjectController
 
+jQuery(document).ready(function(){
+	jQuery("#success").hide();
+	jQuery("#error").hide();
 
-
-
+	jQuery("#Upload").click(function(event){
+			event.preventDefault();
+			var form = document.getElementById('upload_image');
+			var form_data = new FormData(form);
+           
+            $.ajax({
+		        url : 'create-project/upload', 
+		        type : 'POST',
+		        data : form_data,
+		        processData: false, 
+		        contentType: false,
+		        success : function(result){
+		        	var type = result.type;
+		        	var message = result.message;
+		        	if(type=='empty'){
+		        		jQuery("#success").hide();
+		        		jQuery('#error').show();
+		        		jQuery("#error").html(message);
+		    			//console.log(message);
+		    		} else if (type=='error'){
+		    			jQuery("#success").hide();
+		    			jQuery('#error').show();
+		    			jQuery("#error").html(message);
+		    			//console.log(message);
+		    		} else if (type=='success'){
+		    			jQuery("#error").hide();
+		    			jQuery('#success').show();
+		    			jQuery("#success").html(message);
+		   				var url = window.location.origin+'/'+result.image_path;
+		    			jQuery("#image").attr('src',url);
+		    			
+		    		}
+		        	
+		        }
+		    });
+		    
+		});
+	});
 </script>
+@endsection
