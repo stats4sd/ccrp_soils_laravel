@@ -45,9 +45,9 @@ body{
 }
 
 .card-login {
-  position: relative;
+  position: fixed; 
   float: auto;
-  right: 100px;
+  right: 0px;
   top: 250px;
   display: flex;
   width: 300px;

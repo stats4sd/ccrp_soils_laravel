@@ -50,13 +50,17 @@ Route::get('/downloads', 'DownloadsController@index');
 
 // Route::get('/', 'HomeController@index');
 
-Route::get('/create-project', 'ProjectController@index');
-Route::post('/create-project/validateValue', 'ProjectController@validateValue');
-Route::post('/created-group', 'ProjectController@store');
+Route::get('/create-project', 'CreateProjectController@index');
+Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
 
-Route::post('/create-project/upload', 'ProjectController@upload');
 
-Route::get('/projects', 'ProjectMemberController@index');
+Route::post('/create-project/upload', 'CreateProjectController@upload');
+Route::post('/create-project/store', 'CreateProjectController@store');
+Route::post('/create-project/sendEmail', 'CreateProjectController@sendEmail');
+
+
+
+Route::get('/projects', 'ProjectController@index');
 
 });
 

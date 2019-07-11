@@ -2,9 +2,7 @@
 @extends('layouts.layout')
 
 @section('content')
-<!-- <head>
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-</head> -->
+
 <body>
 <div class="col-sm-8">
   <section class="content mb-5" id="group">
@@ -21,13 +19,10 @@
 		<div class="row">
   			<div class="container">
 
-		        <form method="post" action="{{ url('en/create-project/validateValue')}}" id="group_details">
+		        <form method="post" action="{{ url('create-project/store')}}" id="group_details">
 		        	 @csrf
 		           	<div class="form-group">
-
-		           			
-						  	<div class="alert alert-danger alert-block" id="validate_details"></div>
-						  	
+						<div class="alert alert-danger alert-block" id="validate_details"></div>
 		             	<label for="exampleInputEmail1"><b>{{ t("Group Name (required)") }}</b></label>
 		             	<input class="form-control"  type="text" name="group_name">
 		           	</div>
@@ -36,19 +31,16 @@
 		             	<textarea class="form-control"  rows="4" cols="50" name="description" form="group_details"></textarea>
 		           	</div>
 		   
-		          
 		           <button type="submit" id="group_name_descrip" class="btn btn-dark btn-sm" name="create_group">{{ t("CREATE A GROUP AND CONTINUE") }}</button>
  			</div>
    		</div>
 	</div>
 
 	<div id="Settings" class="tabcontent">
-		<!-- <form method="post" action="login.php" id="group_details"> -->
-		 	<!-- <div class="form-group"> -->
 		<h3><b>Privacy Options</b></h3>
 		<div class="form-group">
 		<div>
-			<input type="radio" name="type_group" value="public_group" checked> 
+			<input type="radio" name="type_group" value="public" checked> 
 			<label for="public_group" style="color: grey"> This is a public group</label>
 			<ul>
 				<li>Any site member can join this group.</li>
@@ -58,7 +50,7 @@
 		</div>
 
 		<div>
-			<input type="radio" name="type_group" value="private_group"> 
+			<input type="radio" name="type_group" value="private"> 
 			<label for="private_group" style="color: grey"> This is a private group</label>
 			<ul>
 				<li>Only users who request membership and are accepted can join the group.</li>
@@ -68,7 +60,7 @@
 		</div>
 
 		<div>
-			<input type="radio" name="type_group" value="hidden_group"> 
+			<input type="radio" name="type_group" value="hidden"> 
 			<label for="private_group" style="color: grey"> This is a hidden group</label>
 			<ul>
 				<li>Only users who are invited can join the group.</li>
@@ -97,46 +89,45 @@
 
 		<a href="#" onclick="openPage(event, 'Details')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
 		<a href="#" onclick="openPage(event, 'Photo')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("NEXT STEP") }}</a>
-		 <!-- </div> -->
+		
 		</form>
 	</div>
 
-
-
 	<div id="Photo" class="tabcontent">
-		<div class="container-fluid">
+		<div class="container">
 			<div class="row">
 				<div class="col-sm-4">
-					<div class="container-fluid">
+					<div class="container">
 		  				<div class="img_group_default">
 	  					
-						  	<img id='image' src={{url("images/mystery-group.png")}} >
+						  	<img id='image' src={{url("images/mystery-group.png")}}>
 						  
 						</div>
 					</div>
 				</div>
 				<div class="col-sm-8">
+					<h4 align="center"><b>Upload Photo</b></h4>
+					<br>
 					<p>Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.</p>
 				  <p>To skip the group profile photo upload process, hit the "Next Step" button.</p>
 				</div>
 			</div>
 		</div>
 
-
-	  <div class="container">
-	  	<h4 align="center"><b>Upload Photo</b></h4>
-	  	<br/>
+	  	<div class="container">
+	  		
+	  		<br/>
 	  	
-	  	<div class="alert alert-danger alert-block" id="error"></div>
+	  		<div class="alert alert-danger alert-block" id="error"></div>
 	  	
-	  	<div class="alert alert-success alert-block" id="success"></div>
-	  
+	  		<div class="alert alert-success alert-block" id="success"></div>
 
-		  	<form method="post" action="{{ url('en/create-project/upload')}}" name="Upload" id="upload_image" enctype="multipart/form-data">
+		  	<form method="post" action="{{ url('create-project/upload')}}" name="Upload" id="upload_image">
 		  		{{ csrf_field() }}
 		  		<div class="form-group">
 				
-					<label>  Select Photo for Upload  </label><br>
+					<label> {{ t("Select Photo for Upload") }}</label>
+					<br>
 					<input type="file" id="file" name="select_file">
 					<input type="submit" id="Upload" name="upload" class="btn btn-dark btn-sm" value="Upload">
 				</div>
@@ -145,44 +136,39 @@
 	  	</div>
 
 	  		<a href="#" onclick="openPage(event, 'Settings')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
-			<a href="#" onclick="openPage(event, 'Invites')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("NEXT STEP") }}</a>	
-		
-		
-		<button type="submit" form="form1" class="btn btn-dark btn-sm">FINISH</button>
+	  		<button type="submit" onclick="openPage(event, 'Invites')" id="store_details" class="btn btn-dark btn-sm">{{ t("NEXT STEP") }}</button>
 
 	</div>
-	<!-- </div> -->
-
-
-
+	
 	<div id="Invites" class="tabcontent">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-6">
 					<label>Search for members to invite:</label>
-				  	<input type="text" id="myInput" onkeyup="search()" placeholder="Search for names..">
+					<form  method="post" action="{{url('create-project/sendEmail')}}" name="invite" id="invite" enctype="multipart/form-data">
+				  	<input type="text" id="myInput" onkeyup="search()" class="form-control" placeholder="Search for names..">
 				  	<div class="scroll_list">
+				  		<div class="form-group">
 						<table id="myTable" class="table table-hover">
 							<tbody>
 								@foreach($users as $user)
 								<tr>
-									<td><input type="checkbox" class="name_selected" id="{{$user->name}}" value="{{$user->name}}" > {{$user->name}}</td>		
+									<td><input type="checkbox" name="name_selected[]" id="{{$user->name}}" value="{{$user->name}}"> {{$user->name}}</td>		
 								</tr>
 								@endforeach
 							</tbody>
 						</table>
 					</div>
-		
-					<form action="/action_page.php">
+					</div>
+
 						<div class="form-group">
 							<label for="email">Insert email to invite not members</label>
 			    			<input style="width: 100%;" type="email" class="form-control" id="email">
 			    		</div>
 			    		<a href="#" onclick="openPage(event, 'Photo')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
-			    		<button type="submit" class="btn btn-dark btn-sm">FINISH</button>
-
-			    		
+			    		<button type="submit" class="btn btn-dark btn-sm" id="send_email">FINISH</button>	
 					</form>
+
 				</div>
 				<div class="col-sm-6">
 					<div class="alert alert-info">
@@ -193,7 +179,7 @@
 
 					<div class="container" id="myDIV">
 						<div class="img_group">
-						<img src={{url("images/535015583.jpg")}} id="avatar" >
+						<img src={{url("images/mystery-group.png")}} id="avatar" >
 						{{$user->name}}
 						</div>
 					<a href="">Remove invite</a>
@@ -203,10 +189,10 @@
 			</div>
 		</div>
 	</div>
-  </section>
+</section>
  
 
-</div>
+
 </body>
 
 @endsection
@@ -253,19 +239,21 @@ function search() {
     } 
   }
 }
+
+
+
 // Display selected person
 
 document.addEventListener("change", function (e) {
 	 var x = document.getElementById("myDIV");
     if (e.target.type === "checkbox") {
         console.log(e.target.value);
-
         x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-    
+  	} else {
+	    x.style.display = "none";
+	}
 });
+
 //validation group name and group description
 jQuery(document).ready(function(){
 	jQuery('#validate_details').hide();
@@ -276,69 +264,112 @@ jQuery(document).ready(function(){
 		var form_data = new FormData(form);
 		console.log(form_data);
 		$.ajax({
-		        url : 'create-project/validateValue', 
-		        type : 'POST',
-		        data : form_data,
-		        processData: false, 
-		        contentType: false,
-		        success : function(result){
-		        	var type = result.type;
-		        	var message = result.message;
-		        	console.log(result);
-		        	if(type == 'error'){
-		        		jQuery('#validate_details').show();
-		        		jQuery("#validate_details").html(message);
-					} else {
-						openPage(event, 'Settings');
-					}
-		        }
-		    });
-		});
+	        url : 'create-project/validateValue', 
+	        type : 'POST',
+	        data : form_data,
+	        processData: false, 
+	        contentType: false,
+	        success : function(result){
+	        	var type = result.type;
+	        	var message = result.message;
+	        	console.log(result);
+	        	if(type == 'error'){
+	        		jQuery('#validate_details').show();
+	        		jQuery("#validate_details").html(message);
+				} else {
+					openPage(event, 'Settings');
+				}
+	        }
+	    });
+	});
 });
 
-//send an HTTP Get request to CreateProjectController
+//check file image validation
 
 jQuery(document).ready(function(){
 	jQuery("#success").hide();
 	jQuery("#error").hide();
 
 	jQuery("#Upload").click(function(event){
-			event.preventDefault();
-			var form = document.getElementById('upload_image');
-			var form_data = new FormData(form);
-           
-            $.ajax({
-		        url : 'create-project/upload', 
-		        type : 'POST',
-		        data : form_data,
-		        processData: false, 
-		        contentType: false,
-		        success : function(result){
-		        	var type = result.type;
-		        	var message = result.message;
-		        	if(type=='empty'){
-		        		jQuery("#success").hide();
-		        		jQuery('#error').show();
-		        		jQuery("#error").html(message);
-		    			//console.log(message);
-		    		} else if (type=='error'){
-		    			jQuery("#success").hide();
-		    			jQuery('#error').show();
-		    			jQuery("#error").html(message);
-		    			//console.log(message);
-		    		} else if (type=='success'){
-		    			jQuery("#error").hide();
-		    			jQuery('#success').show();
-		    			jQuery("#success").html(message);
-		   				var url = window.location.origin+'/'+result.image_path;
-		    			jQuery("#image").attr('src',url);
-		    			
-		    		}
-		        	
-		        }
-		    });
-		    
+		event.preventDefault();
+		var form = document.getElementById('upload_image');
+		var form_data = new FormData(form);
+       
+        $.ajax({
+	        url : 'create-project/upload', 
+	        type : 'POST',
+	        data : form_data,
+	        processData: false, 
+	        contentType: false,
+	        success : function(result){
+	        	var type = result.type;
+	        	var message = result.message;
+	        	if(type=='empty'){
+	        		jQuery("#success").hide();
+	        		jQuery('#error').show();
+	        		jQuery("#error").html(message);
+	    			//console.log(message);
+	    		} else if (type=='error'){
+	    			jQuery("#success").hide();
+	    			jQuery('#error').show();
+	    			jQuery("#error").html(message);
+	    			//console.log(message);
+	    		} else if (type=='success'){
+	    			jQuery("#error").hide();
+	    			jQuery('#success').show();
+	    			jQuery("#success").html(message);
+	   				var url = window.location.origin+'/'+result.image_path;
+	    			jQuery("#image").attr('src',url);	    			
+	    		}	        	
+			}
 		});
 	});
+});
+
+//store details project 
+
+jQuery(document).ready(function(){
+	
+	jQuery("#store_details").click(function(event){
+		event.preventDefault();
+		var form = document.getElementById('group_details');
+		var form_data = new FormData(form);
+       
+        $.ajax({
+	        url : 'create-project/store', 
+	        type : 'POST',
+	        data : form_data,
+	        processData: false, 
+	        contentType: false,
+	        success : function(result){
+	        	
+	        	console.log(result)
+			}
+		});
+	});
+});
+//send email for invitating members
+Query(document).ready(function(){
+	
+	jQuery("#send_email").click(function(event){
+		event.preventDefault();
+		var form = document.getElementById('group_details');
+		var form_data = new FormData(form);
+       
+        $.ajax({
+	        url : 'create-project/sendEmail', 
+	        type : 'POST',
+	        data : form_data,
+	        processData: false, 
+	        contentType: false,
+	        success : function(result){
+	        	
+	        	console.log(result)
+			}
+		});
+	});
+});
 </script>
+
+
 @endsection
