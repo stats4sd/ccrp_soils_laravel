@@ -19,9 +19,8 @@ class CreateProjectsTable extends Migration
             $table->string('slug', 200);
             $table->longText('description');
             $table->string('status', 10)->default('public');
-            $table->bigInteger('parent_id')->default(0);
-            $table->tinyInteger('enable_forum')->default(1);
-            $table->dateTime('date_created');
+            $table->string('group_invitations')->default('all_members');
+            $table->string('image');
             $table->timestamps();
 
         });

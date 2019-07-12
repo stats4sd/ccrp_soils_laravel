@@ -18,7 +18,7 @@ class CreateProjectController extends Controller
 
     public function validateValue(Request $request)
     {
-        $group_name = $_POST['group_name'];
+        $group_name = $_POST['name'];
         $group_description = $_POST['description'];
         if($group_name==null && $group_description==null){
             return response()->json(["type"=>"error", "message" => "<b>Group Name</b> and <b>Group Description</b> are required"]);
@@ -61,12 +61,10 @@ class CreateProjectController extends Controller
 
     public function store (Request $request)
     {
-        $name = $_POST['group_name'];
-        $description = $_POST['description'];
-        $status = $_POST['type_group'];
-        // $group_invitations = $_POST['group_invitations'];
-
-        $newProject = array('name' => $name, 'description' => $description, 'status' =>$status);
+   
+       // dd($request);
+        $newProject = $request->all();
+        unset($newProject['_token']);
         DB::table('projects')->insert($newProject);
         return response()->json(["type"=>"success"]);
     }

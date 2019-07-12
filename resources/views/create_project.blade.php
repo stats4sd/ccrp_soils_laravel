@@ -24,7 +24,7 @@
 		           	<div class="form-group">
 						<div class="alert alert-danger alert-block" id="validate_details"></div>
 		             	<label for="exampleInputEmail1"><b>{{ t("Group Name (required)") }}</b></label>
-		             	<input class="form-control"  type="text" name="group_name">
+		             	<input class="form-control"  type="text" name="name">
 		           	</div>
 		           	<div class="form-group">
 		             	<label for="exampleInputEmail1"><b>{{ t("Group Description (required)") }}</b></label>
@@ -38,9 +38,9 @@
 
 	<div id="Settings" class="tabcontent">
 		<h3><b>Privacy Options</b></h3>
-		<div class="form-group">
+		<div class="form-group" >
 		<div>
-			<input type="radio" name="type_group" value="public" checked> 
+			<input type="radio" id="type" name="status" value="public" checked> 
 			<label for="public_group" style="color: grey"> This is a public group</label>
 			<ul>
 				<li>Any site member can join this group.</li>
@@ -50,7 +50,7 @@
 		</div>
 
 		<div>
-			<input type="radio" name="type_group" value="private"> 
+			<input type="radio" id="type" name="status" value="private"> 
 			<label for="private_group" style="color: grey"> This is a private group</label>
 			<ul>
 				<li>Only users who request membership and are accepted can join the group.</li>
@@ -60,7 +60,7 @@
 		</div>
 
 		<div>
-			<input type="radio" name="type_group" value="hidden"> 
+			<input type="radio" id="type" name="status" value="hidden"> 
 			<label for="private_group" style="color: grey"> This is a hidden group</label>
 			<ul>
 				<li>Only users who are invited can join the group.</li>
@@ -77,10 +77,10 @@
 			<input type="radio" name="group_invitations" value="all_members" checked> 
 			<label for="group_invitations" style="color: grey"> All group members</label>
 		</div>
-		<div>
+		<!-- <div>
 			<input type="radio" name="group_invitations" value="group_admins_and_mods"> 
 			<label for="group_invitations" style="color: grey"> Group admins and mods only</label>
-		</div>
+		</div> -->
 		<div>
 			<input type="radio" name="group_invitations" value="group_admins"> 
 			<label for="group_invitations" style="color: grey"> Group admins only</label>
@@ -98,14 +98,14 @@
 			<div class="row">
 				<div class="col-sm-4">
 					<div class="container">
-		  				<div class="img_group_default">
+		  				<div class="img_group_default mt-3">
 	  					
 						  	<img id='image' src={{url("images/mystery-group.png")}}>
 						  
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-8">
+				<div class="col-sm-8 mt-3">
 					<h4 align="center"><b>Upload Photo</b></h4>
 					<br>
 					<p>Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.</p>
@@ -137,6 +137,7 @@
 
 	  		<a href="#" onclick="openPage(event, 'Settings')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
 	  		<button type="submit" onclick="openPage(event, 'Invites')" id="store_details" class="btn btn-dark btn-sm">{{ t("NEXT STEP") }}</button>
+
 
 	</div>
 	
@@ -334,7 +335,15 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 		var form = document.getElementById('group_details');
 		var form_data = new FormData(form);
-       
+
+		var images = $('#image').attr('src');
+		form_data.append('image', images );
+		// if ($('#type').is(":checked"))
+		// {
+		//   var type = $('#type').val();
+		// 	form_data.append('type', type );
+		// }
+		
         $.ajax({
 	        url : 'create-project/store', 
 	        type : 'POST',
@@ -349,26 +358,26 @@ jQuery(document).ready(function(){
 	});
 });
 //send email for invitating members
-Query(document).ready(function(){
+// Query(document).ready(function(){
 	
-	jQuery("#send_email").click(function(event){
-		event.preventDefault();
-		var form = document.getElementById('group_details');
-		var form_data = new FormData(form);
+// 	jQuery("#send_email").click(function(event){
+// 		event.preventDefault();
+// 		var form = document.getElementById('group_details');
+// 		var form_data = new FormData(form);
        
-        $.ajax({
-	        url : 'create-project/sendEmail', 
-	        type : 'POST',
-	        data : form_data,
-	        processData: false, 
-	        contentType: false,
-	        success : function(result){
+//         $.ajax({
+// 	        url : 'create-project/sendEmail', 
+// 	        type : 'POST',
+// 	        data : form_data,
+// 	        processData: false, 
+// 	        contentType: false,
+// 	        success : function(result){
 	        	
-	        	console.log(result)
-			}
-		});
-	});
-});
+// 	        	console.log(result)
+// 			}
+// 		});
+// 	});
+// });
 </script>
 
 
