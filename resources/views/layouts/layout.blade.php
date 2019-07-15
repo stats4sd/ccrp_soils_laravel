@@ -85,7 +85,7 @@
      <div class="card card-login mx-5 mt-5 sticky-top">
        <div class="card-header"><strong>{{ t("MY ACCOUNT") }}</strong></div>
        <div class="card-body">
-         <form method="post" action="login.php">
+         <form method="post" action="{{url('login')}}">
            <div class="form-group">
              <label for="exampleInputEmail1">{{ t("Username") }}</label>
              <input class="form-control"  type="text" name="username">

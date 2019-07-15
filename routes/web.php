@@ -56,7 +56,7 @@ Route::post('/create-project/validateValue', 'CreateProjectController@validateVa
 
 Route::post('/create-project/upload', 'CreateProjectController@upload');
 Route::post('/create-project/store', 'CreateProjectController@store');
-Route::post('/create-project/sendEmail', 'CreateProjectController@sendEmail');
+Route::post('create-project/sendEmail', 'CreateProjectController@sendEmail');
 
 
 
@@ -64,3 +64,7 @@ Route::get('/projects', 'ProjectController@index');
 
 });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

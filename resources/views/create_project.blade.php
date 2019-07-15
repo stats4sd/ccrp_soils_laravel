@@ -40,7 +40,7 @@
 		<h3><b>Privacy Options</b></h3>
 		<div class="form-group" >
 		<div>
-			<input type="radio" id="type" name="status" value="public" checked> 
+			<input type="radio" name="status" value="public" checked> 
 			<label for="public_group" style="color: grey"> This is a public group</label>
 			<ul>
 				<li>Any site member can join this group.</li>
@@ -50,7 +50,7 @@
 		</div>
 
 		<div>
-			<input type="radio" id="type" name="status" value="private"> 
+			<input type="radio" name="status" value="private"> 
 			<label for="private_group" style="color: grey"> This is a private group</label>
 			<ul>
 				<li>Only users who request membership and are accepted can join the group.</li>
@@ -60,7 +60,7 @@
 		</div>
 
 		<div>
-			<input type="radio" id="type" name="status" value="hidden"> 
+			<input type="radio" name="status" value="hidden"> 
 			<label for="private_group" style="color: grey"> This is a hidden group</label>
 			<ul>
 				<li>Only users who are invited can join the group.</li>
@@ -146,7 +146,7 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<label>Search for members to invite:</label>
-					<form  method="post" action="{{url('create-project/sendEmail')}}" name="invite" id="invite" enctype="multipart/form-data">
+					<form  method="post" action="{{url('create-project/sendEmail')}}" name="invite" id="invite">
 				  	<input type="text" id="myInput" onkeyup="search()" class="form-control" placeholder="Search for names..">
 				  	<div class="scroll_list">
 				  		<div class="form-group">
@@ -175,7 +175,7 @@
 					<div class="alert alert-info">
 						<strong> Select people to invite from your friends list.</strong>
 					</div>	
-					@foreach($users as $user)
+					<!-- @foreach($users as $user)
 					<br>
 
 					<div class="container" id="myDIV">
@@ -185,7 +185,7 @@
 						</div>
 					<a href="">Remove invite</a>
 					</div>
-				@endforeach	
+				@endforeach	 -->
 				</div>	
 			</div>
 		</div>
@@ -245,15 +245,15 @@ function search() {
 
 // Display selected person
 
-document.addEventListener("change", function (e) {
-	 var x = document.getElementById("myDIV");
-    if (e.target.type === "checkbox") {
-        console.log(e.target.value);
-        x.style.display = "block";
-  	} else {
-	    x.style.display = "none";
-	}
-});
+// document.addEventListener("change", function (e) {
+// 	 var x = document.getElementById("myDIV");
+//     if (e.target.type === "checkbox") {
+//         console.log(e.target.value);
+//         x.style.display = "block";
+//   	} else {
+// 	    x.style.display = "none";
+// 	}
+// });
 
 //validation group name and group description
 jQuery(document).ready(function(){
@@ -338,11 +338,7 @@ jQuery(document).ready(function(){
 
 		var images = $('#image').attr('src');
 		form_data.append('image', images );
-		// if ($('#type').is(":checked"))
-		// {
-		//   var type = $('#type').val();
-		// 	form_data.append('type', type );
-		// }
+		
 		
         $.ajax({
 	        url : 'create-project/store', 
@@ -358,26 +354,26 @@ jQuery(document).ready(function(){
 	});
 });
 //send email for invitating members
-// Query(document).ready(function(){
+Query(document).ready(function(){
 	
-// 	jQuery("#send_email").click(function(event){
-// 		event.preventDefault();
-// 		var form = document.getElementById('group_details');
-// 		var form_data = new FormData(form);
+	jQuery("#send_email").click(function(event){
+		event.preventDefault();
+		var form = document.getElementById('invite');
+		var form_data = new FormData(form);
        
-//         $.ajax({
-// 	        url : 'create-project/sendEmail', 
-// 	        type : 'POST',
-// 	        data : form_data,
-// 	        processData: false, 
-// 	        contentType: false,
-// 	        success : function(result){
+        $.ajax({
+	        url : 'create-project/sendEmail', 
+	        type : 'POST',
+	        data : form_data,
+	        processData: false, 
+	        contentType: false,
+	        success : function(result){
 	        	
-// 	        	console.log(result)
-// 			}
-// 		});
-// 	});
-// });
+	        	console.log(result)
+			}
+		});
+	});
+});
 </script>
 
 

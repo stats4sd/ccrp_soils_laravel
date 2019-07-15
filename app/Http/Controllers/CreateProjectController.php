@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
-
+use App\Mail\InviteMember;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class CreateProjectController extends Controller
@@ -62,16 +63,33 @@ class CreateProjectController extends Controller
     public function store (Request $request)
     {
    
-       // dd($request);
+        //dd($request);
+        $user = Auth::user();
+        $creator_id = $user->id;
+        $slug = preg_replace('/[^a-z0-9]+/i', '-', trim(strtolower($request->name)));
         $newProject = $request->all();
+        $newProject['creator_id'] = $creator_id;
+        $newProject['slug'] = $slug;
+        $newProject['image'] = substr($newProject['image'], strrpos($newProject['image'], '/' )-6);
+        $newProject['created_at'] = now();
+        $newProject['updated_at'] = now();
         unset($newProject['_token']);
+
         DB::table('projects')->insert($newProject);
+
         return response()->json(["type"=>"success"]);
     }
 
     public function sendEmail (Request $request)
     {
-        //dd($request);
+        dd($request);
+        $data = array(
+                'name' => 'lucia',
+                'email' => 'email@gmail.com',
+                'creator_id' =>'Creator name',
+        );
+
+        Mail::to('lucia@stats4sd.org')->send(new InviteMember($data));
         dd($request->input('name_selected'));
          return response()->json(["type"=>"success"]);
     }

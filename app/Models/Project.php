@@ -17,11 +17,12 @@ class Project extends Model
 
     protected $table = 'projects';
     // protected $primaryKey = 'id';
-    // public $timestamps = false;
+    public $timestamps = true;
     // protected $guarded = ['id'];
     protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
+
 
     /*
     |--------------------------------------------------------------------------
