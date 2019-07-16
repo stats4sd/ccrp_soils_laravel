@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\InviteMember;
+use App\Models\Project;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -66,33 +68,46 @@ class CreateProjectController extends Controller
         //dd($request);
         $user = Auth::user();
         $creator_id = $user->id;
-        $slug = preg_replace('/[^a-z0-9]+/i', '-', trim(strtolower($request->name)));
-        $newProject = $request->all();
-        $newProject['creator_id'] = $creator_id;
-        $newProject['slug'] = $slug;
-        $newProject['image'] = substr($newProject['image'], strrpos($newProject['image'], '/' )-6);
-        $newProject['created_at'] = now();
-        $newProject['updated_at'] = now();
-        unset($newProject['_token']);
 
-        DB::table('projects')->insert($newProject);
+        $project = new Project();
 
-        return response()->json(["type"=>"success"]);
+        $project->name = $request->name;
+        $project->creator_id = $creator_id;
+        $project->slug = preg_replace('/[^a-z0-9]+/i', '-', trim(strtolower($request->name)));
+        $project->description = $request->description;
+        $project->status = $request->status;
+        $project->image = substr($request['image'], strrpos($request['image'], '/' )-6);
+        $project->group_invitations = $request->group_invitations;
+
+        $project->save();
+        $this->project_id = $project->id;
+        return response()->json(["type"=>"stored successfully", "project_id"=>$project->id]);
     }
 
     public function sendEmail (Request $request)
     {
         dd($request);
-        $data = array(
-                'name' => 'lucia',
-                'email' => 'email@gmail.com',
-                'creator_id' =>'Creator name',
-        );
+        $user = Auth::user();
+        $creator_name = $user->name;
 
-        Mail::to('lucia@stats4sd.org')->send(new InviteMember($data));
-        dd($request->input('name_selected'));
-         return response()->json(["type"=>"success"]);
+        if(!empty($request->name_selected))
+        {
+            foreach ($request->name_selected as $user_id) 
+            {
+                $user_invited = User::find(($user_id));
+                $data = [ "creator_name"=> $creator_name, "name_invited" => $user_invited->name, 
+                    "email"=>$user_invited->email, "name_project"=>"project Name"];
+                
+                Mail::to($user_invited->email)->send(new InviteMember($data));       
+            }
+        } else if(!empty($request->email_inserted))
+        {
+            $data = [ "creator_name"=> $creator_name, 
+                    "email"=>$request->email_inserted, "name_project"=>"project Name"];
+            Mail::to($request->email_inserted)->send(new InviteMember($data));   
+        }
+
+        return Back()->with(["type"=>"emails send successfully"]);
     }
-
 
 }

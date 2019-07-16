@@ -146,7 +146,8 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<label>Search for members to invite:</label>
-					<form  method="post" action="{{url('create-project/sendEmail')}}" name="invite" id="invite">
+					<form  method="post" action="{{url('en/create-project/send')}}" name="invite" id="invite">
+				  	{{ csrf_field() }}
 				  	<input type="text" id="myInput" onkeyup="search()" class="form-control" placeholder="Search for names..">
 				  	<div class="scroll_list">
 				  		<div class="form-group">
@@ -154,7 +155,7 @@
 							<tbody>
 								@foreach($users as $user)
 								<tr>
-									<td><input type="checkbox" name="name_selected[]" id="{{$user->name}}" value="{{$user->name}}"> {{$user->name}}</td>		
+									<td><input type="checkbox" name="name_selected[]" id="{{$user->id}}" value="{{$user->id}}"> {{$user->name}}</td>		
 								</tr>
 								@endforeach
 							</tbody>
@@ -164,7 +165,7 @@
 
 						<div class="form-group">
 							<label for="email">Insert email to invite not members</label>
-			    			<input style="width: 100%;" type="email" class="form-control" id="email">
+			    			<input style="width: 100%;" type="email" class="form-control" name="email_inserted">
 			    		</div>
 			    		<a href="#" onclick="openPage(event, 'Photo')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
 			    		<button type="submit" class="btn btn-dark btn-sm" id="send_email">FINISH</button>	
@@ -348,32 +349,36 @@ jQuery(document).ready(function(){
 	        contentType: false,
 	        success : function(result){
 	        	
-	        	console.log(result)
+	        	console.log(result);
+	        	var form = document.getElementById('invite');
+				var form_data = new FormData(form);
+				form_data.append('project_id', result.project_id);
+
 			}
 		});
 	});
 });
 //send email for invitating members
-Query(document).ready(function(){
+// jQuery(document).ready(function(){
 	
-	jQuery("#send_email").click(function(event){
-		event.preventDefault();
-		var form = document.getElementById('invite');
-		var form_data = new FormData(form);
+// 	jQuery("#send_email").click(function(event){
+// 		event.preventDefault();
+// 		var form = document.getElementById('invite');
+// 		var form_data = new FormData(form);
        
-        $.ajax({
-	        url : 'create-project/sendEmail', 
-	        type : 'POST',
-	        data : form_data,
-	        processData: false, 
-	        contentType: false,
-	        success : function(result){
+//         $.ajax({
+// 	        url : 'create-project/sendEmail', 
+// 	        type : 'POST',
+// 	        data : form_data,
+// 	        processData: false, 
+// 	        contentType: false,
+// 	        success : function(result){
 	        	
-	        	console.log(result)
-			}
-		});
-	});
-});
+// 	        	console.log(result)
+// 			}
+// 		});
+// 	});
+// });
 </script>
 
 
