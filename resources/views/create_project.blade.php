@@ -10,8 +10,8 @@
 	<!-- Tab links -->
 	<div class="tab">
 	  <button class="tablinks" onclick="openPage(event, 'Details')" id="defaultOpen"><font size="2">{{ t("1.Details") }}</font></button>
-	  <button class="tablinks" onclick="openPage(event, 'Settings')"><font size="2">{{ t("2. Settings") }}</font></button>
-	  <button class="tablinks" onclick="openPage(event, 'Photo')"><font size="2">{{ t("3. Photo") }}</font></button>
+	  <button class="tablinks" ><font size="2">{{ t("2. Settings") }}</font></button>
+	  <button class="tablinks"><font size="2">{{ t("3. Photo") }}</font></button>
 	  <button class="tablinks" onclick="openPage(event, 'Invites')"><font size="2">{{ t("4. Send Invites") }}</font></button>
 	</div>
 
@@ -77,10 +77,6 @@
 			<input type="radio" name="group_invitations" value="all_members" checked> 
 			<label for="group_invitations" style="color: grey"> All group members</label>
 		</div>
-		<!-- <div>
-			<input type="radio" name="group_invitations" value="group_admins_and_mods"> 
-			<label for="group_invitations" style="color: grey"> Group admins and mods only</label>
-		</div> -->
 		<div>
 			<input type="radio" name="group_invitations" value="group_admins"> 
 			<label for="group_invitations" style="color: grey"> Group admins only</label>
@@ -164,8 +160,8 @@
 					</div>
 
 						<div class="form-group">
-							<label for="email">Insert email to invite not members</label>
-			    			<input style="width: 100%;" type="email" class="form-control" name="email_inserted">
+							<label for="email">Enter the email addresses of people to invite.</label>
+			    			<input style="width: 100%;" type="email" class="form-control" name="email_inserted" multiple>
 			    		</div>
 			    		<a href="#" onclick="openPage(event, 'Photo')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
 			    		<button type="submit" class="btn btn-dark btn-sm" id="send_email">FINISH</button>	
@@ -176,17 +172,20 @@
 					<div class="alert alert-info">
 						<strong> Select people to invite from your friends list.</strong>
 					</div>	
-					<!-- @foreach($users as $user)
+				
 					<br>
 
-					<div class="container" id="myDIV">
+					
+						<!-- @foreach($users as $user) -->
+						<!-- <div class="container" id="user_card">
 						<div class="img_group">
-						<img src={{url("images/mystery-group.png")}} id="avatar" >
-						{{$user->name}}
-						</div>
-					<a href="">Remove invite</a>
-					</div>
-				@endforeach	 -->
+						<img src={{url("images/mystery-group.png")}} id="avatar" > -->
+						<!-- {{$user->name}} -->
+						<!-- </div>
+						</div> -->
+						<!-- @endforeach -->
+
+				
 				</div>	
 			</div>
 		</div>
@@ -245,16 +244,28 @@ function search() {
 
 
 // Display selected person
+jQuery(document).ready(function(){
+	jQuery('#user_card').hide();
 
-// document.addEventListener("change", function (e) {
-// 	 var x = document.getElementById("myDIV");
-//     if (e.target.type === "checkbox") {
-//         console.log(e.target.value);
-//         x.style.display = "block";
-//   	} else {
-// 	    x.style.display = "none";
-// 	}
-// });
+ jQuery( ":checkbox" ).click( "click", function() {
+ 	if(jQuery( ":checkbox" ).is(':checked')){
+ 		if(jQuery(":checkbox").length >0){
+ 		jQuery(":checkbox").val();
+ 		jQuery('#user_card').show();
+ 	
+ 		
+ 		}
+ 	}
+ 	else
+ 	{
+ 		
+ 			jQuery('#user_card').hide();
+ 		
+ 	}
+
+
+	});
+});
 
 //validation group name and group description
 jQuery(document).ready(function(){
@@ -340,7 +351,6 @@ jQuery(document).ready(function(){
 		var images = $('#image').attr('src');
 		form_data.append('image', images );
 		
-		
         $.ajax({
 	        url : 'create-project/store', 
 	        type : 'POST',
@@ -348,37 +358,20 @@ jQuery(document).ready(function(){
 	        processData: false, 
 	        contentType: false,
 	        success : function(result){
+	        	$("#invite").submit(function(event){
+	        		$(this).append('<input type="hidden" id="project_id" name="project_id" value="'+result.project_id+'" />');
+	        		return true;
+	        	});
+
+	        	
 	        	
 	        	console.log(result);
-	        	var form = document.getElementById('invite');
-				var form_data = new FormData(form);
-				form_data.append('project_id', result.project_id);
-
+	        	
 			}
 		});
 	});
 });
-//send email for invitating members
-// jQuery(document).ready(function(){
-	
-// 	jQuery("#send_email").click(function(event){
-// 		event.preventDefault();
-// 		var form = document.getElementById('invite');
-// 		var form_data = new FormData(form);
-       
-//         $.ajax({
-// 	        url : 'create-project/sendEmail', 
-// 	        type : 'POST',
-// 	        data : form_data,
-// 	        processData: false, 
-// 	        contentType: false,
-// 	        success : function(result){
-	        	
-// 	        	console.log(result)
-// 			}
-// 		});
-// 	});
-// });
+
 </script>
 
 

@@ -37,6 +37,7 @@ class CreateProjectController extends Controller
     
     }
 
+
     public function upload(Request $request)
     {
         $allowed_image_extension = array("png","jpg","jpeg",'webp');
@@ -64,8 +65,6 @@ class CreateProjectController extends Controller
 
     public function store (Request $request)
     {
-   
-        //dd($request);
         $user = Auth::user();
         $creator_id = $user->id;
 
@@ -80,34 +79,44 @@ class CreateProjectController extends Controller
         $project->group_invitations = $request->group_invitations;
 
         $project->save();
-        $this->project_id = $project->id;
-        return response()->json(["type"=>"stored successfully", "project_id"=>$project->id]);
+        $project_id = $project->id;
+     
+    
+        return response()->json(["type"=>"stored successfully", "project_id"=>$project_id]);
     }
+
 
     public function sendEmail (Request $request)
     {
-        dd($request);
         $user = Auth::user();
         $creator_name = $user->name;
+        $project = Project::find($request->project_id);
 
         if(!empty($request->name_selected))
         {
             foreach ($request->name_selected as $user_id) 
             {
                 $user_invited = User::find(($user_id));
-                $data = [ "creator_name"=> $creator_name, "name_invited" => $user_invited->name, 
-                    "email"=>$user_invited->email, "name_project"=>"project Name"];
+                $data = [ "creator_name"=> $creator_name, 
+                    "email"=>$user_invited->email, "name_project"=>$project->name];
                 
                 Mail::to($user_invited->email)->send(new InviteMember($data));       
             }
-        } else if(!empty($request->email_inserted))
-        {
-            $data = [ "creator_name"=> $creator_name, 
-                    "email"=>$request->email_inserted, "name_project"=>"project Name"];
-            Mail::to($request->email_inserted)->send(new InviteMember($data));   
         }
+        if(!empty($request->email_inserted))
+        {
+            $email_multiple = explode(",", $request->email_inserted);
 
-        return Back()->with(["type"=>"emails send successfully"]);
+            foreach($email_multiple as $email)
+            {         
+                $data = [ "creator_name"=> $creator_name, 
+                    "email"=>$email, "name_project"=>$project->name];
+
+                Mail::to($email)->send(new InviteMember($data));
+            }  
+        } 
+        
+        return redirect('project/'.$project->slug);
     }
 
 }

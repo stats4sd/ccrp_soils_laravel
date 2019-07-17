@@ -11273,11 +11273,11 @@ div.scroll_list {
   overflow: auto;
 }
 
-#myDIV {
+#user_card {
   width: 100%;
   padding: 50px 0;
   text-align: center;
-  background-color: lightblue;
+  background-color: #ccc;
   margin-top: 20px;
 }
 
