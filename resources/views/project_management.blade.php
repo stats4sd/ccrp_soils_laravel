@@ -4,12 +4,12 @@
 @section('content')
 
 <body>
-	<div class="col-sm-12">
+	<div class="col-sm-8">
 	 	<section class="content mb-5" id="group">
 
-	 		@foreach ($projects as $project)
-		    	<h1 class="mb-5"><b>{{$project->name}}</b></h1>
-	    	@endforeach
+	 		
+		    	<h1 class="mb-5"><b>Projects</b></h1>
+	 
 
 	    	<div class="container-fluid">
 	    		<div class="row">
@@ -21,10 +21,9 @@
 					<div class="col-sm-6">
 
 						<div id="description">
-							@foreach ($projects as $project)
-						    	<p>{{$project->description}}</p>
-					    	@endforeach
-
+							
+						    	<p>description</p>
+					    	
 						</div>
 					</div>
 					<div class="col-sm-4">
@@ -91,6 +90,9 @@
 			</div>
 
 	    </section>
+	</div>
+	<div id="login" class="row" >
+		@include('layouts.login')	
 	</div>
 </body>
 

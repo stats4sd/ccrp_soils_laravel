@@ -12,7 +12,19 @@
 */
 
 Route::prefix('{locale?}')->middleware('set.locale')->group(function() {
+
+
 	
+Route::get('/home', function(){
+	return redirect('home');
+});
+
+Route::get('/', function(){
+	return view('home');
+});
+Route::get('/admin/login', function(){
+	return view('home');
+});
 
 Route::get('/about', function () {
     return view('about');
@@ -20,10 +32,6 @@ Route::get('/about', function () {
 
 Route::get('/start-sampling', function () {
     return view('start_sampling');
-});
-
-Route::get('/data-management', function () {
-	return view('data_management');
 });
 
 Route::get('/qr-codes', function() {
@@ -37,30 +45,40 @@ Route::get('/downloads', function() {
 Route::get('/register', function() {
 	return view('register');
 });
-
-
-
-Route::get('/home', 'HomeController@index');
-
-##Login and logout
-Route::post('/home/checklogin', 'HomeController@checklogin');
-Route::get('/home/successlogin', 'HomeController@successlogin');
-Route::get('/home/logout', 'HomeController@logout');
 Route::get('/downloads', 'DownloadsController@index');
 
-// Route::get('/', 'HomeController@index');
-
-Route::get('/create-project', 'CreateProjectController@index');
-Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
-
-
-Route::post('/create-project/upload', 'CreateProjectController@upload');
-Route::post('/create-project/store', 'CreateProjectController@store');
-Route::post('/create-project/send', 'CreateProjectController@sendEmail');
-
-
-
 Route::get('/projects', 'ProjectController@index');
+
+Route::post('/register/validator', 'RegisterController@validator');
+Route::post('/register/store', 'RegisterController@store');
+
+
+Route::group([
+    
+    'middleware' => ['auth'],
+    
+], function () { 
+
+	Route::get('/data-management', function () {
+		return view('data_management');
+	});
+
+	
+	Route::get('/create-project', 'CreateProjectController@index');
+	Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
+
+
+	Route::post('/create-project/upload', 'CreateProjectController@upload');
+	Route::post('/create-project/store', 'CreateProjectController@store');
+	Route::post('/create-project/send', 'CreateProjectController@sendEmail');
+
+});
+
+
+
+
+
+
 
 });
 

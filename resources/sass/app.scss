@@ -46,11 +46,12 @@ body{
 
 .card-login {
   position: fixed; 
-  float: auto;
+  
   right: 0px;
-  top: 0px;
+  top: 100px;
   width: 300px;
 }
+
 
 /*
 |--------------------------------------------------------------------------
@@ -199,3 +200,4 @@ div.scroll_list {
   border-radius: 50%;
   left: 150px;
 }
+

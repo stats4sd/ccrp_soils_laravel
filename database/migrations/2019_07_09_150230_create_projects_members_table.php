@@ -18,7 +18,7 @@ class CreateProjectsMembersTable extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('inviter_id');
             $table->tinyInteger('is_admin')->default(0);
-            $table->longText('comments');
+            $table->longText('comments')->nullable();
             $table->tinyInteger('is_confirmed')->default(0);
             $table->timestamps();
         });

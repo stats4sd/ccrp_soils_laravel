@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <section class="card">
+  <section class="card" id="card-body">
     <div class="row">
       <div class="card-body">
         <div class="container mt-5">
@@ -28,29 +28,25 @@
             <div class="dropdown">
               <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">{{ t("Home") }}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="home">{{ t("Introduction") }}</a></li>
-                  <li><a href="about">{{ t("About") }}</a></li>
+                  <li><a href="en/home">{{ t("Introduction") }}</a></li>
+                  <li><a href="en/about">{{ t("About") }}</a></li>
                 </ul>
             </div>
 
             <div class="dropdown">
               <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">{{ t("Start Sampling") }}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="start-sampling">{{ t("Start Sampling") }}</a></li>
-                  <li><a href="data-management">{{ t("Data Management") }}</a></li>
+                  <li><a href="en/start-sampling">{{ t("Start Sampling") }}</a></li>
+                  <li><a href="en/data-management">{{ t("Data Management") }}</a></li>
                 </ul>
             </div>
 
             <div class="dropdown">
               <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">{{ t("Tools") }}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="qr-codes">{{ t("QR Codes") }}</a></li>
-                  <li><a href="downloads">{{ t("Downloads") }}</a></li>
+                  <li><a href="en/qr-codes">{{ t("QR Codes") }}</a></li>
+                  <li><a href="en/downloads">{{ t("Downloads") }}</a></li>
                 </ul>
-            </div>
-
-            <div class="dropdown">
-              <a href="login" style="color:black;">{{ t("Log In") }}<b class="caret"></b></a>
             </div>
 
             <div class="dropdown">
@@ -61,11 +57,11 @@
             </div>
 
             <div class="btn dropdown">
-              <a href="projects" style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
+              <a href="en/projects" style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
             </div>
 
             <div class="btn dropdown">
-              <a href="create-project" style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
+              <a href="en/create-project" style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
             </div>
 
             <div class="btn dropdown">
@@ -74,43 +70,22 @@
       </section>
         @yield('content')
 
+        @if(!auth()->check())
+          <div id="login" class="row" >
+            @include('layouts.login') 
+          </div>
+        @endif
+
+        @if(auth()->check())
+          <div id="logout" class="row" >
+            @include('layouts.account') 
+          </div>
+        @endif
+
       </div>
     </div>
 </body>
 
-
- <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<div class="row">
-  <div class="container">
-     <div class="card card-login mx-5 mt-5 sticky-top">
-       <div class="card-header"><strong>{{ t("MY ACCOUNT") }}</strong></div>
-       <div class="card-body">
-         <form method="post" action="{{url('login')}}">
-           <div class="form-group">
-             <label for="exampleInputEmail1">{{ t("Username") }}</label>
-             <input class="form-control"  type="text" name="username">
-           </div>
-           <div class="form-group">
-             <label for="exampleInputPassword1">{{ t("Password") }}</label>
-             <input class="form-control"  type="password" name="password">
-           </div>
-           <div class="form-group">
-             <div class="form-check">
-               <label class="form-check-label">
-                 <input class="form-check-input" type="checkbox"> {{ t("Remember Password") }}</label>
-             </div>
-           </div>
-           <button type="submit" class="btn btn-dark btn-block" name="login_user">{{ t("Login") }}</button>
-         </form>
-         <div class="text-center">
-           <a class="d-block small mt-3" href="/en/register">{{ t("Register an Account") }}</a>
-        <a class="d-block small" href="forgot-password.php">{{ t("Forgot Password?") }}</a>
-         </div>
-       </div>
-     </div>
-   </div>
-    @yield('login')
-</div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

@@ -12,7 +12,7 @@
 	  <button class="tablinks" onclick="openPage(event, 'Details')" id="defaultOpen"><font size="2">{{ t("1.Details") }}</font></button>
 	  <button class="tablinks" ><font size="2">{{ t("2. Settings") }}</font></button>
 	  <button class="tablinks"><font size="2">{{ t("3. Photo") }}</font></button>
-	  <button class="tablinks" onclick="openPage(event, 'Invites')"><font size="2">{{ t("4. Send Invites") }}</font></button>
+	  <button class="tablinks"><font size="2">{{ t("4. Send Invites") }}</font></button>
 	</div>
 
 	<div id="Details" class="tabcontent">
@@ -151,7 +151,7 @@
 							<tbody>
 								@foreach($users as $user)
 								<tr>
-									<td><input type="checkbox" name="name_selected[]" id="{{$user->id}}" value="{{$user->id}}"> {{$user->name}}</td>		
+									<td><input class="checkboxClass" type="checkbox" name="name_selected[]" id="{{$user->id}}" value="{{$user->id}}"> {{$user->name}}</td>		
 								</tr>
 								@endforeach
 							</tbody>
@@ -176,27 +176,33 @@
 					<br>
 
 					
-						<!-- @foreach($users as $user) -->
-						<!-- <div class="container" id="user_card">
-						<div class="img_group">
-						<img src={{url("images/mystery-group.png")}} id="avatar" > -->
-						<!-- {{$user->name}} -->
-						<!-- </div>
-						</div> -->
-						<!-- @endforeach -->
+					<!-- <div class="container-fluid">
+						<div class="row">
+							<div class="img_group">
+								<img style="display:none" src={{url("images/mystery-group.png")}} id="avatar" >
 
+									<p id="text" style="display:none">Name</p>
+							</div>
+						</div>
+					</div> -->
+					
 				
 				</div>	
 			</div>
 		</div>
 	</div>
 </section>
- 
 
+<div id="login" class="row" >
+	@include('layouts.login')	
+</div>
 
 </body>
-
 @endsection
+
+
+
+
 @section('script')
 <script type="text/javascript">	
 
@@ -240,32 +246,6 @@ function search() {
     } 
   }
 }
-
-
-
-// Display selected person
-jQuery(document).ready(function(){
-	jQuery('#user_card').hide();
-
- jQuery( ":checkbox" ).click( "click", function() {
- 	if(jQuery( ":checkbox" ).is(':checked')){
- 		if(jQuery(":checkbox").length >0){
- 		jQuery(":checkbox").val();
- 		jQuery('#user_card').show();
- 	
- 		
- 		}
- 	}
- 	else
- 	{
- 		
- 			jQuery('#user_card').hide();
- 		
- 	}
-
-
-	});
-});
 
 //validation group name and group description
 jQuery(document).ready(function(){
@@ -362,15 +342,40 @@ jQuery(document).ready(function(){
 	        		$(this).append('<input type="hidden" id="project_id" name="project_id" value="'+result.project_id+'" />');
 	        		return true;
 	        	});
-
-	        	
-	        	
+     	
 	        	console.log(result);
 	        	
 			}
 		});
 	});
 });
+
+//display member selected
+// jQuery(".checkboxClass").click(function(){
+//         var selectedMember = new Array();
+//         var n = jQuery(".checkboxClass:checked").length;
+//         if (n > 0){
+//             jQuery(".checkboxClass:checked").each(function(){
+//                 selectedMember.push($(this).val());
+//             });
+//         }
+//          $.ajax({
+// 	        url : 'create-project/index', 
+// 	        type : 'POST',
+// 	        data : form_data,
+// 	        processData: false, 
+// 	        contentType: false,
+// 	        success : function(result){
+     	
+// 	        	console.log(result);
+	        	
+// 			}
+// 		});
+// 	});
+//         console.log(selectedMember);
+//     });
+
+  
 
 </script>
 

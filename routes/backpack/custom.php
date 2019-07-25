@@ -21,4 +21,5 @@ Route::group([
     CRUD::resource('projectMember', 'ProjectMemberCrudController');
 
 
+    CRUD::resource('user', 'UserCrudController');
 }); // this should be the absolute last line of this file

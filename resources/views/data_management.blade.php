@@ -35,7 +35,9 @@
   </div>
 </section>
 </div>
-
+<div id="login" class="row" >
+  @include('layouts.login') 
+</div>
 </body>
 @endsection
 

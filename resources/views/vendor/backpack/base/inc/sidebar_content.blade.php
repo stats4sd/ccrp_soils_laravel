@@ -10,3 +10,4 @@
 <li><a href='{{ backpack_url('project') }}'><i class='fa fa-tag'></i> <span>Projects</span></a></li>
 <li><a href='{{ backpack_url('projectMeta') }}'><i class='fa fa-tag'></i> <span>Project Meta</span></a></li>
 <li><a href='{{ backpack_url('projectMember') }}'><i class='fa fa-tag'></i> <span>Projects Members</span></a></li>
+<li><a href='{{ backpack_url('user') }}'><i class='fa fa-user'></i> <span>Users</span></a></li>

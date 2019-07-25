@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\InviteMember;
 use App\Models\Project;
+use App\Models\ProjectMember;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,14 +81,15 @@ class CreateProjectController extends Controller
 
         $project->save();
         $project_id = $project->id;
-     
     
         return response()->json(["type"=>"stored successfully", "project_id"=>$project_id]);
     }
 
 
+
     public function sendEmail (Request $request)
     {
+
         $user = Auth::user();
         $creator_name = $user->name;
         $project = Project::find($request->project_id);
@@ -116,7 +118,26 @@ class CreateProjectController extends Controller
             }  
         } 
         
+        $this->createProjectMember($request);
         return redirect('project/'.$project->slug);
+    }
+
+    public function createProjectMember(Request $request)
+    {
+
+        foreach ($request->name_selected as $user_id) {
+      
+            $projects_members = new ProjectMember();
+            $projects_members->group_id = $request->project_id;
+
+            $projects_members->inviter_id = Auth::user()->id;
+            $projects_members->user_id = $user_id;
+            $projects_members->save();
+        }
+   
+        return $projects_members;
+
+       
     }
 
 }
