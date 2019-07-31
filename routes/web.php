@@ -59,18 +59,23 @@ Route::group([
     
 ], function () { 
 
+	Route::get('/projects/members/{username}', 'UserAccountController@index');
+
 	Route::get('/data-management', function () {
 		return view('data_management');
 	});
-
 	
 	Route::get('/create-project', 'CreateProjectController@index');
 	Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
 
-
 	Route::post('/create-project/upload', 'CreateProjectController@upload');
 	Route::post('/create-project/store', 'CreateProjectController@store');
 	Route::post('/create-project/send', 'CreateProjectController@sendEmail');
+
+	Route::get('/projects/{slug}', 'ProjectAccountController@index');
+	Route::post('/projects/upload/{id}', 'ProjectAccountController@upload');
+	// Route::post('/projects/{id}/validate', 'ProjectAccountController@validate');
+	Route::post('/projects/{id}/upload', 'ProjectAccountController@upload');
 
 });
 

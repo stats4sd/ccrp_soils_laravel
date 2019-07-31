@@ -16,9 +16,7 @@
 			  <p><a href="uploads/{{$xlsform->form_id}}"><u>{{ t("Download") }} {{$xlsform->form_title}} {{ t("form") }}</u></a></p> 
 			</section>
 		@endforeach
-		<div id="login" class="row" >
-			@include('layouts.login') 
-		</div>
+		
 	</div>
 </body>
 @endsection

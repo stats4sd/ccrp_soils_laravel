@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\InviteMember;
 use App\Models\Project;
 use App\Models\ProjectMember;
+use App\Models\Projectxlsform;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,20 +77,31 @@ class CreateProjectController extends Controller
         $project->slug = preg_replace('/[^a-z0-9]+/i', '-', trim(strtolower($request->name)));
         $project->description = $request->description;
         $project->status = $request->status;
-        $project->image = substr($request['image'], strrpos($request['image'], '/' )-6);
+        $project->image = substr($request['image'], strrpos($request['image'], '/' )-7);
         $project->group_invitations = $request->group_invitations;
-
         $project->save();
+
         $project_id = $project->id;
+        $this->syncProjectXlsForm($project_id);
     
         return response()->json(["type"=>"stored successfully", "project_id"=>$project_id]);
     }
 
+    public function syncProjectXlsForm($project_id) 
+    {
+
+        $project_xlsform = new Projectxlsform;
+
+        $project_xlsform->form_id->attach(1);
+        $project_xlsform->save();
+        dd($project_xlsform);
+
+    }  
 
 
     public function sendEmail (Request $request)
     {
-
+        
         $user = Auth::user();
         $creator_name = $user->name;
         $project = Project::find($request->project_id);
@@ -128,7 +140,7 @@ class CreateProjectController extends Controller
         foreach ($request->name_selected as $user_id) {
       
             $projects_members = new ProjectMember();
-            $projects_members->group_id = $request->project_id;
+            $projects_members->project_id = $request->project_id;
 
             $projects_members->inviter_id = Auth::user()->id;
             $projects_members->user_id = $user_id;

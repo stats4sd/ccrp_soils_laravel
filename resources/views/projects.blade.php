@@ -4,6 +4,7 @@
 @section('content')
 
 <body>
+	<div class="row">
 	<div class="col-sm-8">
 	 	<section class="content mb-5" id="group">
 
@@ -24,33 +25,58 @@
        		     
 	          		<div class="img_group mb-3">
 	          				
-	          			<div class="row">
-
-		            		<img src="{{$project->image}}" alt="Person" width="96" height="96">
+	          			<div class="row mb-3">
+	          				<div class="col-sm-2">
+	          					<a href="projects/{{$project->slug}}">
+			            		<img src={{$project->image}} alt="Person" width="96" height="96"></a>
+		            		</div>
+		            		<div class="col-sm-8">
 			            		<a href="projects/{{$project->slug}}">
-			          				<h6>{{$project->name}}</h6>
+			          				<h6>{{$project->name}}</h6></a>
 			          			
-			          				<p>{{$project->created_at}}</p>
-			          			
-			          				<p>{{$project->description}}</p>
-			          				</div>
-			          			</a>
-		          			
-	          			</div>
+			          				{{$project->created_at}}
+			          				<br>		
+			          				{{$project->description}}
+			          		</div>
+			          	</div>	          			
+	          		</div>
         		        
       			@endforeach
 		   		
 			</div>
 			<div id="My_Projects" class="tabcontent">
+						
+       		    @foreach($myprojects as $project)
+       		     
+	          		<div class="img_group mb-3">
+	          				
+	          			<div class="row mb-3">
+	          				<div class="col-sm-2">
+	          					<a href="projects/{{$project->slug}}">
+			            		<img src="{{$project->image}}" alt="Person" width="96" height="96"></a>
+		            		</div>
+		            		<div class="col-sm-8">
+			            		<a href="projects/{{$project->slug}}">
+			          				<h6>{{$project->name}}</h6></a>
+			          			
+			          				{{$project->created_at}}
+			          				<br>		
+			          				{{$project->description}}
+			          		</div>
+			          	</div>	          			
+	          		</div>
+        		        
+      			@endforeach
+	          		
+        	
 			</div>
 
 			
 
 	    </section>
 	</div>
-	<div id="login" class="row" >
-		@include('layouts.login')	
-	</div>
+	
+</div>
 </body>
 
 @endsection

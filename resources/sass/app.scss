@@ -45,12 +45,10 @@ body{
 }
 
 .card-login {
-  position: fixed; 
-  
-  right: 0px;
-  top: 100px;
+  position: relative;  
+  /*top: 100px;*/
   width: 300px;
-}
+} 
 
 
 /*

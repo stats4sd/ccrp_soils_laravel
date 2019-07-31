@@ -14,7 +14,7 @@ class CreateProjectsProjectmetaTable extends Migration
     {
         Schema::create('projects_projectmeta', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('group_id');
+            $table->bigInteger('project_id');
             $table->string('meta_key')->nullable();
             $table->longText('meta_value');
             $table->timestamps();

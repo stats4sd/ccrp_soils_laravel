@@ -37,5 +37,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public $incrementing = true;
+
+    public function projects()
+    {
+        return $this->belongsToMany('App\Models\Project', 'projects_members')->withPivot('is_admin');;
+    }
+
+
  
 }

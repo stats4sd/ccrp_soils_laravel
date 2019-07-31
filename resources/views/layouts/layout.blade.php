@@ -28,24 +28,24 @@
             <div class="dropdown">
               <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">{{ t("Home") }}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="en/home">{{ t("Introduction") }}</a></li>
-                  <li><a href="en/about">{{ t("About") }}</a></li>
+                  <li><a href="/home">{{ t("Introduction") }}</a></li>
+                  <li><a href="about">{{ t("About") }}</a></li>
                 </ul>
             </div>
 
             <div class="dropdown">
               <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">{{ t("Start Sampling") }}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="en/start-sampling">{{ t("Start Sampling") }}</a></li>
-                  <li><a href="en/data-management">{{ t("Data Management") }}</a></li>
+                  <li><a href="start-sampling">{{ t("Start Sampling") }}</a></li>
+                  <li><a href="data-management">{{ t("Data Management") }}</a></li>
                 </ul>
             </div>
 
             <div class="dropdown">
               <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">{{ t("Tools") }}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="en/qr-codes">{{ t("QR Codes") }}</a></li>
-                  <li><a href="en/downloads">{{ t("Downloads") }}</a></li>
+                  <li><a href="qr-codes">{{ t("QR Codes") }}</a></li>
+                  <li><a href="downloads">{{ t("Downloads") }}</a></li>
                 </ul>
             </div>
 
@@ -57,30 +57,37 @@
             </div>
 
             <div class="btn dropdown">
-              <a href="en/projects" style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
+              <a href="projects" style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
             </div>
 
             <div class="btn dropdown">
-              <a href="en/create-project" style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
+              <a href="create-project" style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
             </div>
 
             <div class="btn dropdown">
               <a href="{{url('admin')}}" style="color:black;">{{ t("Admin") }}<b class="caret"></b></a>
             </div>
+
+      
       </section>
         @yield('content')
 
-        @if(!auth()->check())
-          <div id="login" class="row" >
-            @include('layouts.login') 
-          </div>
-        @endif
+        <div class="row">
+          
+          <div class="col-8-sm">
+          @if(!auth()->check())
+            <div id="login" class="row">
+              @include('layouts.login') 
+            </div>
+          @endif
 
-        @if(auth()->check())
-          <div id="logout" class="row" >
-            @include('layouts.account') 
-          </div>
-        @endif
+          @if(auth()->check())
+            <div id="logout" class="row" >
+              @include('layouts.account') 
+            </div>
+          @endif
+        </div>
+        </div>
 
       </div>
     </div>

@@ -14,7 +14,7 @@ class CreateProjectsMembersTable extends Migration
     {
         Schema::create('projects_members', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('group_id');
+            $table->bigInteger('project_id');
             $table->bigInteger('user_id');
             $table->bigInteger('inviter_id');
             $table->tinyInteger('is_admin')->default(0);

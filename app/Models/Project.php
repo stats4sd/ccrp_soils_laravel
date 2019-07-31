@@ -18,8 +18,8 @@ class Project extends Model
     protected $table = 'projects';
     // protected $primaryKey = 'id';
     public $timestamps = true;
-    // protected $guarded = ['id'];
-    protected $fillable = [];
+    protected $guarded = ['id'];
+    //protected $fillable = ['created_at'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -46,6 +46,12 @@ class Project extends Model
             'form_kobo_id_string'
         ]);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'projects_members')->withPivot('is_admin');
+    }
+
 
     /*
     |--------------------------------------------------------------------------

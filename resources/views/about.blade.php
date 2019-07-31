@@ -32,8 +32,6 @@
   <p>{{ t("To see all the forms available and choose ones to download, go to our downloads page.") }}</p>
 </section>
 </div>
-<!-- <div id="login" class="row" >
-  @include('layouts.login') 
-</div> -->
+
 </body>
 @endsection

@@ -40,7 +40,7 @@
 		<h3><b>Privacy Options</b></h3>
 		<div class="form-group" >
 		<div>
-			<input type="radio" name="status" value="public" checked> 
+			<input type="radio" name="status" value="Public" checked> 
 			<label for="public_group" style="color: grey"> This is a public group</label>
 			<ul>
 				<li>Any site member can join this group.</li>
@@ -50,7 +50,7 @@
 		</div>
 
 		<div>
-			<input type="radio" name="status" value="private"> 
+			<input type="radio" name="status" value="Private"> 
 			<label for="private_group" style="color: grey"> This is a private group</label>
 			<ul>
 				<li>Only users who request membership and are accepted can join the group.</li>
@@ -60,7 +60,7 @@
 		</div>
 
 		<div>
-			<input type="radio" name="status" value="hidden"> 
+			<input type="radio" name="status" value="Hidden"> 
 			<label for="private_group" style="color: grey"> This is a hidden group</label>
 			<ul>
 				<li>Only users who are invited can join the group.</li>
@@ -193,9 +193,6 @@
 	</div>
 </section>
 
-<div id="login" class="row" >
-	@include('layouts.login')	
-</div>
 
 </body>
 @endsection
