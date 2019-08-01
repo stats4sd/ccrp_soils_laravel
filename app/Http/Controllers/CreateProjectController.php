@@ -87,14 +87,13 @@ class CreateProjectController extends Controller
         return response()->json(["type"=>"stored successfully", "project_id"=>$project_id]);
     }
 
-    public function syncProjectXlsForm($project_id) 
+    public function syncProjectXlsForm($id) 
     {
 
-        $project_xlsform = new Projectxlsform;
-
-        $project_xlsform->form_id->attach(1);
-        $project_xlsform->save();
-        dd($project_xlsform);
+        $project = Project::all();
+        $sync=$project->xls_forms;
+        // dd($sync);
+        return true;
 
     }  
 

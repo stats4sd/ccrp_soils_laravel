@@ -15,11 +15,11 @@ class Projectxlsform extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'projectxlsforms';
+    protected $table = 'projects_xls_forms';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
-    // protected $guarded = ['id'];
-    protected $fillable = [];
+    protected $guarded = ['id'];
+    //protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
 

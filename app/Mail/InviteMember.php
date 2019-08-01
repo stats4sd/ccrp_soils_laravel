@@ -20,7 +20,6 @@ class InviteMember extends Mailable
     {
         $this->info = $data;
         //dd($data);
-        //creator_id
         //no-reply@stats4sd.org
     }
 
@@ -31,6 +30,6 @@ class InviteMember extends Mailable
      */
     public function build()
     {
-        return $this->from("lucia@stats4sd.org")->subject('[CCRP Soils Data Platform] You have an invitation to the group: '.$this->info['name_project'])->view('invite_member_email')->with('info', $this->info);
+        return $this->from("no-reply@stats4sd.org")->subject('[CCRP Soils Data Platform] You have an invitation to the group: '.$this->info['name_project'])->view('invite_member_email')->with('info', $this->info);
     }
 }

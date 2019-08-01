@@ -73,9 +73,9 @@ Route::group([
 	Route::post('/create-project/send', 'CreateProjectController@sendEmail');
 
 	Route::get('/projects/{slug}', 'ProjectAccountController@index');
-	Route::post('/projects/upload/{id}', 'ProjectAccountController@upload');
-	// Route::post('/projects/{id}/validate', 'ProjectAccountController@validate');
+	Route::post('/projects/{id}/validateGroup', 'ProjectAccountController@validateGroup');
 	Route::post('/projects/{id}/upload', 'ProjectAccountController@upload');
+	Route::post('/projects/{id}/send', 'ProjectAccountController@sendEmail');
 
 });
 
