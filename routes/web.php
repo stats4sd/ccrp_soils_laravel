@@ -58,6 +58,7 @@ Route::group([
     'middleware' => ['auth'],
     
 ], function () { 
+	Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
 
 	Route::get('/projects/members/{username}', 'UserAccountController@index');
 

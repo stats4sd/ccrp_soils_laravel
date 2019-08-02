@@ -19,6 +19,7 @@ class InviteMember extends Mailable
     public function __construct($data)
     {
         $this->info = $data;
+
         //dd($data);
         //no-reply@stats4sd.org
     }

@@ -156,91 +156,100 @@
 				</div>
 			</div>			
 			<div id="Manage" class="tabcontent">
-				 
-				<div class="row">
-		  			<div class="container">
+				@if($is_admin)
+						 
+					<div class="row">
+			  			<div class="container">
 
-				        <form method="post" action="{{ url('project/store')}}" id="group_details">
-				        	 @csrf
-				           	<div class="form-group">
-								<div class="alert alert-danger alert-block" id="validate_danger"></div>
-								<div class="alert alert-success alert-block" id="validate_success"></div>
-				             	<label for="exampleInputEmail1"><b>{{ t("Group Name (required)") }}</b></label>
-				             	<input class="form-control"  type="text" name="name" value="{{$projects->name}}">
-				           	</div>
-				           	<div class="form-group">
-				             	<label for="exampleInputEmail1"><b>{{ t("Group Description (required)") }}</b></label>
-				             	<textarea class="form-control"  rows="4" cols="50" name="description" form="group_details">{{$projects->description}}</textarea>
-				           	</div>
-				
+					        <form method="post" action="{{ url('project/store')}}" id="group_details">
+					        	 @csrf
+					           	<div class="form-group">
+									<div class="alert alert-danger alert-block" id="validate_danger"></div>
+									<div class="alert alert-success alert-block" id="validate_success"></div>
+					             	<label for="exampleInputEmail1"><b>{{ t("Group Name (required)") }}</b></label>
+					             	<input class="form-control"  type="text" name="name" value="{{$projects->name}}">
+					           	</div>
+					           	<div class="form-group">
+					             	<label for="exampleInputEmail1"><b>{{ t("Group Description (required)") }}</b></label>
+					             	<textarea class="form-control"  rows="4" cols="50" name="description" form="group_details">{{$projects->description}}</textarea>
+					           	</div>
+					
 
-			           
-			           		<div class="row">			           				
-			           			<div class="col-sm-6">
-		           				<b>Privacy Options</b>
-						           	<div class="form-group">
-						           		<input type="radio" name="status" value="Public" checked> 
-											<label for="public_group" style="color: grey"> This is a public group</label>
-										<br>
-										<input type="radio" name="status" value="Private"> 
-											<label for="private_group" style="color: grey"> This is a private group</label>
-										<br>
-										<input type="radio" name="status" value="Hidden"> 
-											<label for="private_group" style="color: grey"> This is a hidden group</label>
-										<br>
-									</div>
-					   			</div>
-					   			<div class="col-sm-6">
-					   				<b>Group Invitations</b>
-					   				<div class="form-group">
-				   						<div>
-					   						<input type="radio" name="group_invitations" value="all_members" checked> 
-											<label for="group_invitations" style="color: grey"> All group members</label>
+				           
+				           		<div class="row">			           				
+				           			<div class="col-sm-6">
+			           				<b>Privacy Options</b>
+							           	<div class="form-group">
+							           		<input type="radio" name="status" value="Public" checked> 
+												<label for="public_group" style="color: grey"> This is a public group</label>
+											<br>
+											<input type="radio" name="status" value="Private"> 
+												<label for="private_group" style="color: grey"> This is a private group</label>
+											<br>
+											<input type="radio" name="status" value="Hidden"> 
+												<label for="private_group" style="color: grey"> This is a hidden group</label>
+											<br>
 										</div>
-										<div>
-											<input type="radio" name="group_invitations" value="group_admins"> 
-											<label for="group_invitations" style="color: grey"> Group admins only</label>
-										</div>	
-					   				</div>				
-					   			</div>
-				           	</div>
+						   			</div>
+						   			<div class="col-sm-6">
+						   				<b>Group Invitations</b>
+						   				<div class="form-group">
+					   						<div>
+						   						<input type="radio" name="group_invitations" value="all_members" checked> 
+												<label for="group_invitations" style="color: grey"> All group members</label>
+											</div>
+											<div>
+												<input type="radio" name="group_invitations" value="group_admins"> 
+												<label for="group_invitations" style="color: grey"> Group admins only</label>
+											</div>	
+						   				</div>				
+						   			</div>
+					           	</div>
 
 
+						        
+					       
+
+					           	<div class="row">
+									<div class="col-sm-4">
+										<div class="container">
+							  				<div class="img_group_default mt-3">
+							  					<b>Photo</b>
+						  					
+											  	<img id='image' src={{$projects->image}}>
+											  
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-8 mt-5">
+										
+										<div class="form-group">
+											<br>
+											<div class="alert alert-danger alert-block" id="error"></div>  	
+											<div class="alert alert-success alert-block" id="success"></div>
+											<br>
+											<label> {{ t("Select Photo for Upload") }}</label>
+											<br>
+											<input type="file" id="file" name="select_file">
+											<input type="submit" id="Upload" name="upload" class="btn btn-dark btn-sm" value="Upload">
+										</div>
+									</div>
+						           <button type="submit" id="group_name_descrip" class="btn btn-dark btn-sm mt-5" name="create_group">{{ t("UPDATE GROUP") }}</button>
+					       		</div>
+								
+							</form>
 					        
-				       
+				 			</div>
+			   		</div>
+			   	@else
+			   		<div class="alert alert-danger alert-block" id="is_not_admin">
+			   			<p><b>Access is not allowed.</b> Only the admins of this project have the permission for this page.</p>
+			   		</div>
+			   	@endif
+			   
 
-				           	<div class="row">
-								<div class="col-sm-4">
-									<div class="container">
-						  				<div class="img_group_default mt-3">
-						  					<b>Photo</b>
-					  					
-										  	<img id='image' src={{$projects->image}}>
-										  
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-8 mt-5">
-									
-									<div class="form-group">
-										<br>
-										<div class="alert alert-danger alert-block" id="error"></div>  	
-										<div class="alert alert-success alert-block" id="success"></div>
-										<br>
-										<label> {{ t("Select Photo for Upload") }}</label>
-										<br>
-										<input type="file" id="file" name="select_file">
-										<input type="submit" id="Upload" name="upload" class="btn btn-dark btn-sm" value="Upload">
-									</div>
-								</div>
-					           <button type="submit" id="group_name_descrip" class="btn btn-dark btn-sm mt-5" name="create_group">{{ t("UPDATE GROUP") }}</button>
-				       		</div>
-							
-						</form>
-				        
-		 			</div>
-	   			</div>				
-			</div>
+
+				</div>
 		   
 
 			

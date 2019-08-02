@@ -26,11 +26,7 @@ class ProjectAccountController extends Controller
         });
         $is_admin =$auth->pluck('id')->contains(Auth::id());
 
-    
-    	
-
     	$xls_forms = $projects->xls_forms;
-
     
     	return view('project_account', compact('users', 'projects', 'members','xls_forms', 'is_admin'));
     	
@@ -109,7 +105,8 @@ class ProjectAccountController extends Controller
                 $user_invited = User::find(($user_id));
 
                 $data = [ "creator_name"=> $creator_name, 
-                    "email"=>$user_invited->email, "name_project"=>$project->name, "user"=>true, 'url'=>url("en/projects/".$project->slug)
+                    "email"=>$user_invited->email, "project_id"=>$project->id, "name_project"=>$project->name, "user_id"=>$user_id, 'url'=>url("en/projects/".$project->slug),
+                    "key_confirmed" =>str_random(32)
                 ];
                 
                 Mail::to($user_invited->email)->send(new InviteMember($data));   
@@ -124,7 +121,9 @@ class ProjectAccountController extends Controller
             foreach($email_multiple as $email)
             {         
                 $data = [ "creator_name"=> $creator_name, 
-                    "email"=>$email, "name_project"=>$project->name, "user"=>false, 'url'=>url("en/projects/".$project->slug)];
+                    "email"=>$email, "name_project"=>$project->name, "user"=>false, 'url'=>url("en/projects/".$project->slug),
+                    "key_confirmed" =>str_random(32)
+                ];
 
                 Mail::to($email)->send(new InviteMember($data));
              
