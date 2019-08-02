@@ -13,7 +13,7 @@ class CreateXlsForms extends Migration
      */
     public function up()
     {
-        Schema::create('xls_forms', function (Blueprint $table) {
+        Schema::create('xlsforms', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('form_title')->nullable();
             $table->string('form_id')->nullable();
