@@ -39,7 +39,7 @@
       <div class="card-body">
         @if(auth()->check())
           @foreach($array_projects as $prop)
-            <a href="projects/{{$prop['slug']}}">     
+            <a href="/en/projects/{{$prop['slug']}}">     
               <div class="img_group mb-3">
                 <img src="{{$prop['image']}}" alt="Person" width="96" height="96">
               {{$prop['name']}}

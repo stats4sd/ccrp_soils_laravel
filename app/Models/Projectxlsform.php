@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Projectxlsform extends Model
+class Projectxlsform extends Pivot
 {
     use CrudTrait;
 
@@ -15,7 +16,7 @@ class Projectxlsform extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'projects_xls_forms';
+    protected $table = 'project_xlsform';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];

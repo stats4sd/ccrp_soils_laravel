@@ -15,7 +15,7 @@ class Xlsform extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'xls_forms';
+    protected $table = 'xlsforms';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];

@@ -21,14 +21,16 @@ class ProjectAccountController extends Controller
     	$users = DB::table('users')->get();
     	$projects = Project::where('slug','like',$slug)->first();
         $members = $projects->users;
-       
-    	// $admins = User::whereHas('projects', function($query) {
-     //            $query->where('project_id', 1)->where('is_admin', 1)->where('user_id', Auth::id());
-     //        })->get();
-       
-     //    dd($admins); 
+       $auth=$members->filter(function($value){
+            return $value->pivot->is_admin==1;
+       });
+       $admin =$auth->pluck('id')->contains(Auth::id());
 
-    	$xls_forms = DB::table('xls_forms')->get();
+       //dd($admin);
+    	
+
+    	$xls_forms = $projects->xls_forms;
+
     
     	return view('project_account', compact('users', 'projects', 'members','xls_forms'));
     	

@@ -6,6 +6,7 @@ use App\Mail\InviteMember;
 use App\Models\Project;
 use App\Models\ProjectMember;
 use App\Models\Projectxlsform;
+use App\Models\Xlsform;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -90,9 +91,9 @@ class CreateProjectController extends Controller
     public function syncProjectXlsForm($id) 
     {
 
-        $project = Project::all();
-        $sync=$project->xls_forms;
-        // dd($sync);
+        $project = Project::find($id);
+        $sync=$project->xls_forms()->sync(Xlsform::all()->pluck('id')->toArray());
+        dd($sync);
         return true;
 
     }  

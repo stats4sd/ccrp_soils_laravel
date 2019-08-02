@@ -61,7 +61,7 @@
             </div>
 
             <div class="btn dropdown">
-              <a href="create-project" style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
+              <a href="{{url('create-project')}}" style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
             </div>
 
             <div class="btn dropdown">

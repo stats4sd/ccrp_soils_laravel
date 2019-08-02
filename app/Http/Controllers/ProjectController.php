@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Projectxlsform;
+use App\Models\Xlsform;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +17,7 @@ class ProjectController extends Controller
     	$users = DB::table('users')->get();
     	$projects =	$this->timeString();;
     	$admins = DB::table('users')->get();
-    	$xls_forms = DB::table('xls_forms')->get();
+    	$xls_forms = Projectxlsform::all();
         $myprojects = Auth::user()->projects;
         
     	return view('projects', compact('users', 'projects', 'admins','xls_forms','myprojects'));
