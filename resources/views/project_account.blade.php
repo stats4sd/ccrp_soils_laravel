@@ -84,58 +84,61 @@
 			<div id="Members" class="tabcontent">
 
 			  <button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonInvite"><font size="2">{{ t("INVITE") }}</font></button>
-			<div id="Invite" class="tabcontent">
 
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-sm-6">
-							<label>Search for members to invite:</label>
-							<form  method="post" action="{{url('en/projects/1/send')}}" name="invite" id="invite">
-						  	{{ csrf_field() }}
-						  	<input type="text" id="myInput" onkeyup="search()" class="form-control" placeholder="Search for names..">
-						  	<div class="scroll_list">
-						  		<div class="form-group">
-								<table id="myTable" class="table table-hover">
-									<tbody>
-										@foreach($users as $user)
-										<tr>
-											<td><input class="checkboxClass" type="checkbox" name="name_selected[]" id="{{$user->id}}" value="{{$user->id}}"> {{$user->name}}</td>		
-										</tr>
-										@endforeach
-									</tbody>
-								</table>
-							</div>
-							</div>
+				<div id="Invite" class="tabcontent">
 
-								<div class="form-group">
-									<label for="email">Enter the email addresses of people to invite.</label>
-					    			<input style="width: 100%;" type="email" class="form-control" name="email_inserted" multiple>
-					    		</div>
-					    	
-					    		<button type="submit" class="btn btn-dark btn-sm" id="send_email">{{ t("SUBMIT")}}</button>	
-							</form>
-
-						</div>
-						<div class="col-sm-6">
-							<div class="alert alert-info">
-								<strong> Select people to invite from your friends list.</strong>
-							</div>	
-						
-							<br>
-							<!-- <div class="container-fluid">
-								<div class="row">
-									<div class="img_group">
-										<img style="display:none" src={{url("images/mystery-group.png")}} id="avatar" >
-
-											<p id="text" style="display:none">Name</p>
-									</div>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-sm-6">
+								<label>Search for members to invite:</label>
+								<form  method="post" action="{{url('en/projects/1/send')}}" name="invite" id="invite">
+							  	{{ csrf_field() }}
+							  	<input type="text" id="myInput" onkeyup="search()" class="form-control" placeholder="Search for names..">
+							  	<div class="scroll_list">
+							  		<div class="form-group">
+									<table id="myTable" class="table table-hover">
+										<tbody>
+											@foreach($users as $user)
+												
+												<tr>
+													<td><input class="checkboxClass" type="checkbox" name="name_selected[]" id="{{$user->id}}" value="{{$user->id}}"> {{$user->name}}</td>		
+												</tr>
+											
+											@endforeach
+										</tbody>
+									</table>
 								</div>
-							</div> -->				
-						</div>	
-					</div>
-				</div>
+								</div>
 
-				</div> 
+									<div class="form-group">
+										<label for="email">Enter the email addresses of people to invite.</label>
+						    			<input style="width: 100%;" type="email" class="form-control" name="email_inserted" multiple>
+						    		</div>
+						    	
+						    		<button type="submit" class="btn btn-dark btn-sm" id="send_email">{{ t("SUBMIT")}}</button>	
+								</form>
+
+							</div>
+							<div class="col-sm-6">
+								<div class="alert alert-info">
+									<strong> Select people to invite from your friends list.</strong>
+								</div>	
+							
+								<br>
+								<!-- <div class="container-fluid">
+									<div class="row">
+										<div class="img_group">
+											<img style="display:none" src={{url("images/mystery-group.png")}} id="avatar" >
+
+												<p id="text" style="display:none">Name</p>
+										</div>
+									</div>
+								</div> -->				
+							</div>	
+						</div>
+					</div>
+
+					</div> 
 	            <div id="members">
 				@foreach($members as $member)
 	   		     
@@ -174,7 +177,6 @@
 					             	<textarea class="form-control"  rows="4" cols="50" name="description" form="group_details">{{$projects->description}}</textarea>
 					           	</div>
 					
-
 				           
 				           		<div class="row">			           				
 				           			<div class="col-sm-6">
@@ -207,9 +209,6 @@
 					           	</div>
 
 
-						        
-					       
-
 					           	<div class="row">
 									<div class="col-sm-4">
 										<div class="container">
@@ -238,6 +237,66 @@
 					       		</div>
 								
 							</form>
+
+
+								
+										<div class="container">
+							  				<div class="img_group mt-3">
+							  					<b>Members</b>
+						  					<table class="table table-hover">
+						  						<thead>
+												    <tr>
+												      <th scope="col">Avatar</th>
+												      <th scope="col">Username</th>
+												      <th scope="col">Status</th>
+												      <th scope="col">Actions</th>
+												    </tr>
+												</thead>
+												<tbody>
+
+												 
+											  @foreach($members as $member)
+											   <tr>
+									   		  <td>
+								          		<div class="img_group mb-3">	          			
+						          					<a href="members/{{$member->username}}">
+								            		<img src="{{$member->avatar}}" alt="Person"></a>
+							            		</div>  
+								            	</td>
+								            	<td>
+							            		<a href="members/{{$member->username}}"><p>{{$member->username}}</p></a>
+								            	</td>
+								            	<td>
+								            		@if($member->pivot->is_admin)
+								            		<p>Admin</p>
+								            		@else
+								            		<p>User</p>
+								            		@endif
+								            		
+								            	</td>
+								            	<td>
+								            		delete
+								            		
+								            	</td>
+
+								    		   	</tr>     
+								      		@endforeach
+								      	
+										      	</tbody>
+												</table>
+											</div>
+										
+									<div class="col-sm-8 mt-5">
+										
+										<div class="form-group">
+
+
+										</div>
+													
+									</div>
+						           <button type="submit" id="update_members" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("UPDATE MEMBERS") }}</button>
+					       		</div>
+
 					        
 				 			</div>
 			   		</div>

@@ -51,15 +51,17 @@ Route::get('/projects', 'ProjectController@index');
 
 Route::post('/register/validator', 'RegisterController@validator');
 Route::post('/register/store', 'RegisterController@store');
+Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
+	
 
 
 Route::group([
     
     'middleware' => ['auth'],
     
-], function () { 
-	Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
-
+], function () {
+	// Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
+	
 	Route::get('/projects/members/{username}', 'UserAccountController@index');
 
 	Route::get('/data-management', function () {

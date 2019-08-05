@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\InviteMember;
+use App\Models\Invite;
 use App\Models\Project;
 use App\Models\ProjectMember;
 use App\User;
@@ -103,56 +104,60 @@ class ProjectAccountController extends Controller
             foreach ($request->name_selected as $user_id) 
             {
                 $user_invited = User::find(($user_id));
+                $key = str_random(32);
+                $this->createProjectMember($user_id, $id, $key); 
 
                 $data = [ "creator_name"=> $creator_name, 
                     "email"=>$user_invited->email, "project_id"=>$project->id, "name_project"=>$project->name, "user_id"=>$user_id, 'url'=>url("en/projects/".$project->slug),
-                    "key_confirmed" =>str_random(32)
+                    "key_confirmed" =>$key
                 ];
-                
+               
                 Mail::to($user_invited->email)->send(new InviteMember($data));   
                    
             }
-            $this->createProjectMember($request, $id); 
         }
         if(!empty($request->email_inserted))
         {
             $email_multiple = explode(",", $request->email_inserted);
-
+        
             foreach($email_multiple as $email)
             {         
+                $key = str_random(32);
+                $this->createInvite($creator_id,  $email, $id, $key);
                 $data = [ "creator_name"=> $creator_name, 
-                    "email"=>$email, "name_project"=>$project->name, "user"=>false, 'url'=>url("en/projects/".$project->slug),
-                    "key_confirmed" =>str_random(32)
+                    "email"=>$email, "name_project"=>$project->name, "project_id"=>$project->id, "user_id"=>0, 'url'=>url("en/projects/".$project->slug),
+                    "key_confirmed" =>$key
                 ];
 
                 Mail::to($email)->send(new InviteMember($data));
              
             }  
         } 
-        
-        
+                
         return redirect::back();
     }
 
-    public function createProjectMember(Request $request, $id)
-    {
-
-        foreach ($request->name_selected as $user_id) {
-      
-            $projects_members = new ProjectMember();
-            $projects_members->project_id = $id;
-
-            $projects_members->inviter_id = Auth::user()->id;
-            $projects_members->user_id = $user_id;
-            $projects_members->save();
-        }
+    public function createProjectMember($user_id, $id, $key)
+    {   
+        $projects_members = new ProjectMember();
+        $projects_members->project_id = $id;
+        $projects_members->inviter_id = Auth::user()->id;
+        $projects_members->user_id = $user_id;
+        $projects_members->key_confirm = $key;
+        $projects_members->save();
    
         return $projects_members;
-
-       
     }
 
-
-
+    public function createInvite($inviter_id, $email, $project_id, $key)
+    {
+        $invite = new Invite();
+        $invite->inviter_id = $inviter_id;
+        $invite->email = $email;
+        $invite->project_id = $project_id;
+        $invite->key_confirm = $key;
+        $invite->save();
+        return $invite;
+    }
     
 }
