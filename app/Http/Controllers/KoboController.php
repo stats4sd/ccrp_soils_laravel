@@ -28,7 +28,7 @@ class KoboController extends Controller
         $form = Xlsform::find($formId);
 
         //$form->form_id is actually the file path!
-        $xlsFile = Storage::disk('uploads')->path($form->form_id);
+        $xlsFile = Storage::disk('uploads')->path($form->path_file);
 
 
         // setup Guzzle Client info

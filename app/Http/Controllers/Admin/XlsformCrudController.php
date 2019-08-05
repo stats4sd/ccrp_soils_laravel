@@ -56,11 +56,11 @@ class XlsformCrudController extends CrudController
 
             ],
             [
-                'name' => 'form_id',
+                'name' => 'path_file',
                 'label' => 'File',
                 'type' => 'closure',
                 'function' => function($entry){
-                    $file = $entry->form_id;
+                    $file = $entry->path_file;
                     return '<a href="'.url('/uploads/'.$file.'').'" target="_blank">'.$file.'</a>';
                 } 
             ],
@@ -113,7 +113,7 @@ class XlsformCrudController extends CrudController
 
             ],
             [   // Upload
-                'name' => 'form_id',
+                'name' => 'path_file',
                 'label' => 'File',
                 'type' => 'upload',
                 'upload' => true,
