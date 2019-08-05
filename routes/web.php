@@ -14,7 +14,7 @@
 Route::prefix('{locale?}')->middleware('set.locale')->group(function() {
 
 
-	
+
 Route::get('/home', function(){
 	return redirect('home');
 });
@@ -54,17 +54,17 @@ Route::post('/register/store', 'RegisterController@store');
 
 
 Route::group([
-    
+
     'middleware' => ['auth'],
-    
-], function () { 
+
+], function () {
 
 	Route::get('/projects/members/{username}', 'UserAccountController@index');
 
 	Route::get('/data-management', function () {
 		return view('data_management');
 	});
-	
+
 	Route::get('/create-project', 'CreateProjectController@index');
 	Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
 
@@ -76,6 +76,8 @@ Route::group([
 	Route::post('/projects/{id}/validateGroup', 'ProjectAccountController@validateGroup');
 	Route::post('/projects/{id}/upload', 'ProjectAccountController@upload');
 	Route::post('/projects/{id}/send', 'ProjectAccountController@sendEmail');
+
+	Route::post('/kobo/publish', 'KoboController@publish');
 
 });
 

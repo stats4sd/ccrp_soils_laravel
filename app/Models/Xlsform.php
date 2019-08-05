@@ -102,6 +102,8 @@ class Xlsform extends Model
 
             // 3. Save the complete path to the database
             $this->attributes[$attribute_name] = $file_path;
+
+            dd($file);
         }
     }
 }
