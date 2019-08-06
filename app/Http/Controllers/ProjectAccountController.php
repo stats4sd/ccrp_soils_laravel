@@ -159,5 +159,11 @@ class ProjectAccountController extends Controller
         $invite->save();
         return $invite;
     }
+
+    public function changeStatus($en, $projects_id)
+    {
+        dd($project_id);
+        return response()->json(["type"=>'error', "message"=>"message"]);
+    }
     
 }

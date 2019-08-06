@@ -44,9 +44,9 @@
 
 	    	<!-- Tab links -->
 			<div class="tab mt-5">
-			  <button class="tablinks" onclick="openPage(event, 'Form_data')" id="defaultOpen"><font size="2">{{ t("Form and Data") }}</font></button>
+			  <button class="tablinks" onclick="openPage(event, 'Form_data')"><font size="2">{{ t("Form and Data") }}</font></button>
 			  <button class="tablinks" onclick="openPage(event, 'Members')" id="buttonMembers"><font size="2">{{ t("Members") }}</font></button>
-			  <button class="tablinks" onclick="openPage(event, 'Manage')"><font size="2">{{ t("Manage") }}</font></button>
+			  <button class="tablinks" onclick="openPage(event, 'Manage')" id="defaultOpen"><font size="2">{{ t("Manage") }}</font></button>
 			</div>
 
 			<div id="Form_data" class="tabcontent">
@@ -56,7 +56,7 @@
 		  					<thead>
 		  						<tr>
 		  							<th>Form Name</th>
-		  							<th>Kototools Form ID</th>
+		  							<th>Kobotools Form ID</th>
 		  							<th>Number of Collected Records</th>
 		  							<th>Status</th>
 		  							<th>Action</th>
@@ -254,17 +254,25 @@
 												</thead>
 												<tbody>
 
-												 
-											  @foreach($members as $member)
-											   <tr>
-									   		  <td>
+												<form method="post" action="project/{{$projects->id}}/{{$member->id}}/change-status" id="change_details">
+												
+									        	@csrf 
+										        	
+												@foreach($members as $member)
+											    <tr>
+										   		<td>
 								          		<div class="img_group mb-3">	          			
 						          					<a href="members/{{$member->username}}">
 								            		<img src="{{$member->avatar}}" alt="Person"></a>
 							            		</div>  
 								            	</td>
 								            	<td>
+								            		<div class="form-group">
+
+								            		<div id="change_id" value="{{$member->id}}">
 							            		<a href="members/{{$member->username}}"><p>{{$member->username}}</p></a>
+									            	</div>
+									            </div>
 								            	</td>
 								            	<td>
 								            		@if($member->pivot->is_admin)
@@ -275,25 +283,20 @@
 								            		
 								            	</td>
 								            	<td>
-								            		delete
+								            		<button type="submit" id="change_status" class="btn btn-dark btn-sm" name="update_members">{{ t("CHANGE STATUS") }}</button>
+								            		<button id="delete" class="btn btn-dark btn-sm" name="update_members">{{ t("DELETE") }}</button>
 								            		
 								            	</td>
-
-								    		   	</tr>     
+								    		   	</tr>
+								    		   	</div>     
 								      		@endforeach
+								      		 </form>
 								      	
 										      	</tbody>
 												</table>
 											</div>
 										
-									<div class="col-sm-8 mt-5">
-										
-										<div class="form-group">
-
-
-										</div>
-													
-									</div>
+									
 						           <button type="submit" id="update_members" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("UPDATE MEMBERS") }}</button>
 					       		</div>
 
@@ -437,5 +440,27 @@ jQuery(document).ready(function(){
 	});
 });
 
+//Changes the status of User by button 
+jQuery(document).ready(function(){
+	jQuery("#change_status").click(function(event){
+		event.preventDefault();
+		var form = document.getElementById('change_details');
+		var form_data = new FormData(form);
+		console.log(form_data);
+
+		$.ajax({
+	        url : '/en/projects/{{$projects->id}}/{{$member->id}}/change-status', 
+	        type : 'POST',
+	        data : form_data,
+	        processData: false, 
+	        contentType: false,
+	        success : function(result){
+	        	console.log(result);
+	        	
+	        	
+	        }
+	    });
+	});
+});
 </script>
 @endsection

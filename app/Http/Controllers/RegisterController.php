@@ -68,5 +68,11 @@ class RegisterController extends Controller
         return $projects_members;
     }
 
+    public function includeEmail($en, $key)
+    {
+        $invite = Invite::where('key_confirm', $key)->first();
+        return $invite->email;
+    }
+
 
 }

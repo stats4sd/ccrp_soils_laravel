@@ -12,9 +12,10 @@ class ConfirmProjectController extends Controller
 {
     public function index($en, $project_id, $user_id, $key)
     {
+        $key_confirm = $key;
     	$project = Project::find($project_id);
     	$is_user = $this->confirmProject($project_id, $user_id, $key);
-    	return view('confirm_project', compact('project', 'is_user'));
+    	return view('confirm_project', compact('project', 'is_user', 'key_confirm'));
     }
 
     public function confirmProject($project_id, $user_id, $key)
