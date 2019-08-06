@@ -298,9 +298,10 @@
 										
 									
 						           <button type="submit" id="update_members" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("UPDATE MEMBERS") }}</button>
+
 					       		</div>
 
-					        
+					         <button id="delete_project" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("DELETE PROJECT") }}</button>
 				 			</div>
 			   		</div>
 			   	@else
@@ -450,6 +451,29 @@ jQuery(document).ready(function(){
 
 		$.ajax({
 	        url : '/en/projects/{{$projects->id}}/{{$member->id}}/change-status', 
+	        type : 'POST',
+	        data : form_data,
+	        processData: false, 
+	        contentType: false,
+	        success : function(result){
+	        	console.log(result);
+	        	
+	        	
+	        }
+	    });
+	});
+});
+
+//Soft delete project
+jQuery(document).ready(function(){
+	jQuery("#delete_project").click(function(event){
+		event.preventDefault();
+		var form = document.getElementById('group_details');
+		var form_data = new FormData(form);
+		console.log(form_data);
+
+		$.ajax({
+	        url : '/en/projects/{{$projects->id}}/delete', 
 	        type : 'POST',
 	        data : form_data,
 	        processData: false, 

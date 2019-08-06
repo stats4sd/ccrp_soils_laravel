@@ -24,7 +24,12 @@
             </div>
             <div class="form-group">
               <label ><b>{{ t("Email Address (required)") }}</b></label>
-              <input class="form-control"  type="email" name="email" default="{{$email}}">
+              @if($email)
+                <input class="form-control"  type="email" name="email" value="{{$email}}">
+              @else
+                <input class="form-control"  type="email" name="email">
+              @endif
+
               @if($errors->has('email'))
                 <span class="" role="alert">
                     <strong style="color: #a22a2a;">{{ $errors->first('email') }}</strong>

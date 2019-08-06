@@ -21,6 +21,7 @@ class CreateProjectsTable extends Migration
             $table->string('status', 10)->default('public');
             $table->string('group_invitations')->default('all_members');
             $table->string('image');
+            $table->softDeletes();
             $table->timestamps();
 
         });

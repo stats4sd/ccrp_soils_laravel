@@ -49,7 +49,8 @@ Route::get('/downloads', 'DownloadsController@index');
 
 Route::get('/projects', 'ProjectController@index');
 
-Route::get('/{key}/register','RegisterController@includeEmail');
+Route::get('/{key}/register','RegisterController@index');
+Route::get('/register', 'RegisterController@index');
 Route::post('/register/validator', 'RegisterController@validator');
 Route::post('/register/store', 'RegisterController@store');
 Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
@@ -79,6 +80,7 @@ Route::group([
 	Route::post('/projects/{id}/validateGroup', 'ProjectAccountController@validateGroup');
 	Route::post('/projects/{id}/upload', 'ProjectAccountController@upload');
 	Route::post('/projects/{id}/send', 'ProjectAccountController@sendEmail');
+	Route::post('/projects/{id}/delete', 'ProjectAccountController@delete');
 	Route::post('/project/{id}/{user_id}/change-status', 'ProjectController@changeStatus');
 
 });

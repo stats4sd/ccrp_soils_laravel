@@ -10,9 +10,16 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    public function create()
+    public function index($en, $key)
     {
-    	return view('register');
+        if($key)
+        {
+            $email = $this->includeEmail($key);
+        }else {
+            $email = "email";
+        }
+       
+    	return view('register', compact('email'));
     } 
 
     public function validator(Request $request)
@@ -68,9 +75,11 @@ class RegisterController extends Controller
         return $projects_members;
     }
 
-    public function includeEmail($en, $key)
+    public function includeEmail($key)
     {
+        
         $invite = Invite::where('key_confirm', $key)->first();
+        
         return $invite->email;
     }
 
