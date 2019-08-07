@@ -160,7 +160,7 @@ class ProjectAccountController extends Controller
         return $invite;
     }
 
-    public function changeStatus($en, $projects_id)
+    public function changeStatus($en, $project_id)
     {
         dd($project_id);
         return response()->json(["type"=>'error', "message"=>"message"]);

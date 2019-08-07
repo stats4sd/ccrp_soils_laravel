@@ -16,11 +16,9 @@ class ProjectController extends Controller
     {
     	$users = DB::table('users')->get();
     	$projects =	$this->timeString();;
-    	$admins = DB::table('users')->get();
-    	$xls_forms = Projectxlsform::all();
         $myprojects = Auth::user()->projects;
         
-    	return view('projects', compact('users', 'projects', 'admins','xls_forms','myprojects'));
+    	return view('projects', compact('users', 'projects','myprojects'));
     }
 
     public function myProjects()

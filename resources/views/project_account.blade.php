@@ -302,11 +302,10 @@
 					<div class="row mt-3">
 						<div class="col-sm-8">				  				
 					  		<b>Delete Project</b>
-					  		<p>You are about to permanently delete this form.</p>
+					  		<p>You are about to permanently delete this project.</p>
 					  		<ul style="list-style-type: circle;">
-							  <li>All data gathered for this form will be deleted.</li>
-							  <li>All questions created for this form will be deleted.</li>
-							  <li>The form associated with this project will be deleted</li>
+							  <li>All data gathered for this project will be deleted.</li>
+							  <li>All forms created for this project will be deleted.</li>
 							</ul>
 						</div>
 
@@ -457,15 +456,13 @@ jQuery(document).ready(function(){
 		console.log(form_data);
 
 		$.ajax({
-	        url : '/en/projects/{{$projects->id}}/{{$member->id}}/change-status', 
+	        url : '/en/projects/{{$projects->id}}/change-status', 
 	        type : 'POST',
 	        data : form_data,
 	        processData: false, 
 	        contentType: false,
 	        success : function(result){
-	        	console.log(result);
-	        	
-	        	
+	        	console.log(result);        	
 	        }
 	    });
 	});
@@ -484,8 +481,7 @@ jQuery(document).ready(function(){
 	        processData: false, 
 	        contentType: false,
 	        success : function(result){
-	        	//console.log(result);
-	        	        	
+	        	//console.log(result);	        	        	
 		        }
 		    });
 		    window.location.replace("/en/home");

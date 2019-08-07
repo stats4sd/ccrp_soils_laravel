@@ -74,14 +74,14 @@ Route::group([
 
 	Route::post('/create-project/upload', 'CreateProjectController@upload');
 	Route::post('/create-project/store', 'CreateProjectController@store');
-	Route::post('/create-project/send', 'CreateProjectController@sendEmail');
+	Route::post('/create-project/{id}/send', 'CreateProjectController@sendEmail');
 
 	Route::get('/projects/{slug}', 'ProjectAccountController@index');
 	Route::post('/projects/{id}/validateGroup', 'ProjectAccountController@validateGroup');
 	Route::post('/projects/{id}/upload', 'ProjectAccountController@upload');
 	Route::post('/projects/{id}/send', 'ProjectAccountController@sendEmail');
 	Route::post('/projects/{id}/delete', 'ProjectAccountController@delete');
-	Route::post('/project/{id}/{user_id}/change-status', 'ProjectController@changeStatus');
+	Route::post('/projects/{id}/change-status', 'ProjectAccountController@changeStatus');
 
 });
 
