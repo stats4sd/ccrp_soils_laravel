@@ -203,5 +203,6 @@ window.onload = function openDefaultPage() {
 	document.getElementById("defaultOpen").click();
 }
 
+
 </script>
 @endsection
