@@ -168,10 +168,8 @@ class ProjectAccountController extends Controller
 
     public function delete($en, $id)
     {
-        $project_id = Project::find($id);
-        // ->delete();
-
-        return response()->json(["type"=>'error', "message"=>$project_id->id]);
+        $project_id = Project::find($id)->delete();
+        return response()->json(["type"=>'success', "project_id"=>$project_id->id]);
         
     }
     

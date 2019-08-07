@@ -159,11 +159,9 @@
 				</div>
 			</div>			
 			<div id="Manage" class="tabcontent">
-				@if($is_admin)
-						 
+				@if($is_admin)	 
 					<div class="row">
 			  			<div class="container">
-
 					        <form method="post" action="{{ url('project/store')}}" id="group_details">
 					        	 @csrf
 					           	<div class="form-group">
@@ -180,7 +178,7 @@
 				           
 				           		<div class="row">			           				
 				           			<div class="col-sm-6">
-			           				<b>Privacy Options</b>
+				           				<b>Privacy Options</b>
 							           	<div class="form-group">
 							           		<input type="radio" name="status" value="Public" checked> 
 												<label for="public_group" style="color: grey"> This is a public group</label>
@@ -237,84 +235,93 @@
 					       		</div>
 								
 							</form>
+						</div>					
+						<div class="container">
+			  				<div class="img_group mt-3">
+			  					<b>Members</b>
+		  					<table class="table table-hover">
+		  						<thead>
+								    <tr>
+								      <th scope="col">Avatar</th>
+								      <th scope="col">Username</th>
+								      <th scope="col">Status</th>
+								      <th scope="col">Actions</th>
+								    </tr>
+								</thead>
+								<tbody>
 
-
+								<form method="post" action="project/{{$projects->id}}/{{$member->id}}/change-status" id="change_details">
 								
-										<div class="container">
-							  				<div class="img_group mt-3">
-							  					<b>Members</b>
-						  					<table class="table table-hover">
-						  						<thead>
-												    <tr>
-												      <th scope="col">Avatar</th>
-												      <th scope="col">Username</th>
-												      <th scope="col">Status</th>
-												      <th scope="col">Actions</th>
-												    </tr>
-												</thead>
-												<tbody>
+					        	@csrf 
+						        	
+								@foreach($members as $member)
+							    <tr>
+						   		<td>
+				          		<div class="img_group mb-3">	          			
+		          					<a href="members/{{$member->username}}">
+				            		<img src="{{$member->avatar}}" alt="Person"></a>
+			            		</div>  
+				            	</td>
+				            	<td>
+				            		<div class="form-group">
 
-												<form method="post" action="project/{{$projects->id}}/{{$member->id}}/change-status" id="change_details">
-												
-									        	@csrf 
-										        	
-												@foreach($members as $member)
-											    <tr>
-										   		<td>
-								          		<div class="img_group mb-3">	          			
-						          					<a href="members/{{$member->username}}">
-								            		<img src="{{$member->avatar}}" alt="Person"></a>
-							            		</div>  
-								            	</td>
-								            	<td>
-								            		<div class="form-group">
+				            		<div id="change_id" value="{{$member->id}}">
+			            		<a href="members/{{$member->username}}"><p>{{$member->username}}</p></a>
+					            	</div>
+					            </div>
+				            	</td>
+				            	<td>
+				            		@if($member->pivot->is_admin)
+				            		<p>Admin</p>
+				            		@else
+				            		<p>User</p>
+				            		@endif
+				            		
+				            	</td>
+				            	<td>
+				            		<button type="submit" id="change_status" class="btn btn-dark btn-sm" name="update_members">{{ t("CHANGE STATUS") }}</button>
+				            		<button id="delete" class="btn btn-dark btn-sm" name="update_members">{{ t("DELETE") }}</button>
+				            		
+				            	</td>
+				    		   	</tr>
+				    		   	</div>     
+				      		@endforeach
+				      		 </form>
+				      	
+						      	</tbody>
+								</table>
+							</div>
+						
+					  </div>
+			           <button type="submit" id="update_members" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("UPDATE MEMBERS") }}</button>
 
-								            		<div id="change_id" value="{{$member->id}}">
-							            		<a href="members/{{$member->username}}"><p>{{$member->username}}</p></a>
-									            	</div>
-									            </div>
-								            	</td>
-								            	<td>
-								            		@if($member->pivot->is_admin)
-								            		<p>Admin</p>
-								            		@else
-								            		<p>User</p>
-								            		@endif
-								            		
-								            	</td>
-								            	<td>
-								            		<button type="submit" id="change_status" class="btn btn-dark btn-sm" name="update_members">{{ t("CHANGE STATUS") }}</button>
-								            		<button id="delete" class="btn btn-dark btn-sm" name="update_members">{{ t("DELETE") }}</button>
-								            		
-								            	</td>
-								    		   	</tr>
-								    		   	</div>     
-								      		@endforeach
-								      		 </form>
-								      	
-										      	</tbody>
-												</table>
-											</div>
-										
-									
-						           <button type="submit" id="update_members" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("UPDATE MEMBERS") }}</button>
-
-					       		</div>
-
-					         <button id="delete_project" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("DELETE PROJECT") }}</button>
-				 			</div>
-			   		</div>
-			   	@else
-			   		<div class="alert alert-danger alert-block" id="is_not_admin">
-			   			<p><b>Access is not allowed.</b> Only the admins of this project have the permission for this page.</p>
-			   		</div>
-			   	@endif
-			   
+		       		</div>
 
 
-				</div>
-		   
 
+					<div class="row mt-3">
+						<div class="col-sm-8">				  				
+					  		<b>Delete Project</b>
+					  		<p>You are about to permanently delete this form.</p>
+					  		<ul style="list-style-type: circle;">
+							  <li>All data gathered for this form will be deleted.</li>
+							  <li>All questions created for this form will be deleted.</li>
+							  <li>The form associated with this project will be deleted</li>
+							</ul>
+						</div>
+
+
+						<div class="col-sm-4 mt-5">						
+				   			<button id="delete_project" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("DELETE PROJECT") }}</button>
+				   		</div>
+			       	</div>
+
+				   	@else
+				   		<div class="alert alert-danger alert-block" id="is_not_admin">
+				   			<p><b>Access is not allowed.</b> Only the admins of this project have the permission for this page.</p>
+				   		</div>
+				   	@endif
+			</div>
 			
 	    </section>
 	</div>
@@ -468,22 +475,26 @@ jQuery(document).ready(function(){
 jQuery(document).ready(function(){
 	jQuery("#delete_project").click(function(event){
 		event.preventDefault();
-		var form = document.getElementById('group_details');
-		var form_data = new FormData(form);
-		console.log(form_data);
-
-		$.ajax({
+		
+		if (confirm('Are you sure to delete the project {{$projects->name}}?')) {
+		    
+		    $.ajax({
 	        url : '/en/projects/{{$projects->id}}/delete', 
 	        type : 'POST',
-	        data : form_data,
 	        processData: false, 
 	        contentType: false,
 	        success : function(result){
-	        	console.log(result);
-	        	
-	        	
-	        }
-	    });
+	        	//console.log(result);
+	        	        	
+		        }
+		    });
+		    window.location.replace("/en/home");
+
+		  } 
+
+
+
+		
 	});
 });
 </script>

@@ -29,7 +29,7 @@
               <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">{{ t("Home") }}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="/home">{{ t("Introduction") }}</a></li>
-                  <li><a href="about">{{ t("About") }}</a></li>
+                  <li><a href="/about">{{ t("About") }}</a></li>
                 </ul>
             </div>
 
@@ -57,7 +57,7 @@
             </div>
 
             <div class="btn dropdown">
-              <a href="projects" style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
+              <a href="{{url('projects')}}"  style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
             </div>
 
             <div class="btn dropdown">
