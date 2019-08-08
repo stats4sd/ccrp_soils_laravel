@@ -75,17 +75,17 @@
           <br>
           <label><b>{{ t("Who can see this field?") }}</b></label>
           <div class="choice">
-            <input id="choice_1" type="radio" name="privacy" value="everyone" checked/>
+            <input id="choice_1" type="radio" name="privacy" value="Everyone" checked/>
             <label for="choice_1">{{ t("Everyone") }}</label>
           </div>
 
           <div class="choice">
-            <input id="choice_2" type="radio" name="privacy" value="only_me" />
+            <input id="choice_2" type="radio" name="privacy" value="Only Me" />
             <label for="choice_2">{{ t("Only Me") }}</label>
           </div>
 
           <div class="choice">    
-            <input id="choice_3" type="radio" name="privacy" value="all_members" />
+            <input id="choice_3" type="radio" name="privacy" value="All Members" />
             <label for="choice_3">{{ t("All Members") }}</label>
           </div>
         </div>

@@ -50,7 +50,7 @@ Route::get('/downloads', 'DownloadsController@index');
 Route::get('/projects', 'ProjectController@index');
 
 Route::get('/{key}/register','RegisterController@index');
-Route::get('/register', 'RegisterController@index');
+//Route::get('/register', 'RegisterController@index');
 Route::post('/register/validator', 'RegisterController@validator');
 Route::post('/register/store', 'RegisterController@store');
 Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
@@ -62,8 +62,13 @@ Route::group([
     'middleware' => ['auth'],
     
 ], function () {
-	
+    // User profile 
 	Route::get('/projects/members/{username}', 'UserAccountController@index');
+	Route::post('/projects/members/{id}/upload', 'UserAccountController@upload');
+	Route::post('/projects/members/{id}/validateDetails', 'UserAccountController@validateDetails');
+	Route::post('/projects/members/{id}/changePassword', 'UserAccountController@changePassword');
+	Route::post('/projects/members/{id}/deleteProfile', 'UserAccountController@deleteProfile');
+	Route::post('/projects/members/{id}/kobo-user', 'UserAccountController@koboUser');
 
 	Route::get('/data-management', function () {
 		return view('data_management');

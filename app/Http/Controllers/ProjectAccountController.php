@@ -162,7 +162,7 @@ class ProjectAccountController extends Controller
 
     public function changeStatus($en, $project_id)
     {
-        dd($project_id);
+        //dd($project_id);
         return response()->json(["type"=>'error', "message"=>"message"]);
     }
 

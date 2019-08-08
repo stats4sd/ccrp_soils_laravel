@@ -27,7 +27,7 @@
          
           <div class="img_group mb-3">
 
-            <a href="projects/members/{{ Auth::user()->username}}"><img src={{Auth::user()->avatar}} id="avatar" >
+            <a href={{url('en/projects/members/'.Auth::user()->username)}}><img src={{Auth::user()->avatar}} id="avatar" >
               <strong>{{ Auth::user()->username}}</strong></a>
             </div>
                   

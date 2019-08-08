@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('privacy');
             $table->string('avatar')->default("/images/mystery-group.png");
+            $table->string('kobo_id')->nullable();
             $table->tinyInteger('admin')->default(0);
             $table->rememberToken();
             $table->timestamps();
