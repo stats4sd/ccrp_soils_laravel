@@ -150,9 +150,11 @@
 						<table id="myTable" class="table table-hover">
 							<tbody>
 								@foreach($users as $user)
+								@if(Auth::id()!=$user->id)
 								<tr>
 									<td><input class="checkboxClass" type="checkbox" name="name_selected[]" id="{{$user->id}}" value="{{$user->id}}"> {{$user->name}}</td>		
 								</tr>
+								@endif
 								@endforeach
 							</tbody>
 						</table>
@@ -336,6 +338,7 @@ jQuery(document).ready(function(){
 	        contentType: false,
 	        success : function(result){
 	        	$("#invite").submit(function(event){
+	        	
 	        		$(this).append('<input type="hidden" id="project_id" name="project_id" value="'+result.project_id+'" />');
 	        		return true;
 	        	});
@@ -347,32 +350,6 @@ jQuery(document).ready(function(){
 	});
 });
 
-//display member selected
-// jQuery(".checkboxClass").click(function(){
-//         var selectedMember = new Array();
-//         var n = jQuery(".checkboxClass:checked").length;
-//         if (n > 0){
-//             jQuery(".checkboxClass:checked").each(function(){
-//                 selectedMember.push($(this).val());
-//             });
-//         }
-//          $.ajax({
-// 	        url : 'create-project/index', 
-// 	        type : 'POST',
-// 	        data : form_data,
-// 	        processData: false, 
-// 	        contentType: false,
-// 	        success : function(result){
-     	
-// 	        	console.log(result);
-	        	
-// 			}
-// 		});
-// 	});
-//         console.log(selectedMember);
-//     });
-
-  
 
 </script>
 

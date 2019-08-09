@@ -11,18 +11,26 @@
 |
 */
 
-Route::prefix('{locale?}')->middleware('set.locale')->group(function() {
+//Route::prefix('{locale?}')->middleware('set.locale')->group(function() {
 
+Route::group([
+  'prefix' => '{locale}', 
+  'where' => ['locale' => '[a-zA-Z]{2}'], 
+  'middleware' => 'set.locale'], function() { 
 
-	
+Route::get('/', function () {
+    return redirect(app()->getLocale());
+});	
 Route::get('/home', function(){
-	return redirect('home');
+	return view('home');
 });
 
 Route::get('/', function(){
-	return view('home');
+	
+	return redirect('en/home');
 });
-Route::get('/admin/login', function(){
+
+Route::get('/admin', function(){
 	return view('home');
 });
 
@@ -47,13 +55,15 @@ Route::get('/register', function() {
 });
 Route::get('/downloads', 'DownloadsController@index');
 
-Route::get('/projects', 'ProjectController@index');
+
 
 Route::get('/{key}/register','RegisterController@index');
-//Route::get('/register', 'RegisterController@index');
+Route::get('/register', 'RegisterController@index');
 Route::post('/register/validator', 'RegisterController@validator');
 Route::post('/register/store', 'RegisterController@store');
 Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
+
+
 	
 
 
@@ -62,6 +72,7 @@ Route::group([
     'middleware' => ['auth'],
     
 ], function () {
+	
     // User profile 
 	Route::get('/projects/members/{username}', 'UserAccountController@index');
 	Route::post('/projects/members/{id}/upload', 'UserAccountController@upload');
@@ -73,20 +84,24 @@ Route::group([
 	Route::get('/data-management', function () {
 		return view('data_management');
 	});
+
 	
 	Route::get('/create-project', 'CreateProjectController@index');
 	Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
 
 	Route::post('/create-project/upload', 'CreateProjectController@upload');
 	Route::post('/create-project/store', 'CreateProjectController@store');
-	Route::post('/create-project/{id}/send', 'CreateProjectController@sendEmail');
+	Route::post('/create-project/send', 'CreateProjectController@sendEmail');
 
+	Route::get('/projects', 'ProjectController@index');
 	Route::get('/projects/{slug}', 'ProjectAccountController@index');
 	Route::post('/projects/{id}/validateGroup', 'ProjectAccountController@validateGroup');
 	Route::post('/projects/{id}/upload', 'ProjectAccountController@upload');
 	Route::post('/projects/{id}/send', 'ProjectAccountController@sendEmail');
+
 	Route::post('/projects/{id}/delete', 'ProjectAccountController@delete');
 	Route::post('/projects/{id}/change-status', 'ProjectAccountController@changeStatus');
+
 
 });
 

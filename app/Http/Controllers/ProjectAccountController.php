@@ -20,17 +20,16 @@ class ProjectAccountController extends Controller
     {
     	
     	$users = DB::table('users')->get();
-    	$projects = Project::where('slug','like',$slug)->first();
+    	$projects = Project::where('slug','like',$slug)->first();    
+        $xls_forms = $projects->xls_forms;
         $members = $projects->users;
+        $is_member = $members->contains(Auth::id());
         $auth=$members->filter(function($value){
             return $value->pivot->is_admin==1;
         });
         $is_admin =$auth->pluck('id')->contains(Auth::id());
-
-    	$xls_forms = $projects->xls_forms;
-    
-    	return view('project_account', compact('users', 'projects', 'members','xls_forms', 'is_admin'));
-    	
+            
+    	return view('project_account', compact('users', 'projects', 'members','xls_forms', 'is_admin', 'is_member'));  	
     }
 
     public function upload(Request $request, $en, $id)

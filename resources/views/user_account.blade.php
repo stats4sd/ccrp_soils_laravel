@@ -30,6 +30,7 @@
 			  <button class="tablinks" onclick="openPage(event, 'Projects')"><font size="2">{{ t("Projects") }}</font></button>
 			  <button class="tablinks" onclick="openPage(event, 'Settings')"><font size="2">{{ t("Settings") }}</font></button>
 			</div>
+			@if(Auth::id()==$user->id)
 
 			<div id="Profile" class="tabcontent">
 				<div class="card">
@@ -246,7 +247,9 @@
 					        </div>
 				        </div>	
 					</div>
+				</div>
 			</div>
+			@endif
 	    </section>
 	</div>
 	

@@ -28,24 +28,24 @@
             <div class="dropdown">
               <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">{{ t("Home") }}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="/home">{{ t("Introduction") }}</a></li>
-                  <li><a href="/about">{{ t("About") }}</a></li>
+                  <li><a href={{url(app()->getLocale().'\home')}}>{{ t("Introduction") }}</a></li>
+                  <li><a href={{url(app()->getLocale().'\about')}}>{{ t("About") }}</a></li>
                 </ul>
             </div>
 
             <div class="dropdown">
               <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">{{ t("Start Sampling") }}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="start-sampling">{{ t("Start Sampling") }}</a></li>
-                  <li><a href="data-management">{{ t("Data Management") }}</a></li>
+                  <li><a href={{url(app()->getLocale().'\start-sampling')}}>{{ t("Start Sampling") }}</a></li>
+                  <li><a href={{url(app()->getLocale().'\data-management')}}>{{ t("Data Management") }}</a></li>
                 </ul>
             </div>
 
             <div class="dropdown">
               <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">{{ t("Tools") }}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="qr-codes">{{ t("QR Codes") }}</a></li>
-                  <li><a href="downloads">{{ t("Downloads") }}</a></li>
+                  <li><a href={{url(app()->getLocale().'\qr-codes')}}>{{ t("QR Codes") }}</a></li>
+                  <li><a href={{url(app()->getLocale().'\downloads')}}>{{ t("Downloads") }}</a></li>
                 </ul>
             </div>
 
@@ -57,16 +57,17 @@
             </div>
 
             <div class="btn dropdown">
-              <a href="{{url('projects')}}"  style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
+              <a href={{url(app()->getLocale().'\projects')}}  style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
             </div>
 
             <div class="btn dropdown">
-              <a href="{{url('create-project')}}" style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
+              <a href={{url(app()->getLocale().'\create-project')}} style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
             </div>
 
             <div class="btn dropdown">
               <a href="{{url('admin')}}" style="color:black;">{{ t("Admin") }}<b class="caret"></b></a>
             </div>
+           
 
       
       </section>

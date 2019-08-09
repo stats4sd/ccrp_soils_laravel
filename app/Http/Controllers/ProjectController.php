@@ -15,8 +15,11 @@ class ProjectController extends Controller
 	public function index()
     {
     	$users = DB::table('users')->get();
-    	$projects =	$this->timeString();;
+    	$projects =	$this->timeString();
+
         $myprojects = Auth::user()->projects;
+
+       
         
     	return view('projects', compact('users', 'projects','myprojects'));
     }
@@ -32,7 +35,7 @@ class ProjectController extends Controller
 
     public function timeString()
     {
-    	$projects = DB::table('projects')->get();
+    	$projects = DB::table('projects')->where('deleted_at', null)->get();
     	foreach ($projects as $project) {
             $project->created_at= Carbon::createFromTimeStamp(strtotime($project->created_at))->diffForHumans();
     	}

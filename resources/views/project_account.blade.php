@@ -26,10 +26,11 @@
 					    	
 						</div>
 					</div>
+				
 					<div class="col-sm-4">
 						<div class="admin_group">
 						<h3><b>{{ t("Group Admins") }}</b></h3>
-						
+						@if($is_member)
 							@foreach ($members as $member)
 								@if($member->pivot->is_admin)
 								<a href="members/{{$member->username}}" data-toggle="tooltip" title="{{$member->username}}">
@@ -37,17 +38,21 @@
 								</a>
 								@endif
 					    	@endforeach
+					    @endif
 						</div>
 					</div>
+
 				</div>
 			</div>
 
 	    	<!-- Tab links -->
 			<div class="tab mt-5">
-			  <button class="tablinks" onclick="openPage(event, 'Form_data')"><font size="2">{{ t("Form and Data") }}</font></button>
+			  <button class="tablinks" onclick="openPage(event, 'Form_data')" id="defaultOpen"><font size="2">{{ t("Form and Data") }}</font></button>
 			  <button class="tablinks" onclick="openPage(event, 'Members')" id="buttonMembers"><font size="2">{{ t("Members") }}</font></button>
-			  <button class="tablinks" onclick="openPage(event, 'Manage')" id="defaultOpen"><font size="2">{{ t("Manage") }}</font></button>
+			  <button class="tablinks" onclick="openPage(event, 'Manage')"><font size="2">{{ t("Manage") }}</font></button>
 			</div>
+			@if($is_member)
+		
 
 			<div id="Form_data" class="tabcontent">
 				<div class="row">
@@ -57,7 +62,7 @@
 		  						<tr>
 		  							<th>Form Name</th>
 		  							<th>Kobotools Form ID</th>
-		  							<th>Number of Collected Records</th>
+		  							<th>Records</th>
 		  							<th>Status</th>
 		  							<th>Action</th>
 		  						</tr>
@@ -66,10 +71,24 @@
 		  						@foreach($xls_forms as $xls_form)
 		  						<tr>
 		  							<td>{{ $xls_form->form_title}}</td>
-		  							<td>{{ $xls_form->form_id}}</td>
-		  							<td></td>
-		  							<td></td>
-		  							<td></td>
+		  							<td>{{ $xls_form->pivot->form_kobo_id}}</td>
+		  							<td>{{ $xls_form->pivot->records}}</td>
+		  							<td>
+		  								@if($xls_form->pivot->deployed)
+		  									<p>deployed</p>
+		  								@endif
+		  							</td>
+		  							<td>
+		  								<div class="w3-show-inline-block">
+										  	<div class="w3-bar">
+										    	<button class="btn btn-dark btn-sm">DEPLOY</button>
+										    	<button class="btn btn-dark btn-sm">UPDATE</button>
+										    	<button class="btn btn-dark btn-sm">DELETE</button>
+										 	 </div>
+										</div>
+		  							
+		  							
+		  							</td>
 		  						</tr>
 		  						@endforeach
 		  					</tbody>
@@ -159,7 +178,7 @@
 				</div>
 			</div>			
 			<div id="Manage" class="tabcontent">
-				@if($is_admin)	 
+				 	@if($is_admin)
 					<div class="row">
 			  			<div class="container">
 					        <form method="post" action="{{ url('project/store')}}" id="group_details">
@@ -271,6 +290,7 @@
 					            </div>
 				            	</td>
 				            	<td>
+
 				            		@if($member->pivot->is_admin)
 				            		<p>Admin</p>
 				            		@else
@@ -321,6 +341,13 @@
 				   		</div>
 				   	@endif
 			</div>
+			@else
+			<div class="alert alert-info alert-block" id="is_not_admin">
+				<p><b>This is a private group.</b> To join you must be a registered site member and request group membership.</p>
+			</div>
+			@endif
+
+
 			
 	    </section>
 	</div>

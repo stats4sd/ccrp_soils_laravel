@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\ProjectMember;
 use App\Models\Projectxlsform;
 use App\Models\Xlsform;
+use App\Models\Invite;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -85,7 +86,25 @@ class CreateProjectController extends Controller
         $project_id = $project->id;
         $this->syncProjectXlsForm($project_id);
     
+        $this->creatorProject($creator_id, $project_id); 
+    
         return response()->json(["type"=>"stored successfully", "project_id"=>$project_id]);
+    }
+
+    public function creatorProject($creator_id, $id)
+    {
+        $key = str_random(32);
+        $projects_members = new ProjectMember();
+        $projects_members->project_id = $id;
+        $projects_members->inviter_id = Auth::user()->id;
+        $projects_members->user_id = $creator_id;
+        $projects_members->key_confirm = $key;
+        $projects_members->is_admin = 1;
+        $projects_members->is_confirmed = 1;
+        $projects_members->save();
+   
+        return $projects_members;
+        
     }
 
     public function syncProjectXlsForm($id) 
@@ -93,7 +112,6 @@ class CreateProjectController extends Controller
 
         $project = Project::find($id);
         $sync=$project->xls_forms()->sync(Xlsform::all()->pluck('id')->toArray());
-        dd($sync);
         return true;
 
     }  
@@ -101,7 +119,6 @@ class CreateProjectController extends Controller
 
     public function sendEmail (Request $request)
     {
-        dd($request);
         $user = Auth::user();
         $creator_name = $user->name;
         $project = Project::find($request->project_id);
@@ -129,7 +146,7 @@ class CreateProjectController extends Controller
             foreach($email_multiple as $email)
             {         
                 $key = str_random(32);
-                $this->createInvite($creator_id,  $email, $id, $key);
+                $this->createInvite($project->creator_id,  $email, $project->id, $key);
                 $data = [ "creator_name"=> $creator_name, 
                     "email"=>$email, "name_project"=>$project->name, "project_id"=>$project->id, "user_id"=>0, 'url'=>url("en/projects/".$project->slug),
                     "key_confirmed" =>$key
@@ -141,7 +158,7 @@ class CreateProjectController extends Controller
         } 
         
         
-        return redirect('project/'.$project->slug);
+        return redirect(app()->getLocale()."\projects/".$project->slug);
     }
 
     public function createProjectMember($user_id, $id, $key)
