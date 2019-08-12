@@ -10,21 +10,21 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    public function index($en, $key)
+    public function index($en, $key = null)
     {
         if($key)
         {
             $email = $this->includeEmail($key);
         }else {
-            $email = "email";
+            $email = null;
         }
-       
+
     	return view('register', compact('email'));
-    } 
+    }
 
     public function validator(Request $request)
     {
-    	$request->validate( 
+    	$request->validate(
     	 [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -36,8 +36,8 @@ class RegisterController extends Controller
         return redirect()->to('en/register');
     }
 
-    public function store(Request $request) 
-    {    	
+    public function store(Request $request)
+    {
     	$this->validator($request);
 
     	$user = User::create([
@@ -45,13 +45,13 @@ class RegisterController extends Controller
     		'username' => $request['username'],
     		'email' => $request['email'],
     		'password' => bcrypt($request['password']),
-			'remember_token' => $request['_token'], 
+			'remember_token' => $request['_token'],
 			'privacy' => $request['privacy']
     	]);
         $this->checkInvite($user->email, $user->id);
-    	
+
     	auth()->login($user);
-    	
+
     	return redirect()->to('en/home');
     }
 
@@ -71,15 +71,15 @@ class RegisterController extends Controller
             $invite->delete();
 
         }
-   
+
         return $projects_members;
     }
 
     public function includeEmail($key)
     {
-        
+
         $invite = Invite::where('key_confirm', $key)->first();
-        
+
         return $invite->email;
     }
 

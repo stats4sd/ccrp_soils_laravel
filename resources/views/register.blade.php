@@ -15,7 +15,7 @@
             {{csrf_field()}}
             <div class="form-group">
               <label><b>{{ t("Username (required)") }}</b></label>
-              <input class="form-control"  type="text" name="username">
+              <input class="form-control"  type="text" name="username" value="{{ old('username') }}">
               @if($errors->has('username'))
                 <span class="" role="alert">
                     <strong style="color: #a22a2a;">{{ $errors->first('username') }}</strong>
@@ -24,12 +24,7 @@
             </div>
             <div class="form-group">
               <label ><b>{{ t("Email Address (required)") }}</b></label>
-              @if($email)
-                <input class="form-control"  type="email" name="email" value="{{$email}}">
-              @else
-                <input class="form-control"  type="email" name="email">
-              @endif
-
+                <input class="form-control"  type="email" name="email" value="{{ $email ? $email : old('email') }}">
               @if($errors->has('email'))
                 <span class="" role="alert">
                     <strong style="color: #a22a2a;">{{ $errors->first('email') }}</strong>
@@ -55,23 +50,23 @@
               @endif
             </div>
             <button type="submit" class="btn btn-dark btn-block">{{ t("Complete Sign Up") }}</button>
-        
+
         </div>
 
         <div class="col-sm-6">
           <h3 class="content mb-3"><b>{{ t("Profile Details") }}</b></h3>
           <div class="form-group">
             <label><b>{{ t("Name (required)") }}</b></label>
-              <input class="form-control"  type="text" name="name">
+              <input class="form-control"  type="text" name="name" value="{{ old('name') }}">
                @if($errors->has('name'))
                <span class="" role="alert">
-                
+
                     <strong style="color: #a22a2a;">{{ $errors->first('name') }}</strong>
-              
+
               </span>
               @endif
           </div>
-          
+
           <br>
           <label><b>{{ t("Who can see this field?") }}</b></label>
           <div class="choice">
@@ -84,7 +79,7 @@
             <label for="choice_2">{{ t("Only Me") }}</label>
           </div>
 
-          <div class="choice">    
+          <div class="choice">
             <input id="choice_3" type="radio" name="privacy" value="All Members" />
             <label for="choice_3">{{ t("All Members") }}</label>
           </div>
@@ -92,7 +87,7 @@
 
       </form>
       </div>
-    </div>      
+    </div>
   </body>
-    
+
 @endsection
