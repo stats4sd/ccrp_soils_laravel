@@ -6,9 +6,12 @@
 	<div class="col-sm-8">
 	 	<section class="content mb-5" id="group">
 
-	 		
+
 		    <h1 class="mb-5"><b>{{$projects->name}}</b></h1>
-	 
+	 	<div class="btn btn-primary btn-lg" onclick="deploy(1,1)">DEPLOY</div>
+	 	<div class="btn btn-primary btn-lg" onclick="deleteForm(1,1)">DELETE</div>
+	 	<div class="btn btn-primary btn-lg" onclick="runtest(1,1)">TEST KOBO SYNC</div>
+	 	<div class="btn btn-primary btn-lg" onclick="runtest(1,1)">TEST KOBO SYNC</div>
 
 	    	<div class="container-fluid">
 	    		<div class="row">
@@ -23,14 +26,18 @@
 						<div id="description">
 							<p>{{$projects->status}} Group {{$projects->created_at}}</p>
 						    <p>{{$projects->description}}</p>
-					    	
+
 						</div>
 					</div>
 				
 					<div class="col-sm-4">
 						<div class="admin_group">
 						<h3><b>{{ t("Group Admins") }}</b></h3>
+
 						@if($is_member)
+
+
+
 							@foreach ($members as $member)
 								@if($member->pivot->is_admin)
 								<a href="members/{{$member->username}}" data-toggle="tooltip" title="{{$member->username}}">
@@ -92,10 +99,10 @@
 		  						</tr>
 		  						@endforeach
 		  					</tbody>
-		  					
+
 		  				</table>
 
-				        
+
 		 			</div>
 		   		</div>
 			</div>
@@ -103,6 +110,7 @@
 			<div id="Members" class="tabcontent">
 
 			  <button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonInvite"><font size="2">{{ t("INVITE") }}</font></button>
+
 
 				<div id="Invite" class="tabcontent">
 
@@ -148,36 +156,88 @@
 									<div class="row">
 										<div class="img_group">
 											<img style="display:none" src={{url("images/mystery-group.png")}} id="avatar" >
+=======
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-6">
+							<label>Search for members to invite:</label>
+							<form  method="post" action="{{url('en/projects/1/send')}}" name="invite" id="invite">
+						  	{{ csrf_field() }}
+						  	<input type="text" id="myInput" onkeyup="search()" class="form-control" placeholder="Search for names..">
+						  	<div class="scroll_list">
+						  		<div class="form-group">
+								<table id="myTable" class="table table-hover">
+									<tbody>
+										@foreach($users as $user)
+										<tr>
+											<td><input class="checkboxClass" type="checkbox" name="name_selected[]" id="{{$user->id}}" value="{{$user->id}}"> {{$user->name}}</td>
+										</tr>
+										@endforeach
+									</tbody>
+								</table>
+							</div>
+							</div>
+
+								<div class="form-group">
+									<label for="email">Enter the email addresses of people to invite.</label>
+					    			<input style="width: 100%;" type="email" class="form-control" name="email_inserted" multiple>
+					    		</div>
+
+					    		<button type="submit" class="btn btn-dark btn-sm" id="send_email">{{ t("SUBMIT")}}</button>
+							</form>
+
+						</div>
+						<div class="col-sm-6">
+							<div class="alert alert-info">
+								<strong> Select people to invite from your friends list.</strong>
+							</div>
+
+							<br>
+							<!-- <div class="container-fluid">
+								<div class="row">
+									<div class="img_group">
+										<img style="display:none" src={{url("images/mystery-group.png")}} id="avatar" >
+
 
 												<p id="text" style="display:none">Name</p>
 										</div>
 									</div>
+
 								</div> -->				
 							</div>	
+
+								</div>
+							</div> 
+
 						</div>
 					</div>
 
+
 					</div> 
+
+				</div>
+
 	            <div id="members">
 				@foreach($members as $member)
-	   		     
-	          		<div class="img_group mb-3">	          				
+
+	          		<div class="img_group mb-3">
 	          			<div class="row mb-3">
 	          				<div class="col-sm-1">
 	          					<a href="members/{{$member->username}}">
 			            		<img src="{{$member->avatar}}" alt="Person" width="96" height="96"></a>
 		            		</div>
 		            		<div class="col-sm-8 mt-3">
-			            		<a href="members/{{$member->username}}">{{$member->username}}</a>		            		
-			          		</div>		
-			          		<br>					          		
-			          	</div>	          			
+			            		<a href="members/{{$member->username}}">{{$member->username}}</a>
+			          		</div>
+			          		<br>
+			          	</div>
 	          		</div>
-	    		        
+
 	      		@endforeach
 				</div>
-			</div>			
+			</div>
 			<div id="Manage" class="tabcontent">
+
 				 	@if($is_admin)
 					<div class="row">
 			  			<div class="container">
@@ -348,10 +408,98 @@
 			@endif
 
 
-			
+
+				<div class="row">
+		  			<div class="container">
+
+				        <form method="post" action="{{ url('project/store')}}" id="group_details">
+				        	 @csrf
+				           	<div class="form-group">
+								<div class="alert alert-danger alert-block" id="validate_danger"></div>
+								<div class="alert alert-success alert-block" id="validate_success"></div>
+				             	<label for="exampleInputEmail1"><b>{{ t("Group Name (required)") }}</b></label>
+				             	<input class="form-control"  type="text" name="name" value="{{$projects->name}}">
+				           	</div>
+				           	<div class="form-group">
+				             	<label for="exampleInputEmail1"><b>{{ t("Group Description (required)") }}</b></label>
+				             	<textarea class="form-control"  rows="4" cols="50" name="description" form="group_details">{{$projects->description}}</textarea>
+				           	</div>
+
+
+
+			           		<div class="row">
+			           			<div class="col-sm-6">
+		           				<b>Privacy Options</b>
+						           	<div class="form-group">
+						           		<input type="radio" name="status" value="Public" checked>
+											<label for="public_group" style="color: grey"> This is a public group</label>
+										<br>
+										<input type="radio" name="status" value="Private">
+											<label for="private_group" style="color: grey"> This is a private group</label>
+										<br>
+										<input type="radio" name="status" value="Hidden">
+											<label for="private_group" style="color: grey"> This is a hidden group</label>
+										<br>
+									</div>
+					   			</div>
+					   			<div class="col-sm-6">
+					   				<b>Group Invitations</b>
+					   				<div class="form-group">
+				   						<div>
+					   						<input type="radio" name="group_invitations" value="all_members" checked>
+											<label for="group_invitations" style="color: grey"> All group members</label>
+										</div>
+										<div>
+											<input type="radio" name="group_invitations" value="group_admins">
+											<label for="group_invitations" style="color: grey"> Group admins only</label>
+										</div>
+					   				</div>
+					   			</div>
+				           	</div>
+
+
+
+
+
+				           	<div class="row">
+								<div class="col-sm-4">
+									<div class="container">
+						  				<div class="img_group_default mt-3">
+						  					<b>Photo</b>
+
+										  	<img id='image' src={{$projects->image}}>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-8 mt-5">
+
+									<div class="form-group">
+										<br>
+										<div class="alert alert-danger alert-block" id="error"></div>
+										<div class="alert alert-success alert-block" id="success"></div>
+										<br>
+										<label> {{ t("Select Photo for Upload") }}</label>
+										<br>
+										<input type="file" id="file" name="select_file">
+										<input type="submit" id="Upload" name="upload" class="btn btn-dark btn-sm" value="Upload">
+									</div>
+								</div>
+					           <button type="submit" id="group_name_descrip" class="btn btn-dark btn-sm mt-5" name="create_group">{{ t("UPDATE GROUP") }}</button>
+				       		</div>
+
+						</form>
+
+		 			</div>
+	   			</div>
+			</div>
+
+
+
+
 	    </section>
 	</div>
-	
+
 </body>
 
 @endsection
@@ -359,7 +507,11 @@
 
 
 @section('script')
-<script type="text/javascript">	
+
+@include('kobosync')
+
+<script type="text/javascript">
+
 function openPage(evt, pageName) {
 	var i, tabcontent, tablinks;
 	tabcontent = document.getElementsByClassName("tabcontent");
@@ -404,12 +556,12 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 		var form = document.getElementById('group_details');
 		var form_data = new FormData(form);
-       
+
         $.ajax({
-	        url : '/en/projects/{{$projects->id}}/upload', 
+	        url : '/en/projects/{{$projects->id}}/upload',
 	        type : 'POST',
 	        data : form_data,
-	        processData: false, 
+	        processData: false,
 	        contentType: false,
 	        success : function(result){
 	        	var type = result.type;
@@ -429,10 +581,10 @@ jQuery(document).ready(function(){
 	    			jQuery('#success').show();
 	    			jQuery("#success").html(message);
 	   				var url = window.location.origin+'/'+result.image_path;
-	    			jQuery("#image").attr('src', url);	 
-	    			jQuery("#img_group").attr('src', url); 
+	    			jQuery("#image").attr('src', url);
+	    			jQuery("#img_group").attr('src', url);
 
-	    		}	        	
+	    		}
 			}
 		});
 	});
@@ -441,7 +593,7 @@ jQuery(document).ready(function(){
 //validation group name and group description
 jQuery(document).ready(function(){
 	jQuery('#validate_danger').hide();
-	jQuery('#validate_success').hide();	
+	jQuery('#validate_success').hide();
 	jQuery("#group_name_descrip").click(function(event){
 		event.preventDefault();
 		var form = document.getElementById('group_details');
@@ -449,10 +601,10 @@ jQuery(document).ready(function(){
 		console.log(form_data);
 
 		$.ajax({
-	        url : '/en/projects/{{$projects->id}}/validateGroup', 
+	        url : '/en/projects/{{$projects->id}}/validateGroup',
 	        type : 'POST',
 	        data : form_data,
-	        processData: false, 
+	        processData: false,
 	        contentType: false,
 	        success : function(result){
 	        	console.log(result);
@@ -465,7 +617,7 @@ jQuery(document).ready(function(){
 	        		jQuery("#validate_danger").html(message);
 				} else {
 					jQuery('#validate_success').show();
-					jQuery('#validate_danger').hide();	
+					jQuery('#validate_danger').hide();
 	        		jQuery("#validate_success").html(message);
 	        		location.reload();
 				}

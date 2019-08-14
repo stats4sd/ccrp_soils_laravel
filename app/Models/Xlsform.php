@@ -62,9 +62,9 @@ class Xlsform extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-    public function setFormIdAttribute($value)
+    public function setPathFileAttribute($value)
     {
-        $attribute_name = "form_id";
+        $attribute_name = "path_file";
         $disk = "uploads";
         $destination_path = "xlsforms";
 
@@ -102,6 +102,7 @@ class Xlsform extends Model
 
             // 3. Save the complete path to the database
             $this->attributes[$attribute_name] = $file_path;
+
         }
     }
 }

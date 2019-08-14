@@ -1,7 +1,6 @@
 <script>
 
-    function runtest(projectId, formId) {
-
+    function deploy(projectId, formId) {
         jQuery.ajax('{{ url('en/kobo/publish') }}', {
             method: "POST",
             data: {

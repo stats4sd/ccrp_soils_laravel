@@ -18,12 +18,15 @@ Route::group([
   'where' => ['locale' => '[a-zA-Z]{2}'],
   'middleware' => 'set.locale'], function() {
 
+
     Route::get('/', function () {
         return redirect(app()->getLocale());
     });
     Route::get('/home', function(){
        return view('home');
    });
+
+
 
     Route::get('/', function(){
 
@@ -56,6 +59,12 @@ Route::group([
     Route::get('/downloads', 'DownloadsController@index');
 
 
+Route::group([
+
+    'middleware' => ['auth'],
+
+], function () {
+
 
     Route::get('/{key}/register','RegisterController@index');
     Route::get('/register', 'RegisterController@index');
@@ -64,14 +73,9 @@ Route::group([
     Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
 
 
+	Route::get('/create-project', 'CreateProjectController@index');
+	Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
 
-
-
-    Route::group([
-
-        'middleware' => ['auth'],
-
-    ], function () {
 
     // User profile
        Route::get('/projects/members/{username}', 'UserAccountController@index');
@@ -103,7 +107,12 @@ Route::group([
        Route::post('/projects/{id}/change-status', 'ProjectAccountController@changeStatus');
 
 
-   });
+   // });
+
+	Route::post('/kobo/publish', 'KoboController@publish');
+
+});
+
 
 
 
