@@ -8,10 +8,6 @@
 
 
 		    <h1 class="mb-5"><b>{{$projects->name}}</b></h1>
-	 	<div class="btn btn-primary btn-lg" onclick="deploy(1,1)">DEPLOY</div>
-	 	<div class="btn btn-primary btn-lg" onclick="deleteForm(1,1)">DELETE</div>
-	 	<div class="btn btn-primary btn-lg" onclick="runtest(1,1)">TEST KOBO SYNC</div>
-	 	<div class="btn btn-primary btn-lg" onclick="runtest(1,1)">TEST KOBO SYNC</div>
 
 	    	<div class="container-fluid">
 	    		<div class="row">
@@ -33,10 +29,7 @@
 					<div class="col-sm-4">
 						<div class="admin_group">
 						<h3><b>{{ t("Group Admins") }}</b></h3>
-
 						@if($is_member)
-
-
 
 							@foreach ($members as $member)
 								@if($member->pivot->is_admin)
@@ -88,7 +81,7 @@
 		  							<td>
 		  								<div class="w3-show-inline-block">
 										  	<div class="w3-bar">
-										    	<button class="btn btn-dark btn-sm">DEPLOY</button>
+										    	<button class="btn btn-dark btn-sm" onclick="deploy({{$projects->id}},{{$xls_form->id}})">DEPLOY</button>
 										    	<button class="btn btn-dark btn-sm">UPDATE</button>
 										    	<button class="btn btn-dark btn-sm">DELETE</button>
 										 	 </div>
@@ -151,71 +144,12 @@
 									<strong> Select people to invite from your friends list.</strong>
 								</div>	
 							
-								<br>
-								<!-- <div class="container-fluid">
-									<div class="row">
-										<div class="img_group">
-											<img style="display:none" src={{url("images/mystery-group.png")}} id="avatar" >
-=======
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-sm-6">
-							<label>Search for members to invite:</label>
-							<form  method="post" action="{{url('en/projects/1/send')}}" name="invite" id="invite">
-						  	{{ csrf_field() }}
-						  	<input type="text" id="myInput" onkeyup="search()" class="form-control" placeholder="Search for names..">
-						  	<div class="scroll_list">
-						  		<div class="form-group">
-								<table id="myTable" class="table table-hover">
-									<tbody>
-										@foreach($users as $user)
-										<tr>
-											<td><input class="checkboxClass" type="checkbox" name="name_selected[]" id="{{$user->id}}" value="{{$user->id}}"> {{$user->name}}</td>
-										</tr>
-										@endforeach
-									</tbody>
-								</table>
 							</div>
-							</div>
-
-								<div class="form-group">
-									<label for="email">Enter the email addresses of people to invite.</label>
-					    			<input style="width: 100%;" type="email" class="form-control" name="email_inserted" multiple>
-					    		</div>
-
-					    		<button type="submit" class="btn btn-dark btn-sm" id="send_email">{{ t("SUBMIT")}}</button>
-							</form>
-
-						</div>
-						<div class="col-sm-6">
-							<div class="alert alert-info">
-								<strong> Select people to invite from your friends list.</strong>
-							</div>
-
-							<br>
-							<!-- <div class="container-fluid">
-								<div class="row">
-									<div class="img_group">
-										<img style="display:none" src={{url("images/mystery-group.png")}} id="avatar" >
-
-
-												<p id="text" style="display:none">Name</p>
-										</div>
-									</div>
-
-								</div> -->				
-							</div>	
-
-								</div>
-							</div> 
-
 						</div>
 					</div>
+				</div>		
 
-
-					</div> 
-
-				</div>
+							
 
 	            <div id="members">
 				@foreach($members as $member)
@@ -407,7 +341,7 @@
 			</div>
 			@endif
 
-
+=======
 
 				<div class="row">
 		  			<div class="container">
@@ -493,7 +427,7 @@
 		 			</div>
 	   			</div>
 			</div>
-
+>>>>>>> kobotoolbox
 
 
 

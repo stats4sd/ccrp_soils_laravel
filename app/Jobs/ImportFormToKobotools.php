@@ -108,10 +108,6 @@ class ImportFormToKobotools implements ShouldQueue
                 $response = [
                         'uid' => $response['data']['uid'],
                     ];
-                   // return $response['uid'];
-
-                //save uid
-               // $project->forms()->updateExistingPivot($formId, ['form_kobo_id' => $response['data']['uid']]);
 
 
                 
@@ -135,7 +131,7 @@ class ImportFormToKobotools implements ShouldQueue
         finally {
             //Deploy
          
-           dispatch(new DeployKobotoolsForm($response['data']->uid));
+           dispatch(new DeployKobotoolsForm($response['data']->uid, $this->projectId, $this->formId));
             return $response;
         }
     }
