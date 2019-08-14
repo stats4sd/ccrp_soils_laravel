@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ImportFormToKobotools;
 use App\Models\Xlsform;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -19,20 +20,85 @@ class KoboController extends Controller
      *                            - HTTP response code from Kobotools request;
      *                            - The UID of the form on Kobotools;
      */
-    public function publish (Request $request)
-    {
-
+    public function publish(Request $request)
+    {   
         $formId = $request->formId;
         $projectId = $request->projectId;
 
-        $form = Xlsform::find($formId);
-
-        //$form->form_id is actually the file path!
-        $xlsFile = Storage::disk('uploads')->path($form->path_file);
+        // //$form->form_id is actually the file path!
+        // $xlsFile = Storage::disk('uploads')->path($form->path_file);
 
 
+        // // setup Guzzle Client info
+        // $client = new Client();
+       
+        // $id = config('services.kobo.id');
+        // $password = config('services.kobo.password');
+
+        // // prepare payload for creating new form
+
+        // $post = [
+        //     'auth' => [$id, $password],
+        //     'headers' => [
+        //         'Accept' => 'application/json'
+        //     ],
+        //     'multipart' => [
+        //         [
+        //             'name' => 'library',
+        //             'contents' => 'true',
+        //         ],
+        //         [
+        //             'name' => 'file',
+        //             'contents' => file_get_contents($xlsFile),
+        //             'filename' => 'text.xlsx',
+        //         ],
+        //         [
+        //             'name' => 'name',
+        //             'contents' => 'Testing Form For Kobo API 2345 ',
+        //         ],
+        //         [
+        //             'name' => 'settings',
+        //             'contents' => '{"description":"hello from testing helloooooooo"}',
+        //         ],
+        //         [
+        //             'name' => 'asset_type',
+        //             'contents' => 'survey',
+        //         ],
+        //     ]
+        // ];
+
+        dispatch(new ImportFormToKobotools($formId, $projectId));
+       
+    
+
+        return   $response = [
+                    'status' => 'imported',
+            ];     
+
+    }
+
+
+     public function deploy($uid)
+    {   
+         $client = new Client();
+       
+        $id = config('services.kobo.id');
+        $password = config('services.kobo.password');
+         $post = [
+            'auth' => [$id, $password],
+            'headers' => [
+                'Accept' => 'application/json'
+            ]
+        ];
+
+
+         $res = $client->request('GET', 'https://kf.kobotoolbox.org/imports/ijJQDQGTq6fJ5Tthshm93n/', $post) ;
+         
+
+      
         // setup Guzzle Client info
         $client = new Client();
+       
         $id = config('services.kobo.id');
         $password = config('services.kobo.password');
 
@@ -44,46 +110,33 @@ class KoboController extends Controller
             ],
             'multipart' => [
                 [
-                    'name' => 'library',
-                    'contents' => 'false',
-                ],
-                [
-                    'name' => 'file',
-                    'contents' => file_get_contents($xlsFile),
-                    'filename' => 'text.xlsx',
-                ],
-                [
-                    'name' => 'name',
-                    'contents' => 'Testing Form For Kobo API 2345 ',
-                ],
-                [
-                    'name' => 'settings',
-                    'contents' => '{"description":"hello from testing helloooooooo"}',
-                ],
-                [
-                    'name' => 'asset_type',
-                    'contents' => 'survey',
-                ],
+                    'name' => 'active',
+                    'contents' => 'true',
+                ]
+               
             ]
+                
         ];
+
 
         // preprare response array;
         $response = [];
 
         try {
             // Send the request to Kobotoolbox
-            $res = $client->request('POST', 'https://kf.kobotoolbox.org/imports/', $post);
-
+            $res = $client->request('POST', 'https://kf.kobotoolbox.org/assets/'.$uid.'/deployment/', $post);
+          
             $response = [
                     'status' => $res->getStatusCode(),
             ];
 
             //POST request to imports returns 201 on success.
-            if($response['status'] == 201) {
-                $response['data'] = json_decode($res->getBody());
+            if($response['status'] == 200) {
+              
+               // $response['data'] = json_decode($res->getBody());
 
                 //save uid
-                $project->forms()->updateExistingPivot($formId, ['form_kobo_id' => $respons['data']['uid']]);
+                $project->xls_forms->updateExistingPivot($formId, ['form_kobo_id' => $response['data']['uid']]);
             }
 
             else {

@@ -8,6 +8,9 @@
 
 
 		    <h1 class="mb-5"><b>{{$projects->name}}</b></h1>
+	 	<div class="btn btn-primary btn-lg" onclick="deploy(1,1)">DEPLOY</div>
+	 	<div class="btn btn-primary btn-lg" onclick="deleteForm(1,1)">DELETE</div>
+	 	<div class="btn btn-primary btn-lg" onclick="runtest(1,1)">TEST KOBO SYNC</div>
 	 	<div class="btn btn-primary btn-lg" onclick="runtest(1,1)">TEST KOBO SYNC</div>
 
 	    	<div class="container-fluid">
