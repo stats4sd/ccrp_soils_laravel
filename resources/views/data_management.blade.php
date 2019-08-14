@@ -29,9 +29,9 @@
   <div class="card mx-5 mt-5">
     <div class="card-header"><h3><b>{{ t("Forms and Data") }}</b></h3></div>
       <div class="card-body">
-        
+
       </div>
-    
+
   </div>
 </section>
 </div>

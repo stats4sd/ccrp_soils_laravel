@@ -53,7 +53,8 @@ $routes = function() {
    Route::post('/register/store', 'RegisterController@store');
    Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
 
-
+  Route::post('qr-newcodes', 'QrController@newCodes');
+  Route::get('qr-print', 'QrController@printView');
 
 
 
