@@ -104,7 +104,7 @@ Route::group([
        Route::post('/projects/{id}/send', 'ProjectAccountController@sendEmail');
 
        Route::post('/projects/{id}/delete', 'ProjectAccountController@delete');
-       Route::post('/projects/{id}/change-status', 'ProjectAccountController@changeStatus');
+       Route::post('/projects/changeStatus', 'ProjectAccountController@changeStatus');
 
 
    // });

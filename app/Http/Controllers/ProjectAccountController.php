@@ -159,10 +159,20 @@ class ProjectAccountController extends Controller
         return $invite;
     }
 
-    public function changeStatus($en, $project_id)
+    public function changeStatus(Request $request)
     {
-        //dd($project_id);
-        return response()->json(["type"=>'error', "message"=>"message"]);
+        $user_id = $request['userId'];
+        $project_id = $request['projectId'];
+        $project_member = ProjectMember::where('user_id', $user_id)->where('project_id', $project_id)->get();
+        $current_status = $project_member[0]->is_admin;
+        if($current_status)
+        {
+            ProjectMember::where('user_id', $user_id)->where('project_id', $project_id)->update(['is_admin'=>0]);
+        } else {
+            ProjectMember::where('user_id', $user_id)->where('project_id', $project_id)->update(['is_admin'=>1]);
+
+        }
+        return response()->json(["type"=>'info', "message"=>"Status changed"]);
     }
 
     public function delete($en, $id)
