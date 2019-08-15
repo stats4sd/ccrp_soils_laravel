@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Project;
+use App\Models\Xlsform;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -50,21 +51,16 @@ class DeployKobotoolsForm implements ShouldQueue
                 'Accept' => 'application/json'
             ]
         ];
-
-        
+     
         $res = $client->request('GET', 'https://kf.kobotoolbox.org/imports/'.$this->uid, $post);
         $response = json_decode($res->getBody());
-
-
-
-
+        
 
         if($response->status=="complete")
         {
             //Log::info(json_encode($response->messages->created[0]->uid));
-            //Rename form
-            // $resp_rename = $client->request('PATCH', 'https://kf.kobotoolbox.org/assets/'.$response->messages->created[0]->uid, $post);
-            // Log::info(json_decode($resp_rename->getBody()));
+            $new_uid = $response->messages->created[0]->uid;
+    
             $get = [
                 'auth' => [$id, $password],
                 'headers' => [
@@ -72,23 +68,60 @@ class DeployKobotoolsForm implements ShouldQueue
                 ],
                 'multipart' => [
                     [
-                        'name' => 'name',
-                        'contents' => 'CCRP',
-                    ]                  
+                        'name' => 'active',
+                        'contents' => 'true',
+                    ]
                 ]
                     
             ];
-             $resp = $client->request('POST', 'https://kf.kobotoolbox.org/assets/'.$response->messages->created[0]->uid.'/deployment/', $get);
+            $resp = $client->request('POST', 'https://kf.kobotoolbox.org/assets/'.$response->messages->created[0]->uid.'/deployment/', $get);
+            //Rename form
+            $this->renameForm( $new_uid, $this->formId );
             //save uid
             // $project = Project::find($this->projectId);
             // Log::info($project->xls_forms);
             //$project->xls_forms->updateExistingPivot(['form_kobo_id_string' => $response->messages->created[0]->uid]);
 
         } else {
-            Log::error("Deploying new form to Kobotoolbox failed with error " . json_encode($response['status']) . ".");
-            $response['error'] = "Request failed with HTTP error " . json_encode($response['status']) . ". Please contact your administrator.";
+            $this->handle();
 
         }
+
+        return $response;
+    }
+
+    public function renameForm($uid, $formId)
+    {
+        $client = new Client();
+        $form = Xlsform::find($formId);
+        Log::info($form->form_title);
+
+        $id = config('services.kobo.id');
+        $password = config('services.kobo.password');
+
+        $get = [
+                'auth' => [$id, $password],
+                'headers' => [
+                    'Accept' => 'application/json'
+                ],
+                'multipart' => [
+                    [
+                        'name' => 'name',
+                        'contents' => 'CCRP TITLE'.$form->form_title,
+                    ],
+                    // [
+                    //     'name' => 'settings',
+                    //     'contents' => '{"description":'.$form->description.'}',
+                    // ],
+                    [
+                        'name' => 'asset_type',
+                        'contents' => 'survey',
+                    ]
+                ]
+                        
+            ];
+        $resp = $client->request('PATCH', 'https://kf.kobotoolbox.org/assets/'.$uid.'/', $get);
+        //Log::info(json_decode($resp->getBody()));
 
 
         return $response;
