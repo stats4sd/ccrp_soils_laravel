@@ -94,11 +94,10 @@ class DeployKobotoolsForm implements ShouldQueue
     {
         $client = new Client();
         $form = Xlsform::find($formId);
-        Log::info($form->form_title);
-
+        
         $id = config('services.kobo.id');
         $password = config('services.kobo.password');
-
+        
         $get = [
                 'auth' => [$id, $password],
                 'headers' => [
@@ -107,21 +106,22 @@ class DeployKobotoolsForm implements ShouldQueue
                 'multipart' => [
                     [
                         'name' => 'name',
-                        'contents' => 'CCRP TITLE'.$form->form_title,
+                        'contents' => $form->form_title,
                     ],
-                    // [
-                    //     'name' => 'settings',
-                    //     'contents' => '{"description":'.$form->description.'}',
-                    // ],
+                    [
+                        'name' => 'settings',
+                        'contents' => '{"description":"'.$form->description.'"}',
+                    ],
                     [
                         'name' => 'asset_type',
                         'contents' => 'survey',
                     ]
+            
                 ]
                         
             ];
         $resp = $client->request('PATCH', 'https://kf.kobotoolbox.org/assets/'.$uid.'/', $get);
-        //Log::info(json_decode($resp->getBody()));
+        Log::info(json_decode($resp->getBody()));
 
 
         return $response;
