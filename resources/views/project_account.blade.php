@@ -45,11 +45,13 @@
 				</div>
 			</div>
 
+			
 	    	<!-- Tab links -->
+	    	
 			<div class="tab mt-5">
 			  <button class="tablinks" onclick="openPage(event, 'Form_data')" id="defaultOpen"><font size="2">{{ t("Form and Data") }}</font></button>
 			  <button class="tablinks" onclick="openPage(event, 'Members')" id="buttonMembers"><font size="2">{{ t("Members") }}</font></button>
-			  <button class="tablinks" onclick="openPage(event, 'Manage')"><font size="2">{{ t("Manage") }}</font></button>
+			  <button class="tablinks" onclick="openPage(event, 'Manage')" id="manageOpen"><font size="2">{{ t("Manage") }}</font></button>
 			</div>
 			@if($is_member)
 		
@@ -264,11 +266,12 @@
 								</thead>
 								<tbody>
 
-								<form method="post" action="project/{{$projects->id}}/{{$member->id}}/change-status" id="change_details">
+								<form method="post" action="" id="change_details">
 								
 					        	@csrf 
 						        	
 								@foreach($members as $member)
+					
 							    <tr>
 						   		<td>
 				          		<div class="img_group mb-3">	          			
@@ -279,48 +282,51 @@
 				            	<td>
 				            		<div class="form-group">
 
-				            		<div id="change_id" value="{{$member->id}}">
-			            		<a href="members/{{$member->username}}"><p>{{$member->username}}</p></a>
+					            		<div id="change_id{{$member->id}}" value="{{$member->id}}">
+				            				<a href="members/{{$member->username}}"><p>{{$member->username}}</p></a>
+						            	</div>
 					            	</div>
-					            </div>
 				            	</td>
 				            	<td>
-
-				            		@if($member->pivot->is_admin)
-				            		<p>Admin</p>
-				            		@else
-				            		<p>User</p>
-				            		@endif
+				            		<div id="member_status{{$member->id}}">
+					            		@if($member->pivot->is_admin)
+					            		<p>Admin</p>
+					            		@else
+					            		<p>User</p>
+					            		@endif
+					            	</div>
+				            		<p id="status{{$member->id}}"></p>
 				            		
 				            	</td>
 				            	<td>
 				            		<button type="submit" class="btn btn-dark btn-sm" name="update_members" onclick="changeStatus({{$projects->id}},{{$member->id}})">{{ t("CHANGE STATUS") }}</button>
-				            		<button id="delete" class="btn btn-dark btn-sm" name="update_members">{{ t("DELETE") }}</button>
+				            		<button type="submit" id="delete" class="btn btn-dark btn-sm" onclick="deleteMember({{$projects->id}},{{$member->id}})" name="update_members">{{ t("DELETE") }}</button>
 				            		
 				            	</td>
 				    		   	</tr>
-				    		   	</div>     
+				    		 
+				    		   
+
 				      		@endforeach
 				      		 </form>
 				      	
 						      	</tbody>
 								</table>
 							</div>
+
 						
 					  </div>
-			           <button type="submit" id="update_members" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("UPDATE MEMBERS") }}</button>
+			           <button onclick="openPage(event, 'Members')" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("INVITE MEMBERS") }}</button>
 
 		       		</div>
-
-
 
 					<div class="row mt-3">
 						<div class="col-sm-8">				  				
 					  		<b>Delete Project</b>
-					  		<p>You are about to permanently delete this project.</p>
+					  		<p>You are about to delete this project.</p>
 					  		<ul style="list-style-type: circle;">
-							  <li>All data gathered for this project will be deleted.</li>
-							  <li>All forms created for this project will be deleted.</li>
+							  <li>You will no longer be able to access the data of this project</li>
+							  <li>You will no longer be able to access the forms for this project</li>
 							</ul>
 						</div>
 
@@ -356,7 +362,7 @@
 @include('kobosync')
 
 <script type="text/javascript">
-
+// Changes status member from button CHANGE STATUS
 function changeStatus(projectId, userId) 
 {
 	event.preventDefault();
@@ -367,12 +373,34 @@ function changeStatus(projectId, userId)
                 userId: userId,
             }
         }).done(function(res) {
-        	location.reload();
-        	openPage(event, 'Manage');
+        	jQuery("#member_status".concat(userId)).hide();
+        	jQuery('#status'.concat(userId)).show();
+        	jQuery('#status'.concat(userId)).html(res.status);
             console.log(res);
-        });
-	
+        });	
 }
+
+//Deletes member from project
+
+function deleteMember(projectId, userId) 
+{	
+	event.preventDefault();
+	if(confirm('Are you sure to delete this user?'))
+	{
+	jQuery.ajax('{{ url('en/projects/deleteMember') }}', {
+            method: "POST",
+            data: {
+                projectId: projectId,
+                userId: userId,
+            }
+        }).done(function(res) {
+        	jQuery('#message').html(res.message);
+        	location.reload();
+            
+        });	
+    }
+}
+
 
 function openPage(evt, pageName) {
 	var i, tabcontent, tablinks;
@@ -390,9 +418,10 @@ function openPage(evt, pageName) {
 // Get the element with id="defaultOpen" and click on it
 window.onload = function openDefaultPage() {
 	document.getElementById("defaultOpen").click();
+
 }
 
-//button members
+//Shows the members and hideis 
 jQuery(document).ready(function(){
 	jQuery("#buttonMembers").click(function(event){
 		jQuery("#Invite").hide();
@@ -503,11 +532,11 @@ jQuery(document).ready(function(){
 	        processData: false, 
 	        contentType: false,
 	        success : function(result){
-	        	//console.log(result);	        	        	
+	        	//console.log(result);	   
+	        	window.location.replace("/en/home");     	        	
 		        }
 		    });
-		    window.location.replace("/en/home");
-
+		   
 		  } 	
 	});
 });

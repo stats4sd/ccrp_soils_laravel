@@ -168,11 +168,24 @@ class ProjectAccountController extends Controller
         if($current_status)
         {
             ProjectMember::where('user_id', $user_id)->where('project_id', $project_id)->update(['is_admin'=>0]);
+            return response()->json(["type"=>'info', "status"=>"User"]);
         } else {
             ProjectMember::where('user_id', $user_id)->where('project_id', $project_id)->update(['is_admin'=>1]);
+            return response()->json(["type"=>'info', "status"=>"Admin"]);
 
         }
         return response()->json(["type"=>'info', "message"=>"Status changed"]);
+    }
+
+    public function deleteMember(Request $request)
+    {
+        $user_id = $request['userId'];
+        $project_id = $request['projectId'];
+        ProjectMember::where('user_id', $user_id)->where('project_id', $project_id)->delete();
+        $username = User::find($user_id)->username;
+
+        return response()->json(["type"=>'success', "message"=>"the user ".$username." is been deleted from the project"]);
+
     }
 
     public function delete($en, $id)

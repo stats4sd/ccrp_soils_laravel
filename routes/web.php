@@ -105,6 +105,7 @@ Route::group([
 
        Route::post('/projects/{id}/delete', 'ProjectAccountController@delete');
        Route::post('/projects/changeStatus', 'ProjectAccountController@changeStatus');
+       Route::post('/projects/deleteMember', 'ProjectAccountController@deleteMember');
 
 
    // });
