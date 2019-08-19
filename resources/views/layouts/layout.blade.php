@@ -52,21 +52,22 @@
             <div class="dropdown">
               <a href="#" class="btn dropdown-toggle" data-toggle="dropdown"><img src="https://img.icons8.com/color/26/000000/great-britain.png"> English (Inglés)</a>
                 <ul class="dropdown-menu">
-                  <li><a href="#"><img src="https://img.icons8.com/color/26/000000/bolivia.png"> Español (Spanish)</a></li>
+                  <li><a id="sp" href="#"><img src="https://img.icons8.com/color/26/000000/bolivia.png"> Español (Spanish)</a></li>
                 </ul>
             </div>
 
             <div class="btn dropdown">
-              <a href={{url(app()->getLocale().'\projects')}}  style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
+              <a href={{url(app()->getLocale().'\projects')}} id="projects_bar" style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
             </div>
 
             <div class="btn dropdown">
-              <a href={{url(app()->getLocale().'\create-project')}} style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
+              <a href={{url(app()->getLocale().'\create-project')}} id="create_project_bar" style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
             </div>
 
             <div class="btn dropdown">
-              <a href="{{url('admin')}}" style="color:black;">{{ t("Admin") }}<b class="caret"></b></a>
+              <a href="{{url('admin')}}" id="admin" style="color:black;">{{ t("Admin") }}<b class="caret"></b></a>
             </div>
+           
            
 
       
@@ -95,18 +96,101 @@
 </body>
 
 
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-
-        $.ajaxSetup({
-            headers:
-            { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-        });
-
+    $.ajaxSetup({
+        headers:
+        { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
+  });
+
+  jQuery(document).ready(function(){
+    jQuery('#info_login').hide();
+    jQuery("#admin").click(function(event){
+      event.preventDefault();
+          
+      $.ajax({
+        url : '/en/home/login', 
+        type : 'POST',
+        processData: false, 
+        contentType: false,
+        success : function(result){
+          console.log(result); 
+          if(result.auth){
+            window.location.replace("/admin");  
+          }else{
+            window.location.replace("/en/home");
+            jQuery('#info_login').show();
+          }
+        }
+      });       
+    });
+  });
+
+  jQuery(document).ready(function(){
+    jQuery("#create_project_bar").click(function(event){
+      event.preventDefault();
+          
+      $.ajax({
+        url : '/en/home/login', 
+        type : 'POST',
+        processData: false, 
+        contentType: false,
+        success : function(result){
+          console.log(result); 
+          if(result.auth){
+            window.location.replace("/en/create-project");  
+          }else{
+            window.location.replace("/en/home");
+            jQuery('#info_login').show();
+          }
+
+        }
+      });       
+    });
+  });
+
+  jQuery(document).ready(function(){
+    jQuery("#projects_bar").click(function(event){
+      event.preventDefault();
+          
+      $.ajax({
+        url : '/en/home/login', 
+        type : 'POST',
+        processData: false, 
+        contentType: false,
+        success : function(result){
+          console.log(result); 
+          if(result.auth){
+            window.location.replace("/en/projects");  
+          }else{
+            window.location.replace("/en/home");
+            jQuery('#info_login').show();
+          }
+        }
+      });       
+    });
+  });
+//changes en to sp
+   jQuery(document).ready(function(){
+    jQuery("#sp").click(function(event){
+      event.preventDefault();
+          
+      $.ajax({
+        url : '/en/home/login', 
+        type : 'POST',
+        processData: false, 
+        contentType: false,
+        success : function(result){
+          console.log('Spanish'); 
+          window.location.replace("/sp/home");
+        }
+      });       
+    });
+  });
+
 </script>
 @yield('script')

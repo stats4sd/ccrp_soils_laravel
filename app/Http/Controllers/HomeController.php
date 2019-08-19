@@ -25,4 +25,17 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function login(Request $request)
+    {
+        if(!auth()->check())
+            return response()->json(
+                        [ "auth" => false]
+                    );
+        else
+            return response()->json(
+                    [ "auth" => true]
+                );
+
+    }
 }

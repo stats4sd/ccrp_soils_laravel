@@ -13,6 +13,7 @@
 
 //Route::prefix('{locale?}')->middleware('set.locale')->group(function() {
 
+
 Route::group([
   'prefix' => '{locale}',
   'where' => ['locale' => '[a-zA-Z]{2}'],
@@ -57,67 +58,65 @@ Route::group([
        return view('register');
    });
     Route::get('/downloads', 'DownloadsController@index');
+    Route::post('/home/login', 'HomeController@login');
 
 
-Route::group([
+  Route::group([
 
-    'middleware' => ['auth'],
+      'middleware' => ['auth'],
 
-], function () {
-
-
-    Route::get('/{key}/register','RegisterController@index');
-    Route::get('/register', 'RegisterController@index');
-    Route::post('/register/validator', 'RegisterController@validator');
-    Route::post('/register/store', 'RegisterController@store');
-    Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
+  ], function () {
 
 
-	Route::get('/create-project', 'CreateProjectController@index');
-	Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
+      Route::get('/{key}/register','RegisterController@index');
+      Route::get('/register', 'RegisterController@index');
+      Route::post('/register/validator', 'RegisterController@validator');
+      Route::post('/register/store', 'RegisterController@store');
+      Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
 
 
-    // User profile
-       Route::get('/projects/members/{username}', 'UserAccountController@index');
-       Route::post('/projects/members/{id}/upload', 'UserAccountController@upload');
-       Route::post('/projects/members/{id}/validateDetails', 'UserAccountController@validateDetails');
-       Route::post('/projects/members/{id}/changePassword', 'UserAccountController@changePassword');
-       Route::post('/projects/members/{id}/deleteProfile', 'UserAccountController@deleteProfile');
-       Route::post('/projects/members/{id}/kobo-user', 'UserAccountController@koboUser');
-
-       Route::get('/data-management', function () {
-          return view('data_management');
-      });
+  	Route::get('/create-project', 'CreateProjectController@index');
+  	Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
 
 
-       Route::get('/create-project', 'CreateProjectController@index');
-       Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
+      // User profile
+         Route::get('/projects/members/{username}', 'UserAccountController@index');
+         Route::post('/projects/members/{id}/upload', 'UserAccountController@upload');
+         Route::post('/projects/members/{id}/validateDetails', 'UserAccountController@validateDetails');
+         Route::post('/projects/members/{id}/changePassword', 'UserAccountController@changePassword');
+         Route::post('/projects/members/{id}/deleteProfile', 'UserAccountController@deleteProfile');
+         Route::post('/projects/members/{id}/kobo-user', 'UserAccountController@koboUser');
 
-       Route::post('/create-project/upload', 'CreateProjectController@upload');
-       Route::post('/create-project/store', 'CreateProjectController@store');
-       Route::post('/create-project/send', 'CreateProjectController@sendEmail');
-
-       Route::get('/projects', 'ProjectController@index');
-       Route::get('/projects/{slug}', 'ProjectAccountController@index');
-       Route::post('/projects/{id}/validateGroup', 'ProjectAccountController@validateGroup');
-       Route::post('/projects/{id}/upload', 'ProjectAccountController@upload');
-       Route::post('/projects/{id}/send', 'ProjectAccountController@sendEmail');
-
-       Route::post('/projects/{id}/delete', 'ProjectAccountController@delete');
-       Route::post('/projects/changeStatus', 'ProjectAccountController@changeStatus');
-       Route::post('/projects/deleteMember', 'ProjectAccountController@deleteMember');
+         Route::get('/data-management', function () {
+            return view('data_management');
+        });
 
 
-   // });
+         Route::get('/create-project', 'CreateProjectController@index');
+         Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
 
-	Route::post('/kobo/publish', 'KoboController@publish');
+         Route::post('/create-project/upload', 'CreateProjectController@upload');
+         Route::post('/create-project/store', 'CreateProjectController@store');
+         Route::post('/create-project/send', 'CreateProjectController@sendEmail');
 
-});
+         Route::get('/projects', 'ProjectController@index');
+         Route::get('/projects/{slug}', 'ProjectAccountController@index');
+         Route::post('/projects/{id}/validateGroup', 'ProjectAccountController@validateGroup');
+         Route::post('/projects/{id}/upload', 'ProjectAccountController@upload');
+         Route::post('/projects/{id}/send', 'ProjectAccountController@sendEmail');
+
+         Route::post('/projects/{id}/delete', 'ProjectAccountController@delete');
+         Route::post('/projects/changeStatus', 'ProjectAccountController@changeStatus');
+         Route::post('/projects/deleteMember', 'ProjectAccountController@deleteMember');
 
 
 
+         //Kobotools
+  	     Route::post('/kobo/publish', 'KoboController@publish');
 
 
+
+  });
 
 
 
