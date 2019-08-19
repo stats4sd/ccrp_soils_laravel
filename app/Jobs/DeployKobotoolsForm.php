@@ -27,11 +27,11 @@ class DeployKobotoolsForm implements ShouldQueue
      */
     public function __construct($uid, $projectId, $formId)
     {
-        
+
         $this->uid = $uid;
         $this->projectId = $projectId;
         $this->formId = $formId;
-         
+
     }
 
     /**
@@ -42,7 +42,7 @@ class DeployKobotoolsForm implements ShouldQueue
     public function handle()
     {
         $client = new Client();
-       
+
         $id = config('services.kobo.id');
         $password = config('services.kobo.password');
          $post = [
@@ -51,16 +51,16 @@ class DeployKobotoolsForm implements ShouldQueue
                 'Accept' => 'application/json'
             ]
         ];
-     
+
         $res = $client->request('GET', 'https://kf.kobotoolbox.org/imports/'.$this->uid, $post);
         $response = json_decode($res->getBody());
-        
+
 
         if($response->status=="complete")
         {
             //Log::info(json_encode($response->messages->created[0]->uid));
             $new_uid = $response->messages->created[0]->uid;
-    
+
             $get = [
                 'auth' => [$id, $password],
                 'headers' => [
@@ -72,7 +72,7 @@ class DeployKobotoolsForm implements ShouldQueue
                         'contents' => 'true',
                     ]
                 ]
-                    
+
             ];
             $resp = $client->request('POST', 'https://kf.kobotoolbox.org/assets/'.$response->messages->created[0]->uid.'/deployment/', $get);
             //Rename form
@@ -87,17 +87,17 @@ class DeployKobotoolsForm implements ShouldQueue
 
         }
 
-        return $response;
+        //return $response;
     }
 
     public function renameForm($uid, $formId)
     {
         $client = new Client();
         $form = Xlsform::find($formId);
-        
+
         $id = config('services.kobo.id');
         $password = config('services.kobo.password');
-        
+
         $get = [
                 'auth' => [$id, $password],
                 'headers' => [
@@ -116,14 +116,14 @@ class DeployKobotoolsForm implements ShouldQueue
                         'name' => 'asset_type',
                         'contents' => 'survey',
                     ]
-            
+
                 ]
-                        
+
             ];
         $resp = $client->request('PATCH', 'https://kf.kobotoolbox.org/assets/'.$uid.'/', $get);
-        Log::info(json_decode($resp->getBody()));
+        Log::info($resp->getBody());
 
 
-        return $response;
+        // return $response;
     }
 }

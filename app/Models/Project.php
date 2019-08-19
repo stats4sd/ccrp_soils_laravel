@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Submission;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -54,6 +55,11 @@ class Project extends Model
         return $this->belongsToMany('App\User', 'projects_members')->withPivot('is_admin');
     }
 
+
+    public function submissions ()
+    {
+        return $this->hasMany(Submission::class);
+    }
 
     /*
     |--------------------------------------------------------------------------

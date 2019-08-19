@@ -111,6 +111,7 @@ Route::group([
    // });
 
 	Route::post('/kobo/publish', 'KoboController@publish');
+  Route::post('/kobo/pull', 'KoboController@getProjectData');
 
 });
 
