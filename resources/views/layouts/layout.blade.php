@@ -174,6 +174,7 @@
       });       
     });
   });
+
 //changes en to sp
    jQuery(document).ready(function(){
     jQuery("#sp").click(function(event){
@@ -185,7 +186,7 @@
         processData: false, 
         contentType: false,
         success : function(result){
-          console.log('Spanish'); 
+          //console.log('Spanish'); 
           window.location.replace("/sp/home");
         }
       });       
