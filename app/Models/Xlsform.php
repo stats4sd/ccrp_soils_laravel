@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Submission;
+use App\Models\Variable;
 use Backpack\CRUD\CrudTrait;
+use Illuminate\Database\Eloquent\Model;
 
 class Xlsform extends Model
 {
@@ -43,6 +45,16 @@ class Xlsform extends Model
             'records',
             'form_kobo_id_string'
             ]);
+    }
+
+    public function submissions ()
+    {
+        return $this->hasMany(Submission::class);
+    }
+
+    public function variables ()
+    {
+        return $this->hasMany(Variable::class);
     }
 
     /*

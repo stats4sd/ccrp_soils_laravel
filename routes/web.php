@@ -105,14 +105,18 @@ Route::group([
          Route::post('/projects/{id}/upload', 'ProjectAccountController@upload');
          Route::post('/projects/{id}/send', 'ProjectAccountController@sendEmail');
 
+
          Route::post('/projects/{id}/delete', 'ProjectAccountController@delete');
          Route::post('/projects/changeStatus', 'ProjectAccountController@changeStatus');
          Route::post('/projects/deleteMember', 'ProjectAccountController@deleteMember');
 
+	Route::post('/kobo/publish', 'KoboController@publish');
+  Route::post('/kobo/pull', 'KoboController@getProjectData');
+
+  Route::get('/projects/{id}/downloaddata', 'SubmissionController@download');
 
 
-         //Kobotools
-  	     Route::post('/kobo/publish', 'KoboController@publish');
+
 
 
 

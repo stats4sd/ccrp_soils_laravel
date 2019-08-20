@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Jobs\ImportFormToKobotools;
-
+use App\Jobs\PullDataFromProjectForms;
+use App\Models\Project;
 use App\Models\Xlsform;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -23,24 +24,31 @@ class KoboController extends Controller
      *                            - The UID of the form on Kobotools;
      */
 
- 
+
     public function publish(Request $request)
-    {   
+    {
         $formId = $request->formId;
         $projectId = $request->projectId;
 
 
         dispatch(new ImportFormToKobotools($formId, $projectId));
-       
-    
+
+
 
         return   $response = [
                     'status' => 'imported',
-            ];     
+            ];
 
     }
 
+    public function getProjectData (Request $request)
+    {
+        $project = Project::find($request->projectId);
 
-   
+        dispatch(new PullDataFromProjectForms($project));
+
+        return $response = [ 'status' => 'testing' ];
+    }
+
 
 }

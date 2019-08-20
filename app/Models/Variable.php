@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Submission;
+use App\Models\Xlsform;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Project extends Model
+class Variable extends Model
 {
     use CrudTrait;
-    use SoftDeletes;
 
     /*
     |--------------------------------------------------------------------------
@@ -18,14 +16,13 @@ class Project extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'projects';
+    protected $table = 'variables';
     // protected $primaryKey = 'id';
-    public $timestamps = true;
+    // public $timestamps = false;
     protected $guarded = ['id'];
-    //protected $fillable = ['created_at'];
+    // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
-
 
     /*
     |--------------------------------------------------------------------------
@@ -39,27 +36,10 @@ class Project extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function xls_forms ()
-    {
-        return $this->belongsToMany(Xlsform::class)->using(Projectxlsform::class)
-        ->withPivot([
-            'form_kobo_id',
-            'deployed',
-            'records',
-            'form_kobo_id_string'
-        ]);
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany('App\User', 'projects_members')->withPivot('is_admin');
-    }
-
-
-    public function submissions ()
-    {
-        return $this->hasMany(Submission::class);
-    }
+   public function xls_form ()
+   {
+       return $this->belongsTo(Xlsform::class);
+   }
 
     /*
     |--------------------------------------------------------------------------

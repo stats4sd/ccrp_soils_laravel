@@ -25,7 +25,7 @@
 
 						</div>
 					</div>
-				
+
 					<div class="col-sm-4">
 						<div class="admin_group">
 						<h3><b>{{ t("Group Admins") }}</b></h3>
@@ -45,16 +45,16 @@
 				</div>
 			</div>
 
-			
+
 	    	<!-- Tab links -->
-	    	
+
 			<div class="tab mt-5">
 			  <button class="tablinks" onclick="openPage(event, 'Form_data')" id="defaultOpen"><font size="2">{{ t("Form and Data") }}</font></button>
 			  <button class="tablinks" onclick="openPage(event, 'Members')" id="buttonMembers"><font size="2">{{ t("Members") }}</font></button>
 			  <button class="tablinks" onclick="openPage(event, 'Manage')" id="manageOpen"><font size="2">{{ t("Manage") }}</font></button>
 			</div>
 			@if($is_member)
-		
+
 
 			<div id="Form_data" class="tabcontent">
 				<div class="row">
@@ -88,14 +88,17 @@
 										    	<button class="btn btn-dark btn-sm">DELETE</button>
 										 	 </div>
 										</div>
-		  							
-		  							
+
+
 		  							</td>
 		  						</tr>
 		  						@endforeach
 		  					</tbody>
 
 		  				</table>
+						<button class="btn btn-dark btn-sm" id="get-data-button" onclick="getData({{$projects->id}})">GET DATA</button>
+
+						<a class="btn btn-dark btn-sm text-light" href="{{ url('/en/projects/' . $projects->id . '/downloaddata') }}" >DOWNLOAD DATA</a>
 
 
 		 			</div>
@@ -121,11 +124,11 @@
 									<table id="myTable" class="table table-hover">
 										<tbody>
 											@foreach($users as $user)
-												
+
 												<tr>
-													<td><input class="checkboxClass" type="checkbox" name="name_selected[]" id="{{$user->id}}" value="{{$user->id}}"> {{$user->name}}</td>		
+													<td><input class="checkboxClass" type="checkbox" name="name_selected[]" id="{{$user->id}}" value="{{$user->id}}"> {{$user->name}}</td>
 												</tr>
-											
+
 											@endforeach
 										</tbody>
 									</table>
@@ -136,22 +139,22 @@
 										<label for="email">Enter the email addresses of people to invite.</label>
 						    			<input style="width: 100%;" type="email" class="form-control" name="email_inserted" multiple>
 						    		</div>
-						    	
-						    		<button type="submit" class="btn btn-dark btn-sm" id="send_email">{{ t("SUBMIT")}}</button>	
+
+						    		<button type="submit" class="btn btn-dark btn-sm" id="send_email">{{ t("SUBMIT")}}</button>
 								</form>
 
 							</div>
 							<div class="col-sm-6">
 								<div class="alert alert-info">
 									<strong> Select people to invite from your friends list.</strong>
-								</div>	
-							
+								</div>
+
 							</div>
 						</div>
 					</div>
-				</div>		
+				</div>
 
-							
+
 
 	            <div id="members">
 				@foreach($members as $member)
@@ -190,19 +193,19 @@
 					             	<label for="exampleInputEmail1"><b>{{ t("Group Description (required)") }}</b></label>
 					             	<textarea class="form-control"  rows="4" cols="50" name="description" form="group_details">{{$projects->description}}</textarea>
 					           	</div>
-					
-				           
-				           		<div class="row">			           				
+
+
+				           		<div class="row">
 				           			<div class="col-sm-6">
 				           				<b>Privacy Options</b>
 							           	<div class="form-group">
-							           		<input type="radio" name="status" value="Public" checked> 
+							           		<input type="radio" name="status" value="Public" checked>
 												<label for="public_group" style="color: grey"> This is a public group</label>
 											<br>
-											<input type="radio" name="status" value="Private"> 
+											<input type="radio" name="status" value="Private">
 												<label for="private_group" style="color: grey"> This is a private group</label>
 											<br>
-											<input type="radio" name="status" value="Hidden"> 
+											<input type="radio" name="status" value="Hidden">
 												<label for="private_group" style="color: grey"> This is a hidden group</label>
 											<br>
 										</div>
@@ -211,14 +214,14 @@
 						   				<b>Group Invitations</b>
 						   				<div class="form-group">
 					   						<div>
-						   						<input type="radio" name="group_invitations" value="all_members" checked> 
+						   						<input type="radio" name="group_invitations" value="all_members" checked>
 												<label for="group_invitations" style="color: grey"> All group members</label>
 											</div>
 											<div>
-												<input type="radio" name="group_invitations" value="group_admins"> 
+												<input type="radio" name="group_invitations" value="group_admins">
 												<label for="group_invitations" style="color: grey"> Group admins only</label>
-											</div>	
-						   				</div>				
+											</div>
+						   				</div>
 						   			</div>
 					           	</div>
 
@@ -228,17 +231,17 @@
 										<div class="container">
 							  				<div class="img_group_default mt-3">
 							  					<b>Photo</b>
-						  					
+
 											  	<img id='image' src={{$projects->image}}>
-											  
+
 											</div>
 										</div>
 									</div>
 									<div class="col-sm-8 mt-5">
-										
+
 										<div class="form-group">
 											<br>
-											<div class="alert alert-danger alert-block" id="error"></div>  	
+											<div class="alert alert-danger alert-block" id="error"></div>
 											<div class="alert alert-success alert-block" id="success"></div>
 											<br>
 											<label> {{ t("Select Photo for Upload") }}</label>
@@ -249,9 +252,9 @@
 									</div>
 						           <button type="submit" id="group_name_descrip" class="btn btn-dark btn-sm mt-5" name="create_group">{{ t("UPDATE GROUP") }}</button>
 					       		</div>
-								
+
 							</form>
-						</div>					
+						</div>
 						<div class="container">
 			  				<div class="img_group mt-3">
 			  					<b>Members</b>
@@ -267,17 +270,17 @@
 								<tbody>
 
 								<form method="post" action="" id="change_details">
-								
-					        	@csrf 
-						        	
+
+					        	@csrf
+
 								@foreach($members as $member)
-					
+
 							    <tr>
 						   		<td>
-				          		<div class="img_group mb-3">	          			
+				          		<div class="img_group mb-3">
 		          					<a href="members/{{$member->username}}">
 				            		<img src="{{$member->avatar}}" alt="Person"></a>
-			            		</div>  
+			            		</div>
 				            	</td>
 				            	<td>
 				            		<div class="form-group">
@@ -296,32 +299,32 @@
 					            		@endif
 					            	</div>
 				            		<p id="status{{$member->id}}"></p>
-				            		
+
 				            	</td>
 				            	<td>
 				            		<button type="submit" class="btn btn-dark btn-sm" name="update_members" onclick="changeStatus({{$projects->id}},{{$member->id}})">{{ t("CHANGE STATUS") }}</button>
 				            		<button type="submit" id="delete" class="btn btn-dark btn-sm" onclick="deleteMember({{$projects->id}},{{$member->id}})" name="update_members">{{ t("DELETE") }}</button>
-				            		
+
 				            	</td>
 				    		   	</tr>
-				    		 
-				    		   
+
+
 
 				      		@endforeach
 				      		 </form>
-				      	
+
 						      	</tbody>
 								</table>
 							</div>
 
-						
+
 					  </div>
 			           <button onclick="openPage(event, 'Members')" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("INVITE MEMBERS") }}</button>
 
 		       		</div>
 
 					<div class="row mt-3">
-						<div class="col-sm-8">				  				
+						<div class="col-sm-8">
 					  		<b>Delete Project</b>
 					  		<p>You are about to delete this project.</p>
 					  		<ul style="list-style-type: circle;">
@@ -331,7 +334,7 @@
 						</div>
 
 
-						<div class="col-sm-4 mt-5">						
+						<div class="col-sm-4 mt-5">
 				   			<button id="delete_project" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("DELETE PROJECT") }}</button>
 				   		</div>
 			       	</div>
@@ -363,7 +366,7 @@
 
 <script type="text/javascript">
 // Changes status member from button CHANGE STATUS
-function changeStatus(projectId, userId) 
+function changeStatus(projectId, userId)
 {
 	event.preventDefault();
 	jQuery.ajax('{{ url('en/projects/changeStatus') }}', {
@@ -377,13 +380,13 @@ function changeStatus(projectId, userId)
         	jQuery('#status'.concat(userId)).show();
         	jQuery('#status'.concat(userId)).html(res.status);
             console.log(res);
-        });	
+        });
 }
 
 //Deletes member from project
 
-function deleteMember(projectId, userId) 
-{	
+function deleteMember(projectId, userId)
+{
 	event.preventDefault();
 	if(confirm('Are you sure to delete this user?'))
 	{
@@ -396,8 +399,8 @@ function deleteMember(projectId, userId)
         }).done(function(res) {
         	jQuery('#message').html(res.message);
         	location.reload();
-            
-        });	
+
+        });
     }
 }
 
@@ -421,7 +424,7 @@ window.onload = function openDefaultPage() {
 
 }
 
-//Shows the members and hideis 
+//Shows the members and hideis
 jQuery(document).ready(function(){
 	jQuery("#buttonMembers").click(function(event){
 		jQuery("#Invite").hide();
@@ -523,21 +526,21 @@ jQuery(document).ready(function(){
 jQuery(document).ready(function(){
 	jQuery("#delete_project").click(function(event){
 		event.preventDefault();
-		
+
 		if (confirm('Are you sure to delete the project {{$projects->name}}?')) {
-		    
+
 		    $.ajax({
-	        url : '/en/projects/{{$projects->id}}/delete', 
+	        url : '/en/projects/{{$projects->id}}/delete',
 	        type : 'POST',
-	        processData: false, 
+	        processData: false,
 	        contentType: false,
 	        success : function(result){
-	        	//console.log(result);	   
-	        	window.location.replace("/en/home");     	        	
+	        	//console.log(result);
+	        	window.location.replace("/en/home");
 		        }
 		    });
-		   
-		  } 	
+
+		  }
 	});
 });
 </script>
