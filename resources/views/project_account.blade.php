@@ -98,6 +98,8 @@
 		  				</table>
 						<button class="btn btn-dark btn-sm" id="get-data-button" onclick="getData({{$projects->id}})">GET DATA</button>
 
+						<a class="btn btn-dark btn-sm text-light" href="{{ url('/en/projects/' . $projects->id . '/downloaddata') }}" >DOWNLOAD DATA</a>
+
 
 		 			</div>
 		   		</div>

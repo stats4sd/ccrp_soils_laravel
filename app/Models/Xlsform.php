@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Submission;
+use App\Models\Variable;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
@@ -49,6 +50,11 @@ class Xlsform extends Model
     public function submissions ()
     {
         return $this->hasMany(Submission::class);
+    }
+
+    public function variables ()
+    {
+        return $this->hasMany(Variable::class);
     }
 
     /*
