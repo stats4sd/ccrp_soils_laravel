@@ -33,8 +33,6 @@ class KoboController extends Controller
 
         dispatch(new ImportFormToKobotools($formId, $projectId));
 
-
-
         return   $response = [
                     'status' => 'imported',
             ];

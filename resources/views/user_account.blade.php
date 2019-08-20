@@ -103,10 +103,8 @@
 								</div>
 								</form>
 							</div>
-						</div>
-						
+						</div>	
 					</div>
-					
 				</div>
 				<div class="card">
 					<div class="card-header">
@@ -224,26 +222,26 @@
 				        </div>	
 					</div>
 				</div>
-				<div class="card alert alert-danger alert-block">
+				<div class="card">
 					<div class="card-header">
 						<h5><b>DELETE PROFILE</b></h5>
 					</div>
 					<div class="card-body">
 						<div class="row">
-							<div class="col-sm-8">
+							<div class="col-sm-12">
 								<form method="post" action="/en/projects/members/{{$user->id}}/deleteProfile" id="delete">
 						            {{csrf_field()}}
 						           
 						            	<p>You are about to permanently delete yuor profile</p>
 						            	<ul style="list-style-type: circle;">
-								            <li>All your projects will be deleted.</li>
-										    <li>All data gathered for your projects will be deleted.</li>
-										    <li>All forms created for your projects will be deleted.</li>
+								            <li>You will no longer be able to access to your project data.</li>
+										    <li>You will no longer be able to access to the forms for your projects.</li>
 										</ul>
-						
-		
-						            <button type="submit" class="btn btn-dark btn-block" id="delete_profile">{{ t("DELETE PROFILE") }}</button>
-						        </form>
+        
+					        </div>
+					        <div class="col-sm-6">
+					        		<button type="submit" class="btn btn-dark btn-block" id="delete_profile">{{ t("DELETE PROFILE") }}</button>
+						        </form>					        	
 					        </div>
 				        </div>	
 					</div>
@@ -256,9 +254,6 @@
 </body>
 
 @endsection
-
-
-
 
 @section('script')
 <script type="text/javascript">	

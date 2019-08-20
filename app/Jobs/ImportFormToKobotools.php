@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ImportFormToKobotools implements ShouldQueue
 {
+     /**
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
+    public $tries = 3;
     private $formId;
     private $projectId;
 
@@ -27,7 +33,6 @@ class ImportFormToKobotools implements ShouldQueue
      */
     public function __construct($formId, $projectId)
     {
-
         $this->formId = $formId;
         $this->projectId = $projectId;
     }
@@ -38,9 +43,7 @@ class ImportFormToKobotools implements ShouldQueue
      * @return void
      */
     public function handle()
-    {
-           
-        
+    {    
         $formId = $this->formId;
         $form = Xlsform::find($formId);
 
@@ -107,10 +110,7 @@ class ImportFormToKobotools implements ShouldQueue
                 $response['data'] = json_decode($res->getBody());
                 $response = [
                         'uid' => $response['data']['uid'],
-                    ];
-
-
-                
+                    ];        
             }
 
 
@@ -131,7 +131,7 @@ class ImportFormToKobotools implements ShouldQueue
         finally {
             //Deploy
          
-           dispatch(new DeployKobotoolsForm($response['data']->uid, $this->projectId, $this->formId));
+            dispatch(new DeployKobotoolsForm($response['data']->uid, $this->projectId, $this->formId));
             return $response;
         }
     }

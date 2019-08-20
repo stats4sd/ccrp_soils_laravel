@@ -6,6 +6,7 @@ use App\Mail\InviteMember;
 use App\Models\Invite;
 use App\Models\Project;
 use App\Models\ProjectMember;
+use App\Models\Projectxlsform;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -187,12 +188,19 @@ class ProjectAccountController extends Controller
         return response()->json(["type"=>'success', "message"=>"the user ".$username." is been deleted from the project"]);
 
     }
-
+    // soft delete project
     public function delete($en, $id)
     {
         $project_id = Project::find($id)->delete();
         return response()->json(["type"=>'success', "project_id"=>$project_id->id]);
         
     }
+    public function deleteForm(Request $request)
+    {
+        Projectxlsform::where('project_id', $request['projectId'])->where('xlsform_id', $request['formId'])->delete();
+        return response()->json(["type"=>'success', "project_id"=>$request['projectId']]);
+        
+    }
+
     
 }

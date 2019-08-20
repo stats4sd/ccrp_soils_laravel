@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\Concerns\updateExistingPivot;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class DeployKobotoolsForm implements ShouldQueue
@@ -45,7 +46,7 @@ class DeployKobotoolsForm implements ShouldQueue
 
         $id = config('services.kobo.id');
         $password = config('services.kobo.password');
-         $post = [
+        $post = [
             'auth' => [$id, $password],
             'headers' => [
                 'Accept' => 'application/json'
@@ -54,7 +55,6 @@ class DeployKobotoolsForm implements ShouldQueue
 
         $res = $client->request('GET', 'https://kf.kobotoolbox.org/imports/'.$this->uid, $post);
         $response = json_decode($res->getBody());
-
 
         if($response->status=="complete")
         {
@@ -74,13 +74,14 @@ class DeployKobotoolsForm implements ShouldQueue
                 ]
 
             ];
-            $resp = $client->request('POST', 'https://kf.kobotoolbox.org/assets/'.$response->messages->created[0]->uid.'/deployment/', $get);
+            $resp = $client->request('POST', 'https://kf.kobotoolbox.org/assets/'.$new_uid.'/deployment/', $get);
             //Rename form
-            $this->renameForm( $new_uid, $this->formId );
+            $this->renameForm($new_uid);
             //save uid
             // $project = Project::find($this->projectId);
             // Log::info($project->xls_forms);
-            //$project->xls_forms->updateExistingPivot(['form_kobo_id_string' => $response->messages->created[0]->uid]);
+           // $project->xls_forms->updateExistingPivot(['form_kobo_id_string' => $new_uid]);
+
 
         } else {
             $this->handle();
@@ -90,10 +91,10 @@ class DeployKobotoolsForm implements ShouldQueue
         //return $response;
     }
 
-    public function renameForm($uid, $formId)
+    public function renameForm($uid)
     {
         $client = new Client();
-        $form = Xlsform::find($formId);
+        $form = Xlsform::find($this->formId);
 
         $id = config('services.kobo.id');
         $password = config('services.kobo.password');
@@ -122,8 +123,25 @@ class DeployKobotoolsForm implements ShouldQueue
             ];
         $resp = $client->request('PATCH', 'https://kf.kobotoolbox.org/assets/'.$uid.'/', $get);
         Log::info($resp->getBody());
+        $this->updateProjForm($uid);
 
+      
+
+        // $project = Project::find($projectId);
+            
+        //    $project->xls_forms->updateExistingPivot(['form_kobo_id_string' => $uid]);
 
         // return $response;
     }
+
+    public function updateProjForm($uid)
+    {
+        // update form uid into project_xlsform
+        DB::table('project_xlsform')->where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->update(['form_kobo_id_string'=>$uid]);
+
+         DB::table('project_xlsform')->where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->update(['deployed'=>'1']);
+
+    }
+
+
 }

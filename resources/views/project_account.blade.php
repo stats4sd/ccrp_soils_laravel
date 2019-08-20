@@ -85,7 +85,7 @@
 										  	<div class="w3-bar">
 										    	<button class="btn btn-dark btn-sm" onclick="deploy({{$projects->id}},{{$xls_form->id}})">DEPLOY</button>
 										    	<button class="btn btn-dark btn-sm">UPDATE</button>
-										    	<button class="btn btn-dark btn-sm">DELETE</button>
+										    	<button class="btn btn-dark btn-sm" onclick="deleteForm({{$projects->id}},{{$xls_form->id}})">DELETE</button>
 										 	 </div>
 										</div>
 
@@ -365,6 +365,20 @@
 @include('kobosync')
 
 <script type="text/javascript">
+
+function deleteForm(projectId, formId) {
+	event.preventDefault();
+	jQuery.ajax('{{ url('en/projects/deleteForm') }}', {
+            method: "POST",
+            data: {
+                projectId: projectId,
+                formId: formId,
+            }
+        }).done(function(res) {
+        	
+            console.log(res);
+        });
+}
 // Changes status member from button CHANGE STATUS
 function changeStatus(projectId, userId)
 {
