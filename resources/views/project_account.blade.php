@@ -84,8 +84,10 @@
 		  								<div class="w3-show-inline-block">
 										  	<div class="w3-bar">
 										    	<button class="btn btn-dark btn-sm" onclick="deploy({{$projects->id}},{{$xls_form->id}})">DEPLOY</button>
-										    	<button class="btn btn-dark btn-sm">UPDATE</button>
-										    	<button class="btn btn-dark btn-sm" onclick="deleteForm({{$projects->id}},{{$xls_form->id}})">DELETE</button>
+										    	<button class="btn btn-dark btn-sm">OPEN</button>
+										    	@if($is_admin)
+											    	<button class="btn btn-dark btn-sm" onclick="deleteForm({{$projects->id}},{{$xls_form->id}})">DELETE</button>
+										    	@endif
 										 	 </div>
 										</div>
 
@@ -375,7 +377,8 @@ function deleteForm(projectId, formId) {
                 formId: formId,
             }
         }).done(function(res) {
-        	
+        	location.reload();
+
             console.log(res);
         });
 }

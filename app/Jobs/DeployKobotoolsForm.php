@@ -74,9 +74,11 @@ class DeployKobotoolsForm implements ShouldQueue
                 ]
 
             ];
+           
             $resp = $client->request('POST', 'https://kf.kobotoolbox.org/assets/'.$new_uid.'/deployment/', $get);
             //Rename form
             $this->renameForm($new_uid);
+            
             //save uid
             // $project = Project::find($this->projectId);
             // Log::info($project->xls_forms);
@@ -93,6 +95,7 @@ class DeployKobotoolsForm implements ShouldQueue
 
     public function renameForm($uid)
     {
+
         $client = new Client();
         $form = Xlsform::find($this->formId);
 
@@ -122,7 +125,7 @@ class DeployKobotoolsForm implements ShouldQueue
 
             ];
         $resp = $client->request('PATCH', 'https://kf.kobotoolbox.org/assets/'.$uid.'/', $get);
-        Log::info($resp->getBody());
+        //Log::info($resp->getBody());
         $this->updateProjForm($uid);
 
       
@@ -136,12 +139,45 @@ class DeployKobotoolsForm implements ShouldQueue
 
     public function updateProjForm($uid)
     {
+        $this->redeploy(); 
         // update form uid into project_xlsform
         DB::table('project_xlsform')->where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->update(['form_kobo_id_string'=>$uid]);
-
-         DB::table('project_xlsform')->where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->update(['deployed'=>'1']);
+        // update the status of the form
+        DB::table('project_xlsform')->where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->update(['deployed'=>'1']);
+        
 
     }
+
+     public function redeploy()
+    {
+
+        $client = new Client();
+        $form = Xlsform::find($this->formId);
+
+        $id = config('services.kobo.id');
+        $password = config('services.kobo.password');
+
+        $get = [
+                'auth' => [$id, $password],
+                'headers' => [
+                    'Accept' => 'application/json'
+                    ]
+                ];
+        $resp = $client->request('GET', 'https://kf.kobotoolbox.org/assets/'.'av772yQz4hCVQUdGD84cSp'.'/', $get);
+        $response = json_decode($resp->getBody());
+        Log::info($response);
+        
+
+      
+
+        // $project = Project::find($projectId);
+            
+        //    $project->xls_forms->updateExistingPivot(['form_kobo_id_string' => $uid]);
+
+        // return $response;
+    }
+
+
 
 
 }

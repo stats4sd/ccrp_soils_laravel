@@ -48,5 +48,19 @@ class KoboController extends Controller
         return $response = [ 'status' => 'testing' ];
     }
 
+    public function share(Request $request)
+    {
+        $formId = $request->formId;
+        $projectId = $request->projectId;
+
+
+        dispatch(new ShareFormToKobotools($formId, $projectId));
+
+        return   $response = [
+                    'status' => 'imported',
+            ];
+        
+    }
+
 
 }

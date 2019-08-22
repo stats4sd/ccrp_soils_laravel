@@ -113,6 +113,7 @@ Route::group([
         Route::post('/projects/deleteMember', 'ProjectAccountController@deleteMember');
 
       	Route::post('/kobo/publish', 'KoboController@publish');
+        Route::post('/kobo/share', 'KoboController@share');
         Route::post('/kobo/pull', 'KoboController@getProjectData');
 
         Route::get('/projects/{id}/downloaddata', 'SubmissionController@download');
