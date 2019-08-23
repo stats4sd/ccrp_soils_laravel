@@ -84,7 +84,7 @@
 		  								<div class="w3-show-inline-block">
 										  	<div class="w3-bar">
 										    	<button class="btn btn-dark btn-sm" onclick="deploy({{$projects->id}},{{$xls_form->id}})">DEPLOY</button>
-										    	<button class="btn btn-dark btn-sm">OPEN</button>
+										    	<button class="btn btn-dark btn-sm" onclick="share({{$projects->id}},{{$xls_form->id}})">SHARE</button>
 										    	@if($is_admin)
 											    	<button class="btn btn-dark btn-sm" onclick="deleteForm({{$projects->id}},{{$xls_form->id}})">DELETE</button>
 										    	@endif

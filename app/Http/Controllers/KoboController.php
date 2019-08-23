@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\ImportFormToKobotools;
 use App\Jobs\PullDataFromProjectForms;
+use App\Jobs\ShareFormToKobotools;
 use App\Models\Project;
 use App\Models\Xlsform;
 use GuzzleHttp\Client;
@@ -57,7 +58,7 @@ class KoboController extends Controller
         dispatch(new ShareFormToKobotools($formId, $projectId));
 
         return   $response = [
-                    'status' => 'imported',
+                    'status' => 'shared',
             ];
         
     }
