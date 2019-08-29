@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Project;
+use App\Models\Projectxlsform;
 use App\Models\Xlsform;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
@@ -85,10 +86,7 @@ class DeployKobotoolsForm implements ShouldQueue
            // $project->xls_forms->updateExistingPivot(['form_kobo_id_string' => $new_uid]);
 
 
-        } else {
-            $this->handle();
-
-        }
+        } 
 
         //return $response;
     }
@@ -125,23 +123,22 @@ class DeployKobotoolsForm implements ShouldQueue
 
             ];
         $resp = $client->request('PATCH', 'https://kf.kobotoolbox.org/assets/'.$uid.'/', $get);
-        //Log::info($resp->getBody());
+       
+        
         $this->updateProjForm($uid);
-
-      
 
         // $project = Project::find($projectId);
             
-        //    $project->xls_forms->updateExistingPivot(['form_kobo_id_string' => $uid]);
+        // $project->xls_forms->updateExistingPivot(['form_kobo_id_string' => $uid]);
 
-        // return $response;
     }
 
     public function updateProjForm($uid)
     {
         $this->getAssets();
         // update form uid into project_xlsform
-        DB::table('project_xlsform')->where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->update(['form_kobo_id_string'=>$uid]);
+        
+        Projectxlsform::where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->update(['form_kobo_id_string'=>$uid]);
         // update the status of the form
         DB::table('project_xlsform')->where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->update(['deployed'=>'1']);
         
@@ -167,8 +164,8 @@ class DeployKobotoolsForm implements ShouldQueue
                 ];
         $resp = $client->request('GET', 'https://kf.kobotoolbox.org/assets/'.$uid.'/', $get);
         $response = json_decode($resp->getBody());
-        //Log::info($response);
-        return $response;
+        Log::info($response);
+        //return $response;
     }
 
 

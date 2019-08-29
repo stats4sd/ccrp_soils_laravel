@@ -57,7 +57,7 @@ class ShareFormToKobotools implements ShouldQueue
             'multipart' => [
                 [
                     'name' => 'content_object',
-                    'contents' => "https://kf.kobotoolbox.org/assets/apNSVq5qufjQhKSFSp5g2w/",
+                    'contents' => "https://kf.kobotoolbox.org/assets/aywgXByrLZVM39GYRN7v34/",
                 ],
                 
                 [
@@ -66,12 +66,9 @@ class ShareFormToKobotools implements ShouldQueue
                 ],
                 [
                     'name' => 'user',
-                    'contents' => 'luciafalcinelli',
-                ],
-                [
-                    'name' => 'asset_type',
                     'contents' => 'https://kf.kobotoolbox.org/users/luciafalcinelli/',
                 ]
+               
             ]
         ];
 
@@ -81,12 +78,12 @@ class ShareFormToKobotools implements ShouldQueue
 
         try {
             // Send the request to Kobotoolbox
-            $res = $client->request('POST', "https://kf.kobotoolbox.org/permissions/pF6T8p2XZddU6kBuhkQyuk/", $post);
+            $res = $client->request('POST', "https://kf.kobotoolbox.org/permissions/", $post);
             Log::info('hello');
             log::info(json_decode($res->getBody()));
 
             $status = $res->getStatusCode();
-            //dd($status);
+         
             
             $response = [
                     'status' => $res->getStatusCode(),
