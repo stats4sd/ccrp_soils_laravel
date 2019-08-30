@@ -15,6 +15,7 @@ class ShareFormToKobotools implements ShouldQueue
 {
     private $projectId;
     private $formId;
+    private $kobo_id;
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
@@ -22,10 +23,12 @@ class ShareFormToKobotools implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($formId, $projectId)
+    public function __construct($formId, $projectId, $kobo_id)
     {
         $this->formId = $formId;
         $this->projectId = $projectId;
+        $this->kobo_id = $kobo_id;
+
     }
 
     /**
@@ -38,8 +41,7 @@ class ShareFormToKobotools implements ShouldQueue
         
         $proj_xls = DB::table('project_xlsform')->where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->get();
         $uid = $proj_xls[0]->form_kobo_id_string;
-
-
+    
         // setup Guzzle Client info
         $client = new Client();
        
@@ -57,16 +59,16 @@ class ShareFormToKobotools implements ShouldQueue
             'multipart' => [
                 [
                     'name' => 'content_object',
-                    'contents' => "https://kf.kobotoolbox.org/assets/aywgXByrLZVM39GYRN7v34/",
-                ],
-                
+                    'contents' => "https://kf.kobotoolbox.org/assets/".$uid."/",
+                ],               
                 [
                     'name' => 'permission',
                     'contents' => 'change_asset',
                 ],
+                //problem with passing kobo_id
                 [
                     'name' => 'user',
-                    'contents' => 'https://kf.kobotoolbox.org/users/luciafalcinelli/',
+                    'contents' => 'https://kf.kobotoolbox.org/users/'.$this->kobo_id.'/',
                 ]
                
             ]
@@ -79,7 +81,6 @@ class ShareFormToKobotools implements ShouldQueue
         try {
             // Send the request to Kobotoolbox
             $res = $client->request('POST', "https://kf.kobotoolbox.org/permissions/", $post);
-            Log::info('hello');
             log::info(json_decode($res->getBody()));
 
             $status = $res->getStatusCode();

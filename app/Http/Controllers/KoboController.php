@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 
+use App\Jobs\DeployKobotoolsForm;
 use App\Jobs\ImportFormToKobotools;
 use App\Jobs\PullDataFromProjectForms;
 use App\Jobs\ShareFormToKobotools;
 use App\Models\Project;
 use App\Models\Xlsform;
 use GuzzleHttp\Client;
+use Illuminate\Foundation\Bus\withChain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,13 +33,11 @@ class KoboController extends Controller
         $formId = $request->formId;
         $projectId = $request->projectId;
 
-
         dispatch(new ImportFormToKobotools($formId, $projectId));
 
         return   $response = [
                     'status' => 'imported',
             ];
-
     }
 
     public function getProjectData (Request $request)
@@ -54,13 +54,11 @@ class KoboController extends Controller
         $formId = $request->formId;
         $projectId = $request->projectId;
 
-
         dispatch(new ShareFormToKobotools($formId, $projectId));
 
         return   $response = [
                     'status' => 'shared',
             ];
-        
     }
 
 

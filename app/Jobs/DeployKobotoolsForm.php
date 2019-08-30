@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Jobs\ShareFormToKobotools;
 use App\Models\Project;
-use App\Models\Projectxlsform;
 use App\Models\Xlsform;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
@@ -29,11 +29,9 @@ class DeployKobotoolsForm implements ShouldQueue
      */
     public function __construct($uid, $projectId, $formId)
     {
-
         $this->uid = $uid;
         $this->projectId = $projectId;
         $this->formId = $formId;
-
     }
 
     /**
@@ -56,10 +54,11 @@ class DeployKobotoolsForm implements ShouldQueue
 
         $res = $client->request('GET', 'https://kf.kobotoolbox.org/imports/'.$this->uid, $post);
         $response = json_decode($res->getBody());
+        // Log::info($response);
 
         if($response->status=="complete")
         {
-            //Log::info(json_encode($response->messages->created[0]->uid));
+            Log::info(json_encode($response->messages->created[0]->uid));
             $new_uid = $response->messages->created[0]->uid;
 
             $get = [
@@ -78,17 +77,21 @@ class DeployKobotoolsForm implements ShouldQueue
            
             $resp = $client->request('POST', 'https://kf.kobotoolbox.org/assets/'.$new_uid.'/deployment/', $get);
             //Rename form
+            Log::info($new_uid);
             $this->renameForm($new_uid);
+        }
+        else {
+
+            $this->handle();
+        }
             
             //save uid
             // $project = Project::find($this->projectId);
             // Log::info($project->xls_forms);
            // $project->xls_forms->updateExistingPivot(['form_kobo_id_string' => $new_uid]);
+     
 
-
-        } 
-
-        //return $response;
+        return $response;
     }
 
     public function renameForm($uid)
@@ -122,27 +125,35 @@ class DeployKobotoolsForm implements ShouldQueue
                 ]
 
             ];
-        $resp = $client->request('PATCH', 'https://kf.kobotoolbox.org/assets/'.$uid.'/', $get);
-       
+        $resp = $client->request('PATCH', 'https://kf.kobotoolbox.org/assets/'.$uid.'/', $get);   
         
         $this->updateProjForm($uid);
 
-        // $project = Project::find($projectId);
-            
-        // $project->xls_forms->updateExistingPivot(['form_kobo_id_string' => $uid]);
+        $project = Project::find($this->projectId);
+        $members = $project->users;
+        //log::info($members);
+
+        foreach ($members as $member)
+        {
+
+            dispatch(new ShareFormToKobotools($this->formId,  $this->projectId, $member->kobo_id));
+        }
+
+
+        return $resp;
 
     }
 
     public function updateProjForm($uid)
     {
-        $this->getAssets();
         // update form uid into project_xlsform
+        DB::table('project_xlsform')->where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->update(['form_kobo_id_string'=>$uid]);
         
-        Projectxlsform::where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->update(['form_kobo_id_string'=>$uid]);
         // update the status of the form
         DB::table('project_xlsform')->where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->update(['deployed'=>'1']);
-        
 
+        return $uid;
+        
     }
 
      public function getAssets()
@@ -165,7 +176,7 @@ class DeployKobotoolsForm implements ShouldQueue
         $resp = $client->request('GET', 'https://kf.kobotoolbox.org/assets/'.$uid.'/', $get);
         $response = json_decode($resp->getBody());
         Log::info($response);
-        //return $response;
+        return $response;
     }
 
 
