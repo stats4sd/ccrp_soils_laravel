@@ -73,7 +73,7 @@
 		  						@foreach($xls_forms as $xls_form)
 		  						<tr>
 		  							<td>{{ $xls_form->form_title}}</td>
-		  							<td>{{ $xls_form->pivot->form_kobo_id}}</td>
+		  							<td>{{ $xls_form->pivot->form_kobo_id_string}}</td>
 		  							<td>{{ $xls_form->pivot->records}}</td>
 		  							<td>
 		  								@if($xls_form->pivot->deployed)
@@ -83,11 +83,10 @@
 		  							<td>
 		  								<div class="w3-show-inline-block">
 										  	<div class="w3-bar">
-										    	<button class="btn btn-dark btn-sm" onclick="deploy({{$projects->id}},{{$xls_form->id}})">DEPLOY</button>
-										    	<button class="btn btn-dark btn-sm" onclick="share({{$projects->id}},{{$xls_form->id}})">SHARE</button>
-										    	@if($is_admin)
+										    	<button class="btn btn-dark btn-sm" onclick="deploy({{$projects->id}},{{$xls_form->id}})">DEPLOY</button>	
+										 <!--    	@if($is_admin)
 											    	<button class="btn btn-dark btn-sm" onclick="deleteForm({{$projects->id}},{{$xls_form->id}})">DELETE</button>
-										    	@endif
+										    	@endif -->
 										 	 </div>
 										</div>
 
@@ -111,14 +110,13 @@
 
 			  <button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonInvite"><font size="2">{{ t("INVITE") }}</font></button>
 
-
 				<div id="Invite" class="tabcontent">
 
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-sm-6">
 								<label>Search for members to invite:</label>
-								<form  method="post" action="{{url('en/projects/1/send')}}" name="invite" id="invite">
+								<form  method="post" action="{{url('en/projects/'.$projects->id.'/send')}}" name="invite" id="invite">
 							  	{{ csrf_field() }}
 							  	<input type="text" id="myInput" onkeyup="search()" class="form-control" placeholder="Search for names..">
 							  	<div class="scroll_list">

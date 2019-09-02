@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ShareFormToKobotools;
 use App\Models\Invite;
 use App\Models\ProjectMember;
+use App\Models\Xlsform;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -58,7 +60,6 @@ class RegisterController extends Controller
     public function checkInvite($email, $user_id)
     {
         $invite = Invite::where('email', $email)->first();
-        $projects_members = null;
         if($invite!=null)
         {
             $projects_members = new ProjectMember();
@@ -68,18 +69,15 @@ class RegisterController extends Controller
             $projects_members->key_confirm = $invite->key_confirm;
             $projects_members->is_confirmed = $invite->is_confirmed;
             $projects_members->save();
-            $invite->delete();
-
         }
+        $invite->delete();
 
         return $projects_members;
     }
 
     public function includeEmail($key)
     {
-
         $invite = Invite::where('key_confirm', $key)->first();
-
         return $invite->email;
     }
 

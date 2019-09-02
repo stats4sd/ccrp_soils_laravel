@@ -4,6 +4,9 @@ namespace App\Jobs;
 
 use App\Jobs\DeployKobotoolsForm;
 use App\Jobs\RedeployFormToKobotools;
+use App\Jobs\ReplaceFormToKobotools;
+use App\Jobs\ShareFormToKobotools;
+use App\Models\Project;
 use App\Models\Projectxlsform;
 use App\Models\Xlsform;
 use GuzzleHttp\Client;
@@ -49,17 +52,20 @@ class ImportFormToKobotools implements ShouldQueue
     {    
         $kobo_id = DB::table('project_xlsform')->where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->get();
 
+        //if the 
         if($kobo_id[0]->form_kobo_id_string != null)
         {
-            dispatch(new RedeployFormToKobotools($this->formId, $this->projectId));
+            dispatch(new ReplaceFormToKobotools($this->formId, $this->projectId));
+            $project = Project::find($this->projectId);
+            $members = $project->users;
+            foreach($members as $member){
+                dispatch(new ShareFormToKobotools($this->formId, $this->projectId, $member->kobo_id));
+            }
 
         } else {
 
             $formId = $this->formId;
             $form = Xlsform::find($formId);
-
-            //$form->form_id is actually the file path!
-            $xlsFile = Storage::disk('uploads')->path($form->path_file);
 
             // setup Guzzle Client info
             $client = new Client();
@@ -84,14 +90,6 @@ class ImportFormToKobotools implements ShouldQueue
                         'name' => 'file',
                         'contents' => Storage::disk('uploads')->get($form->path_file),
                         'filename' => 'text.xlsx',
-                    ],
-                    [
-                        'name' => 'name',
-                        'contents' => 'Testing Form For Kobo API 2345 ',
-                    ],
-                    [
-                        'name' => 'settings',
-                        'contents' => '{"description":"hello from testing helloooooooo"}',
                     ],
                     [
                         'name' => 'asset_type',

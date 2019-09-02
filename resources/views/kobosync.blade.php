@@ -35,20 +35,5 @@
         });
     }
 
-    function share(projectId, formId) {
-        jQuery.ajax('{{ url('en/kobo/share') }}', {
-            method: "POST",
-            data: {
-                projectId: projectId,
-                formId: formId,
-            }
-        }).done(function(res) {
-
-            console.log(res);
-        });
-
-    }
-
-
-
+   
 </script>

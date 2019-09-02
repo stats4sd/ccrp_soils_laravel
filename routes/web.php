@@ -58,8 +58,8 @@ Route::group([
        return view('register');
    });
     Route::get('/downloads', 'DownloadsController@index');
-    Route::post('/home/login', 'HomeController@login');
-
+    //Route::post('/home/login', 'HomeController@login');
+    
 
   Route::group([
 
@@ -67,13 +67,11 @@ Route::group([
 
   ], function () {
 
-
       Route::get('/{key}/register','RegisterController@index');
       Route::get('/register', 'RegisterController@index');
       Route::post('/register/validator', 'RegisterController@validator');
       Route::post('/register/store', 'RegisterController@store');
       Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
-
 
   	 Route::get('/create-project', 'CreateProjectController@index');
   	 Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
@@ -113,7 +111,6 @@ Route::group([
         Route::post('/projects/deleteMember', 'ProjectAccountController@deleteMember');
 
       	Route::post('/kobo/publish', 'KoboController@publish');
-        Route::post('/kobo/share', 'KoboController@share');
         Route::post('/kobo/pull', 'KoboController@getProjectData');
 
         Route::get('/projects/{id}/downloaddata', 'SubmissionController@download');
