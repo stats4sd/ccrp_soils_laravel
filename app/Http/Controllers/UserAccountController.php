@@ -14,7 +14,7 @@ use Illuminate\Validation\getMessageBag;
 
 class UserAccountController extends Controller
 {
-    public function index()
+    public function index($en, $username)
     {
     	$user = Auth::user();
     	$projects = Auth::user()->projects;

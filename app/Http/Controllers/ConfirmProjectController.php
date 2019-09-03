@@ -33,7 +33,6 @@ class ConfirmProjectController extends Controller
             }
             
 
-
 	    }else 
 	    {
 	    	$is_confirmed = Invite::where('key_confirm', $key)->update(['is_confirmed' => 1]);

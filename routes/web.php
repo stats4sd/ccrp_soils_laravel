@@ -27,8 +27,6 @@ Route::group([
        return view('home');
    });
 
-
-
     Route::get('/', function(){
 
        return redirect('en/home');
@@ -58,7 +56,8 @@ Route::group([
        return view('register');
    });
     Route::get('/downloads', 'DownloadsController@index');
-    //Route::post('/home/login', 'HomeController@login');
+    Route::post('/home/login', 'HomeController@login');
+    Route::post('/home/admin', 'HomeController@checkAdmin');
     
 
   Route::group([
@@ -89,7 +88,6 @@ Route::group([
             return view('data_management');
         });
 
-
         Route::get('/create-project', 'CreateProjectController@index');
         Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
 
@@ -112,6 +110,7 @@ Route::group([
 
       	Route::post('/kobo/publish', 'KoboController@publish');
         Route::post('/kobo/pull', 'KoboController@getProjectData');
+        Route::post('/kobo/share', 'KoboController@share');
 
         Route::get('/projects/{id}/downloaddata', 'SubmissionController@download');
 

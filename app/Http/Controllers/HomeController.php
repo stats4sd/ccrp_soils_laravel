@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -35,6 +36,21 @@ class HomeController extends Controller
         else
             return response()->json(
                     [ "auth" => true]
+                );
+
+    }
+
+    public function checkAdmin()
+    {
+        $current_user = Auth::user();
+        //dd($current_user->admin);
+        if($current_user->admin)
+            return response()->json(
+                        [ "admin" => true]
+                    );
+        else
+            return response()->json(
+                    [ "adminn" => false]
                 );
 
     }

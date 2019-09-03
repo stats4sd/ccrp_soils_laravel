@@ -63,14 +63,10 @@
             <div class="btn dropdown">
               <a href={{url(app()->getLocale().'\create-project')}} id="create_project_bar" style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
             </div>
-
             <div class="btn dropdown">
               <a href="{{url('admin')}}" id="admin" style="color:black;">{{ t("Admin") }}<b class="caret"></b></a>
             </div>
-           
-           
-
-      
+  
       </section>
         @yield('content')
 
@@ -113,13 +109,13 @@
       event.preventDefault();
           
       $.ajax({
-        url : '/en/home/login', 
+        url : '/en/home/admin', 
         type : 'POST',
         processData: false, 
         contentType: false,
         success : function(result){
           console.log(result); 
-          if(result.auth){
+          if(result.admin){
             window.location.replace("/admin");  
           }else{
             window.location.replace("/en/home");

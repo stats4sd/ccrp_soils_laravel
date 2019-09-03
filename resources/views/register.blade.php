@@ -66,6 +66,10 @@
               </span>
               @endif
           </div>
+          <div class="form-group">
+            <label><b>{{ t("Kobotools Account")}}</b></label>
+            <input class="form-control" type="text" name="kobo_id"> 
+          </div>
 
           <br>
           <label><b>{{ t("Who can see this field?") }}</b></label>

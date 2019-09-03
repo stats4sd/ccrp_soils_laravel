@@ -48,7 +48,8 @@ class RegisterController extends Controller
     		'email' => $request['email'],
     		'password' => bcrypt($request['password']),
 			'remember_token' => $request['_token'],
-			'privacy' => $request['privacy']
+			'privacy' => $request['privacy'],
+            'kobo_id' => $request['kobo_id']
     	]);
         $this->checkInvite($user->email, $user->id);
 
@@ -69,10 +70,12 @@ class RegisterController extends Controller
             $projects_members->key_confirm = $invite->key_confirm;
             $projects_members->is_confirmed = $invite->is_confirmed;
             $projects_members->save();
-        }
-        $invite->delete();
+            $invite->delete();
+            return $projects_members;
 
-        return $projects_members;
+        }
+        
+        return $invite;
     }
 
     public function includeEmail($key)

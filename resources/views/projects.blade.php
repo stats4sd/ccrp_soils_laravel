@@ -23,22 +23,19 @@
 			<div id="All_Projects" class="tabcontent">
 				@foreach($projects as $project)
        		     
-	          		<div class="img_group mb-3">
-	          				
-	          			<div class="row mb-3">
-	          				<div class="col-sm-2">
-	          					<a href="projects/{{$project->slug}}">
-			            		<img src={{$project->image}} alt="Person" width="96" height="96"></a>
-		            		</div>
-		            		<div class="col-sm-8">
-			            		<a href="projects/{{$project->slug}}">
-			          				<h6>{{$project->name}}</h6></a>
-			          			
-			          				{{$project->created_at}}
-			          				<br>		
-			          				{{$project->description}}
-			          		</div>
-			          	</div>	          			
+	          		<div class="card mb-3" style="max-width: 540px;">
+	          			<div class="row no-gutters">
+						    <div class="col-md-4 img_card_project mb-3 mt-3">
+						      <a href="projects/{{$project->slug}}"><img src={{$project->image}} class="center" alt="Project"></a>
+						    </div>
+						    <div class="col-md-8">
+								<div class="card-body">
+									<a href="projects/{{$project->slug}}"><h5 class="card-title"><b>{{$project->name}}</b></h5></a>
+									<p class="card-text">{{$project->description}}</p>
+									<p class="card-text"><small class="text-muted">{{$project->created_at}}</small></p>
+								</div>
+						    </div>
+						</div>	
 	          		</div>
         		        
       			@endforeach
@@ -48,22 +45,19 @@
 						
        		    @foreach($myprojects as $project)
        		     
-	          		<div class="img_group mb-3">
-	          				
-	          			<div class="row mb-3">
-	          				<div class="col-sm-2">
-	          					<a href="projects/{{$project->slug}}">
-			            		<img src="{{$project->image}}" alt="Person" width="96" height="96"></a>
-		            		</div>
-		            		<div class="col-sm-8">
-			            		<a href="projects/{{$project->slug}}">
-			          				<h6>{{$project->name}}</h6></a>
-			          			
-			          				{{$project->created_at}}
-			          				<br>		
-			          				{{$project->description}}
-			          		</div>
-			          	</div>	          			
+	          		<div class="card mb-3" style="max-width: 540px;">
+	          			<div class="row no-gutters">
+						    <div class="col-md-4 img_card_project mb-3 mt-3">
+						      <a href="projects/{{$project->slug}}"><img src={{$project->image}} class="center" alt="Project"></a>
+						    </div>
+						    <div class="col-md-8">
+								<div class="card-body">
+									<a href="projects/{{$project->slug}}"><h5 class="card-title"><b>{{$project->name}}</b></h5></a>
+									<p class="card-text">{{$project->description}}</p>
+									<p class="card-text"><small class="text-muted">{{$project->created_at->diffForHumans()}}</small></p>
+								</div>
+						    </div>
+						</div>	
 	          		</div>
         		        
       			@endforeach

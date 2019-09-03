@@ -24,8 +24,9 @@ class ProjectAccountController extends Controller
     	$projects = Project::where('slug','like',$slug)->first();    
         $xls_forms = $projects->xls_forms;
         $members = $projects->users;
-        $is_member = $members->contains(Auth::id());
-        $auth=$members->filter(function($value){
+        $is_member = $this->privacy($projects, $members);
+        
+        $auth = $members->filter(function($value){
             return $value->pivot->is_admin==1;
         });
         $is_admin =$auth->pluck('id')->contains(Auth::id());
@@ -33,6 +34,29 @@ class ProjectAccountController extends Controller
     	return view('project_account', compact('users', 'projects', 'members','xls_forms', 'is_admin', 'is_member'));  	
     }
 
+    public function privacy($project, $members)
+    {
+        if($project->status == "Public")
+        {
+            $user = Auth::id();
+            return $user;
+
+        }else if($project->status == "Private")
+        {
+            $is_member = $members->contains(Auth::id());
+            return $is_member;
+        }
+    }
+
+    // public function invitations($project)
+    // {
+    //     if($project->group_invitations == 'group_admins')
+    //     {
+    //         return $is_admin;
+    //     }
+    //     return $group_invitations;
+    // }
+    
     public function upload(Request $request, $en, $id)
     {
         $allowed_image_extension = array("png","jpg","jpeg",'webp');
@@ -195,12 +219,12 @@ class ProjectAccountController extends Controller
         return response()->json(["type"=>'success', "project_id"=>$project_id->id]);
         
     }
-    public function deleteForm(Request $request)
-    {
-        Projectxlsform::where('project_id', $request['projectId'])->where('xlsform_id', $request['formId'])->delete();
-        return response()->json(["type"=>'success', "project_id"=>$request['projectId']]);
+    // public function deleteForm(Request $request)
+    // {
+    //     Projectxlsform::where('project_id', $request['projectId'])->where('xlsform_id', $request['formId'])->delete();
+    //     return response()->json(["type"=>'success', "project_id"=>$request['projectId']]);
         
-    }
+    // }
 
     
 }

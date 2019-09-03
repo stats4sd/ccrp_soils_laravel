@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\XlsformRequest as StoreRequest;
 use App\Http\Requests\XlsformRequest as UpdateRequest;
+use App\Models\Projectxlsform;
 use App\Models\Xlsform;
 use Backpack\CRUD\CrudPanel;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -144,12 +145,15 @@ class XlsformCrudController extends CrudController
         return $redirect_location;
     }
 
-    public function update(UpdateRequest $request)
+    public function update(UpdateRequest $request, $id)
     {
         // your additional operations before save here
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
+        Projectxlsform::where('xlsform_id', $id)->update(['deployed'=>0]);
+
+
         return $redirect_location;
     }
 }

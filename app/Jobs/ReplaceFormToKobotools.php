@@ -83,14 +83,13 @@ class ReplaceFormToKobotools implements ShouldQueue
         ];
 
 
-        // preprare response array;
+        // prepare response array;
          
         $response = [];  
         
         $proj_xls = DB::table('project_xlsform')->where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->get();
         $uid = $proj_xls[0]->form_kobo_id_string;
-        //dd($uid);
-       
+   
         try {  
 
             // Send the request to Kobotoolbox

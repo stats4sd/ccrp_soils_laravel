@@ -78,6 +78,7 @@ class RedeployFormToKobotools implements ShouldQueue
                 ];
     
         $resp_path = $client_path->request('PATCH', 'https://kf.kobotoolbox.org/assets/'.$uid.'/deployment/', $path);
+        $proj_xls = DB::table('project_xlsform')->where('xlsform_id', $this->formId)->where('project_id', $this->projectId)->update(['deployed'=>1]);
         $response_path = json_decode($resp_path->getBody());
         return $response_path;
     }

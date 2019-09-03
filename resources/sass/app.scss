@@ -184,6 +184,15 @@ div.scroll_list {
   border-radius: 50%;
 }
 
+.img_card_project img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Group
@@ -197,5 +206,24 @@ div.scroll_list {
   object-fit: cover;
   border-radius: 50%;
   left: 150px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Image center
+|--------------------------------------------------------------------------
+*/
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.aside {
+  float: right;
+  margin: 0 1.5%;
+  width: 30%;
 }
 

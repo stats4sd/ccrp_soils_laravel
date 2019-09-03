@@ -34,9 +34,9 @@ class KoboController extends Controller
         $projectId = $request->projectId;
 
         dispatch(new ImportFormToKobotools($formId, $projectId));
-
+        
         return   $response = [
-                    'status' => 'imported',
+                    'status' => 'deployed',
             ];
     }
 
@@ -51,14 +51,23 @@ class KoboController extends Controller
 
     public function share(Request $request)
     {
+        //dd($request);
         $formId = $request->formId;
         $projectId = $request->projectId;
 
-        dispatch(new ShareFormToKobotools($formId, $projectId));
+        $project = Project::find($projectId);
+        $members = $project->users;
 
-        return   $response = [
-                    'status' => 'shared',
-            ];
+        foreach ($members as $member)
+        {
+            dispatch(new ShareFormToKobotools($formId,  $projectId, $member->kobo_id));
+        }
+
+        return $response = ['status' =>'shared'];
+
+
+
+
     }
 
 

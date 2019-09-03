@@ -20,7 +20,7 @@
 						<br>
 
 						<div id="description">
-							<p>{{$projects->status}} Group {{$projects->created_at}}</p>
+							<p>{{$projects->status}} Group {{$projects->created_at->diffForHumans()}}</p>
 						    <p>{{$projects->description}}</p>
 
 						</div>
@@ -44,7 +44,6 @@
 
 				</div>
 			</div>
-
 
 	    	<!-- Tab links -->
 
@@ -78,12 +77,14 @@
 		  							<td>
 		  								@if($xls_form->pivot->deployed)
 		  									<p>deployed</p>
+		  								@else
+		  									<p>undeployed</p>
 		  								@endif
 		  							</td>
 		  							<td>
 		  								<div class="w3-show-inline-block">
 										  	<div class="w3-bar">
-										    	<button class="btn btn-dark btn-sm" onclick="deploy({{$projects->id}},{{$xls_form->id}})">DEPLOY</button>	
+										    	<button class="btn btn-dark btn-sm" id="deploy-form-button{{$xls_form->id}}" onclick="deploy({{$projects->id}},{{$xls_form->id}})">DEPLOY</button>	
 										 <!--    	@if($is_admin)
 											    	<button class="btn btn-dark btn-sm" onclick="deleteForm({{$projects->id}},{{$xls_form->id}})">DELETE</button>
 										    	@endif -->
@@ -108,7 +109,9 @@
 
 			<div id="Members" class="tabcontent">
 
-			  <button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonInvite"><font size="2">{{ t("INVITE") }}</font></button>
+	
+			 	<button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonInvite"><font size="2">{{ t("INVITE") }}</font></button>
+			    <button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonShare" onclick="share({{$xls_form->id}},{{$projects->id}})"><font size="2">{{ t("SHARE") }}</font></button>
 
 				<div id="Invite" class="tabcontent">
 
@@ -159,17 +162,19 @@
 	            <div id="members">
 				@foreach($members as $member)
 
-	          		<div class="img_group mb-3">
-	          			<div class="row mb-3">
-	          				<div class="col-sm-1">
-	          					<a href="members/{{$member->username}}">
-			            		<img src="{{$member->avatar}}" alt="Person" width="96" height="96"></a>
-		            		</div>
-		            		<div class="col-sm-8 mt-3">
-			            		<a href="members/{{$member->username}}">{{$member->username}}</a>
-			          		</div>
-			          		<br>
-			          	</div>
+	          		<div class="card mb-3" style="max-width: 350px;">
+	          			<div class="row no-gutters">
+						    <div class="col-md-4 img_group mb-3 mt-3">
+						      <a href="members/{{$member->username}}"><img src="{{$member->avatar}}" class="center" alt="Person"></a>
+						    </div>
+						    <div class="col-md-8">
+								<div class="card-body">
+									<a href="members/{{$member->username}}"><h5 class="card-title"><b>{{$member->username}}</b></h5></a>
+							
+									<p class="card-text"><small class="text-muted"><b>created at :</b> {{$member->created_at->diffForHumans()}}</small></p>
+								</div>
+						    </div>
+						</div>	
 	          		</div>
 
 	      		@endforeach

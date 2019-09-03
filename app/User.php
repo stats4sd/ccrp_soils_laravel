@@ -2,13 +2,15 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use Backpack\CRUD\CrudTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use CrudTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'email', 'password', 'username', 'remember_token', 'privacy'
+        'id', 'name', 'email', 'password', 'username', 'remember_token', 'privacy', 'kobo_id'
     ];
 
     /**
