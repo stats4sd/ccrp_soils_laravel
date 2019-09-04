@@ -52,7 +52,7 @@ class PullDataFromProjectForms implements ShouldQueue
         ];
 
         $forms->each(function($form) use ($client, $get) {
-            Log::info("form with ID - " . $form->id . " has kobo_id = " . $form->pivot->form_kobo_id);
+            Log::info("form with ID - " . $form->id . " has kobo_id = " . $form->pivot->form_kobo_id_string);
 
 
         // For now, just pull all submissions.
@@ -62,7 +62,7 @@ class PullDataFromProjectForms implements ShouldQueue
         // 3. Then, in future, we only get submissions starting from that date.
 
             try {
-                $res = $client->request('GET', 'https://kf.kobotoolbox.org/assets/'.$form->pivot->form_kobo_id.'/submissions', $get);
+                $res = $client->request('GET', 'https://kf.kobotoolbox.org/assets/'.$form->pivot->form_kobo_id_string.'/submissions', $get);
 
                 $response = [
                     'status' => $res->getStatusCode(),

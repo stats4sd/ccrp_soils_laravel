@@ -2,17 +2,13 @@
 @extends('layouts.layout')
 
 @section('content')
-
-<body>
-	<div class="row">
-	<div class="col-sm-8">
+<div class="row">
+	<div class="col-sm-12">
 	 	<section class="content mb-5" id="group">
-
-	 		
 			<h1 class="mb-5"><b>Projects</b></h1>
 
 	    	<!-- Tab links -->
-			<div class="tab mt-5">
+			<div class="tab mt-5" style="min-width: 600px;">
 			  <button class="tablinks" onclick="openPage(event, 'All_Projects')" id="defaultOpen"><font size="2">{{ t("All Projects") }}</font></button>
 			  <button class="tablinks" onclick="openPage(event, 'My_Projects')"><font size="2">{{ t("My Projects") }}</font></button>
 			  <a href="/en/create-project">
@@ -22,7 +18,7 @@
 
 			<div id="All_Projects" class="tabcontent">
 				@foreach($projects as $project)
-       		     
+	   		     
 	          		<div class="card mb-3" style="max-width: 540px;">
 	          			<div class="row no-gutters">
 						    <div class="col-md-4 img_card_project mb-3 mt-3">
@@ -37,14 +33,14 @@
 						    </div>
 						</div>	
 	          		</div>
-        		        
-      			@endforeach
+	    		        
+	  			@endforeach
 		   		
 			</div>
 			<div id="My_Projects" class="tabcontent">
 						
-       		    @foreach($myprojects as $project)
-       		     
+	   		    @foreach($myprojects as $project)
+	   		     
 	          		<div class="card mb-3" style="max-width: 540px;">
 	          			<div class="row no-gutters">
 						    <div class="col-md-4 img_card_project mb-3 mt-3">
@@ -59,20 +55,13 @@
 						    </div>
 						</div>	
 	          		</div>
-        		        
-      			@endforeach
+	    		        
+	  			@endforeach
 	          		
-        	
 			</div>
-
-			
-
 	    </section>
 	</div>
-	
 </div>
-</body>
-
 @endsection
 
 <script type="text/javascript">	

@@ -10670,6 +10670,17 @@ body {
   display: inline-block;
 }
 
+.card-page {
+  margin: 5px;
+  /* Added */
+  float: auto;
+  /* Added */
+  margin-bottom: 20px;
+  /* Added */
+  margin-top: 20px;
+  min-height: 100%;
+}
+
 .card {
   margin: 20px;
   /* Added */
@@ -10814,14 +10825,6 @@ div.scroll_list {
   overflow: auto;
 }
 
-#user_card {
-  width: 100%;
-  padding: 50px 0;
-  text-align: center;
-  background-color: #ccc;
-  margin-top: 20px;
-}
-
 /*
 |--------------------------------------------------------------------------
 | Rounded Images
@@ -10845,8 +10848,8 @@ div.scroll_list {
 }
 
 .img_card_project img {
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 50%;
@@ -10865,7 +10868,7 @@ div.scroll_list {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 50%;
-  left: 150px;
+  /*left: 150px;*/
 }
 
 /*

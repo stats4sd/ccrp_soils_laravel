@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body class="card-page">
   <section class="card" id="card-body">
     <div class="row">
       <div class="card-body">
@@ -68,29 +68,27 @@
             </div>
   
       </section>
-        @yield('content')
+       <div class="row">
+          <div class="col-sm-8">
+            @yield('content')
+          </div>
+          <div class="col-sm-4">
+            @if(!auth()->check())
+              <div id="login" class="row">
+                @include('layouts.login') 
+              </div>
+            @endif
 
-        <div class="row">
-          
-          <div class="col-8-sm">
-          @if(!auth()->check())
-            <div id="login" class="row">
-              @include('layouts.login') 
-            </div>
-          @endif
-
-          @if(auth()->check())
-            <div id="logout" class="row" >
-              @include('layouts.account') 
-            </div>
-          @endif
+            @if(auth()->check())
+              <div id="logout" class="row" >
+                @include('layouts.account') 
+              </div>
+            @endif
+          </div>
         </div>
-        </div>
-
       </div>
     </div>
 </body>
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

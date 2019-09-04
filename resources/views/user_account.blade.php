@@ -2,8 +2,7 @@
 
 @section('content')
 
-<body>
-	<div class="col-sm-8">
+	<div class="col-sm-12">
 	 	<section class="content mb-5" id="group">
 
 	 		@if($privacy || Auth::id()==$user->id)
@@ -32,7 +31,7 @@
 			</div>
 
 	    	<!-- Tab links -->
-			<div class="tab mt-5">
+			<div class="tab mt-5" style="width: 700px;">
 			  <button class="tablinks" onclick="openPage(event, 'Profile')" id="defaultOpen"><font size="2">{{ t("Profile") }}</font></button>
 			  <button class="tablinks" onclick="openPage(event, 'Projects')"><font size="2">{{ t("Projects") }}</font></button>
 			  <button class="tablinks" onclick="openPage(event, 'Settings')"><font size="2">{{ t("Settings") }}</font></button>
@@ -69,11 +68,11 @@
 	          		<div class="card mb-3" style="max-width: 540px;">
 	          			<div class="row no-gutters">
 						    <div class="col-md-4 img_card_project mb-3 mt-3">
-						      <a href="projects/{{$project->slug}}"><img src={{$project->image}} class="center" alt="Project"></a>
+						      <a href={{url(app()->getLocale().'/projects/'.$project->slug)}}><img src={{$project->image}} class="center" alt="Project"></a>
 						    </div>
 						    <div class="col-md-8">
 								<div class="card-body">
-									<a href="projects/{{$project->slug}}"><h5 class="card-title"><b>{{$project->name}}</b></h5></a>
+									<a href={{url(app()->getLocale().'/projects/'.$project->slug)}}><h5 class="card-title"><b>{{$project->name}}</b></h5></a>
 									<p class="card-text">{{$project->description}}</p>
 									<p class="card-text"><small class="text-muted">{{$project->created_at->diffForHumans()}}</small></p>
 								</div>
@@ -255,8 +254,7 @@
 			@endif
 	    </section>
 	</div>
-	
-</body>
+
 
 @endsection
 

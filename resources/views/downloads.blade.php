@@ -2,7 +2,6 @@
 @extends('layouts.layout')
 
 @section('content')
-<body>
 	<div class="col-sm-8">
 		<section class="content mb-5" id="generate_qr_code">
 		  <h3 class="mb-5"><b>{{ t("Downloads") }}</b></h3>
@@ -13,11 +12,9 @@
 			  <h4 class="mb-4"><b>{{$xlsform->form_title}}:</b></h4>
 			  <p>{{$xlsform->description}}</p>
 			  <p><a href="{{$xlsform->link_page}}"><u>{{ t("View protocol online") }}</u></a> {{ t("(redirects to smallholder.sha.org)") }}</p>
-			  <p><a href="uploads/{{$xlsform->path_file}}"><u>{{ t("Download") }} {{$xlsform->form_title}} {{ t("form") }}</u></a></p> 
+			  <p><a href="/uploads/{{$xlsform->path_file}}"><u>{{ t("Download") }} {{$xlsform->form_title}} {{ t("form") }}</u></a></p> 
 			</section>
 		@endforeach
-		
 	</div>
-</body>
 @endsection
 

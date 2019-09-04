@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Submission;
 use Illuminate\Http\Request;
 
+
 class SubmissionController extends Controller
 {
     public function download ($en, $id)
@@ -38,10 +39,10 @@ class SubmissionController extends Controller
 
         foreach($submissions as $submission) {
             $data = json_decode($submission->content);
-
+            //dd($data);
             //before removing un-needed properties, deal with attachments and geolocation
 
-            if($data->_geolocation != null) {
+            if($data->_geolocation[0] != null) {
                 $data->location = implode(' ', $data->location);
                 $data->latitude = $data->location[0];
                 $data->longitude = $data->location[1];
@@ -58,6 +59,6 @@ class SubmissionController extends Controller
 
         }
 
-        dd($submissions);
+     
     }
 }

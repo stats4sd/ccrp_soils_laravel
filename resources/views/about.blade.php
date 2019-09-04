@@ -3,8 +3,7 @@
 
 @section('content')
 
-<body>
-<div class="col-sm-8">
+<div class="col-sm-12">
 
 <section class="content mb-5" id="introduction">
   <h1>{{ t("How the platform works") }}</h1>
@@ -32,6 +31,4 @@
   <p>{{ t("To see all the forms available and choose ones to download, go to our downloads page.") }}</p>
 </section>
 </div>
-
-</body>
 @endsection

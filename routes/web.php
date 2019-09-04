@@ -113,12 +113,6 @@ Route::group([
         Route::post('/kobo/share', 'KoboController@share');
 
         Route::get('/projects/{id}/downloaddata', 'SubmissionController@download');
-
-
-
-
-
-
   });
 
 
