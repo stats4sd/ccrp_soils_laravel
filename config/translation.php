@@ -11,3 +11,4 @@ return [
     /* Where the Gettext translations are stored */
     'gettext_locales_path' => 'resources/lang/gettext'
 ];
+
