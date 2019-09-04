@@ -6,9 +6,11 @@
 	<div class="col-sm-8">
 	 	<section class="content mb-5" id="group">
 
-	 		
-		    <h1 class="mb-5"><b>{{$user->name}}</b></h1>
-	 
+	 		@if($privacy || Auth::id()==$user->id)
+			    <h1 class="mb-5"><b>{{$user->name}}</b></h1>
+		    @else 
+		    	<h1 class="mb-5"><b>{{$user->username}}</b></h1>
+		    @endif
 
 	    	<div class="container-fluid">
 	    		<div class="row">
@@ -20,6 +22,9 @@
 					<div class="col-sm-5">
 						<p><b>Kobotoolbox:</b> {{$user->kobo_id}}</p>
 						<p><b>Groups:</b> {{$user->projects->count()}}</p>
+						@if($privacy || Auth::id()==$user->id)
+							<p><b>Email:</b> {{$user->email}}</p>
+						@endif
 						<p><b>Created:</b> {{$user->created_at->diffForHumans()}}</p>
 					</div>
 					

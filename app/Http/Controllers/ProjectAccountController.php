@@ -26,12 +26,14 @@ class ProjectAccountController extends Controller
         $members = $projects->users;
         $is_member = $this->privacy($projects, $members);
         
+        
         $auth = $members->filter(function($value){
             return $value->pivot->is_admin==1;
         });
         $is_admin =$auth->pluck('id')->contains(Auth::id());
+        $invitations = $this->invitations($projects, $is_admin, $is_member);
             
-    	return view('project_account', compact('users', 'projects', 'members','xls_forms', 'is_admin', 'is_member'));  	
+    	return view('project_account', compact('users', 'projects', 'members','xls_forms', 'is_admin', 'is_member', 'invitations'));  	
     }
 
     public function privacy($project, $members)
@@ -48,14 +50,15 @@ class ProjectAccountController extends Controller
         }
     }
 
-    // public function invitations($project)
-    // {
-    //     if($project->group_invitations == 'group_admins')
-    //     {
-    //         return $is_admin;
-    //     }
-    //     return $group_invitations;
-    // }
+    public function invitations($project, $is_admin, $is_member)
+    {
+        if($project->group_invitations == 'group_admins')
+        {
+            return $is_admin;
+        }elseif($project->group_invitations == 'all_members'){
+            return $is_member;
+        }
+    }
     
     public function upload(Request $request, $en, $id)
     {

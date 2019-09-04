@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Project;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,12 +17,40 @@ class UserAccountController extends Controller
 {
     public function index($en, $username)
     {
-    	$user = Auth::user();
-    	$projects = Auth::user()->projects;
 
-    	return view('user_account', compact('user', 'projects'));
+    	$user = User::where('username', $username)->first();
+    	$projects = $user->projects;
+        $privacy = $this->privacy($username);
+
+    	return view('user_account', compact('user', 'projects', 'privacy'));
     }
 
+    public function privacy($username)
+    {
+        $user = User::where('username', $username)->first();
+        if($user->privacy == "Everyone")
+        {
+            return true;
+        }else if($user->privacy =="Only Me")
+        {
+            return false;
+        }else if ($user->privacy == "All Members") 
+        {
+            $projects = $user->projects;
+
+            foreach ($projects as $proj) {
+                $projects = Project::find($proj->id); 
+                $members = $projects->users;
+                $is_member = $members->contains(Auth::id());
+                if($is_member){
+                    return true;
+                }
+
+            }
+        }
+            
+           
+    }
 
     public function upload(Request $request, $en, $id)
     {

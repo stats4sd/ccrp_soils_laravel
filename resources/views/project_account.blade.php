@@ -52,8 +52,8 @@
 			  <button class="tablinks" onclick="openPage(event, 'Members')" id="buttonMembers"><font size="2">{{ t("Members") }}</font></button>
 			  <button class="tablinks" onclick="openPage(event, 'Manage')" id="manageOpen"><font size="2">{{ t("Manage") }}</font></button>
 			</div>
-			@if($is_member)
 
+			@if($is_member)
 
 			<div id="Form_data" class="tabcontent">
 				<div class="row">
@@ -111,7 +111,9 @@
 
 	
 			 	<button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonInvite"><font size="2">{{ t("INVITE") }}</font></button>
-			    <button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonShare" onclick="share({{$xls_form->id}},{{$projects->id}})"><font size="2">{{ t("SHARE") }}</font></button>
+			 	@if($invitations)
+				    <button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonShare" onclick="share({{$xls_form->id}},{{$projects->id}})"><font size="2">{{ t("SHARE") }}</font></button>
+				@endif
 
 				<div id="Invite" class="tabcontent">
 
@@ -298,9 +300,9 @@
 				            	<td>
 				            		<div id="member_status{{$member->id}}">
 					            		@if($member->pivot->is_admin)
-					            		<p>Admin</p>
+					            			<p>Admin</p>
 					            		@else
-					            		<p>User</p>
+					            			<p>User</p>
 					            		@endif
 					            	</div>
 				            		<p id="status{{$member->id}}"></p>
