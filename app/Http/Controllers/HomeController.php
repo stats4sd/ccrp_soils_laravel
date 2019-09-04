@@ -3,49 +3,55 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-	function index()
-	{
-		return view('home');
-	}
-	function checklogin(Request $request)
-	{
-		//dd($request);
-		$this->validate($request, [
-			'name' => 'required',
-			'password' => 'required|alphaNum|min:6'
-		]);
-		$user_data = array(
-			'name' => $request->get('name'),
-			'password' => $request->get('password')
-		);
-		//dd(Auth::attempt($user_data));
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
-		if(Auth::attempt($user_data))
-		{
-			return redirect('home/successlogin');
-		}
-		else
-		{
-			return back()->with('error', 'Wrong Login Details');
-		}
-	}
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('home');
+    }
 
+    public function login(Request $request)
+    {
+        if(!auth()->check())
+            return response()->json(
+                        [ "auth" => false]
+                    );
+        else
+            return response()->json(
+                    [ "auth" => true]
+                );
 
-	function successlogin()
-	{
-		return view('home');
-	}
+    }
 
+    public function checkAdmin()
+    {
+        $current_user = Auth::user();
+        //dd($current_user->admin);
+        if($current_user->admin)
+            return response()->json(
+                        [ "admin" => true]
+                    );
+        else
+            return response()->json(
+                    [ "adminn" => false]
+                );
 
-	function logout()
-	{
-		Auth::logout();
-		return redirect('home');
-	}
-  
+    }
 }

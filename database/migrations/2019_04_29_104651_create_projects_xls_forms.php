@@ -13,10 +13,10 @@ class CreateProjectsXlsForms extends Migration
      */
     public function up()
     {
-        Schema::create('projects_xls_forms', function (Blueprint $table) {
+        Schema::create('project_xlsform', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('project_id');
-            $table->bigInteger('form_id');
+            $table->bigInteger('xlsform_id');
             $table->integer('form_kobo_id')->nullable();
             $table->tinyInteger('deployed')->default(0);
             $table->integer('records')->default(0);
