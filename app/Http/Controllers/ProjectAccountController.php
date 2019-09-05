@@ -146,13 +146,22 @@ class ProjectAccountController extends Controller
         if(!empty($request->email_inserted))
         {
             $email_multiple = explode(",", $request->email_inserted);
+
+
         
             foreach($email_multiple as $email)
-            {         
+            { 
+                $user = User::where('email', $email)->get();
+                $user_first = $user->first();
+                $is_user = 0;
+                if(!empty($user_first->id))
+                {
+                    $is_user = $user_first->id;
+                }
                 $key = str_random(32);
                 $this->createInvite($creator_id,  $email, $id, $key);
                 $data = [ "creator_name"=> $creator_name, 
-                    "email"=>$email, "name_project"=>$project->name, "project_id"=>$project->id, "user_id"=>0, 'url'=>url("en/projects/".$project->slug),
+                    "email"=>$email, "name_project"=>$project->name, "project_id"=>$project->id, "user_id"=>$is_user, 'url'=>url("en/projects/".$project->slug),
                     "key_confirmed" =>$key
                 ];
 

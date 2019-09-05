@@ -7,7 +7,7 @@
 	  <section class="content mb-5" id="group">
 	    <h1 class="mb-5"><b>{{ t("Project") }}</b></h1>
 		<!-- Tab links -->
-		<div class="tab" style="min-width: 600px;">
+		<div class="tab">
 		  <button class="tablinks" onclick="openPage(event, 'Details')" id="defaultOpen"><font size="2">{{ t("1.Details") }}</font></button>
 		  <button class="tablinks" ><font size="2">{{ t("2. Settings") }}</font></button>
 		  <button class="tablinks"><font size="2">{{ t("3. Photo") }}</font></button>
@@ -34,49 +34,49 @@
 		</div>
 
 		<div id="Settings" class="tabcontent">
-			<h3><b>Privacy Options</b></h3>
+			<h3><b>{{ t("Privacy Options") }}</b></h3>
 			<div class="form-group" >
 				<div>
 					<input type="radio" name="status" value="Public" checked> 
-					<label for="public_group" style="color: grey"> This is a public group</label>
+					<label for="public_group" style="color: grey">{{ t("This is a public group") }}</label>
 					<ul>
-						<li>Any site member can join this group.</li>
-						<li>This group will be listed in the groups directory and in search results.</li>
-						<li>Group content and activity will be visible to any site member.</li>
+						<li>{{ t("Any site member can join this group.") }}</li>
+						<li>{{ t("This group will be listed in the groups directory and in search results.") }}</li>
+						<li>{{ t("Group content and activity will be visible to any site member.") }}</li>
 					</ul>
 				</div>
 
 				<div>
 					<input type="radio" name="status" value="Private"> 
-					<label for="private_group" style="color: grey"> This is a private group</label>
+					<label for="private_group" style="color: grey">{{ t("This is a private group") }}</label>
 					<ul>
-						<li>Only users who request membership and are accepted can join the group.</li>
-						<li>This group will be listed in the groups directory and in search results.</li>
-						<li>Group content and activity will only be visible to members of the group.</li>
+						<li>{{ t("Only users who request membership and are accepted can join the group.") }}</li>
+						<li>{{ t("This group will be listed in the groups directory and in search results.") }}</li>
+						<li>{{ t("Group content and activity will only be visible to members of the group.") }}</li>
 					</ul>
 				</div>
 
 				<div>
 					<input type="radio" name="status" value="Hidden"> 
-					<label for="private_group" style="color: grey"> This is a hidden group</label>
+					<label for="private_group" style="color: grey">{{ t("This is a hidden group") }}</label>
 					<ul>
-						<li>Only users who are invited can join the group.</li>
-						<li>This group will not be listed in the groups directory or search results.</li>
-						<li>Group content and activity will only be visible to members of the group.</li>
+						<li>{{ t("Only users who are invited can join the group.") }}</li>
+						<li>{{ t("This group will not be listed in the groups directory or search results.") }}</li>
+						<li>{{ t("Group content and activity will only be visible to members of the group.") }}</li>
 					</ul>
 				</div>
 			</div>
 
-			<h3><b>Group Invitations</b></h3>
-			<p>Which members of this group are allowed to invite others?</p>
+			<h3><b>{{ t("Group Invitations") }}</b></h3>
+			<p>{{ t("Which members of this group are allowed to invite others?") }}</p>
 			<div class="form-group">
 				<div>
 					<input type="radio" name="group_invitations" value="all_members" checked> 
-					<label for="group_invitations" style="color: grey"> All group members</label>
+					<label for="group_invitations" style="color: grey">{{ t("All group members") }}</label>
 				</div>
 				<div>
 					<input type="radio" name="group_invitations" value="group_admins"> 
-					<label for="group_invitations" style="color: grey"> Group admins only</label>
+					<label for="group_invitations" style="color: grey">{{ t("Group admins only") }}</label>
 				</div>
 			</div>
 
@@ -98,10 +98,10 @@
 						</div>
 					</div>
 					<div class="col-sm-8 mt-3">
-						<h4 align="center"><b>Upload Photo</b></h4>
+						<h4 align="center"><b>{{ t("Upload Photo") }}</b></h4>
 						<br>
-						<p>Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.</p>
-					  <p>To skip the group profile photo upload process, hit the "Next Step" button.</p>
+						<p>{{ t("Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.") }}</p>
+					  <p>{{ t("To skip the group profile photo upload process, hit the "Next Step" button.") }}</p>
 					</div>
 				</div>
 			</div>
@@ -135,7 +135,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-sm-6">
-						<label>Search for members to invite:</label>
+						<label>{{ t("Search for members to invite:") }}</label>
 						<form  method="post" action="{{url('en/create-project/send')}}" name="invite" id="invite">
 					  	{{ csrf_field() }}
 					  	<input type="text" id="myInput" onkeyup="search()" class="form-control" placeholder="Search for names..">
@@ -156,7 +156,7 @@
 						</div>
 
 							<div class="form-group">
-								<label for="email">Enter the email addresses of people to invite.</label>
+								<label for="email">{{ t("Enter the email addresses of people to invite.") }}</label>
 				    			<input style="width: 100%;" type="email" class="form-control" name="email_inserted" multiple>
 				    		</div>
 				    		<a href="#" onclick="openPage(event, 'Photo')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
@@ -165,7 +165,7 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="alert alert-info">
-								<strong> Select people to invite from your friends list.</strong>
+								<strong> {{ t("Select people to invite from your friends list. }}</strong>
 							</div>	
 							<br>
 						</div>	

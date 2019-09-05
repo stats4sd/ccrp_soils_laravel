@@ -8,7 +8,7 @@
 			<h1 class="mb-5"><b>Projects</b></h1>
 
 	    	<!-- Tab links -->
-			<div class="tab mt-5" style="min-width: 600px;">
+			<div class="tab mt-5">
 			  <button class="tablinks" onclick="openPage(event, 'All_Projects')" id="defaultOpen"><font size="2">{{ t("All Projects") }}</font></button>
 			  <button class="tablinks" onclick="openPage(event, 'My_Projects')"><font size="2">{{ t("My Projects") }}</font></button>
 			  <a href="/en/create-project">

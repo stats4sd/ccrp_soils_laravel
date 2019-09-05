@@ -18,6 +18,7 @@ class ConfirmProjectController extends Controller
         $key_confirm = $key;
     	$project = Project::find($project_id);
     	$is_user = $this->confirmProject($project_id, $user_id, $key);
+
     	return view('confirm_project', compact('project', 'is_user', 'key_confirm'));
     }
 
@@ -32,7 +33,6 @@ class ConfirmProjectController extends Controller
                 dispatch(new ShareFormToKobotools($xlsform->id, $project_id, $user->kobo_id));
             }
             
-
 	    }else 
 	    {
 	    	$is_confirmed = Invite::where('key_confirm', $key)->update(['is_confirmed' => 1]);

@@ -115,10 +115,7 @@ class ShareFormToKobotools implements ShouldQueue
         }
 
         finally {
-            return $response;
-         
-           
-            
+            return $response; 
         }
     
     }

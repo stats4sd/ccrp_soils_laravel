@@ -2,7 +2,6 @@
 
 @section('content')
 
-<body>
 	<div class="col-sm-12">
 	 	<section class="content mb-5" id="group">
 		    <h1 class="mb-5"><b>{{$projects->name}}</b></h1>
@@ -53,11 +52,11 @@
 			  				<table class="table table-striped">
 			  					<thead>
 			  						<tr>
-			  							<th>Form Name</th>
-			  							<th style="width: 250px;">Kobotools Form ID</th>
-			  							<th>Records</th>
-			  							<th>Status</th>
-			  							<th>Action</th>
+			  							<th>{{ t("Form Name") }}</th>
+			  							<th>{{ t("Kobotools Form ID") }}</th>
+			  							<th>{{ t("Records") }}</th>
+			  							<th>{{ t("Status") }}</th>
+			  							<th>{{ t("Action") }}</th>
 			  						</tr>
 			  					</thead>
 			  					<tbody>
@@ -68,9 +67,9 @@
 			  							<td>{{ $xls_form->pivot->records}}</td>
 			  							<td>
 			  								@if($xls_form->pivot->deployed)
-			  									<p>deployed</p>
+			  									<p>{{ t("deployed") }}</p>
 			  								@else
-			  									<p>undeployed</p>
+			  									<p>{{ t("undeployed") }}</p>
 			  								@endif
 			  							</td>
 			  							<td>
@@ -87,8 +86,8 @@
 			  						@endforeach
 			  					</tbody>
 			  				</table>
-							<button class="btn btn-dark btn-sm" id="get-data-button" onclick="getData({{$projects->id}})">GET DATA</button>
-							<a class="btn btn-dark btn-sm text-light" href="{{ url('/en/projects/' . $projects->id . '/downloaddata') }}" >DOWNLOAD DATA</a>
+							<button class="btn btn-dark btn-sm" id="get-data-button" onclick="getData({{$projects->id}})">{{ t("GET DATA") }}</button>
+							<a class="btn btn-dark btn-sm text-light" href="{{ url('/en/projects/' . $projects->id . '/downloaddata') }}" >{{ t("DOWNLOAD DATA") }}</a>
 			 			</div>
 			   		</div>
 				</div>
@@ -106,7 +105,7 @@
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-sm-6">
-									<label>Search for members to invite:</label>
+									<label>{{ t("Search for members to invite:") }}</label>
 									<form  method="post" action="{{url('en/projects/'.$projects->id.'/send')}}" name="invite" id="invite">
 								  	{{ csrf_field() }}
 								  	<input type="text" id="myInput" onkeyup="search()" class="form-control" placeholder="Search for names..">
@@ -127,7 +126,7 @@
 									</div>
 
 										<div class="form-group">
-											<label for="email">Enter the email addresses of people to invite.</label>
+											<label for="email">{{ t("Enter the email addresses of people to invite.") }}</label>
 							    			<input style="width: 100%;" type="email" class="form-control" name="email_inserted" multiple>
 							    		</div>
 
@@ -137,7 +136,7 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="alert alert-info">
-										<strong> Select people to invite from your friends list.</strong>
+										<strong>{{ t("Select people to invite from your friends list.") }}</strong>
 									</div>
 
 								</div>
@@ -159,7 +158,7 @@
 									<div class="card-body">
 										<a href="members/{{$member->username}}"><h5 class="card-title"><b>{{$member->username}}</b></h5></a>
 								
-										<p class="card-text"><small class="text-muted"><b>created at :</b> {{$member->created_at->diffForHumans()}}</small></p>
+										<p class="card-text"><small class="text-muted"><b>{{ t("created at :") }}</b> {{$member->created_at->diffForHumans()}}</small></p>
 									</div>
 							    </div>
 							</div>	
@@ -190,29 +189,29 @@
 
 					           		<div class="row">
 					           			<div class="col-sm-6">
-					           				<b>Privacy Options</b>
+					           				<b>{{ t("Privacy Options") }}</b>
 								           	<div class="form-group">
 								           		<input type="radio" name="status" value="Public" checked>
-													<label for="public_group" style="color: grey"> This is a public group</label>
+													<label for="public_group" style="color: grey"> {{ t("This is a public group") }}</label>
 												<br>
 												<input type="radio" name="status" value="Private">
-													<label for="private_group" style="color: grey"> This is a private group</label>
+													<label for="private_group" style="color: grey"> {{ t("This is a private group") }}</label>
 												<br>
 												<input type="radio" name="status" value="Hidden">
-													<label for="private_group" style="color: grey"> This is a hidden group</label>
+													<label for="private_group" style="color: grey"> {{ t("This is a hidden group") }}</label>
 												<br>
 											</div>
 							   			</div>
 							   			<div class="col-sm-6">
-							   				<b>Group Invitations</b>
+							   				<b>{{ t("Group Invitations") }}</b>
 							   				<div class="form-group">
 						   						<div>
 							   						<input type="radio" name="group_invitations" value="all_members" checked>
-													<label for="group_invitations" style="color: grey"> All group members</label>
+													<label for="group_invitations" style="color: grey">{{ t("All group members") }}</label>
 												</div>
 												<div>
 													<input type="radio" name="group_invitations" value="group_admins">
-													<label for="group_invitations" style="color: grey"> Group admins only</label>
+													<label for="group_invitations" style="color: grey">{{ t("Group admins only") }}</label>
 												</div>
 							   				</div>
 							   			</div>
@@ -223,7 +222,7 @@
 										<div class="col-sm-4">
 											<div class="container">
 								  				<div class="img_group_default mt-3">
-								  					<b>Photo</b>
+								  					<b>{{ t("Photo") }}</b>
 
 												  	<img id='image' src={{$projects->image}}>
 
@@ -250,14 +249,14 @@
 							</div>
 							<div class="container">
 				  				<div class="img_group mt-3">
-				  					<b>Members</b>
+				  					<b>{{ t("Members") }}</b>
 			  					<table class="table table-hover">
 			  						<thead>
 									    <tr>
-									      <th scope="col">Avatar</th>
-									      <th scope="col">Username</th>
-									      <th scope="col">Status</th>
-									      <th scope="col">Actions</th>
+									      <th scope="col">{{ t("Avatar") }}</th>
+									      <th scope="col">{{ t("Username") }}</th>
+									      <th scope="col">{{ t("Status") }}</th>
+									      <th scope="col">{{ t("Actions") }}</th>
 									    </tr>
 									</thead>
 									<tbody>
@@ -286,9 +285,9 @@
 					            	<td>
 					            		<div id="member_status{{$member->id}}">
 						            		@if($member->pivot->is_admin)
-						            			<p>Admin</p>
+						            			<p>{{ t("Admin") }}</p>
 						            		@else
-						            			<p>User</p>
+						            			<p>{{ t("User") }}</p>
 						            		@endif
 						            	</div>
 					            		<p id="status{{$member->id}}"></p>
@@ -301,15 +300,12 @@
 					            	</td>
 					    		   	</tr>
 
-
-
 					      		@endforeach
 					      		 </form>
 
 							      	</tbody>
 									</table>
 								</div>
-
 
 						  </div>
 				           <button onclick="openPage(event, 'Members')" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("INVITE MEMBERS") }}</button>
@@ -318,11 +314,11 @@
 
 						<div class="row mt-3">
 							<div class="col-sm-8">
-						  		<b>Delete Project</b>
-						  		<p>You are about to delete this project.</p>
+						  		<b>{{ t("Delete Project") }}</b>
+						  		<p>{{ t("You are about to delete this project.") }}</p>
 						  		<ul style="list-style-type: circle;">
-								  <li>You will no longer be able to access the data of this project</li>
-								  <li>You will no longer be able to access the forms for this project</li>
+								  <li>{{ t("You will no longer be able to access the data of this project") }}</li>
+								  <li>{{ t("You will no longer be able to access the forms for this project") }}</li>
 								</ul>
 							</div>
 
@@ -334,18 +330,17 @@
 
 					   	@else
 					   		<div class="alert alert-danger alert-block" id="is_not_admin">
-					   			<p><b>Access is not allowed.</b> Only the admins of this project have the permission for this page.</p>
+					   			<p><b>{{ t("Access is not allowed.</b> Only the admins of this project have the permission for this page.") }}</p>
 					   		</div>
 					   	@endif
 				</div>
 			@else
 				<div class="alert alert-info alert-block" id="is_not_admin">
-					<p><b>This is a private group.</b> To join you must be a registered site member and request group membership.</p>
+					<p><b>{{ t("This is a private group.") }}</b> {{ t("To join you must be a registered site member and request group membership.") }}</p>
 				</div>
 			@endif
 	    </section>
 	</div>
-</body>
 
 @endsection
 

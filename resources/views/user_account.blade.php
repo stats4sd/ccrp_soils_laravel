@@ -19,30 +19,29 @@
 						</div>
 					</div>
 					<div class="col-sm-5">
-						<p><b>Kobotoolbox:</b> {{$user->kobo_id}}</p>
-						<p><b>Groups:</b> {{$user->projects->count()}}</p>
+						<p><b>{{ t("Kobotoolbox:") }}</b> {{$user->kobo_id}}</p>
+						<p><b>{{ t("Groups:") }}</b> {{$user->projects->count()}}</p>
 						@if($privacy || Auth::id()==$user->id)
-							<p><b>Email:</b> {{$user->email}}</p>
+							<p><b>{{ t("Email:") }}</b> {{$user->email}}</p>
 						@endif
-						<p><b>Created:</b> {{$user->created_at->diffForHumans()}}</p>
+						<p><b>{{ t("Created:") }}</b> {{$user->created_at->diffForHumans()}}</p>
 					</div>
 					
 				</div>
 			</div>
 
 	    	<!-- Tab links -->
-			<div class="tab mt-5" style="width: 700px;">
+			<div class="tab mt-5">
 			  <button class="tablinks" onclick="openPage(event, 'Profile')" id="defaultOpen"><font size="2">{{ t("Profile") }}</font></button>
 			  <button class="tablinks" onclick="openPage(event, 'Projects')"><font size="2">{{ t("Projects") }}</font></button>
 			  <button class="tablinks" onclick="openPage(event, 'Settings')"><font size="2">{{ t("Settings") }}</font></button>
 			</div>
 			@if(Auth::id()==$user->id)
-
 			<div id="Profile" class="tabcontent">
 				<div class="card">
 					<div class="card-header">
 
-						<h5><b>PERSONAL DETAILS</b></h5>
+						<h5><b>{{ t("PERSONAL DETAILS") }}</b></h5>
 					</div>
 					<div class="card-body">
 						<div class="row">
@@ -52,10 +51,10 @@
 								</div>								
 							</div>
 							<div class="col-sm-6">
-								<p><b>Name:</b> {{$user->name}}</p>
-								<p><b>Username:</b> {{$user->username}}</p>
-								<p><b>Email:</b> {{$user->email}}</p>
-								<p><b>Privacy:</b> {{$user->privacy}}</p>
+								<p><b>{{ t("Name:") }}</b> {{$user->name}}</p>
+								<p><b>{{ t("Username:") }}</b> {{$user->username}}</p>
+								<p><b>{{ t("Email:") }}</b> {{$user->email}}</p>
+								<p><b>{{ t("Privacy:") }}</b> {{$user->privacy}}</p>
 							</div>
 						</div>
 					</div>
@@ -85,7 +84,7 @@
 			<div id="Settings" class="tabcontent">
 				<div class="card">
 					<div class="card-header">
-						<h5><b>UPLOAD PICTURE PROFILE</b></h5>
+						<h5><b>{{ t("UPLOAD PICTURE PROFILE") }}</b></h5>
 					</div>
 					<div class="card-body">
 						<div class="row">
@@ -112,7 +111,7 @@
 				</div>
 				<div class="card">
 					<div class="card-header">
-						<h5><b>KOBOTOOLBOX ACCOUNT</b></h5>
+						<h5><b>{{ t("KOBOTOOLBOX ACCOUNT") }}</b></h5>
 					</div>
 					<div class="card-body">
 						<div class="row">
@@ -129,7 +128,7 @@
 						        </form>
 					        </div>
 					        <div class="col-sm-6">
-					        	<label><b>Current Account</b></label>
+					        	<label><b>{{ t("Current Account") }}</b></label>
 					        	<p id="current_account">{{$user->kobo_id}}</p>
 					        	
 					        </div>
@@ -138,7 +137,7 @@
 				</div>
 				<div class="card">
 					<div class="card-header">
-						<h5><b>UPDATE PERSONAL DETAILS</b></h5>
+						<h5><b>{{ t("UPDATE PERSONAL DETAILS") }}</b></h5>
 					</div>
 					<div class="card-body">
 						<div class="row">
@@ -198,7 +197,7 @@
 				</div>
 				<div class="card">
 					<div class="card-header">
-						<h5><b>CHANGE PASSWORD</b></h5>
+						<h5><b>{{ t("CHANGE PASSWORD") }}</b></h5>
 					</div>
 					<div class="card-body">
 						<div class="row">
@@ -228,7 +227,7 @@
 				</div>
 				<div class="card">
 					<div class="card-header">
-						<h5><b>DELETE PROFILE</b></h5>
+						<h5><b>{{ t("DELETE PROFILE") }}</b></h5>
 					</div>
 					<div class="card-body">
 						<div class="row">
@@ -236,15 +235,15 @@
 								<form method="post" action="/en/projects/members/{{$user->id}}/deleteProfile" id="delete">
 						            {{csrf_field()}}
 						           
-						            	<p>You are about to permanently delete yuor profile</p>
+						            	<p>{{ t("You are about to permanently delete yuor profile") }}</p>
 						            	<ul style="list-style-type: circle;">
-								            <li>You will no longer be able to access to your project data.</li>
-										    <li>You will no longer be able to access to the forms for your projects.</li>
+								            <li>{{ t("You will no longer be able to access to your project data.") }}</li>
+										    <li>{{ t("You will no longer be able to access to the forms for your projects.") }}</li>
 										</ul>
         
 					        </div>
 					        <div class="col-sm-6">
-					        		<button type="submit" class="btn btn-dark btn-block" id="delete_profile">{{ t("DELETE PROFILE") }}</button>
+					        	<button type="submit" class="btn btn-dark btn-block" id="delete_profile">{{ t("DELETE PROFILE") }}</button>
 						        </form>					        	
 					        </div>
 				        </div>	

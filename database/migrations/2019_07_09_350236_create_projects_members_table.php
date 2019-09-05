@@ -21,6 +21,7 @@ class CreateProjectsMembersTable extends Migration
             // $table->longText('comments')->nullable();
             $table->tinyInteger('is_confirmed')->default(0);
             $table->string('key_confirm');
+            $table->unique(['project_id', 'user_id']);
             $table->timestamps();
         });
     }
