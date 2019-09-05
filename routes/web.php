@@ -14,11 +14,18 @@
 //Route::prefix('{locale?}')->middleware('set.locale')->group(function() {
 
 
+
 Route::group([
   'prefix' => '{locale}',
   'where' => ['locale' => '[a-zA-Z]{2}'],
   'middleware' => 'set.locale'], function() {
 
+    Route::get('', function() {
+      $locale = App::getLocale();
+     
+        Session::put('locale', $locale);
+      
+    });
 
     Route::get('/', function () {
         return redirect(app()->getLocale());

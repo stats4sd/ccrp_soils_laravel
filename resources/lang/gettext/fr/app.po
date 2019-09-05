@@ -7,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-09-05T13:34:40+00:00\n"
-"PO-Revision-Date: 2019-09-05 15:34+0200\n"
+"POT-Creation-Date: 2019-09-05T13:40:22+00:00\n"
+"PO-Revision-Date: 2019-09-05 15:40+0200\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
@@ -351,7 +351,11 @@ msgid "Who are we?"
 msgstr ""
 
 #: resources\views\home.blade.php:22
-msgid "The platform is a collaboration between the Research Methods Support team at <a href='https://stats4sd.org/'><u>Stats4SD</u></a> and the Cross-cutting Soils project funded by the McKnight foundation’s"
+msgid "The platform is a collaboration between the Research Methods Support team at"
+msgstr ""
+
+#: resources\views\home.blade.php:22
+msgid "and the Cross-cutting Soils project funded by the McKnight foundation’s"
 msgstr ""
 
 #: resources\views\home.blade.php:23

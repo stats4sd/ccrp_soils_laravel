@@ -137,7 +137,10 @@
         success : function(result){
           console.log(result); 
           if(result.auth){
-            window.location.replace("/en/create-project");  
+            var url      = window.location.href;     
+            var origin   = window.location.origin; 
+            var locale   = url.substring(origin.length, origin.length + 4);
+            window.location.replace(origin.concat(locale.concat('create-project'))); 
           }else{
             window.location.replace("/en/home");
             jQuery('#info_login').show();
@@ -160,7 +163,10 @@
         success : function(result){
           console.log(result); 
           if(result.auth){
-            window.location.replace("/en/projects");  
+            var url      = window.location.href;     
+            var origin   = window.location.origin; 
+            var locale   = url.substring(origin.length, origin.length + 4);
+            window.location.replace(origin.concat(locale.concat('projects')));
           }else{
             window.location.replace("/en/home");
             jQuery('#info_login').show();

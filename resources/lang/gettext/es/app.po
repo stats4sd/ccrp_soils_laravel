@@ -7,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-09-05T13:34:40+00:00\n"
-"PO-Revision-Date: 2019-09-05 15:34+0200\n"
+"POT-Creation-Date: 2019-09-05T13:40:22+00:00\n"
+"PO-Revision-Date: 2019-09-05 15:40+0200\n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
@@ -82,7 +82,7 @@ msgstr "Enhorabuena. </b> Ahora puede acceder a"
 
 #: resources\views\confirm_project.blade.php:6
 msgid "You are not register.</b> Before to continue you must"
-msgstr "No estas registrado. Antes de continuar debes"
+msgstr "No estas registrado.</b> Antes de continuar debes"
 
 #: resources\views\create_project.blade.php:5
 msgid "Project"
@@ -351,8 +351,12 @@ msgid "Who are we?"
 msgstr "¿Quienes somos?"
 
 #: resources\views\home.blade.php:22
-msgid "The platform is a collaboration between the Research Methods Support team at <a href='https://stats4sd.org/'><u>Stats4SD</u></a> and the Cross-cutting Soils project funded by the McKnight foundation’s"
-msgstr "La plataforma es una colaboración entre el equipo de Soporte de Métodos de Investigación en <a href='https://stats4sd.org/'><u>Stats4SD</u></a> y el proyecto de suelos transversales financiado por la fundación McKnight"
+msgid "The platform is a collaboration between the Research Methods Support team at"
+msgstr "La plataforma es una colaboración entre el equipo de Soporte de Métodos de Investigación en"
+
+#: resources\views\home.blade.php:22
+msgid "and the Cross-cutting Soils project funded by the McKnight foundation’s"
+msgstr ""
 
 #: resources\views\home.blade.php:23
 msgid "This website and associated resources are created by the CCRP Research Methods Support team and Cross-cutting Soils Project, in association with the"
@@ -550,7 +554,7 @@ msgstr "BORRAR PROYECTO"
 
 #: resources\views\project_account.blade.php:332
 msgid "Access is not allowed.</b> Only the admins of this project have the permission for this page."
-msgstr ""
+msgstr "El acceso no está permitido. Solo los administradores de este proyecto tienen permiso para esta página."
 
 #: resources\views\project_account.blade.php:338
 msgid "This is a private group."
