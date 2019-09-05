@@ -23,7 +23,7 @@
 
       <section class="content mb-5" id="whoweare">
         <h3><strong>{{ t("Who are we?") }}</strong></h3>
-        <p>{{ t("The platform is a collaboration between the Research Methods Support team at <a href='https://stats4sd.org/'><u>Stats4SD</u></a> and the Cross-cutting Soils project funded by the McKnight foundation’s") }}<a href='http://ccrp.org/'><u>Collaborative Crop Research Program (CCRP)</u></a>.</p>
+        <p>{{ t("The platform is a collaboration between the Research Methods Support team at") }} <a href='https://stats4sd.org/'><u>Stats4SD</u></a> {{ t("and the Cross-cutting Soils project funded by the McKnight foundation’s") }}<a href='http://ccrp.org/'><u>Collaborative Crop Research Program (CCRP)</u></a>.</p>
         <p>{{ t("This website and associated resources are created by the CCRP Research Methods Support team and Cross-cutting Soils Project, in association with the")}} <a href='http://ccrp.org/'><u>Collaborative Crop Research Program</u></a>. {{ t("All data present in the platform remains the property of the individual projects using the platform.") }}</p>
       </section>
     </section>

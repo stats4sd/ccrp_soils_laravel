@@ -7,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-09-05T13:27:39+00:00\n"
-"PO-Revision-Date: 2019-09-05 15:27+0200\n"
+"POT-Creation-Date: 2019-09-05T13:34:40+00:00\n"
+"PO-Revision-Date: 2019-09-05 15:34+0200\n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
@@ -78,11 +78,11 @@ msgstr "Para ver todos los formularios disponibles y elegir los que desea descar
 
 #: resources\views\confirm_project.blade.php:4
 msgid "Congratulation.</b> Now you are allow to access the"
-msgstr ""
+msgstr "Enhorabuena. </b> Ahora puede acceder a"
 
 #: resources\views\confirm_project.blade.php:6
 msgid "You are not register.</b> Before to continue you must"
-msgstr ""
+msgstr "No estas registrado. Antes de continuar debes"
 
 #: resources\views\create_project.blade.php:5
 msgid "Project"
@@ -121,71 +121,71 @@ msgstr "CREAR UN GRUPO Y CONTINUAR"
 #: resources\views\create_project.blade.php:34
 #: resources\views\project_account.blade.php:191
 msgid "Privacy Options"
-msgstr ""
+msgstr "Opciones de Privacidad"
 
 #: resources\views\create_project.blade.php:38
 #: resources\views\project_account.blade.php:194
 msgid "This is a public group"
-msgstr ""
+msgstr "Este es un grupo público"
 
 #: resources\views\create_project.blade.php:40
 msgid "Any site member can join this group."
-msgstr ""
+msgstr "Cualquier miembro del sitio puede unirse a este grupo."
 
 #: resources\views\create_project.blade.php:41
 #: resources\views\create_project.blade.php:51
 msgid "This group will be listed in the groups directory and in search results."
-msgstr ""
+msgstr "Este grupo aparecerá en el directorio de grupos y en los resultados de búsqueda."
 
 #: resources\views\create_project.blade.php:42
 msgid "Group content and activity will be visible to any site member."
-msgstr ""
+msgstr "El contenido y la actividad del grupo serán visibles para cualquier miembro del sitio."
 
 #: resources\views\create_project.blade.php:48
 #: resources\views\project_account.blade.php:197
 msgid "This is a private group"
-msgstr ""
+msgstr "Este es un grupo privado"
 
 #: resources\views\create_project.blade.php:50
 msgid "Only users who request membership and are accepted can join the group."
-msgstr ""
+msgstr "Solo los usuarios que solicitan membresía y son aceptados pueden unirse al grupo."
 
 #: resources\views\create_project.blade.php:52
 #: resources\views\create_project.blade.php:62
 msgid "Group content and activity will only be visible to members of the group."
-msgstr ""
+msgstr "El contenido y la actividad del grupo solo serán visibles para los miembros del grupo."
 
 #: resources\views\create_project.blade.php:58
 #: resources\views\project_account.blade.php:200
 msgid "This is a hidden group"
-msgstr ""
+msgstr "Este es un grupo oculto"
 
 #: resources\views\create_project.blade.php:60
 msgid "Only users who are invited can join the group."
-msgstr ""
+msgstr "Solo los usuarios invitados pueden unirse al grupo."
 
 #: resources\views\create_project.blade.php:61
 msgid "This group will not be listed in the groups directory or search results."
-msgstr ""
+msgstr "Este grupo no aparecerá en el directorio de grupos ni en los resultados de búsqueda."
 
 #: resources\views\create_project.blade.php:67
 #: resources\views\project_account.blade.php:205
 msgid "Group Invitations"
-msgstr ""
+msgstr "Invitaciones grupales"
 
 #: resources\views\create_project.blade.php:68
 msgid "Which members of this group are allowed to invite others?"
-msgstr ""
+msgstr "¿Qué miembros de este grupo pueden invitar a otros?"
 
 #: resources\views\create_project.blade.php:72
 #: resources\views\project_account.blade.php:209
 msgid "All group members"
-msgstr ""
+msgstr "Todos los miembros del grupo"
 
 #: resources\views\create_project.blade.php:76
 #: resources\views\project_account.blade.php:213
 msgid "Group admins only"
-msgstr ""
+msgstr "Solo administradores de grupo"
 
 #: resources\views\create_project.blade.php:80
 #: resources\views\create_project.blade.php:128
@@ -200,15 +200,15 @@ msgstr "PRÓXIMO PASO"
 
 #: resources\views\create_project.blade.php:98
 msgid "Upload Photo"
-msgstr ""
+msgstr "Subir Foto"
 
 #: resources\views\create_project.blade.php:100
 msgid "Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results."
-msgstr ""
+msgstr "Suba una imagen para usarla como foto de perfil para este grupo. La imagen se mostrará en la página principal del grupo y en los resultados de búsqueda."
 
 #: resources\views\create_project.blade.php:101
 msgid "To skip the group profile photo upload process, hit the 'Next Step' button."
-msgstr ""
+msgstr "Para omitir el proceso de carga de fotos de perfil de grupo, presione el botón 'Siguiente paso'."
 
 #: resources\views\create_project.blade.php:119
 #: resources\views\project_account.blade.php:238
@@ -219,17 +219,17 @@ msgstr "Seleccionar Foto para Subir"
 #: resources\views\create_project.blade.php:136
 #: resources\views\project_account.blade.php:106
 msgid "Search for members to invite:"
-msgstr ""
+msgstr "Busque miembros para invitar:"
 
 #: resources\views\create_project.blade.php:158
 #: resources\views\project_account.blade.php:128
 msgid "Enter the email addresses of people to invite."
-msgstr ""
+msgstr "Ingrese las direcciones de correo electrónico de las personas a invitar."
 
 #: resources\views\create_project.blade.php:167
 #: resources\views\project_account.blade.php:138
 msgid "Select people to invite from your friends list."
-msgstr ""
+msgstr "Seleccione personas para invitar desde su lista de amigos."
 
 #: resources\views\data_management.blade.php:6
 msgid "To view data for a project you must first be invited to the group. Please either go to the projects page and request membership for your project, or contact rms@stats4sd.org."
@@ -348,11 +348,11 @@ msgstr "se recomienda la exploración de esta plataforma para ver cómo estas he
 
 #: resources\views\home.blade.php:21
 msgid "Who are we?"
-msgstr ""
+msgstr "¿Quienes somos?"
 
 #: resources\views\home.blade.php:22
 msgid "The platform is a collaboration between the Research Methods Support team at <a href='https://stats4sd.org/'><u>Stats4SD</u></a> and the Cross-cutting Soils project funded by the McKnight foundation’s"
-msgstr ""
+msgstr "La plataforma es una colaboración entre el equipo de Soporte de Métodos de Investigación en <a href='https://stats4sd.org/'><u>Stats4SD</u></a> y el proyecto de suelos transversales financiado por la fundación McKnight"
 
 #: resources\views\home.blade.php:23
 msgid "This website and associated resources are created by the CCRP Research Methods Support team and Cross-cutting Soils Project, in association with the"
@@ -364,15 +364,15 @@ msgstr "Todos los datos presentes en la plataforma siguen siendo propiedad de lo
 
 #: resources\views\invite_member_email.blade.php:4
 msgid "has invited you to join the group:"
-msgstr ""
+msgstr "te ha invitado a unirte al grupo:"
 
 #: resources\views\invite_member_email.blade.php:5
 msgid "Go here to accept your invitation</a> or "
-msgstr ""
+msgstr "Vaya aquí para aceptar su invitación</a> o"
 
 #: resources\views\invite_member_email.blade.php:5
 msgid "visit the group</a> to learn more."
-msgstr ""
+msgstr "visite al grupo</a> para aprender más."
 
 #: resources\views\layouts\layout.blade.php:26
 msgid "CCRP Soils Data Platform"
@@ -437,40 +437,40 @@ msgstr "Gestionar"
 
 #: resources\views\project_account.blade.php:53
 msgid "Form Name"
-msgstr ""
+msgstr "Nombre del formulario"
 
 #: resources\views\project_account.blade.php:54
 msgid "Kobotools Form ID"
-msgstr ""
+msgstr "ID de Formulario de Kobotools"
 
 #: resources\views\project_account.blade.php:55
 msgid "Records"
-msgstr ""
+msgstr "Archivos"
 
 #: resources\views\project_account.blade.php:56
 #: resources\views\project_account.blade.php:257
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 #: resources\views\project_account.blade.php:57
 msgid "Action"
-msgstr ""
+msgstr "Acción"
 
 #: resources\views\project_account.blade.php:68
 msgid "deployed"
-msgstr ""
+msgstr "desplegado"
 
 #: resources\views\project_account.blade.php:70
 msgid "undeployed"
-msgstr ""
+msgstr "sin desplegar"
 
 #: resources\views\project_account.blade.php:87
 msgid "GET DATA"
-msgstr ""
+msgstr "OBTENER DATOS"
 
 #: resources\views\project_account.blade.php:88
 msgid "DOWNLOAD DATA"
-msgstr ""
+msgstr "DESCARGAR DATOS"
 
 #: resources\views\project_account.blade.php:96
 msgid "INVITE"
@@ -480,7 +480,7 @@ msgstr ""
 
 #: resources\views\project_account.blade.php:98
 msgid "SHARE"
-msgstr ""
+msgstr "COMPARTIR"
 
 #: resources\views\project_account.blade.php:132
 msgid "SUBMIT"
@@ -488,11 +488,11 @@ msgstr "ENVIAR"
 
 #: resources\views\project_account.blade.php:160
 msgid "created at :"
-msgstr ""
+msgstr "Creado en :"
 
 #: resources\views\project_account.blade.php:224
 msgid "Photo"
-msgstr ""
+msgstr "Foto"
 
 #: resources\views\project_account.blade.php:244
 msgid "UPDATE GROUP"
@@ -500,19 +500,19 @@ msgstr "ACTUALIZAR GRUPO"
 
 #: resources\views\project_account.blade.php:255
 msgid "Avatar"
-msgstr ""
+msgstr "Avatar"
 
 #: resources\views\project_account.blade.php:256
 msgid "Username"
-msgstr ""
+msgstr "Nombre de usuario"
 
 #: resources\views\project_account.blade.php:258
 msgid "Actions"
-msgstr ""
+msgstr "Acciones"
 
 #: resources\views\project_account.blade.php:289
 msgid "User"
-msgstr ""
+msgstr "Usuario"
 
 #: resources\views\project_account.blade.php:296
 msgid "CHANGE STATUS"
@@ -526,23 +526,23 @@ msgstr ""
 
 #: resources\views\project_account.blade.php:310
 msgid "INVITE MEMBERS"
-msgstr ""
+msgstr "INVITAR A LOS MIEMBROS"
 
 #: resources\views\project_account.blade.php:316
 msgid "Delete Project"
-msgstr ""
+msgstr "Borrar Proyecto"
 
 #: resources\views\project_account.blade.php:317
 msgid "You are about to delete this project."
-msgstr ""
+msgstr "Estás a punto de eliminar este proyecto."
 
 #: resources\views\project_account.blade.php:319
 msgid "You will no longer be able to access the data of this project"
-msgstr ""
+msgstr "Ya no podrás acceder a los datos de este proyecto"
 
 #: resources\views\project_account.blade.php:320
 msgid "You will no longer be able to access the forms for this project"
-msgstr ""
+msgstr "Ya no podrá acceder a los formularios para este proyecto"
 
 #: resources\views\project_account.blade.php:326
 msgid "DELETE PROJECT"
@@ -554,11 +554,11 @@ msgstr ""
 
 #: resources\views\project_account.blade.php:338
 msgid "This is a private group."
-msgstr ""
+msgstr "Este es un grupo privado."
 
 #: resources\views\project_account.blade.php:338
 msgid "To join you must be a registered site member and request group membership."
-msgstr ""
+msgstr "Para unirse debe ser un miembro registrado del sitio y solicitar la membresía de grupo."
 
 #: resources\views\projects.blade.php:10
 msgid "My Projects"
@@ -631,7 +631,7 @@ msgstr "Nombre (requerido)"
 
 #: resources\views\register.blade.php:68
 msgid "Kobotools Account"
-msgstr ""
+msgstr "Cuenta Kobotools"
 
 #: resources\views\register.blade.php:73
 #: resources\views\user_account.blade.php:175
@@ -691,20 +691,20 @@ msgstr "Use nuestra herramienta de generación de QR para crear códigos QR para
 
 #: resources\views\user_account.blade.php:20
 msgid "Kobotoolbox:"
-msgstr ""
+msgstr "Kobotoolbox:"
 
 #: resources\views\user_account.blade.php:21
 msgid "Groups:"
-msgstr ""
+msgstr "Grupos:"
 
 #: resources\views\user_account.blade.php:23
 #: resources\views\user_account.blade.php:54
 msgid "Email:"
-msgstr ""
+msgstr "Email:"
 
 #: resources\views\user_account.blade.php:25
 msgid "Created:"
-msgstr ""
+msgstr "Creado:"
 
 #: resources\views\user_account.blade.php:33
 msgid "Profile"
@@ -720,23 +720,23 @@ msgstr "Ajustes"
 
 #: resources\views\user_account.blade.php:42
 msgid "PERSONAL DETAILS"
-msgstr ""
+msgstr "DETALLES PERSONALES"
 
 #: resources\views\user_account.blade.php:52
 msgid "Name:"
-msgstr ""
+msgstr "Nombre:"
 
 #: resources\views\user_account.blade.php:53
 msgid "Username:"
-msgstr ""
+msgstr "Nombre de usuario:"
 
 #: resources\views\user_account.blade.php:55
 msgid "Privacy:"
-msgstr ""
+msgstr "Intimidad:"
 
 #: resources\views\user_account.blade.php:85
 msgid "UPLOAD PICTURE PROFILE"
-msgstr ""
+msgstr "CARGAR PERFIL DE IMAGEN"
 
 #: resources\views\user_account.blade.php:113
 #: resources\views\user_account.blade.php:127
@@ -749,11 +749,11 @@ msgstr "Ingrese con la cuenta de Kobotoolbox"
 
 #: resources\views\user_account.blade.php:131
 msgid "Current Account"
-msgstr ""
+msgstr "Cuenta actual"
 
 #: resources\views\user_account.blade.php:140
 msgid "UPDATE PERSONAL DETAILS"
-msgstr ""
+msgstr "ACTUALIZAR DETALLES PERSONALES"
 
 #: resources\views\user_account.blade.php:165
 msgid "Update Profile"
@@ -775,12 +775,12 @@ msgstr "BORRAR PERFIL"
 
 #: resources\views\user_account.blade.php:241
 msgid "You are about to permanently delete yuor profile"
-msgstr ""
+msgstr "Está a punto de eliminar permanentemente su perfil"
 
 #: resources\views\user_account.blade.php:243
 msgid "You will no longer be able to access to your project data."
-msgstr ""
+msgstr "Ya no podrá acceder a los datos de su proyecto."
 
 #: resources\views\user_account.blade.php:244
 msgid "You will no longer be able to access to the forms for your projects."
-msgstr ""
+msgstr "Ya no podrá acceder a los formularios para sus proyectos."
