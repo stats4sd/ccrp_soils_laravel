@@ -101,7 +101,7 @@
 						<h4 align="center"><b>{{ t("Upload Photo") }}</b></h4>
 						<br>
 						<p>{{ t("Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.") }}</p>
-					  <p>{{ t("To skip the group profile photo upload process, hit the "Next Step" button.") }}</p>
+					  	<p>{{ t("To skip the group profile photo upload process, hit the 'Next Step' button.") }}</p>
 					</div>
 				</div>
 			</div>
@@ -165,7 +165,7 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="alert alert-info">
-								<strong> {{ t("Select people to invite from your friends list. }}</strong>
+								<strong> {{ t("Select people to invite from your friends list.") }}</strong>
 							</div>	
 							<br>
 						</div>	

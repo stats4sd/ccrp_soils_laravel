@@ -50,9 +50,10 @@
             </div>
 
             <div class="dropdown">
-              <a href="#" class="btn dropdown-toggle" data-toggle="dropdown"><img src="https://img.icons8.com/color/26/000000/great-britain.png"> English (Inglés)</a>
+              <a href="en" class="btn dropdown-toggle" data-toggle="dropdown"><img src="https://img.icons8.com/color/26/000000/great-britain.png">English (Inglés)</a>
                 <ul class="dropdown-menu">
-                  <li><a id="sp" href="#"><img src="https://img.icons8.com/color/26/000000/bolivia.png"> Español (Spanish)</a></li>
+                  <li><a id="en" href="#"><img src="https://img.icons8.com/color/26/000000/great-britain.png"> English (Inglés)</a></li>
+                  <li><a id="es" href="#"><img src="https://img.icons8.com/color/26/000000/bolivia.png"> Español (Spanish)</a></li>
                 </ul>
             </div>
 
@@ -171,7 +172,7 @@
 
 //changes en to sp
    jQuery(document).ready(function(){
-    jQuery("#sp").click(function(event){
+    jQuery("#es").click(function(event){
       event.preventDefault();
           
       $.ajax({
@@ -180,8 +181,36 @@
         processData: false, 
         contentType: false,
         success : function(result){
-          //console.log('Spanish'); 
-          window.location.replace("/sp/home");
+
+          var url      = window.location.href;     
+          var origin   = window.location.origin; 
+          var current_url = url.substring(origin.length + 4, url.length);
+
+          window.location.replace("/es/".concat(current_url));
+
+        }
+      });       
+    });
+  });
+
+   //changes es to en
+   jQuery(document).ready(function(){
+    jQuery("#en").click(function(event){
+      event.preventDefault();
+          
+      $.ajax({
+        url : '/en/home/login', 
+        type : 'POST',
+        processData: false, 
+        contentType: false,
+        success : function(result){
+
+          var url      = window.location.href;     
+          var origin   = window.location.origin; 
+          var current_url = url.substring(origin.length + 4, url.length);
+
+          window.location.replace("/en/".concat(current_url));
+
         }
       });       
     });
