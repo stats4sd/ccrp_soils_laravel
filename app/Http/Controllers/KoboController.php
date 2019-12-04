@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Jobs\DeployKobotoolsForm;
-use App\Jobs\ImportFormToKobotools;
+use App\Jobs\PublishFormToKobotools;
 use App\Jobs\PullDataFromProjectForms;
 use App\Jobs\ShareFormToKobotools;
 use App\Models\Project;
@@ -17,28 +17,17 @@ use Illuminate\Support\Facades\Storage;
 class KoboController extends Controller
 {
 
-    /**
-     * Function to create a new instance of the requested form on Kobotoolbox, and then share the new form with the requested project.
-     * @param  Request $request A POST request including:
-     *                          - formId;
-     *                          - projectId;
-     * @return array           An array containing the response data:
-     *                            - HTTP response code from Kobotools request;
-     *                            - The UID of the form on Kobotools;
-     */
-
-
-    public function publish(Request $request)
+    public function publish (Request $request)
     {
-        $formId = $request->formId;
-        $projectId = $request->projectId;
+        $project = Project::find($request->projectId);
 
-        dispatch(new ImportFormToKobotools($formId, $projectId));
-        
-        return   $response = [
-                    'status' => 'deployed',
-            ];
+        // When a model is serialised to be passed to a job, it loses any "pivot" properties. So we send the formId instead of the actual form model:
+        dispatch(new PublishFormToKobotools($request->formId, $project));
+
+
     }
+
+
 
     public function getProjectData (Request $request)
     {

@@ -20,6 +20,9 @@ class Projectxlsform extends Pivot
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
+    public $incrementing = true;
+
+
     //protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];

@@ -18,7 +18,6 @@ class KoboHelper
     public static function getClient ()
     {
 
-        //get access token for FreeAgent
         $auth = [config('services.kobo.username'), config('services.kobo.password')];
 
         //setup new client to send requests to FreeAgent dev app:
@@ -26,8 +25,9 @@ class KoboHelper
             'base_uri' => config('services.kobo.endpoint'),
             'headers' => [
                 'Accept' => 'application/json',
-                'Content-Type' => 'application/json'
+                'Content-Type' => 'application/json',
             ],
+            'debug' => true,
             'auth' => $auth,
         ]);
 
