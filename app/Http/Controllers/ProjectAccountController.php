@@ -19,21 +19,21 @@ class ProjectAccountController extends Controller
 {
     public function index($locale, $slug)
     {
-    	
+
     	$users = DB::table('users')->get();
-    	$projects = Project::where('slug','like',$slug)->first();    
+    	$projects = Project::where('slug','like',$slug)->first();
         $xls_forms = $projects->xls_forms;
         $members = $projects->users;
         $is_member = $this->privacy($projects, $members);
-        
-        
+
+
         $auth = $members->filter(function($value){
             return $value->pivot->is_admin==1;
         });
         $is_admin =$auth->pluck('id')->contains(Auth::id());
         $invitations = $this->invitations($projects, $is_admin, $is_member);
-            
-    	return view('project_account', compact('users', 'projects', 'members','xls_forms', 'is_admin', 'is_member', 'invitations'));  	
+
+    	return view('project_account', compact('users', 'projects', 'members','xls_forms', 'is_admin', 'is_member', 'invitations'));
     }
 
     public function privacy($project, $members)
@@ -59,7 +59,7 @@ class ProjectAccountController extends Controller
             return $is_member;
         }
     }
-    
+
     public function upload(Request $request, $en, $id)
     {
         $allowed_image_extension = array("png","jpg","jpeg",'webp');
@@ -103,12 +103,12 @@ class ProjectAccountController extends Controller
         } else{
             $this->update($request, $en, $id);
             return response()->json(["type"=>"success", "message"=>"Updated group successfully", "project_id"=>$id]);
-        } 
+        }
     }
 
     public function update (Request $request, $en, $id)
     {
-        
+
         $project = DB::table('projects')->where('id', $id)->update(
             [
                 'name' => $request->name,
@@ -116,7 +116,7 @@ class ProjectAccountController extends Controller
                 'status' => $request->status,
                 'group_invitations' => $request->group_invitations,
             ]);
-    
+
         return $project;
     }
 
@@ -125,22 +125,22 @@ class ProjectAccountController extends Controller
         $project = Project::find($id);
         $creator_id = $project->creator_id;
         $creator_name = User::find($creator_id)->name;
-    
+
         if(!empty($request->name_selected))
         {
-            foreach ($request->name_selected as $user_id) 
+            foreach ($request->name_selected as $user_id)
             {
                 $user_invited = User::find(($user_id));
                 $key = str_random(32);
-                $this->createProjectMember($user_id, $id, $key); 
+                $this->createProjectMember($user_id, $id, $key);
 
-                $data = [ "creator_name"=> $creator_name, 
+                $data = [ "creator_name"=> $creator_name,
                     "email"=>$user_invited->email, "project_id"=>$project->id, "name_project"=>$project->name, "user_id"=>$user_id, 'url'=>url("en/projects/".$project->slug),
                     "key_confirmed" =>$key
                 ];
-               
-                Mail::to($user_invited->email)->send(new InviteMember($data));   
-                   
+
+                Mail::to($user_invited->email)->send(new InviteMember($data));
+
             }
         }
         if(!empty($request->email_inserted))
@@ -148,9 +148,9 @@ class ProjectAccountController extends Controller
             $email_multiple = explode(",", $request->email_inserted);
 
 
-        
+
             foreach($email_multiple as $email)
-            { 
+            {
                 $user = User::where('email', $email)->get();
                 $user_first = $user->first();
                 $is_user = 0;
@@ -160,28 +160,28 @@ class ProjectAccountController extends Controller
                 }
                 $key = str_random(32);
                 $this->createInvite($creator_id,  $email, $id, $key);
-                $data = [ "creator_name"=> $creator_name, 
+                $data = [ "creator_name"=> $creator_name,
                     "email"=>$email, "name_project"=>$project->name, "project_id"=>$project->id, "user_id"=>$is_user, 'url'=>url("en/projects/".$project->slug),
                     "key_confirmed" =>$key
                 ];
 
                 Mail::to($email)->send(new InviteMember($data));
-             
-            }  
-        } 
-                
+
+            }
+        }
+
         return redirect::back();
     }
 
     public function createProjectMember($user_id, $id, $key)
-    {   
+    {
         $projects_members = new ProjectMember();
         $projects_members->project_id = $id;
         $projects_members->inviter_id = Auth::user()->id;
         $projects_members->user_id = $user_id;
         $projects_members->key_confirm = $key;
         $projects_members->save();
-   
+
         return $projects_members;
     }
 
@@ -229,14 +229,14 @@ class ProjectAccountController extends Controller
     {
         $project_id = Project::find($id)->delete();
         return response()->json(["type"=>'success', "project_id"=>$project_id->id]);
-        
+
     }
     // public function deleteForm(Request $request)
     // {
     //     Projectxlsform::where('project_id', $request['projectId'])->where('xlsform_id', $request['formId'])->delete();
     //     return response()->json(["type"=>'success', "project_id"=>$request['projectId']]);
-        
+
     // }
 
-    
+
 }

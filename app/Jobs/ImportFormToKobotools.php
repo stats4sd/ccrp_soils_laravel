@@ -49,10 +49,10 @@ class ImportFormToKobotools implements ShouldQueue
      * @return void
      */
     public function handle()
-    {    
+    {
         $kobo_id = DB::table('project_xlsform')->where('project_id', $this->projectId)->where('xlsform_id', $this->formId)->get();
 
-        //if the 
+        //if the
         if($kobo_id[0]->form_kobo_id_string != null)
         {
             dispatch(new ReplaceFormToKobotools($this->formId, $this->projectId));
@@ -69,9 +69,9 @@ class ImportFormToKobotools implements ShouldQueue
 
             // setup Guzzle Client info
             $client = new Client();
-           
+
             $id = config('services.kobo.id');
-     
+
             $password = config('services.kobo.password');
 
             // prepare payload for creating new form
@@ -99,7 +99,7 @@ class ImportFormToKobotools implements ShouldQueue
             ];
 
              // preprare response array;
-            
+
             $response = [];
 
             try {
@@ -107,7 +107,7 @@ class ImportFormToKobotools implements ShouldQueue
                 $res = $client->request('POST', 'https://kf.kobotoolbox.org/imports/', $post);
 
                 $status = $res->getStatusCode();
-            
+
                 Log::info($status);
                 $response = [
                         'status' => $res->getStatusCode(),
@@ -119,7 +119,7 @@ class ImportFormToKobotools implements ShouldQueue
                     $response['data'] = json_decode($res->getBody());
                     $response = [
                             'uid' => $response['data']['uid']
-                        ];        
+                        ];
                 }
 
 
