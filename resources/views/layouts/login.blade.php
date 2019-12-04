@@ -1,5 +1,5 @@
 <!doctype html>
- 
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
- 
+
   <title>CCRP Soils Data Platform</title>
 
   <!-- Styles -->
@@ -22,7 +22,7 @@
      <div class="card card-login mx-5 mt-5">
        <div class="card-header"><strong>MY ACCOUNT</strong></div>
        <div class="card-body">
-         <form method="post" action="{{ route('login') }}">
+         <form method="post" action="{{ route('login', app()->getLocale()) }}">
           @csrf
            <div class="form-group">
              <label for="exampleInputEmail1">Username</label>
@@ -59,7 +59,7 @@
            <a class="d-block small mt-3" href="/en/register">Register an Account</a>
          <a class="d-block small" href="forgot-password.php">Forgot Password?</a>
 
-        
+
          </div>
        </div>
      </div>

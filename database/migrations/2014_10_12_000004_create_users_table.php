@@ -19,8 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('username');
-            $table->string('privacy');
+            $table->string('privacy')->default('Only Me');
             $table->string('avatar')->default("/images/mystery-group.png");
             $table->string('kobo_id')->nullable();
             $table->tinyInteger('admin')->default(0);

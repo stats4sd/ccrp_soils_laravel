@@ -1,89 +1,58 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-//Route::prefix('{locale?}')->middleware('set.locale')->group(function() {
-
-
+Route::get('/', function() {
+    return redirect(app()->getLocale());
+});
 
 Route::group([
-  'prefix' => '{locale}',
-  'where' => ['locale' => '[a-zA-Z]{2}'],
-  'middleware' => 'set.locale'], function() {
+    'prefix' => '{locale}',
+    'where' => ['locale' => '[a-zA-Z]{2}'],
+    'middleware' => ['setlocale'],
+], function() {
 
-    Route::get('', function() {
-      $locale = App::getLocale();
-     
-        Session::put('locale', $locale);
-      
+
+    // Handle multiple ways to get 'home'
+    Route::get('/', function() {
+        return view('home');
+    })->name('home');
+
+    Route::get('home', function() {
+        return redirect()->route('home', app()->getLocale());
     });
 
-    Route::get('/', function () {
-        return redirect(app()->getLocale());
-    });
-    Route::get('/home', function(){
-       return view('home');
-   });
-
-    Route::get('/', function(){
-
-       return redirect('en/home');
-   });
-
-    Route::get('/admin', function(){
-       return view('home');
-   });
-
-    Route::get('/about', function () {
+    //default pages
+    Route::get('about', function() {
         return view('about');
     });
 
-    Route::get('/start-sampling', function () {
+    Route::get('start-sampling', function() {
         return view('start_sampling');
     });
 
-    Route::get('/qr-codes', function() {
-       return view('qr_code');
-   });
+    // QR Code Stuff
+    Route::get('qr-codes', function() {
+        return view('qr-codes');
+    });
 
-    Route::get('/downloads', function() {
-       return view('downloads');
-   });
-
-    Route::get('/register', function() {
-       return view('register');
-   });
-    Route::get('/downloads', 'DownloadsController@index');
-    Route::post('/home/login', 'HomeController@login');
-    Route::post('/home/admin', 'HomeController@checkAdmin');
-    
-
-  Route::group([
-
-      'middleware' => ['auth'],
-
-  ], function () {
-
-      Route::get('/{key}/register','RegisterController@index');
-      Route::get('/register', 'RegisterController@index');
-      Route::post('/register/validator', 'RegisterController@validator');
-      Route::post('/register/store', 'RegisterController@store');
-      Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
-
-  	 Route::get('/create-project', 'CreateProjectController@index');
-  	 Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
+    Route::post('qr-newcodes', 'QrController@newCodes');
+    Route::get('qr-print', 'QrController@printView');
 
 
-      // User profile
+
+    Route::get('downloads', 'DownloadsController@index');
+
+    Route::post('home/login', 'HomeController@login');
+    Route::post('home/admin', 'HomeController@checkAdmin');
+
+
+    Route::group([
+        'middleware' => ['auth'],
+    ], function() {
+
+        Route::get('create-project', 'CreateProjectController@index');
+        Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
+
+        // User profile
         Route::get('/projects/members/{username}', 'UserAccountController@index');
         Route::post('/projects/members/{id}/upload', 'UserAccountController@upload');
         Route::post('/projects/members/{id}/validateDetails', 'UserAccountController@validateDetails');
@@ -108,24 +77,27 @@ Route::group([
         Route::post('/projects/{id}/upload', 'ProjectAccountController@upload');
         Route::post('/projects/{id}/send', 'ProjectAccountController@sendEmail');
 
-
         Route::post('/projects/{id}/delete', 'ProjectAccountController@delete');
-        Route::post('/projects/changeStatus', 'ProjectAccountController@changeStatus');
+        Route::post('/projects/{id}/change-status', 'ProjectAccountController@changeStatus');
         Route::post('/projects/deleteForm', 'ProjectAccountController@deleteForm');
-        
+
         Route::post('/projects/deleteMember', 'ProjectAccountController@deleteMember');
 
-      	Route::post('/kobo/publish', 'KoboController@publish');
+        Route::post('/kobo/publish', 'KoboController@publish');
         Route::post('/kobo/pull', 'KoboController@getProjectData');
         Route::post('/kobo/share', 'KoboController@share');
 
         Route::get('/projects/{id}/downloaddata', 'SubmissionController@download');
-  });
+
+    });
 
 
+    Auth::routes();
 
 });
 
+Route::get('/{any}', function($any){
+    dd($any);
+});
 
-Auth::routes();
 

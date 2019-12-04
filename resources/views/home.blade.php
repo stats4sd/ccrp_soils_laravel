@@ -3,7 +3,7 @@
 @extends('layouts.layout')
 
 @section('content')
-  <div class="col-sm-12"> 
+  <div class="col-sm-12">
     <section class="content mb-5" id="home">
     <div class="alert alert-info alert-block" id="info_login">You must login to access this page.
     </div>
