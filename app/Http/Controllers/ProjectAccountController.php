@@ -21,22 +21,23 @@ class ProjectAccountController extends Controller
     {
 
     	$users = DB::table('users')->get();
-    	$projects = Project::where('slug','like',$slug)->first();
-        $xls_forms = $projects->xls_forms;
-        $members = $projects->users;
-        $is_member = $this->privacy($projects, $members);
+    	$project = Project::where('slug','like',$slug)->with('users')->with('xls_forms')->first(); //is slug guaranteed to be unique?
+
+        //what does "is_member" represent? Variable suggests a boolean - is current user a member? But it sometimes returns a user model.
+        $is_member = $this->privacy($project);
 
 
-        $auth = $members->filter(function($value){
+        $auth = $project->users->filter(function($value){
             return $value->pivot->is_admin==1;
         });
-        $is_admin =$auth->pluck('id')->contains(Auth::id());
-        $invitations = $this->invitations($projects, $is_admin, $is_member);
 
-    	return view('project_account', compact('users', 'projects', 'members','xls_forms', 'is_admin', 'is_member', 'invitations'));
+        $is_admin =$auth->pluck('id')->contains(Auth::id());
+        $invitations = $this->invitations($project, $is_admin, $is_member);
+
+    	return view('project_account', compact('users', 'project', 'is_admin', 'is_member', 'invitations'));
     }
 
-    public function privacy($project, $members)
+    public function privacy($project)
     {
         if($project->status == "Public")
         {
@@ -45,7 +46,7 @@ class ProjectAccountController extends Controller
 
         }else if($project->status == "Private")
         {
-            $is_member = $members->contains(Auth::id());
+            $is_member = $$project->users->contains(Auth::id());
             return $is_member;
         }
     }

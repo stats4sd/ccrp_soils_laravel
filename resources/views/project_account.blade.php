@@ -4,19 +4,19 @@
 
 	<div class="col-sm-12">
 	 	<section class="content mb-5" id="group">
-		    <h1 class="mb-5"><b>{{$projects->name}}</b></h1>
+		    <h1 class="mb-5"><b>{{$project->name}}</b></h1>
 	    	<div class="container-fluid">
 	    		<div class="row">
 	    			<div class="col-sm-3">
 				    	<div class="img_group_default">
-							<img src={{url($projects->image)}} id="img_group" >
+							<img src={{url($project->image)}} id="img_group" >
 						</div>
 					</div>
 					<div class="col-sm-5">
 						<br>
 						<div id="description">
-							<p>{{$projects->status}} Group {{$projects->created_at->diffForHumans()}}</p>
-						    <p>{{$projects->description}}</p>
+							<p>{{$project->status}} Group {{$project->created_at->diffForHumans()}}</p>
+						    <p>{{$project->description}}</p>
 						</div>
 					</div>
 
@@ -24,7 +24,7 @@
 						<div class="admin_group">
 						<h3><b>{{ t("Group Admins") }}</b></h3>
 						@if($is_member)
-							@foreach ($members as $member)
+							@foreach ($project->users as $member)
 								@if($member->pivot->is_admin)
 									<a href="members/{{$member->username}}" data-toggle="tooltip" title="{{$member->username}}">
 									<img src={{url($member->avatar)}} id="avatar" >
@@ -75,9 +75,9 @@
 			  							<td>
 			  								<div class="w3-show-inline-block">
 											  	<div class="w3-bar">
-											    	<button class="btn btn-dark btn-sm" id="deploy-form-button{{$xls_form->id}}" onclick="deploy({{$projects->id}},{{$xls_form->id}})">DEPLOY</button>
+											    	<button class="btn btn-dark btn-sm" id="deploy-form-button{{$xls_form->id}}" onclick="deploy({{$project->id}},{{$xls_form->id}})">DEPLOY</button>
 											 <!--    	@if($is_admin)
-												    	<button class="btn btn-dark btn-sm" onclick="deleteForm({{$projects->id}},{{$xls_form->id}})">DELETE</button>
+												    	<button class="btn btn-dark btn-sm" onclick="deleteForm({{$project->id}},{{$xls_form->id}})">DELETE</button>
 											    	@endif -->
 											 	 </div>
 											</div>
@@ -86,8 +86,8 @@
 			  						@endforeach
 			  					</tbody>
 			  				</table>
-							<button class="btn btn-dark btn-sm" id="get-data-button" onclick="getData({{$projects->id}})">{{ t("GET DATA") }}</button>
-							<a class="btn btn-dark btn-sm text-light" href="{{ url('/en/projects/' . $projects->id . '/downloaddata') }}" >{{ t("DOWNLOAD DATA") }}</a>
+							<button class="btn btn-dark btn-sm" id="get-data-button" onclick="getData({{$project->id}})">{{ t("GET DATA") }}</button>
+							<a class="btn btn-dark btn-sm text-light" href="{{ url('/en/project/' . $project->id . '/downloaddata') }}" >{{ t("DOWNLOAD DATA") }}</a>
 			 			</div>
 			   		</div>
 				</div>
@@ -97,7 +97,7 @@
 
 				 	<button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonInvite"><font size="2">{{ t("INVITE") }}</font></button>
 				 	@if($invitations)
-					    <button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonShare" onclick="share({{$xls_form->id}},{{$projects->id}})"><font size="2">{{ t("SHARE") }}</font></button>
+					    <button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonShare" onclick="share({{$xls_form->id}},{{$project->id}})"><font size="2">{{ t("SHARE") }}</font></button>
 					@endif
 
 					<div id="Invite" class="tabcontent">
@@ -106,7 +106,7 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<label>{{ t("Search for members to invite:") }}</label>
-									<form  method="post" action="{{url('en/projects/'.$projects->id.'/send')}}" name="invite" id="invite">
+									<form  method="post" action="{{url('en/project/'.$project->id.'/send')}}" name="invite" id="invite">
 								  	{{ csrf_field() }}
 								  	<input type="text" id="myInput" onkeyup="search()" class="form-control" placeholder="Search for names..">
 								  	<div class="scroll_list">
@@ -147,7 +147,7 @@
 
 
 		            <div id="members">
-					@foreach($members as $member)
+					@foreach($project->users as $member)
 
 		          		<div class="card mb-3" style="max-width: 350px;">
 		          			<div class="row no-gutters">
@@ -179,11 +179,11 @@
 										<div class="alert alert-danger alert-block" id="validate_danger"></div>
 										<div class="alert alert-success alert-block" id="validate_success"></div>
 						             	<label for="exampleInputEmail1"><b>{{ t("Group Name (required)") }}</b></label>
-						             	<input class="form-control"  type="text" name="name" value="{{$projects->name}}">
+						             	<input class="form-control"  type="text" name="name" value="{{$project->name}}">
 						           	</div>
 						           	<div class="form-group">
 						             	<label for="exampleInputEmail1"><b>{{ t("Group Description (required)") }}</b></label>
-						             	<textarea class="form-control"  rows="4" cols="50" name="description" form="group_details">{{$projects->description}}</textarea>
+						             	<textarea class="form-control"  rows="4" cols="50" name="description" form="group_details">{{$project->description}}</textarea>
 						           	</div>
 
 
@@ -224,7 +224,7 @@
 								  				<div class="img_group_default mt-3">
 								  					<b>{{ t("Photo") }}</b>
 
-												  	<img id='image' src={{$projects->image}}>
+												  	<img id='image' src={{$project->image}}>
 
 												</div>
 											</div>
@@ -265,7 +265,7 @@
 
 						        	@csrf
 
-									@foreach($members as $member)
+									@foreach($project->users as $member)
 
 								    <tr>
 							   		<td>
@@ -294,8 +294,8 @@
 
 					            	</td>
 					            	<td>
-					            		<button type="submit" class="btn btn-dark btn-sm" name="update_members" onclick="changeStatus({{$projects->id}},{{$member->id}})">{{ t("CHANGE STATUS") }}</button>
-					            		<button type="submit" id="delete" class="btn btn-dark btn-sm" onclick="deleteMember({{$projects->id}},{{$member->id}})" name="update_members">{{ t("DELETE") }}</button>
+					            		<button type="submit" class="btn btn-dark btn-sm" name="update_members" onclick="changeStatus({{$project->id}},{{$member->id}})">{{ t("CHANGE STATUS") }}</button>
+					            		<button type="submit" id="delete" class="btn btn-dark btn-sm" onclick="deleteMember({{$project->id}},{{$member->id}})" name="update_members">{{ t("DELETE") }}</button>
 
 					            	</td>
 					    		   	</tr>
@@ -451,7 +451,7 @@ jQuery(document).ready(function(){
 		var form_data = new FormData(form);
 
         $.ajax({
-	        url : '/en/projects/{{$projects->id}}/upload',
+	        url : '/en/projects/{{$project->id}}/upload',
 	        type : 'POST',
 	        data : form_data,
 	        processData: false,
@@ -494,7 +494,7 @@ jQuery(document).ready(function(){
 		console.log(form_data);
 
 		$.ajax({
-	        url : '/en/projects/{{$projects->id}}/validateGroup',
+	        url : '/en/projects/{{$project->id}}/validateGroup',
 	        type : 'POST',
 	        data : form_data,
 	        processData: false,
@@ -526,10 +526,10 @@ jQuery(document).ready(function(){
 	jQuery("#delete_project").click(function(event){
 		event.preventDefault();
 
-		if (confirm('Are you sure to delete the project {{$projects->name}}?')) {
+		if (confirm('Are you sure to delete the project {{$project->name}}?')) {
 
 		    $.ajax({
-	        url : '/en/projects/{{$projects->id}}/delete',
+	        url : '/en/projects/{{$project->id}}/delete',
 	        type : 'POST',
 	        processData: false,
 	        contentType: false,

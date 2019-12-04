@@ -13,7 +13,7 @@
         }).done(function(res) {
 
             console.log(res);
-            location.reload();
+            //location.reload();
 
 
         }).fail(function(res) {
@@ -38,7 +38,7 @@
         }).done(function(res) {
 
             console.log(res);
-            
+
         }).fail(function(res) {
             console.log("error!", res);
         }).always(function() {
@@ -68,5 +68,5 @@
         });
     }
 
-   
+
 </script>
