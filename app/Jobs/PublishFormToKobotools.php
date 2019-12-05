@@ -74,20 +74,20 @@ class PublishFormToKobotools implements ShouldQueue
                 'name' => 'asset_type',
                 'contents' => 'survey',
             ],
-            [
-                'name' => 'settings',
-                'contents' => [
-                    [
-                        'name' => 'description',
-                        'contents' => 'This is a description of the form ' . Str::slug($form->form_title),
-                    ],
-                ],
-            ],
+            // [
+            //     'name' => 'settings',
+            //     'contents' => [
+            //         [
+            //             'name' => 'description',
+            //             'contents' => 'This is a description of the form ' . Str::slug($form->form_title),
+            //         ],
+            //     ],
+            // ],
         ];
 
         try {
 
-            $res = $client->request('POST', 'assets', [
+            $res = $client->request('POST', 'imports', [
                 'form_params' => $post,
             ]);
 
