@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ProjectxlsformRequest as StoreRequest;
@@ -16,6 +17,11 @@ use Backpack\CRUD\CrudPanel;
  */
 class ProjectxlsformCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    
     public function setup()
     {
         /*
@@ -23,9 +29,9 @@ class ProjectxlsformCrudController extends CrudController
         | CrudPanel Basic Information
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Projectxlsform');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/projectxlsform');
-        $this->crud->setEntityNameStrings('projectxlsform', 'projectxlsforms');
+        CRUD::setModel('App\Models\Projectxlsform');
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/projectxlsform');
+        CRUD::setEntityNameStrings('projectxlsform', 'projectxlsforms');
 
         /*
         |--------------------------------------------------------------------------

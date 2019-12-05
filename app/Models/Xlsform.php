@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Submission;
 use App\Models\Variable;
-use Backpack\CRUD\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Xlsform extends Model
