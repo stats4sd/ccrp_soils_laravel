@@ -11,6 +11,25 @@ Route::group([
     'where' => ['locale' => '[a-zA-Z]{2}'],
     'middleware' => ['setlocale'],
 ], function() {
+    // Authentication Routes...
+    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::post('login', 'Auth\LoginController@login');
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+    // Registration Routes...
+    Route::get('/{key}/register','RegisterController@index');
+    Route::get('/register', 'RegisterController@index');
+    Route::post('/register/validator', 'RegisterController@validator');
+    Route::post('/register/store', 'RegisterController@store');
+    Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
+
+    
+
+    // Password Reset Routes...
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
     // Handle multiple ways to get 'home'
@@ -50,6 +69,9 @@ Route::group([
     Route::group([
         'middleware' => ['auth'],
     ], function() {
+        
+        
+    
 
         Route::get('create-project', 'CreateProjectController@index');
         Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
@@ -93,7 +115,7 @@ Route::group([
     });
 
 
-    Auth::routes();
+    // Auth::routes();
 
 });
 
