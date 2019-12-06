@@ -77,6 +77,11 @@ Route::group([
         Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
 
         // User profile
+        Route::resources([
+            'users' => 'UserController',
+            'projects' => 'ProjectController'
+        ]);
+        
         Route::post('/projects/members/{id}/upload', 'UserAccountController@upload');
         Route::post('/projects/members/{id}/validateDetails', 'UserAccountController@validateDetails');
         Route::post('/projects/members/{id}/changePassword', 'UserAccountController@changePassword');

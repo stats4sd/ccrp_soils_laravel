@@ -59,11 +59,11 @@
                         </div>
 
                         <div class="btn dropdown">
-                            <a href={{url(app()->getLocale().'\projects')}} id="projects_bar" style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
+                            <a href="{{url(app()->getLocale().'\projects')}}"  style="color:black;">{{ t("All Projects") }}<b class="caret"></b></a>
                         </div>
 
                         <div class="btn dropdown">
-                            <a href={{url(app()->getLocale().'\create-project')}} id="create_project_bar" style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
+                            <a href="{{url(app()->getLocale().'\create-project')}} " style="color:black;">{{ t("Create a Project") }}<b class="caret"></b></a>
                         </div>
                         <div class="btn dropdown">
                             <a href="{{url('admin')}}" id="admin" style="color:black;">{{ t("Admin") }}<b class="caret"></b></a>
@@ -94,10 +94,7 @@
     </section>
 </body>
 
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src={{asset("js/app.js")}}></script>
         <script type="text/javascript">
             $(document).ready(function(){
                 $.ajaxSetup({
@@ -129,57 +126,7 @@
                 });
             });
 
-            jQuery(document).ready(function(){
-                jQuery("#create_project_bar").click(function(event){
-                    event.preventDefault();
-
-                    $.ajax({
-                        url : '/en/home/login',
-                        type : 'POST',
-                        processData: false,
-                        contentType: false,
-                        success : function(result){
-                            console.log(result);
-                            if(result.auth){
-                                var url      = window.location.href;
-                                var origin   = window.location.origin;
-                                var locale   = url.substring(origin.length, origin.length + 4);
-                                window.location.replace(origin.concat(locale.concat('create-project')));
-                            }else{
-                                window.location.replace("/en/home");
-                                jQuery('#info_login').show();
-                            }
-
-                        }
-                    });
-                });
-            });
-
-            jQuery(document).ready(function(){
-                jQuery("#projects_bar").click(function(event){
-                    event.preventDefault();
-
-                    $.ajax({
-                        url : '/en/home/login',
-                        type : 'POST',
-                        processData: false,
-                        contentType: false,
-                        success : function(result){
-                            console.log(result);
-                            if(result.auth){
-                                var url      = window.location.href;
-                                var origin   = window.location.origin;
-                                var locale   = url.substring(origin.length, origin.length + 4);
-                                window.location.replace(origin.concat(locale.concat('projects')));
-                            }else{
-                                window.location.replace("/en/home");
-                                jQuery('#info_login').show();
-                            }
-                        }
-                    });
-                });
-            });
-
+            
 //changes en to sp
 jQuery(document).ready(function(){
     jQuery("#es").click(function(event){
@@ -226,5 +173,8 @@ jQuery(document).ready(function(){
     });
 });
 
+
 </script>
+@include('layouts/alerts')
+
 @yield('script')

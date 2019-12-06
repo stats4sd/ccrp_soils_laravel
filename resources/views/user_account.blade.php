@@ -5,7 +5,7 @@
 	<div class="col-sm-12">
 	 	<section class="content mb-5" id="group">
 
-	 		@if($privacy || Auth::id()==$user->id)
+	 		@if($user->privacy || Auth::id()==$user->id)
 			    <h1 class="mb-5"><b>{{$user->name}}</b></h1>
 		    @else 
 		    	<h1 class="mb-5"><b>{{$user->username}}</b></h1>
@@ -21,7 +21,7 @@
 					<div class="col-sm-5">
 						<p><b>{{ t("Kobotoolbox:") }}</b> {{$user->kobo_id}}</p>
 						<p><b>{{ t("Groups:") }}</b> {{$user->projects->count()}}</p>
-						@if($privacy || Auth::id()==$user->id)
+						@if($user->privacy || Auth::id()==$user->id)
 							<p><b>{{ t("Email:") }}</b> {{$user->email}}</p>
 						@endif
 						<p><b>{{ t("Created:") }}</b> {{$user->created_at->diffForHumans()}}</p>
@@ -63,7 +63,7 @@
 			</div>
 
 			<div id="Projects" class="tabcontent">
-				@foreach($projects as $project)   		     
+				@foreach($user->projects as $project)   		     
 	          		<div class="card mb-3" style="max-width: 540px;">
 	          			<div class="row no-gutters">
 						    <div class="col-md-4 img_card_project mb-3 mt-3">

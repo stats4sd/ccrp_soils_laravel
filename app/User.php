@@ -41,6 +41,11 @@ class User extends Authenticatable
 
     public $incrementing = true;
 
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+
     public function projects()
     {
         return $this->belongsToMany('App\Models\Project', 'projects_members')->withPivot('is_admin');;
