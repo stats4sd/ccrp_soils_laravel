@@ -17,6 +17,11 @@
 			</div>
 
 			<div id="All_Projects" class="tabcontent">
+				@if(!empty($projects))
+					<div class="alert alert-info" role="alert">
+						{{ t("There are not project in the platform") }}
+					</div>
+				@endif
 				@foreach($projects as $project)
 	   		     
 	          		<div class="card mb-3" style="max-width: 540px;">
@@ -38,7 +43,11 @@
 		   		
 			</div>
 			<div id="My_Projects" class="tabcontent">
-						
+				@if(!empty($projects))
+					<div class="alert alert-info" role="alert">
+						{{ t("There are not project in your account. Please go in the 'Create Project' section for creating one.") }}
+					</div>
+				@endif		
 	   		    @foreach($myprojects as $project)
 	   		     
 	          		<div class="card mb-3" style="max-width: 540px;">

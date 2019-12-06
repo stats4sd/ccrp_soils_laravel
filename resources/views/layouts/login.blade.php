@@ -56,7 +56,7 @@
            <button type="submit" class="btn btn-dark btn-block" name="login_user">Login</button>
          </form>
          <div class="text-center">
-           <a class="d-block small mt-3" href="/en/register">Register an Account</a>
+           <a class="d-block small mt-3" href={{url(app()->getLocale().'\register')}}>Register an Account</a>
          <a class="d-block small" href="forgot-password.php">Forgot Password?</a>
 
 

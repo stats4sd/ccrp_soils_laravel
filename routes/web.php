@@ -3,7 +3,9 @@
 Route::get('/', function() {
     return redirect(app()->getLocale());
 });
-
+Route::get('email', function() {
+    return view('invite_member_email');
+});
 Route::group([
     'prefix' => '{locale}',
     'where' => ['locale' => '[a-zA-Z]{2}'],
@@ -53,7 +55,6 @@ Route::group([
         Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
 
         // User profile
-        Route::get('/projects/members/{username}', 'UserAccountController@index');
         Route::post('/projects/members/{id}/upload', 'UserAccountController@upload');
         Route::post('/projects/members/{id}/validateDetails', 'UserAccountController@validateDetails');
         Route::post('/projects/members/{id}/changePassword', 'UserAccountController@changePassword');
@@ -96,8 +97,8 @@ Route::group([
 
 });
 
-Route::get('/{any}', function($any){
-    dd($any);
-});
+// Route::get('/{any}', function($any){
+//     dd($any);
+// });
 
 

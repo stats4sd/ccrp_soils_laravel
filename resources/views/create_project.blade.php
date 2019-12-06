@@ -160,7 +160,7 @@
 				    			<input style="width: 100%;" type="email" class="form-control" name="email_inserted" multiple>
 				    		</div>
 				    		<a href="#" onclick="openPage(event, 'Photo')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
-				    		<button type="submit" class="btn btn-dark btn-sm" id="send_email">FINISH</button>	
+				    		<button type="submit" class="btn btn-dark btn-sm" id="send_email">{{ t("FINISH") }}</button>	
 						</form>
 						</div>
 						<div class="col-sm-6">

@@ -60,30 +60,32 @@
 			  						</tr>
 			  					</thead>
 			  					<tbody>
-			  						@foreach($xls_forms as $xls_form)
-			  						<tr>
-			  							<td>{{ $xls_form->form_title}}</td>
-			  							<td>{{ $xls_form->pivot->form_kobo_id_string}}</td>
-			  							<td>{{ $xls_form->pivot->records}}</td>
-			  							<td>
-			  								@if($xls_form->pivot->deployed)
-			  									<p>{{ t("deployed") }}</p>
-			  								@else
-			  									<p>{{ t("undeployed") }}</p>
-			  								@endif
-			  							</td>
-			  							<td>
-			  								<div class="w3-show-inline-block">
-											  	<div class="w3-bar">
-											    	<button class="btn btn-dark btn-sm" id="deploy-form-button{{$xls_form->id}}" onclick="deploy({{$projects->id}},{{$xls_form->id}})">DEPLOY</button>	
-											 <!--    	@if($is_admin)
-												    	<button class="btn btn-dark btn-sm" onclick="deleteForm({{$projects->id}},{{$xls_form->id}})">DELETE</button>
-											    	@endif -->
-											 	 </div>
-											</div>
-			  							</td>
-			  						</tr>
-			  						@endforeach
+			  						
+				  						@foreach($xls_forms as $xls_form)
+				  						<tr>
+				  							<td>{{ $xls_form->form_title}}</td>
+				  							<td>{{ $xls_form->pivot->form_kobo_id_string}}</td>
+				  							<td>{{ $xls_form->pivot->records}}</td>
+				  							<td>
+				  								@if($xls_form->pivot->deployed)
+				  									<p>{{ t("deployed") }}</p>
+				  								@else
+				  									<p>{{ t("undeployed") }}</p>
+				  								@endif
+				  							</td>
+				  							<td>
+				  								<div class="w3-show-inline-block">
+												  	<div class="w3-bar">
+												    	<button class="btn btn-dark btn-sm" id="deploy-form-button{{$xls_form->id}}" onclick="deploy({{$projects->id}},{{$xls_form->id}})">DEPLOY</button>	
+												 <!--    	@if($is_admin)
+													    	<button class="btn btn-dark btn-sm" onclick="deleteForm({{$projects->id}},{{$xls_form->id}})">DELETE</button>
+												    	@endif -->
+												 	 </div>
+												</div>
+				  							</td>
+				  						</tr>
+				  						@endforeach
+			  					
 			  					</tbody>
 			  				</table>
 							<button class="btn btn-dark btn-sm" id="get-data-button" onclick="getData({{$projects->id}})">{{ t("GET DATA") }}</button>
