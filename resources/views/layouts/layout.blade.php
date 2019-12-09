@@ -17,7 +17,7 @@
 </head>
 
 <body class="card-page">
-    <section class="card" id="card-body">
+    <section class="card-background" id="card-body">
         <div class="row">
             <div class="card-body">
                 <div class="container mt-5">

@@ -10986,7 +10986,7 @@ body {
   height: 100%;
 }
 
-.card {
+.card-background {
   margin: 20px;
   /* Added */
   float: auto;
@@ -10995,6 +10995,7 @@ body {
   /* Added */
   margin-top: 20px;
   height: 100%;
+  background-color: white;
 }
 
 .card-login {

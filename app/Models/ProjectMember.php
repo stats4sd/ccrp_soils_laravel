@@ -18,8 +18,8 @@ class ProjectMember extends Model
     protected $table = 'projects_members';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
-    // protected $guarded = ['id'];
-    protected $fillable = [];
+    protected $guarded = ['id'];
+    //protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
 

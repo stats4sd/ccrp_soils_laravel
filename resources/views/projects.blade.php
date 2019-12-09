@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="col-sm-12">
 	 	<section class="content mb-5" id="group">
-			<h1 class="mb-5"><b>Projects</b></h1>
+			<h1 class="mb-5"><b>{{ t("Projects") }}</b></h1>
 
 	    	<!-- Tab links -->
 			<div class="tab mt-5">

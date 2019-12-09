@@ -71,13 +71,30 @@ class XlsformCrudController extends CrudController
                 'function' => function($entry){
                     $page = $entry->link_page;
                     return '<a href="'.url(''.$page.'').'" target="_blank">'.$page.'</a>';
-                } 
+                },
+               
             ],
             [
                 'name' => 'description',
                 'label' => 'Description',
                 'type' => 'text',
+                'limit' => 20,
             ],
+            [
+                'name' => 'media',
+                'label' => 'Media',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'created_at',
+                'label' => 'Created at',
+                'type' => 'dateTime'
+            ],
+            [
+                'name' => 'updated_at',
+                'label' => 'Updated at',
+                'type' => 'dateTime'
+            ]
         ]);
     }
         
@@ -115,7 +132,7 @@ class XlsformCrudController extends CrudController
 
 
             ],
-            [   // Upload
+            [   // Upload xls form 
                 'name' => 'path_file',
                 'label' => 'File',
                 'type' => 'upload',
@@ -135,6 +152,13 @@ class XlsformCrudController extends CrudController
                 'type' => 'simplemde',
                 'hint' => '<b>Insert a description that you want to display for the form</b>',
             ],
+            [
+                'name' => 'media',
+                'label' => 'Upload media File',
+                'type' => 'upload_multiple',
+                'upload' => true,
+                'disk' => 'uploads',
+            ],
         ]);
     }
 
@@ -143,19 +167,7 @@ class XlsformCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
-        Projectxlsform::where('xlsform_id', $id)->update(['deployed'=>0]);
-
-
+        // Projectxlsform::where('xlsform_id', $id)->update(['deployed'=>0]);
     }
-    public function update(UpdateRequest $request, $id)
-    {
-        // your additional operations before save here
-        $redirect_location = parent::updateCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        Projectxlsform::where('xlsform_id', $id)->update(['deployed'=>0]);
-
-
-        return $redirect_location;
-    }
+   
 }

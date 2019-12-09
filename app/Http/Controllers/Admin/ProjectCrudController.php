@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Backpack\CRUD\app\Http\Controllers\CrudController;
-use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-
-// VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ProjectRequest as StoreRequest;
 use App\Http\Requests\ProjectRequest as UpdateRequest;
+use App\User;
 use Backpack\CRUD\CrudPanel;
+use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
  * Class ProjectCrudController
@@ -39,29 +38,113 @@ class ProjectCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        // TODO: remove setFromDb() and manually define Fields and Columns
-        $this->crud->setFromDb();
-
-        // add asterisk for fields that are required in ProjectRequest
-        $this->crud->setRequiredFields(StoreRequest::class, 'create');
-        $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
     }
 
-    public function store(StoreRequest $request)
+    protected function setupListOperation()
     {
-        // your additional operations before save here
-        $redirect_location = parent::storeCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        $this->crud->setColumns([
+            [
+                'name' => 'creator',
+                'label' => 'Creator',
+                'type' => 'select',
+                'entity' => 'users',
+                'attribute' => 'name',
+                'model' => User::class,
+            ],
+            [
+                'name' => 'name',
+                'label' => 'Name',
+                'type' => 'text',
+            ],
+            
+            [
+                'name' => 'description',
+                'label' => 'Description',
+                'type' => 'text',
+                'limit' => 20
+            ],
+            [
+                'name' => 'status',
+                'label' => 'Status',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'group_invitations',
+                'label' => 'Who can invite',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'image',
+                'label' => 'Project Image',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'created_at',
+                'label' => 'Created at',
+                'type' => 'date'
+            ],
+            [
+                'name' => 'updated_at',
+                'label' => 'Updated at',
+                'type' => 'date'
+            ]
+        ]);
+    }
+        
+    protected function setupCreateOperation()
+    {
+
+        $this->crud->addFields([
+            [
+                'name' => 'creator_id',
+                'label' => 'Creator of the Project',
+                'type' => 'select2',
+                'entity' => 'users',
+                'attribute' => 'name',
+                'model' => User::class,
+            ],
+            [
+                'name' => 'name',
+                'label' => 'Name of the Project',
+                'type' => 'text',
+            ],
+            
+            [
+                'name' => 'description',
+                'label' => 'Description',
+                'type' => 'textarea',
+            ],
+            [
+                'name' => 'status',
+                'label' => 'Status',
+                'type' => 'select_from_array',
+                'options' => [
+                    'Public' => 'Public',
+                    'Private' => 'Private',
+                    'Hidden' => 'Hidden'
+                ],
+            ],
+            [
+                'name' => 'group_invitations',
+                'label' => 'Who can invite',
+                'type' => 'select_from_array',
+                'options' => [
+                    'all_members' => 'All group members',
+                    'group_admins' => 'Group admins only',
+                ],
+            ],
+            [
+                'name' => 'image',
+                'label' => 'Project Image',
+                'type' => 'text',
+            ],
+        ]);
     }
 
-    public function update(UpdateRequest $request)
+    
+
+    protected function setupUpdateOperation()
     {
-        // your additional operations before save here
-        $redirect_location = parent::updateCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        $this->setupCreateOperation();
     }
 }

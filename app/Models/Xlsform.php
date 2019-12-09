@@ -24,6 +24,9 @@ class Xlsform extends Model
     //protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
+    protected $casts = [
+        'media' => 'array'
+    ];
 
     /*
     |--------------------------------------------------------------------------
@@ -117,4 +120,56 @@ class Xlsform extends Model
 
         }
     }
+
+    //Mutator for media files 
+
+    public function setMediaAttribute($value)
+    {
+        $attribute_name = "media";
+        $disk = "uploads";
+        $destination_path = "media";
+
+        $this->uploadMultipleFilesToDisk($value, $attribute_name, $disk, $destination_path);
+    }
+
+     public function uploadMultipleFilesToDisk($value, $attribute_name, $disk, $destination_path)
+    {
+        $request = \Request::instance();
+        if (! is_array($this->{$attribute_name})) {
+            $attribute_value = json_decode($this->{$attribute_name}, true) ?? [];
+        } else {
+            $attribute_value = $this->{$attribute_name};
+        }
+        $files_to_clear = $request->get('clear_'.$attribute_name);
+
+        // if a file has been marked for removal,
+        // delete it from the disk and from the db
+        if ($files_to_clear) {
+            foreach ($files_to_clear as $key => $filename) {
+                \Storage::disk($disk)->delete($filename);
+                $attribute_value = array_where($attribute_value, function ($value, $key) use ($filename) {
+                    return $value != $filename;
+                });
+            }
+        }
+
+        // if a new file is uploaded, store it on disk and its filename in the database
+        if ($request->hasFile($attribute_name)) {
+            foreach ($request->file($attribute_name) as $file) {
+                if ($file->isValid()) {
+                   
+                    // 1. Move the new file to the correct path with the original name
+                    $file_path = $file->storeAs($destination_path,$file->getClientOriginalName(), $disk);
+
+                    // 2. Add the public path to the database
+                    $attribute_value[] = $file_path;
+                }
+            }
+        }
+
+        $this->attributes[$attribute_name] = json_encode($attribute_value);
+    }
+
+
+
 }

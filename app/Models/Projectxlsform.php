@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Project;
+use App\Models\Xlsform;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -35,6 +37,15 @@ class Projectxlsform extends Pivot
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_id');
+    }
+
+    public function xlsforms()
+    {
+        return $this->belongsToMany(Xlsform::class, 'xlsform_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

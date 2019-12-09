@@ -45,12 +45,14 @@ body{
   height: 100%;
 }
 
-.card {
+.card-background {
   margin:  20px; /* Added */
   float: auto; /* Added */
   margin-bottom: 20px; /* Added */
   margin-top: 20px;
   height: 100%;
+  background-color: white;
+
 }
 
 .card-login {

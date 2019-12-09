@@ -31,7 +31,7 @@ class ProjectMemberCrudController extends CrudController
         */
         CRUD::setModel('App\Models\ProjectMember');
         CRUD::setRoute(config('backpack.base.route_prefix') . '/projectmember');
-        CRUD::setEntityNameStrings('projectmember', 'project_members');
+        CRUD::setEntityNameStrings('projectmember', 'project members');
 
         /*
         |--------------------------------------------------------------------------
