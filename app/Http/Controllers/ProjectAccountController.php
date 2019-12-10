@@ -17,48 +17,48 @@ use Illuminate\Support\Facades\Redirect;
 
 class ProjectAccountController extends Controller
 {
-    public function index($locale, $slug)
-    {
+    // public function index($locale, $slug)
+    // {
     	
-    	$users = DB::table('users')->get();
-    	$projects = Project::where('slug','like',$slug)->first();    
-        $xls_forms = $projects->xls_forms;
-        $members = $projects->users;
-        $is_member = $this->privacy($projects, $members);
+    // 	$users = DB::table('users')->get();
+    // 	$projects = Project::where('slug','like',$slug)->first();    
+    //     $xls_forms = $projects->xls_forms;
+    //     $members = $projects->users;
+    //     $is_member = $this->privacy($projects, $members);
         
         
-        $auth = $members->filter(function($value){
-            return $value->pivot->is_admin==1;
-        });
-        $is_admin =$auth->pluck('id')->contains(Auth::id());
-        $invitations = $this->invitations($projects, $is_admin, $is_member);
+    //     $auth = $members->filter(function($value){
+    //         return $value->pivot->is_admin==1;
+    //     });
+    //     $is_admin =$auth->pluck('id')->contains(Auth::id());
+    //     $invitations = $this->invitations($projects, $is_admin, $is_member);
             
-    	return view('project_account', compact('users', 'projects', 'members','xls_forms', 'is_admin', 'is_member', 'invitations'));  	
-    }
+    // 	return view('project_account', compact('users', 'projects', 'members','xls_forms', 'is_admin', 'is_member', 'invitations'));  	
+    // }
 
-    public function privacy($project, $members)
-    {
-        if($project->status == "Public")
-        {
-            $user = Auth::id();
-            return $user;
+    // public function privacy($project, $members)
+    // {
+    //     if($project->status == "Public")
+    //     {
+    //         $user = Auth::id();
+    //         return $user;
 
-        }else if($project->status == "Private")
-        {
-            $is_member = $members->contains(Auth::id());
-            return $is_member;
-        }
-    }
+    //     }else if($project->status == "Private")
+    //     {
+    //         $is_member = $members->contains(Auth::id());
+    //         return $is_member;
+    //     }
+    // }
 
-    public function invitations($project, $is_admin, $is_member)
-    {
-        if($project->group_invitations == 'group_admins')
-        {
-            return $is_admin;
-        }elseif($project->group_invitations == 'all_members'){
-            return $is_member;
-        }
-    }
+    // public function invitations($project, $is_admin, $is_member)
+    // {
+    //     if($project->group_invitations == 'group_admins')
+    //     {
+    //         return $is_admin;
+    //     }elseif($project->group_invitations == 'all_members'){
+    //         return $is_member;
+    //     }
+    // }
     
     public function upload(Request $request, $en, $id)
     {

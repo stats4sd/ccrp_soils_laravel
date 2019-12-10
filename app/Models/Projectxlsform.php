@@ -19,7 +19,7 @@ class Projectxlsform extends Pivot
     */
 
     protected $table = 'project_xlsform';
-    // protected $primaryKey = 'id';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
     //protected $fillable = [];
@@ -37,15 +37,17 @@ class Projectxlsform extends Pivot
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function projects()
+    public function project()
     {
-        return $this->belongsToMany(Project::class, 'project_id');
+        return $this->belongsToMany(Project::class);
     }
 
-    public function xlsforms()
+    public function xls_form()
     {
-        return $this->belongsToMany(Xlsform::class, 'xlsform_id');
+        return $this->belongsToMany(Xlsform::class);
     }
+
+
 
     /*
     |--------------------------------------------------------------------------

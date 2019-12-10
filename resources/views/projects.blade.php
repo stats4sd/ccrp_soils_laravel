@@ -17,7 +17,7 @@
 			</div>
 
 			<div id="All_Projects" class="tabcontent">
-				@if(!empty($projects))
+				@if(empty($projects))
 					<div class="alert alert-info" role="alert">
 						{{ t("There are not project in the platform") }}
 					</div>
@@ -33,7 +33,7 @@
 								<div class="card-body">
 									<a href="projects/{{$project->slug}}"><h5 class="card-title"><b>{{$project->name}}</b></h5></a>
 									<p class="card-text">{{$project->description}}</p>
-									<p class="card-text"><small class="text-muted">{{$project->created_at}}</small></p>
+									<p class="card-text"><small class="text-muted"><b>Created at :</b>{{$project->created_at}}</small></p>
 								</div>
 						    </div>
 						</div>	
@@ -43,12 +43,12 @@
 		   		
 			</div>
 			<div id="My_Projects" class="tabcontent">
-				@if(!empty($projects))
+				@if(empty($projects))
 					<div class="alert alert-info" role="alert">
 						{{ t("There are not project in your account. Please go in the 'Create Project' section for creating one.") }}
 					</div>
 				@endif		
-	   		    @foreach($myprojects as $project)
+	   		    @foreach( Auth::user()->projects as $project)
 	   		     
 	          		<div class="card mb-3" style="max-width: 540px;">
 	          			<div class="row no-gutters">

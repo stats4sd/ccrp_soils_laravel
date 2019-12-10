@@ -78,4 +78,8 @@ class Project extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

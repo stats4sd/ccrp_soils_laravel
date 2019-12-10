@@ -63,6 +63,11 @@
 			</div>
 
 			<div id="Projects" class="tabcontent">
+				@if(empty($projects))
+				<div class="alert alert-info" role="alert">
+					{{ t("There are no projects associated with this account. Creating one use 'Create a Project' in the navbar.") }}
+				</div>
+				@endif
 				@foreach($user->projects as $project)   		     
 	          		<div class="card mb-3" style="max-width: 540px;">
 	          			<div class="row no-gutters">
@@ -330,7 +335,6 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 		var form = document.getElementById('profile_details');
 		var form_data = new FormData(form);
-		console.log(form_data);
 
 		$.ajax({
 	        url : '/en/projects/members/{{$user->id}}/validateDetails', 
@@ -342,7 +346,6 @@ jQuery(document).ready(function(){
 	        	
 	        	var type = result.type;
 	        	var message = result.message;
-	        	console.log(result);
 
 	        	if(type == 'error'){
 	        		jQuery('#validate_danger').show();
@@ -370,7 +373,6 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 		var form = document.getElementById('password');
 		var form_data = new FormData(form);
-		console.log(form_data);
 
 		$.ajax({
 	        url : '/en/projects/members/{{$user->id}}/changePassword', 
@@ -405,23 +407,20 @@ jQuery(document).ready(function(){
 jQuery(document).ready(function(){
 	jQuery("#delete_profile").click(function(event){
 		event.preventDefault();
-		
-		if (confirm('Are you sure to delete the your profile {{$user->username}}?')) {
-		    
+	
+		if (confirm('Are you sure to delete your profile {{$user->username}}?')) {
 		    $.ajax({
 	        url : '/en/projects/members/{{$user->id}}/deleteProfile', 
 	        type : 'POST',
 	        processData: false, 
 	        contentType: false,
 	        success : function(result){
-	        	console.log(result);
 		        	if(result.type=="success")
 		        	{
 		        		window.location.replace("/en/home");
 		        	}      	        	        	
 		        }
-		    });
-		
+		    });	
 		} 		
 	});
 });
@@ -432,7 +431,6 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 		var form = document.getElementById('kobo');
 		var form_data = new FormData(form);
-		console.log(form_data);
 
 		$.ajax({
 	        url : '/en/projects/members/{{$user->id}}/kobo-user', 
@@ -447,7 +445,6 @@ jQuery(document).ready(function(){
 	        	jQuery("#current_account").html(message);
 
 	        }
-
 	    });
 	});
 });

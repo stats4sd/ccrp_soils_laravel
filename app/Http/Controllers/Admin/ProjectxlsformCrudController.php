@@ -31,7 +31,7 @@ class ProjectxlsformCrudController extends CrudController
         */
         CRUD::setModel('App\Models\Projectxlsform');
         CRUD::setRoute(config('backpack.base.route_prefix') . '/projectxlsform');
-        CRUD::setEntityNameStrings('projectxlsform', 'project Xlsforms');
+        CRUD::setEntityNameStrings('project xlsform', 'project Xlsforms');
     }
     
     protected function setupListOperation()
@@ -39,49 +39,84 @@ class ProjectxlsformCrudController extends CrudController
         $this->crud->setColumns([
             [
                 'name' => 'project_id',
-                'label' => 'Project Name',
+                'label' => 'Project',
                 'type' => 'select',
-                'entity' => 'projects',
+                'entity' => 'project',
                 'attribute' => 'name',
                 'model' => Project::class,
             ],
-            // [
-            //     'name' => 'xlsform_id',
-            //     'label' => 'Xls Form',
-            //     'type' => 'select',
-            //     'entity' => 'xlsforms',
-            //     'attribute' => 'form_title',
-            //     'model' => Xlsform::class,
-            // ],
-            
-            // [
-            //     'name' => 'form_kobo_id',
-            //     'label' => 'form_kobo_id',
-            //     'type' => 'number',
-            // ],
+            [
+                'name' => 'xlsform_id',
+                'label' => 'Select the xls form for this project',
+                'type' => 'select',
+                'entity' => 'xls_form',
+                'attribute' => 'form_title',
+                'model' => Xlsform::class,
+            ],
+            [
+                'name' => 'form_kobo_id',
+                'label' => 'Form kobo id',
+                'type' => 'number',
+            ],
+            [
+                'name' => 'deployed',
+                'label' => 'Is the form deployed?',
+                'type' => 'checkbox',      
+            ], 
+            [
+                'name' => 'records',
+                'label' => 'Number of records',
+                'type' => 'number',      
+            ],
+            [
+                'name' => 'form_kobo_id_string',
+                'label' => 'Form kobo id string',
+                'type' => 'text',
+            ],
             
         ]);
     }
         
     protected function setupCreateOperation()
     {
-
         $this->crud->addFields([
             [
                 'name' => 'project_id',
-                'label' => 'Project',
+                'label' => 'Project Name',
                 'type' => 'select2',
-                'entity' => 'projects',
+                'entity' => 'project',
                 'attribute' => 'name',
                 'model' => Project::class,
             ],
             [
-                'name' => 'xlsform',
-                'label' => 'Name of the Project',
+                'name' => 'xlsform_id',
+                'label' => 'Select the xls form for this project',
+                'type' => 'select2',
+                'entity' => 'xls_form',
+                'attribute' => 'form_title',
+                'model' => Xlsform::class,
+            ],
+            [
+                'name' => 'form_kobo_id',
+                'label' => 'Form kobo id',
+                'type' => 'number',
+            ],
+            [
+                'name' => 'deployed',
+                'label' => 'Is the form deployed?',
+                'type' => 'checkbox',      
+            ], 
+            [
+                'name' => 'records',
+                'label' => 'Number of records',
+                'type' => 'number',      
+            ],
+            [
+                'name' => 'form_kobo_id_string',
+                'label' => 'Form kobo id string',
                 'type' => 'text',
             ],
-            
-           
+
         ]);
     }
 

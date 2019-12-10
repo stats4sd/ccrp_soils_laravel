@@ -57,7 +57,7 @@
          </form>
          <div class="text-center">
            <a class="d-block small mt-3" href={{url(app()->getLocale().'\register')}}>Register an Account</a>
-         <a class="d-block small" href="forgot-password.php">Forgot Password?</a>
+         <a class="d-block small" href={{url(app()->getLocale().'\password\reset')}}>Forgot Password?</a>
 
 
          </div>

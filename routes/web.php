@@ -23,8 +23,6 @@ Route::group([
     Route::post('/register/store', 'RegisterController@store');
     Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
 
-    
-
     // Password Reset Routes...
     Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
@@ -52,7 +50,7 @@ Route::group([
 
     // QR Code Stuff
     Route::get('qr-codes', function() {
-        return view('qr-codes');
+        return view('qr_code');
     });
 
     Route::post('qr-newcodes', 'QrController@newCodes');
@@ -70,9 +68,6 @@ Route::group([
         'middleware' => ['auth'],
     ], function() {
         
-        
-    
-
         Route::get('create-project', 'CreateProjectController@index');
         Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
 
@@ -98,9 +93,9 @@ Route::group([
         Route::post('/create-project/upload', 'CreateProjectController@upload');
         Route::post('/create-project/store', 'CreateProjectController@store');
         Route::post('/create-project/send', 'CreateProjectController@sendEmail');
-
+        //Project
         Route::get('/projects', 'ProjectController@index');
-        Route::get('/projects/{slug}', 'ProjectAccountController@index');
+        // Route::get('/projects/{slug}', 'ProjectAccountController@index');
         Route::post('/projects/{id}/validateGroup', 'ProjectAccountController@validateGroup');
         Route::post('/projects/{id}/upload', 'ProjectAccountController@upload');
         Route::post('/projects/{id}/send', 'ProjectAccountController@sendEmail');

@@ -12,29 +12,64 @@ use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
+    /**
+     * shows the projects in 'All Projects' page that are not deleted and not hidden status.
+     * @return [Collection] [projects]
+     */
 	public function index()
     {
-    	$users = DB::table('users')->get();
     	$projects = DB::table('projects')->where('deleted_at', null)->whereIn('status', ['Private', 'Public'])->get();
-        $myprojects = $my_projects = Auth::user()->projects;
-
-
-    	return view('projects', compact('users', 'projects','myprojects'));
+    	return view('projects', compact('projects'));
     }
 
-    // public function timeString()
-    // {
-    // 	$projects = DB::table('projects')->where('deleted_at', null)->whereIn('status', ['Private', 'Public'])->get();
-    //     //dd($projects);
-        
-    //     	foreach ($projects as $project) {
-    //             $project->created_at= Carbon::createFromTimeStamp(strtotime($project->created_at))->diffForHumans();
-    //     	}
+    
+    /**
+     * 
+     * @param  [type]  $locale  [description]
+     * @param  Project $project [description]
+     * @return [type]           [description]
+     */
+    public function show($locale, Project $project)
+    {
+        $users = DB::table('users')->get();
+        $is_member = $this->privacy($project);
+        $auth = $project->users->filter(function($value){
+            return $value->pivot->is_admin==1;
+        });
+        $is_admin =$auth->pluck('id')->contains(Auth::id());
+        $invitations = $this->invitations($project, $is_admin, $is_member);
+            
+        return view('project_account', compact('users', 'project', 'is_admin', 'is_member', 'invitations'));    
+    } 
 
-        
-    // 	return $projects;
-    	
-    // }
+    public function privacy($project)
+    {
+        //checks the status of the project and return who can see the details of the project
+        if($project->status == "Public")
+        {
+            $user = Auth::id();
+            return $user;
+
+        }else if($project->status == "Private")
+        {
+            $is_member = $project->users->contains(Auth::id());
+            return $is_member;
+        }
+    }
+
+    public function invitations($project, $is_admin, $is_member)
+    {
+        if($project->group_invitations == 'group_admins')
+        {
+            return $is_admin;
+        }elseif($project->group_invitations == 'all_members'){
+            return $is_member;
+        }
+    }
+
+
+
+  
     
 
 }

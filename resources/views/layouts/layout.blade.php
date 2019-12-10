@@ -33,14 +33,18 @@
                             </ul>
                         </div>
 
-                        <div class="dropdown">
-                            <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">{{ t("Start Sampling") }}<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href={{url(app()->getLocale().'\start-sampling')}}>{{ t("Start Sampling") }}</a></li>
-                                <li><a href={{url(app()->getLocale().'\data-management')}}>{{ t("Data Management") }}</a></li>
-                            </ul>
+                         <div class="btn dropdown">
+                            <a href="{{url(app()->getLocale().'\start-sampling')}}"  style="color:black;">{{ t("Start Sampling") }}<b class="caret"></b></a>
                         </div>
 
+                        <!-- <div class="dropdown">
+                            <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">{{ t("Start Sampling") }}<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href={{url(app()->getLocale().'\start-sampling')}}>{{ t("Start Sampling") }}</a></li> -->
+                                <!-- <li><a href={{url(app()->getLocale().'\data-management')}}>{{ t("Data Management") }}</a></li> -->
+                           <!--  </ul>
+                        </div>
+ -->
                         <div class="dropdown">
                             <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">{{ t("Tools") }}<b class="caret"></b></a>
                             <ul class="dropdown-menu">
