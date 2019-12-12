@@ -67,9 +67,12 @@ Route::group([
     Route::group([
         'middleware' => ['auth'],
     ], function() {
-        
+        //Create Project
         Route::get('create-project', 'CreateProjectController@index');
         Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
+        Route::post('/create-project/upload', 'CreateProjectController@upload');
+        Route::post('/create-project/store', 'CreateProjectController@store');
+        Route::post('/create-project/send', 'CreateProjectController@sendEmail');
 
         // User profile
         Route::resources([
@@ -87,24 +90,19 @@ Route::group([
             return view('data_management');
         });
 
-        Route::get('/create-project', 'CreateProjectController@index');
-        Route::post('/create-project/validateValue', 'CreateProjectController@validateValue');
+        
+       
 
-        Route::post('/create-project/upload', 'CreateProjectController@upload');
-        Route::post('/create-project/store', 'CreateProjectController@store');
-        Route::post('/create-project/send', 'CreateProjectController@sendEmail');
-        //Project
+       
+        //Projects
         Route::get('/projects', 'ProjectController@index');
-        // Route::get('/projects/{slug}', 'ProjectAccountController@index');
-        Route::post('/projects/{id}/validateGroup', 'ProjectAccountController@validateGroup');
-        Route::post('/projects/{id}/upload', 'ProjectAccountController@upload');
-        Route::post('/projects/{id}/send', 'ProjectAccountController@sendEmail');
-
-        Route::post('/projects/{id}/delete', 'ProjectAccountController@delete');
-        Route::post('/projects/{id}/change-status', 'ProjectAccountController@changeStatus');
-        Route::post('/projects/deleteForm', 'ProjectAccountController@deleteForm');
-
-        Route::post('/projects/deleteMember', 'ProjectAccountController@deleteMember');
+        Route::post('/projects/{id}/uploadImage', 'ProjectController@uploadImage');
+        Route::post('/projects/changeStatus', 'ProjectController@changeStatusUser');
+        Route::post('/projects/deleteMember', 'ProjectController@deleteMember');
+        Route::post('/projects/{id}/delete', 'ProjectController@destroy');
+        Route::post('/projects/{id}/validateGroup', 'ProjectController@validateGroup');
+        Route::post('/projects/{id}/send', 'ProjectController@sendEmail');
+    
 
         Route::post('/kobo/publish', 'KoboController@publish');
         Route::post('/kobo/pull', 'KoboController@getProjectData');

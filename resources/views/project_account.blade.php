@@ -94,9 +94,8 @@
 
 				<div id="Members" class="tabcontent">
 
-		
-				 	<button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonInvite"><font size="2">{{ t("INVITE") }}</font></button>
 				 	@if($invitations)
+				 	<button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonInvite"><font size="2">{{ t("INVITE") }}</font></button>
 					    <button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonShare" onclick="share({{$xls_form->id}},{{$project->id}})"><font size="2">{{ t("SHARE") }}</font></button>
 					@endif
 
@@ -329,7 +328,7 @@
 
 					   	@else
 					   		<div class="alert alert-danger alert-block" id="is_not_admin">
-					   			<p><b>{{ t("Access is not allowed.</b> Only the admins of this project have the permission for this page.") }}</p>
+					   			<p><b>{{ t("Access is not allowed.") }}</b> {{ ("Only the admins of this project have the permission for this page.") }}</p>
 					   		</div>
 					   	@endif
 				</div>
@@ -349,25 +348,12 @@
 
 <script type="text/javascript">
 
-function deleteForm(projectId, formId) {
-	event.preventDefault();
-	jQuery.ajax('{{ url('en/projects/deleteForm') }}', {
-            method: "POST",
-            data: {
-                projectId: projectId,
-                formId: formId,
-            }
-        }).done(function(res) {
-        	location.reload();
 
-            console.log(res);
-        });
-}
 // Changes status member from button CHANGE STATUS
 function changeStatus(projectId, userId)
 {
 	event.preventDefault();
-	jQuery.ajax('{{ url('en/projects/changeStatus') }}', {
+	jQuery.ajax('{{ url(app()->getLocale().'/projects/changeStatus') }}', {
             method: "POST",
             data: {
                 projectId: projectId,
@@ -388,7 +374,7 @@ function deleteMember(projectId, userId)
 	event.preventDefault();
 	if(confirm('Are you sure to delete this user?'))
 	{
-	jQuery.ajax('{{ url('en/projects/deleteMember') }}', {
+	jQuery.ajax('{{ url(app()->getLocale().'/projects/deleteMember') }}', {
             method: "POST",
             data: {
                 projectId: projectId,
@@ -450,7 +436,7 @@ jQuery(document).ready(function(){
 		var form_data = new FormData(form);
 
         $.ajax({
-	        url : '/en/projects/{{$project->id}}/upload',
+	        url : '{{$project->id}}/uploadImage',
 	        type : 'POST',
 	        data : form_data,
 	        processData: false,
@@ -493,7 +479,7 @@ jQuery(document).ready(function(){
 		console.log(form_data);
 
 		$.ajax({
-	        url : '/en/projects/{{$project->id}}/validateGroup',
+	        url : '{{$project->id}}/validateGroup',
 	        type : 'POST',
 	        data : form_data,
 	        processData: false,
@@ -528,7 +514,7 @@ jQuery(document).ready(function(){
 		if (confirm('Are you sure to delete the project {{$project->name}}?')) {
 
 		    $.ajax({
-	        url : '/en/projects/{{$project->id}}/delete',
+	        url : '{{$project->id}}/delete',
 	        type : 'POST',
 	        processData: false,
 	        contentType: false,
