@@ -63,11 +63,6 @@
 			</div>
 
 			<div id="Projects" class="tabcontent">
-				@if(empty($projects))
-				<div class="alert alert-info" role="alert">
-					{{ t("There are no projects associated with this account. Creating one use 'Create a Project' in the navbar.") }}
-				</div>
-				@endif
 				@foreach($user->projects as $project)   		     
 	          		<div class="card mb-3" style="max-width: 540px;">
 	          			<div class="row no-gutters">
@@ -103,6 +98,8 @@
 								<form method="post" action="{{ url('avatar/upload')}}" name="Upload" id="upload_image">
 						  		{{ csrf_field() }}
 						  		<div class="form-group">
+						  			<div class="alert alert-danger alert-block" id="error"></div>
+									<div class="alert alert-success alert-block" id="success"></div>
 								
 									<label> {{ t("Select Photo for Upload") }}</label>
 									<br>
@@ -264,23 +261,7 @@
 
 @section('script')
 <script type="text/javascript">	
-	function openPage(evt, pageName) {
-	var i, tabcontent, tablinks;
-	tabcontent = document.getElementsByClassName("tabcontent");
-	for (i = 0; i < tabcontent.length; i++) {
-		tabcontent[i].style.display = "none";
-	}
-	tablinks = document.getElementsByClassName("tablinks");
-	for (i = 0; i < tablinks.length; i++) {
-		tablinks[i].className = tablinks[i].className.replace(" active", "");
-	}
-	document.getElementById(pageName).style.display = "block";
-	evt.currentTarget.className += " active";
-}
-// Get the element with id="defaultOpen" and click on it
-window.onload = function openDefaultPage() {
-	document.getElementById("defaultOpen").click();
-}
+	
 
 //check file image validation
 
@@ -294,7 +275,7 @@ jQuery(document).ready(function(){
 		var form_data = new FormData(form);
        
         $.ajax({
-	        url : '/en/projects/members/{{$user->id}}/upload', 
+	        url : '{{$user->id}}/upload', 
 	        type : 'POST',
 	        data : form_data,
 	        processData: false, 
@@ -337,26 +318,21 @@ jQuery(document).ready(function(){
 		var form_data = new FormData(form);
 
 		$.ajax({
-	        url : '/en/projects/members/{{$user->id}}/validateDetails', 
+	        url : '{{$user->id}}/validateDetails', 
 	        type : 'POST',
 	        data : form_data,
 	        processData: false, 
 	        contentType: false,
 	        success : function(result){
-	        	
-	        	var type = result.type;
-	        	var message = result.message;
-
-	        	if(type == 'error'){
+	        	if(!result.success){
 	        		jQuery('#validate_danger').show();
 	        		jQuery('#validate_success').hide();
-	        		jQuery("#validate_danger").html(result);
+	        		jQuery("#validate_danger").html(result.message);
 				} else {
 					jQuery('#validate_success').show();
 					jQuery('#validate_danger').hide();	
-	        		jQuery("#validate_success").html(result);
+	        		jQuery("#validate_success").html('Account updated');
 	        		location.reload();
-
 				}
 	        }
 
@@ -375,7 +351,7 @@ jQuery(document).ready(function(){
 		var form_data = new FormData(form);
 
 		$.ajax({
-	        url : '/en/projects/members/{{$user->id}}/changePassword', 
+	        url : '{{$user->id}}/changePassword', 
 	        type : 'POST',
 	        data : form_data,
 	        processData: false, 
@@ -393,8 +369,9 @@ jQuery(document).ready(function(){
 				} else {
 					jQuery('#password_success').show();
 					jQuery('#password_danger').hide();	
+					jQuery("#password_success").html('New pasword updated');
 	        		
-	        		location.reload();
+	        		//location.reload();
 
 				}
 	        }
@@ -410,7 +387,7 @@ jQuery(document).ready(function(){
 	
 		if (confirm('Are you sure to delete your profile {{$user->username}}?')) {
 		    $.ajax({
-	        url : '/en/projects/members/{{$user->id}}/deleteProfile', 
+	        url : '{{$user->id}}/deleteProfile', 
 	        type : 'POST',
 	        processData: false, 
 	        contentType: false,
@@ -433,7 +410,7 @@ jQuery(document).ready(function(){
 		var form_data = new FormData(form);
 
 		$.ajax({
-	        url : '/en/projects/members/{{$user->id}}/kobo-user', 
+	        url : '{{$user->id}}/kobo-user', 
 	        type : 'POST',
 	        data : form_data,
 	        processData: false, 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\createProjectMember;
+use App\Mail\InviteMember;
 use App\Models\Invite;
 use App\Models\Project;
 use App\Models\ProjectMember;
@@ -13,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 
 class ProjectController extends Controller
 {
@@ -22,7 +25,7 @@ class ProjectController extends Controller
      */
 	public function index()
     {
-    	$projects = DB::table('projects')->where('deleted_at', null)->whereIn('status', ['Private', 'Public'])->get();
+    	$projects = Project::where('deleted_at', null)->whereIn('status', ['Private', 'Public'])->get();
     	return view('projects', compact('projects'));
     }
 
@@ -120,18 +123,19 @@ class ProjectController extends Controller
     {
         $user_id = $request['userId'];
         $project_id = $request['projectId'];
+
         $project_member = ProjectMember::where('user_id', $user_id)->where('project_id', $project_id)->get();
         $current_status = $project_member[0]->is_admin;
-        if($current_status)
-        {
-            ProjectMember::where('user_id', $user_id)->where('project_id', $project_id)->update(['is_admin'=>0]);
-            return response()->json(["type"=>'info', "status"=>"User"]);
-        } else {
-            ProjectMember::where('user_id', $user_id)->where('project_id', $project_id)->update(['is_admin'=>1]);
-            return response()->json(["type"=>'info', "status"=>"Admin"]);
+        ProjectMember::where('user_id', $user_id)->where('project_id', $project_id)->update(['is_admin'=>!$current_status]);
+        if(!$current_status){
+
+            return response()->json(["type"=>'info', "status"=>'Admin']);
+        }else {
+            return response()->json(["type"=>'info', "status"=>'User']);
 
         }
-        return response()->json(["type"=>'info', "message"=>"Status changed"]);
+        
+       
     }
 
     public function deleteMember(Request $request)
@@ -145,9 +149,8 @@ class ProjectController extends Controller
     }
 
      // soft delete project
-    public function destroy(Project $project)
+    public function destroy($locale, $id)
     {
-        dd($project);
         $project_id = Project::find($id)->delete();
         return response()->json(["type"=>'success', "project_id"=>$id]);
     }
@@ -189,7 +192,7 @@ class ProjectController extends Controller
         $project = Project::find($id);
         $creator_id = $project->creator_id;
         $creator_name = User::find($creator_id)->name;
-    
+        
         if(!empty($request->name_selected))
         {
             foreach ($request->name_selected as $user_id) 
@@ -204,7 +207,6 @@ class ProjectController extends Controller
                 ];
                
                 Mail::to($user_invited->email)->send(new InviteMember($data));   
-                   
             }
         }
         if(!empty($request->email_inserted))
@@ -231,7 +233,7 @@ class ProjectController extends Controller
             }  
         } 
                 
-        return redirect::back();
+        return Redirect::back();
     }
 
      public function createProjectMember($user_id, $id, $key)

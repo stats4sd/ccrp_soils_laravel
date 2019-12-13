@@ -98,39 +98,56 @@
     </section>
 </body>
 
-        <script src={{asset("js/app.js")}}></script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $.ajaxSetup({
-                    headers:
-                    { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-                });
+<script src={{asset("js/app.js")}}></script>
+<script type="text/javascript">
+    function openPage(evt, pageName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(pageName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+// Get the element with id="defaultOpen" and click on it
+window.onload = function openDefaultPage() {
+    document.getElementById("defaultOpen").click();
+}
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers:
+            { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+        });
+    });
+
+    jQuery(document).ready(function(){
+        jQuery('#info_login').hide();
+        jQuery("#admin").click(function(event){
+            event.preventDefault();
+
+            $.ajax({
+                url : '/en/home/admin',
+                type : 'POST',
+                processData: false,
+                contentType: false,
+                success : function(result){
+                    console.log(result);
+                    if(result.admin){
+                        window.location.replace("/admin");
+                    }else{
+                        window.location.replace("/en/home");
+                        jQuery('#info_login').show();
+                    }
+                }
             });
+        });
+    });
 
-            jQuery(document).ready(function(){
-                jQuery('#info_login').hide();
-                jQuery("#admin").click(function(event){
-                    event.preventDefault();
-
-                    $.ajax({
-                        url : '/en/home/admin',
-                        type : 'POST',
-                        processData: false,
-                        contentType: false,
-                        success : function(result){
-                            console.log(result);
-                            if(result.admin){
-                                window.location.replace("/admin");
-                            }else{
-                                window.location.replace("/en/home");
-                                jQuery('#info_login').show();
-                            }
-                        }
-                    });
-                });
-            });
-
-            
+    
 //changes en to sp
 jQuery(document).ready(function(){
     jQuery("#es").click(function(event){

@@ -39,11 +39,7 @@
 		   		
 			</div>
 			<div id="My_Projects" class="tabcontent">
-				@if(empty($projects))
-					<div class="alert alert-info" role="alert">
-						{{ t("There are not project in your account. Please go in the 'Create Project' section for creating one.") }}
-					</div>
-				@endif		
+				
 	   		    @foreach( Auth::user()->projects as $project)
 	   		     
 	          		<div class="card mb-3" style="max-width: 540px;">
@@ -69,24 +65,3 @@
 </div>
 @endsection
 
-<script type="text/javascript">	
-function openPage(evt, pageName) {
-	var i, tabcontent, tablinks;
-	tabcontent = document.getElementsByClassName("tabcontent");
-	for (i = 0; i < tabcontent.length; i++) {
-		tabcontent[i].style.display = "none";
-	}
-	tablinks = document.getElementsByClassName("tablinks");
-	for (i = 0; i < tablinks.length; i++) {
-		tablinks[i].className = tablinks[i].className.replace(" active", "");
-	}
-	document.getElementById(pageName).style.display = "block";
-	evt.currentTarget.className += " active";
-}
-// Get the element with id="defaultOpen" and click on it
-window.onload = function openDefaultPage() {
-	document.getElementById("defaultOpen").click();
-}
-
-
-</script>

@@ -311,6 +311,9 @@
 			       		</div>
 
 						<div class="row mt-3">
+						<form action="{{$project->id}}/destroy" method="post">
+							
+							@csrf
 							<div class="col-sm-8">
 						  		<b>{{ t("Delete Project") }}</b>
 						  		<p>{{ t("You are about to delete this project.") }}</p>
@@ -321,9 +324,10 @@
 							</div>
 
 
-							<div class="col-sm-4 mt-5">
-					   			<button id="delete_project" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("DELETE PROJECT") }}</button>
+							<div class="col-sm mt-5">
+					   			<button  id='delete_project' class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("DELETE PROJECT") }}</button>
 					   		</div>
+					   	</form>
 				       	</div>
 
 					   	@else
@@ -388,27 +392,7 @@ function deleteMember(projectId, userId)
     }
 }
 
-
-function openPage(evt, pageName) {
-	var i, tabcontent, tablinks;
-	tabcontent = document.getElementsByClassName("tabcontent");
-	for (i = 0; i < tabcontent.length; i++) {
-		tabcontent[i].style.display = "none";
-	}
-	tablinks = document.getElementsByClassName("tablinks");
-	for (i = 0; i < tablinks.length; i++) {
-		tablinks[i].className = tablinks[i].className.replace(" active", "");
-	}
-	document.getElementById(pageName).style.display = "block";
-	evt.currentTarget.className += " active";
-}
-// Get the element with id="defaultOpen" and click on it
-window.onload = function openDefaultPage() {
-	document.getElementById("defaultOpen").click();
-
-}
-
-//Shows the members and hideis
+//Show the members and hide the invite panel
 jQuery(document).ready(function(){
 	jQuery("#buttonMembers").click(function(event){
 		jQuery("#Invite").hide();
@@ -512,19 +496,17 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 
 		if (confirm('Are you sure to delete the project {{$project->name}}?')) {
-
 		    $.ajax({
-	        url : '{{$project->id}}/delete',
+	        url : '{{$project->id}}/destroy',
 	        type : 'POST',
 	        processData: false,
 	        contentType: false,
 	        success : function(result){
-	        	//console.log(result);
-	        	window.location.replace("/en/home");
+	        	console.log(result);
+	        	window.location.replace('/');
 		        }
 		    });
-
-		  }
+		}
 	});
 });
 </script>

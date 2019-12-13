@@ -74,41 +74,32 @@ Route::group([
         Route::post('/create-project/store', 'CreateProjectController@store');
         Route::post('/create-project/send', 'CreateProjectController@sendEmail');
 
-        // User profile
         Route::resources([
             'users' => 'UserController',
             'projects' => 'ProjectController'
         ]);
         
-        Route::post('/projects/members/{id}/upload', 'UserAccountController@upload');
-        Route::post('/projects/members/{id}/validateDetails', 'UserAccountController@validateDetails');
-        Route::post('/projects/members/{id}/changePassword', 'UserAccountController@changePassword');
-        Route::post('/projects/members/{id}/deleteProfile', 'UserAccountController@deleteProfile');
-        Route::post('/projects/members/{id}/kobo-user', 'UserAccountController@koboUser');
+        //User
+        Route::post('/users/{id}/upload', 'UserController@upload');
+        Route::post('/users/{id}/validateDetails', 'UserController@validateDetails');
+        Route::post('/users/{id}/changePassword', 'UserController@changePassword');
+        Route::post('/users/{id}/deleteProfile', 'UserController@deleteProfile');
+        Route::post('/users/{id}/kobo-user', 'UserController@koboUser');
 
-        Route::get('/data-management', function () {
-            return view('data_management');
-        });
-
-        
-       
-
-       
         //Projects
         Route::get('/projects', 'ProjectController@index');
         Route::post('/projects/{id}/uploadImage', 'ProjectController@uploadImage');
         Route::post('/projects/changeStatus', 'ProjectController@changeStatusUser');
         Route::post('/projects/deleteMember', 'ProjectController@deleteMember');
-        Route::post('/projects/{id}/delete', 'ProjectController@destroy');
+        Route::post('/projects/{id}/destroy', 'ProjectController@destroy');
         Route::post('/projects/{id}/validateGroup', 'ProjectController@validateGroup');
         Route::post('/projects/{id}/send', 'ProjectController@sendEmail');
+        Route::get('/projects/{id}/downloaddata', 'SubmissionController@download');
     
-
         Route::post('/kobo/publish', 'KoboController@publish');
         Route::post('/kobo/pull', 'KoboController@getProjectData');
         Route::post('/kobo/share', 'KoboController@share');
 
-        Route::get('/projects/{id}/downloaddata', 'SubmissionController@download');
 
     });
 
@@ -117,8 +108,5 @@ Route::group([
 
 });
 
-// Route::get('/{any}', function($any){
-//     dd($any);
-// });
 
 
