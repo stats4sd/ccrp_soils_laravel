@@ -10,3 +10,6 @@
 	<li class='nav-item'><a class='nav-link' href="{{ backpack_url('projectMember') }}"><i class='nav-icon fa fa-object-group'></i> Projects Members</a></li>
 
 
+
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('samplesmerged') }}'><i class='nav-icon fa fa-question'></i> SamplesMergeds</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('samplesmerged') }}'><i class='nav-icon fa fa-question'></i> SamplesMergeds</a></li>

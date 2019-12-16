@@ -94,7 +94,10 @@ Route::group([
         Route::post('/projects/{id}/destroy', 'ProjectController@destroy');
         Route::post('/projects/{id}/validateGroup', 'ProjectController@validateGroup');
         Route::post('/projects/{id}/send', 'ProjectController@sendEmail');
+
+        Route::get('/projects/{id}/download-samples-merged', 'ProjectController@download');
         Route::get('/projects/{id}/downloaddata', 'SubmissionController@download');
+
     
         Route::post('/kobo/publish', 'KoboController@publish');
         Route::post('/kobo/pull', 'KoboController@getProjectData');
