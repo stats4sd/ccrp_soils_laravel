@@ -271,8 +271,7 @@ class ProjectController extends Controller
         //python script accepts 4 arguments in this order: base_path(), query, params and file name
        
         $process = new Process("python3.7 {$scriptPath} {$base_path} {$file_name}");
-        dd($process);
-
+        
         $process->run();
         
         if(!$process->isSuccessful()) {

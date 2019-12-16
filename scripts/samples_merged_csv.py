@@ -10,8 +10,6 @@ import dbConfig as config
 path = sys.argv[1] + '/storage/app/public/data/'
 query = "select * from samples_merged"
 name_file = sys.argv[2]
-print(name_file)
-
 
 try:
 	con = MySQLConnection(**config.dbConfig)
