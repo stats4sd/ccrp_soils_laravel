@@ -261,7 +261,7 @@ class ProjectController extends Controller
         return $invite;
     }
 
-    public function download()
+    public function download($locale, $id)
     {
         $scriptName = 'samples_merged_csv.py';
         $scriptPath = base_path() . '/scripts/' . $scriptName;
@@ -270,8 +270,8 @@ class ProjectController extends Controller
       
         //python script accepts 4 arguments in this order: base_path(), query, params and file name
        
-        $process = new Process("python3.7 {$scriptPath} {$base_path} {$file_name}");
-        
+        $process = new Process("python3.7 {$scriptPath} {$base_path} {$file_name} {$id}");
+        dd( $process );
         $process->run();
         
         if(!$process->isSuccessful()) {

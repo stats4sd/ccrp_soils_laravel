@@ -19,8 +19,5 @@ Route::group([
     Route::crud('projectMeta', 'ProjectMetaCrudController');
     Route::crud('projectMember', 'ProjectMemberCrudController');
 
-
     Route::crud('user', 'UserCrudController');
-    Route::crud('samplesmerged', 'SamplesMergedCrudController');
-    Route::crud('samplesmerged', 'SamplesMergedCrudController');
 }); // this should be the absolute last line of this file

@@ -8,8 +8,8 @@ from datetime import datetime
 import dbConfig as config
 
 path = sys.argv[1] + '/storage/app/public/data/'
-query = "select * from samples_merged"
 name_file = sys.argv[2]
+query = "select * from samples_merged WHERE project_id = " + sys.argv[3]
 
 try:
 	con = MySQLConnection(**config.dbConfig)

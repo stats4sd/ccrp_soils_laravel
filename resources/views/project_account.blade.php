@@ -87,7 +87,8 @@
 			  					</tbody>
 			  				</table>
 							<button class="btn btn-dark btn-sm" id="get-data-button" onclick="getData({{$project->id}})">{{ t("GET DATA") }}</button>
-							<a class="btn btn-dark btn-sm text-light" href="{{ url('/en/project/' . $project->id . '/downloaddata') }}" >{{ t("DOWNLOAD DATA") }}</a>
+							<a class="btn btn-dark btn-sm text-light" href="{{ url(app()->getLocale(). '/projects/' . $project->id . '/downloaddata') }}" >{{ t("DOWNLOAD DATA") }}</a>
+							<a class="btn btn-dark btn-sm text-light" href="{{ url(APP()->getLocale().'/projects/' . $project->id . '/download-samples-merged') }}" >{{ t("SAMPLE MERGED") }}</a>
 			 			</div>
 			   		</div>
 				</div>
