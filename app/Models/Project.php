@@ -22,7 +22,7 @@ class Project extends Model
     // protected $primaryKey = 'id';
     public $timestamps = true;
     protected $guarded = ['id'];
-    //protected $fillable = ['created_at'];
+    protected $fillable = ['created_at'];
     // protected $hidden = [];
     // protected $dates = [];
 

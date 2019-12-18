@@ -14,8 +14,10 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
@@ -267,11 +269,10 @@ class ProjectController extends Controller
         $scriptPath = base_path() . '/scripts/' . $scriptName;
         $base_path = base_path();
         $file_name = date('c')."samplesMerged.csv";
-      
+
         //python script accepts 4 arguments in this order: base_path(), query, params and file name
        
         $process = new Process("python3.7 {$scriptPath} {$base_path} {$file_name} {$id}");
-        dd( $process );
         $process->run();
         
         if(!$process->isSuccessful()) {
@@ -288,11 +289,5 @@ class ProjectController extends Controller
         $path_download =  Storage::url('/data/'.$file_name);
         return response()->json(['path' => $path_download]);
     }
-
-
-
-
-  
-    
 
 }

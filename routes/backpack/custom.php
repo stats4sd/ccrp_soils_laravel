@@ -12,12 +12,6 @@ Route::group([
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
     Route::crud('xlsform', 'XlsFormCrudController');
-    Route::crud('activity', 'ActivityCrudController');
-    Route::crud('activity_meta', 'Activity_metaCrudController');
-    Route::crud('projectxlsform', 'ProjectxlsformCrudController');
     Route::crud('project', 'ProjectCrudController');
-    Route::crud('projectMeta', 'ProjectMetaCrudController');
-    Route::crud('projectMember', 'ProjectMemberCrudController');
-
     Route::crud('user', 'UserCrudController');
 }); // this should be the absolute last line of this file

@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<div class="col-sm-12">
+	
 	 	<section class="content mb-5" id="group">
 		    <h1 class="mb-5"><b>{{$project->name}}</b></h1>
 	    	<div class="container-fluid">
@@ -86,9 +86,9 @@
 			  					
 			  					</tbody>
 			  				</table>
-							<button class="btn btn-dark btn-sm" id="get-data-button" onclick="getData({{$project->id}})">{{ t("GET DATA") }}</button>
-							<a class="btn btn-dark btn-sm text-light" href="{{ url(app()->getLocale(). '/projects/' . $project->id . '/downloaddata') }}" >{{ t("DOWNLOAD DATA") }}</a>
-							<a class="btn btn-dark btn-sm text-light" href="{{ url(APP()->getLocale().'/projects/' . $project->id . '/download-samples-merged') }}" >{{ t("SAMPLE MERGED") }}</a>
+							
+							<a class="btn btn-dark btn-sm text-light" href="{{ url(APP()->getLocale().'/projects/' . $project->id . '/download-samples-merged') }}"  onclick="getDownload(event)" data-toggle="popover">{{ t("DOWNLOAD DATA") }}</a>
+							<div hidden class="alert alert-danger alert-block" id="error"></div>
 			 			</div>
 			   		</div>
 				</div>
@@ -232,7 +232,7 @@
 
 											<div class="form-group">
 												<br>
-												<div class="alert alert-danger alert-block" id="error"></div>
+												<div class="alert alert-danger alert-block" id="error_photo"></div>
 												<div class="alert alert-success alert-block" id="success"></div>
 												<br>
 												<label> {{ t("Select Photo for Upload") }}</label>
@@ -343,7 +343,7 @@
 				</div>
 			@endif
 	    </section>
-	</div>
+	
 
 @endsection
 
@@ -413,7 +413,7 @@ jQuery(document).ready(function(){
 
 jQuery(document).ready(function(){
 	jQuery("#success").hide();
-	jQuery("#error").hide();
+	jQuery("#error_photo").hide();
 
 	jQuery("#Upload").click(function(event){
 		event.preventDefault();
@@ -431,16 +431,16 @@ jQuery(document).ready(function(){
 	        	var message = result.message;
 	        	if(type=='empty'){
 	        		jQuery("#success").hide();
-	        		jQuery('#error').show();
-	        		jQuery("#error").html(message);
+	        		jQuery('#error_photo').show();
+	        		jQuery("#error_photo").html(message);
 	    			//console.log(message);
 	    		} else if (type=='error'){
 	    			jQuery("#success").hide();
-	    			jQuery('#error').show();
-	    			jQuery("#error").html(message);
+	    			jQuery('#error_photo').show();
+	    			jQuery("#error_photo").html(message);
 	    			//console.log(message);
 	    		} else if (type=='success'){
-	    			jQuery("#error").hide();
+	    			jQuery("#error_photo").hide();
 	    			jQuery('#success').show();
 	    			jQuery("#success").html(message);
 	   				var url = window.location.origin+'/'+result.image_path;
@@ -510,5 +510,35 @@ jQuery(document).ready(function(){
 		}
 	});
 });
+
+if(typeof getDownload != 'function') {
+     	function getDownload(e) {
+      		var target = e.target;
+      		target.disabled = true;
+			target.innerHTML = `<div class="spinner-border spinner-border-sm"></div> Preparing...`;
+	      	
+			$.ajax({
+				"url": "{{ url(APP()->getLocale().'/projects/' . $project->id . '/download-samples-merged') }}",
+				"method":"GET",
+				"success": function(result) {
+					console.log("success");
+					path = result['path'];
+					console.log(path);
+					window.location.href = path;
+				},
+				"error": function(result){
+					console.log("error ", result)
+	        		jQuery("#error").prop('hidden' , false)
+	        		jQuery("#error").html(result.responseJSON.message.substr(0, 100));
+				},
+				"complete": function() {
+					target.disabled = false;
+					target.innerHTML = `<div class></div> DOWNLOAD DATA`;
+					
+				}
+			})
+		}
+	 
+	}
 </script>
 @endsection
