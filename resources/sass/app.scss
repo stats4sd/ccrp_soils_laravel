@@ -6,6 +6,8 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~noty/src/noty.scss';
+@import '~noty/src/themes/mint.scss';
 
 // Variables
 @import 'variables';
@@ -40,14 +42,18 @@ body{
   float: auto; /* Added */
   margin-bottom: 20px; /* Added */
   margin-top: 20px;
-  min-height: 100%;
+  height: 100%;
 }
 
-.card {
+.card-background {
   margin:  20px; /* Added */
   float: auto; /* Added */
   margin-bottom: 20px; /* Added */
   margin-top: 20px;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+
 }
 
 .card-login {

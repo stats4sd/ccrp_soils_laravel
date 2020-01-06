@@ -5,7 +5,7 @@
 	<div class="col-sm-12">
 	 	<section class="content mb-5" id="group">
 
-	 		@if($privacy || Auth::id()==$user->id)
+	 		@if($user->privacy || Auth::id()==$user->id)
 			    <h1 class="mb-5"><b>{{$user->name}}</b></h1>
 		    @else 
 		    	<h1 class="mb-5"><b>{{$user->username}}</b></h1>
@@ -21,7 +21,7 @@
 					<div class="col-sm-5">
 						<p><b>{{ t("Kobotoolbox:") }}</b> {{$user->kobo_id}}</p>
 						<p><b>{{ t("Groups:") }}</b> {{$user->projects->count()}}</p>
-						@if($privacy || Auth::id()==$user->id)
+						@if($user->privacy || Auth::id()==$user->id)
 							<p><b>{{ t("Email:") }}</b> {{$user->email}}</p>
 						@endif
 						<p><b>{{ t("Created:") }}</b> {{$user->created_at->diffForHumans()}}</p>
@@ -63,7 +63,7 @@
 			</div>
 
 			<div id="Projects" class="tabcontent">
-				@foreach($projects as $project)   		     
+				@foreach($user->projects as $project)   		     
 	          		<div class="card mb-3" style="max-width: 540px;">
 	          			<div class="row no-gutters">
 						    <div class="col-md-4 img_card_project mb-3 mt-3">
@@ -98,6 +98,8 @@
 								<form method="post" action="{{ url('avatar/upload')}}" name="Upload" id="upload_image">
 						  		{{ csrf_field() }}
 						  		<div class="form-group">
+						  			<div class="alert alert-danger alert-block" id="error"></div>
+									<div class="alert alert-success alert-block" id="success"></div>
 								
 									<label> {{ t("Select Photo for Upload") }}</label>
 									<br>
@@ -259,23 +261,7 @@
 
 @section('script')
 <script type="text/javascript">	
-	function openPage(evt, pageName) {
-	var i, tabcontent, tablinks;
-	tabcontent = document.getElementsByClassName("tabcontent");
-	for (i = 0; i < tabcontent.length; i++) {
-		tabcontent[i].style.display = "none";
-	}
-	tablinks = document.getElementsByClassName("tablinks");
-	for (i = 0; i < tablinks.length; i++) {
-		tablinks[i].className = tablinks[i].className.replace(" active", "");
-	}
-	document.getElementById(pageName).style.display = "block";
-	evt.currentTarget.className += " active";
-}
-// Get the element with id="defaultOpen" and click on it
-window.onload = function openDefaultPage() {
-	document.getElementById("defaultOpen").click();
-}
+	
 
 //check file image validation
 
@@ -289,7 +275,7 @@ jQuery(document).ready(function(){
 		var form_data = new FormData(form);
        
         $.ajax({
-	        url : '/en/projects/members/{{$user->id}}/upload', 
+	        url : '{{$user->id}}/upload', 
 	        type : 'POST',
 	        data : form_data,
 	        processData: false, 
@@ -330,30 +316,23 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 		var form = document.getElementById('profile_details');
 		var form_data = new FormData(form);
-		console.log(form_data);
 
 		$.ajax({
-	        url : '/en/projects/members/{{$user->id}}/validateDetails', 
+	        url : '{{$user->id}}/validateDetails', 
 	        type : 'POST',
 	        data : form_data,
 	        processData: false, 
 	        contentType: false,
 	        success : function(result){
-	        	
-	        	var type = result.type;
-	        	var message = result.message;
-	        	console.log(result);
-
-	        	if(type == 'error'){
+	        	if(!result.success){
 	        		jQuery('#validate_danger').show();
 	        		jQuery('#validate_success').hide();
-	        		jQuery("#validate_danger").html(result);
+	        		jQuery("#validate_danger").html(result.message);
 				} else {
 					jQuery('#validate_success').show();
 					jQuery('#validate_danger').hide();	
-	        		jQuery("#validate_success").html(result);
+	        		jQuery("#validate_success").html('Account updated');
 	        		location.reload();
-
 				}
 	        }
 
@@ -370,10 +349,9 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 		var form = document.getElementById('password');
 		var form_data = new FormData(form);
-		console.log(form_data);
 
 		$.ajax({
-	        url : '/en/projects/members/{{$user->id}}/changePassword', 
+	        url : '{{$user->id}}/changePassword', 
 	        type : 'POST',
 	        data : form_data,
 	        processData: false, 
@@ -391,8 +369,9 @@ jQuery(document).ready(function(){
 				} else {
 					jQuery('#password_success').show();
 					jQuery('#password_danger').hide();	
+					jQuery("#password_success").html('New pasword updated');
 	        		
-	        		location.reload();
+	        		//location.reload();
 
 				}
 	        }
@@ -405,23 +384,20 @@ jQuery(document).ready(function(){
 jQuery(document).ready(function(){
 	jQuery("#delete_profile").click(function(event){
 		event.preventDefault();
-		
-		if (confirm('Are you sure to delete the your profile {{$user->username}}?')) {
-		    
+	
+		if (confirm('Are you sure to delete your profile {{$user->username}}?')) {
 		    $.ajax({
-	        url : '/en/projects/members/{{$user->id}}/deleteProfile', 
+	        url : '{{$user->id}}/deleteProfile', 
 	        type : 'POST',
 	        processData: false, 
 	        contentType: false,
 	        success : function(result){
-	        	console.log(result);
 		        	if(result.type=="success")
 		        	{
 		        		window.location.replace("/en/home");
 		        	}      	        	        	
 		        }
-		    });
-		
+		    });	
 		} 		
 	});
 });
@@ -432,10 +408,9 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 		var form = document.getElementById('kobo');
 		var form_data = new FormData(form);
-		console.log(form_data);
 
 		$.ajax({
-	        url : '/en/projects/members/{{$user->id}}/kobo-user', 
+	        url : '{{$user->id}}/kobo-user', 
 	        type : 'POST',
 	        data : form_data,
 	        processData: false, 
@@ -447,7 +422,6 @@ jQuery(document).ready(function(){
 	        	jQuery("#current_account").html(message);
 
 	        }
-
 	    });
 	});
 });

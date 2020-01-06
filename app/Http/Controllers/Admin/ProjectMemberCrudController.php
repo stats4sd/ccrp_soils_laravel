@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ProjectMemberRequest as StoreRequest;
@@ -16,6 +17,11 @@ use Backpack\CRUD\CrudPanel;
  */
 class ProjectMemberCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    
     public function setup()
     {
         /*
@@ -23,9 +29,9 @@ class ProjectMemberCrudController extends CrudController
         | CrudPanel Basic Information
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\ProjectMember');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/projectmember');
-        $this->crud->setEntityNameStrings('projectmember', 'project_members');
+        CRUD::setModel('App\Models\ProjectMember');
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/projectmember');
+        CRUD::setEntityNameStrings('projectmember', 'project members');
 
         /*
         |--------------------------------------------------------------------------

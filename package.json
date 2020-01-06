@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "cropper": "^4.0.0",
-        "jquery-jcrop": "^0.9.13"
+        "jquery-jcrop": "^0.9.13",
+        "noty": "^3.2.0-beta"
     }
 }

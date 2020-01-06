@@ -23,6 +23,7 @@ class CreateProjectController extends Controller
     	return view('create_project', ['users' => $users]);
     }
 
+    
     public function validateValue(Request $request)
     {
         $group_name = $_POST['name'];

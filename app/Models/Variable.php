@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Xlsform;
-use Backpack\CRUD\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Variable extends Model
