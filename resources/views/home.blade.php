@@ -5,7 +5,7 @@
 @section('content')
   <div class="col-sm-12">
     <section class="content mb-5" id="home">
-    <div class="alert alert-info alert-block" id="info_login">You must login to access this page.
+    <div class="alert alert-info alert-block" id="info_login">{{ t("You must login to access this page.") }}
     </div>
       <section class="content mb-5" id="introduction">
         <h1>{{ t("Introduction") }}</h1>

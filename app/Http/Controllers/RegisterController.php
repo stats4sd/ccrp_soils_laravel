@@ -9,6 +9,7 @@ use App\Models\Xlsform;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
 
 class RegisterController extends Controller
 {
@@ -49,7 +50,8 @@ class RegisterController extends Controller
     		'password' => bcrypt($request['password']),
 			'remember_token' => $request['_token'],
 			'privacy' => $request['privacy'],
-            'kobo_id' => $request['kobo_id']
+            'kobo_id' => $request['kobo_id'],
+            'slug' => base64_encode(openssl_random_pseudo_bytes(12))
     	]);
         $this->checkInvite($user->email, $user->id);
 

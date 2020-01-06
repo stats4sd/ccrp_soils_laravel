@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<div class="col-sm-12">
+
 	 	<section class="content mb-5" id="group">
 		    <h1 class="mb-5"><b>{{$project->name}}</b></h1>
 	    	<div class="container-fluid">
@@ -15,7 +15,7 @@
 					<div class="col-sm-5">
 						<br>
 						<div id="description">
-							<p>{{$project->status}} Group {{$project->created_at->diffForHumans()}}</p>
+							<p>{{$project->status}} {{ t("Group") }} {{$project->created_at->diffForHumans()}}</p>
 						    <p>{{$project->description}}</p>
 						</div>
 					</div>
@@ -26,7 +26,7 @@
 						@if($is_member)
 							@foreach ($project->users as $member)
 								@if($member->pivot->is_admin)
-									<a href="members/{{$member->username}}" data-toggle="tooltip" title="{{$member->username}}">
+									<a href={{url(app()->getLocale().'/users/'.$member->slug)}} data-toggle="tooltip" title="{{$member->username}}">
 									<img src={{url($member->avatar)}} id="avatar" >
 									</a>
 								@endif
@@ -60,43 +60,42 @@
 			  						</tr>
 			  					</thead>
 			  					<tbody>
-			  						@foreach($project->xls_forms as $xls_form)
-			  						<tr>
-			  							<td>{{ $xls_form->form_title}}</td>
-			  							<td>{{ $xls_form->pivot->form_kobo_id_string}}</td>
-			  							<td>{{ $xls_form->pivot->records}}</td>
-			  							<td>
-			  								@if($xls_form->pivot->deployed)
-			  									<p>{{ t("deployed") }}</p>
-			  								@else
-			  									<p>{{ t("undeployed") }}</p>
-			  								@endif
-			  							</td>
-			  							<td>
-			  								<div class="w3-show-inline-block">
-											  	<div class="w3-bar">
-											    	<button class="btn btn-dark btn-sm" id="deploy-form-button{{$xls_form->id}}" onclick="deploy({{$project->id}},{{$xls_form->id}})">DEPLOY</button>
-											 <!--    	@if($is_admin)
-												    	<button class="btn btn-dark btn-sm" onclick="deleteForm({{$project->id}},{{$xls_form->id}})">DELETE</button>
-											    	@endif -->
-											 	 </div>
-											</div>
-			  							</td>
-			  						</tr>
-			  						@endforeach
+				  						@foreach( $project->xls_forms as $xls_form)
+				  						<tr>
+				  							<td>{{ $xls_form->form_title }}</td>
+				  							<td>{{ $xls_form->pivot->form_kobo_id_string }}</td>
+				  							<td>{{ $xls_form->pivot->records }}</td>
+				  							<td>
+				  								@if($xls_form->pivot->deployed)
+				  									<p>{{ t("deployed") }}</p>
+				  								@else
+				  									<p>{{ t("undeployed") }}</p>
+				  								@endif
+				  							</td>
+				  							<td>
+				  								<div class="w3-show-inline-block">
+												  	<div class="w3-bar">
+												    	<button class="btn btn-dark btn-sm" id="deploy-form-button{{$xls_form->id}}" onclick="deploy({{$project->id}},{{$xls_form->id}})">{{ t("DEPLOY") }}</button>
+
+												 	 </div>
+												</div>
+				  							</td>
+				  						</tr>
+				  						@endforeach
+
 			  					</tbody>
 			  				</table>
-							<button class="btn btn-dark btn-sm" id="get-data-button" onclick="getData({{$project->id}})">{{ t("GET DATA") }}</button>
-							<a class="btn btn-dark btn-sm text-light" href="{{ url('/en/project/' . $project->id . '/downloaddata') }}" >{{ t("DOWNLOAD DATA") }}</a>
+
+							<a class="btn btn-dark btn-sm text-light" href="{{ url(APP()->getLocale().'/projects/' . $project->id . '/download-samples-merged') }}"  onclick="getDownload(event)" data-toggle="popover">{{ t("DOWNLOAD DATA") }}</a>
+							<div hidden class="alert alert-danger alert-block" id="error"></div>
 			 			</div>
 			   		</div>
 				</div>
 
 				<div id="Members" class="tabcontent">
 
-
-				 	<button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonInvite"><font size="2">{{ t("INVITE") }}</font></button>
 				 	@if($invitations)
+				 	<button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonInvite"><font size="2">{{ t("INVITE") }}</font></button>
 					    <button class="btn btn-dark btn-sm mt-3 mb-3" id="buttonShare" onclick="share({{$xls_form->id}},{{$project->id}})"><font size="2">{{ t("SHARE") }}</font></button>
 					@endif
 
@@ -106,7 +105,7 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<label>{{ t("Search for members to invite:") }}</label>
-									<form  method="post" action="{{url('en/project/'.$project->id.'/send')}}" name="invite" id="invite">
+									<form  method="post" action="{{url('en/projects/'.$project->id.'/send')}}" name="invite" id="invite">
 								  	{{ csrf_field() }}
 								  	<input type="text" id="myInput" onkeyup="search()" class="form-control" placeholder="Search for names..">
 								  	<div class="scroll_list">
@@ -152,12 +151,11 @@
 		          		<div class="card mb-3" style="max-width: 350px;">
 		          			<div class="row no-gutters">
 							    <div class="col-md-4 img_group mb-3 mt-3">
-							      <a href="members/{{$member->username}}"><img src="{{$member->avatar}}" class="center" alt="Person"></a>
+							      <a href={{url(app()->getLocale().'/users/'.$member->slug)}}><img src="{{$member->avatar}}" class="center" alt="Person"></a>
 							    </div>
 							    <div class="col-md-8">
 									<div class="card-body">
-										<a href="members/{{$member->username}}"><h5 class="card-title"><b>{{$member->username}}</b></h5></a>
-
+										<a href={{url(app()->getLocale().'/users/'.$member->slug)}}><h5 class="card-title"><b>{{$member->username}}</b></h5></a>
 										<p class="card-text"><small class="text-muted"><b>{{ t("created at :") }}</b> {{$member->created_at->diffForHumans()}}</small></p>
 									</div>
 							    </div>
@@ -233,7 +231,7 @@
 
 											<div class="form-group">
 												<br>
-												<div class="alert alert-danger alert-block" id="error"></div>
+												<div class="alert alert-danger alert-block" id="error_photo"></div>
 												<div class="alert alert-success alert-block" id="success"></div>
 												<br>
 												<label> {{ t("Select Photo for Upload") }}</label>
@@ -313,6 +311,9 @@
 			       		</div>
 
 						<div class="row mt-3">
+						<form action="{{$project->id}}/destroy" method="post">
+
+							@csrf
 							<div class="col-sm-8">
 						  		<b>{{ t("Delete Project") }}</b>
 						  		<p>{{ t("You are about to delete this project.") }}</p>
@@ -323,14 +324,15 @@
 							</div>
 
 
-							<div class="col-sm-4 mt-5">
-					   			<button id="delete_project" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("DELETE PROJECT") }}</button>
+							<div class="col-sm mt-5">
+					   			<button  id='delete_project' class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("DELETE PROJECT") }}</button>
 					   		</div>
+					   	</form>
 				       	</div>
 
 					   	@else
 					   		<div class="alert alert-danger alert-block" id="is_not_admin">
-					   			<p><b>{{ t("Access is not allowed.</b> Only the admins of this project have the permission for this page.") }}</p>
+					   			<p><b>{{ t("Access is not allowed.") }}</b> {{ ("Only the admins of this project have the permission for this page.") }}</p>
 					   		</div>
 					   	@endif
 				</div>
@@ -340,7 +342,7 @@
 				</div>
 			@endif
 	    </section>
-	</div>
+
 
 @endsection
 
@@ -350,25 +352,12 @@
 
 <script type="text/javascript">
 
-function deleteForm(projectId, formId) {
-	event.preventDefault();
-	jQuery.ajax('{{ url('en/projects/deleteForm') }}', {
-            method: "POST",
-            data: {
-                projectId: projectId,
-                formId: formId,
-            }
-        }).done(function(res) {
-        	location.reload();
 
-            console.log(res);
-        });
-}
 // Changes status member from button CHANGE STATUS
 function changeStatus(projectId, userId)
 {
 	event.preventDefault();
-	jQuery.ajax('{{ url('en/projects/changeStatus') }}', {
+	jQuery.ajax('{{ url(app()->getLocale()."/projects/changeStatus") }}', {
             method: "POST",
             data: {
                 projectId: projectId,
@@ -389,7 +378,7 @@ function deleteMember(projectId, userId)
 	event.preventDefault();
 	if(confirm('Are you sure to delete this user?'))
 	{
-	jQuery.ajax('{{ url('en/projects/deleteMember') }}', {
+	jQuery.ajax('{{ url(app()->getLocale().'/projects/deleteMember') }}', {
             method: "POST",
             data: {
                 projectId: projectId,
@@ -403,27 +392,7 @@ function deleteMember(projectId, userId)
     }
 }
 
-
-function openPage(evt, pageName) {
-	var i, tabcontent, tablinks;
-	tabcontent = document.getElementsByClassName("tabcontent");
-	for (i = 0; i < tabcontent.length; i++) {
-		tabcontent[i].style.display = "none";
-	}
-	tablinks = document.getElementsByClassName("tablinks");
-	for (i = 0; i < tablinks.length; i++) {
-		tablinks[i].className = tablinks[i].className.replace(" active", "");
-	}
-	document.getElementById(pageName).style.display = "block";
-	evt.currentTarget.className += " active";
-}
-// Get the element with id="defaultOpen" and click on it
-window.onload = function openDefaultPage() {
-	document.getElementById("defaultOpen").click();
-
-}
-
-//Shows the members and hideis
+//Show the members and hide the invite panel
 jQuery(document).ready(function(){
 	jQuery("#buttonMembers").click(function(event){
 		jQuery("#Invite").hide();
@@ -443,7 +412,7 @@ jQuery(document).ready(function(){
 
 jQuery(document).ready(function(){
 	jQuery("#success").hide();
-	jQuery("#error").hide();
+	jQuery("#error_photo").hide();
 
 	jQuery("#Upload").click(function(event){
 		event.preventDefault();
@@ -451,7 +420,8 @@ jQuery(document).ready(function(){
 		var form_data = new FormData(form);
 
         $.ajax({
-	        url : '/en/projects/{{$project->id}}/upload',
+
+	        url : '{{$project->id}}/uploadImage',
 	        type : 'POST',
 	        data : form_data,
 	        processData: false,
@@ -461,16 +431,16 @@ jQuery(document).ready(function(){
 	        	var message = result.message;
 	        	if(type=='empty'){
 	        		jQuery("#success").hide();
-	        		jQuery('#error').show();
-	        		jQuery("#error").html(message);
+	        		jQuery('#error_photo').show();
+	        		jQuery("#error_photo").html(message);
 	    			//console.log(message);
 	    		} else if (type=='error'){
 	    			jQuery("#success").hide();
-	    			jQuery('#error').show();
-	    			jQuery("#error").html(message);
+	    			jQuery('#error_photo').show();
+	    			jQuery("#error_photo").html(message);
 	    			//console.log(message);
 	    		} else if (type=='success'){
-	    			jQuery("#error").hide();
+	    			jQuery("#error_photo").hide();
 	    			jQuery('#success').show();
 	    			jQuery("#success").html(message);
 	   				var url = window.location.origin+'/'+result.image_path;
@@ -494,7 +464,8 @@ jQuery(document).ready(function(){
 		console.log(form_data);
 
 		$.ajax({
-	        url : '/en/projects/{{$project->id}}/validateGroup',
+
+	        url : '{{$project->id}}/validateGroup',
 	        type : 'POST',
 	        data : form_data,
 	        processData: false,
@@ -527,20 +498,48 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 
 		if (confirm('Are you sure to delete the project {{$project->name}}?')) {
-
 		    $.ajax({
-	        url : '/en/projects/{{$project->id}}/delete',
+	        url : '{{$project->id}}/destroy',
 	        type : 'POST',
 	        processData: false,
 	        contentType: false,
 	        success : function(result){
-	        	//console.log(result);
-	        	window.location.replace("/en/home");
+	        	console.log(result);
+	        	window.location.replace('/');
 		        }
 		    });
-
-		  }
+		}
 	});
 });
+
+if(typeof getDownload != 'function') {
+     	function getDownload(e) {
+      		var target = e.target;
+      		target.disabled = true;
+			target.innerHTML = `<div class="spinner-border spinner-border-sm"></div> Preparing...`;
+
+			$.ajax({
+				"url": "{{ url(APP()->getLocale().'/projects/' . $project->id . '/download-samples-merged') }}",
+				"method":"GET",
+				"success": function(result) {
+					console.log("success");
+					path = result['path'];
+					console.log(path);
+					window.location.href = path;
+				},
+				"error": function(result){
+					console.log("error ", result)
+	        		jQuery("#error").prop('hidden' , false)
+	        		jQuery("#error").html(result.responseJSON.message.substr(0, 100));
+				},
+				"complete": function() {
+					target.disabled = false;
+					target.innerHTML = `<div class></div> DOWNLOAD DATA`;
+
+				}
+			})
+		}
+
+	}
 </script>
 @endsection

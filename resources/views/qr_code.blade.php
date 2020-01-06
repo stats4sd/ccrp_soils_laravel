@@ -17,10 +17,10 @@
 				<form method="post" action="{{ url(session()->get('locale') . '/qr-newcodes') }}">
 					@csrf
 					<div class="form-group row">
-						<label for="qrNumber" class="col-sm-4">How many QR codes do you need?</label>
+						<label for="qrNumber" class="col-sm-4">{{ t("How many QR codes do you need?") }}</label>
 						<div class="col-sm-4">
 							<input type="number" class="form-control" id="qrNum" name="qrNum">
-							<small id="passwordHelpBlock" class="form-text text-muted">QR Codes will be split over multiple pages as necessary</small>
+							<small id="passwordHelpBlock" class="form-text text-muted">{{ t("QR Codes will be split over multiple pages as necessary") }}</small>
 						</div>
 					</div>
 					<div class="row">

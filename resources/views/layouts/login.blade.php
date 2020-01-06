@@ -25,12 +25,12 @@
          <form method="post" action="{{ route('login', app()->getLocale()) }}">
           @csrf
            <div class="form-group">
-             <label for="exampleInputEmail1">Username</label>
-             <input class="form-control"  type="text" name="username">
+             <label for="exampleInputEmail1">Email</label>
+             <input class="form-control"  type="text" name="email">
 
-              @if($errors->has('username'))
+              @if($errors->has('email'))
                 <span class="" role="alert">
-                    <strong>{{ $errors->first('username') }}</strong>
+                    <strong>{{ $errors->first('email') }}</strong>
                 </span>
             @endif
 
@@ -56,8 +56,8 @@
            <button type="submit" class="btn btn-dark btn-block" name="login_user">Login</button>
          </form>
          <div class="text-center">
-           <a class="d-block small mt-3" href="/en/register">Register an Account</a>
-         <a class="d-block small" href="forgot-password.php">Forgot Password?</a>
+           <a class="d-block small mt-3" href={{url(app()->getLocale().'\register')}}>Register an Account</a>
+         <a class="d-block small" href={{url(app()->getLocale().'\password\reset')}}>Forgot Password?</a>
 
 
          </div>

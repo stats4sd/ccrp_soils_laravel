@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-use Backpack\CRUD\CrudTrait;
+use App\Models\Project;
+use App\Models\Xlsform;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
@@ -17,7 +19,7 @@ class Projectxlsform extends Pivot
     */
 
     protected $table = 'project_xlsform';
-    // protected $primaryKey = 'id';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
     public $incrementing = true;
@@ -38,6 +40,17 @@ class Projectxlsform extends Pivot
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function project()
+    {
+        return $this->belongsToMany(Project::class);
+    }
+
+    public function xls_form()
+    {
+        return $this->belongsToMany(Xlsform::class);
+    }
+
+
 
     /*
     |--------------------------------------------------------------------------

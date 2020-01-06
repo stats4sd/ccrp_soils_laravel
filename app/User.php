@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Backpack\CRUD\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'email', 'password', 'username', 'remember_token', 'privacy', 'kobo_id'
+        'id', 'name', 'email', 'username', 'privacy', 'kobo_id', 'admin'
     ];
 
     /**
@@ -40,6 +40,11 @@ class User extends Authenticatable
     ];
 
     public $incrementing = true;
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function projects()
     {

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Submission;
-use Backpack\CRUD\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -22,7 +22,7 @@ class Project extends Model
     // protected $primaryKey = 'id';
     public $timestamps = true;
     protected $guarded = ['id'];
-    //protected $fillable = ['created_at'];
+    protected $fillable = ['created_at'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -78,4 +78,8 @@ class Project extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

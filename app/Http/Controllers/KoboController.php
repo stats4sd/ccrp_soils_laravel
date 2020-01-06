@@ -8,6 +8,7 @@ use App\Jobs\PublishFormToKobotools;
 use App\Jobs\PullDataFromProjectForms;
 use App\Jobs\ShareFormToKobotools;
 use App\Models\Project;
+use App\Models\Projectxlsform;
 use App\Models\Xlsform;
 use GuzzleHttp\Client;
 use Illuminate\Foundation\Bus\withChain;
@@ -25,6 +26,12 @@ class KoboController extends Controller
         dispatch(new PublishFormToKobotools($request->formId, $project));
 
 
+
+        dispatch(new ImportFormToKobotools($formId, $projectId));
+        Projectxlsform::where('project_id', $projectId)->where('xlsform_id', $formId)->update(['deployed'=>1]);
+        return   $response = [
+                    'status' => 'deployed',
+            ];
     }
 
 

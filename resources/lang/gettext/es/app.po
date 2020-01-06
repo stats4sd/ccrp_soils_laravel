@@ -1,790 +1,843 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Soils Platform - local\n"
+"Project-Id-Version: Laravel\n"
 "Report-Msgid-Bugs-To: contact@translation.io\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-12-04T12:18:01+00:00\n"
-"PO-Revision-Date: 2019-12-04 13:18+0100\n"
+"POT-Creation-Date: 2019-12-09T11:59:10+00:00\n"
+"PO-Revision-Date: 2019-12-09 12:59+0100\n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: resources/views/about.blade.php:6
+#: resources\views\about.blade.php:6
 msgid "How the platform works"
 msgstr "Como funciona la plataforma"
 
-#: resources/views/about.blade.php:7
+#: resources\views\about.blade.php:7
 msgid "There are three main components to this data platform:"
 msgstr "Hay tres componentes principales en esta plataforma de datos:"
 
-#: resources/views/about.blade.php:9
+#: resources\views\about.blade.php:9
 msgid "A set of ODK forms for use when collecting and analysing soil samples;"
 msgstr "Un conjunto de formularios ODK para usar al recolectar y analizar muestras de suelo;"
 
-#: resources/views/about.blade.php:10
+#: resources\views\about.blade.php:10
 msgid "A QR Code generation tool, to help you uniquely identify and manage your physical samples;"
 msgstr "Una herramienta de generación de código QR, para ayudarlo a identificar y administrar sus muestras físicas de manera única;"
 
-#: resources/views/about.blade.php:11
+#: resources\views\about.blade.php:11
 msgid "A MySQL Database that helps organise data collected through the different forms."
 msgstr "Una base de datos MySQL que ayuda a organizar los datos recopilados a través de los diferentes formularios."
 
-#: resources/views/about.blade.php:13
+#: resources\views\about.blade.php:13
 msgid "You can use these components in different ways, described below."
 msgstr "Puede usar estos componentes de diferentes maneras, como se describe a continuación."
 
-#: resources/views/about.blade.php:17
+#: resources\views\about.blade.php:17
 msgid "1. Register to use the platform’s database"
 msgstr "1. Regístrese para usar la base de datos de la plataforma"
 
-#: resources/views/about.blade.php:18
+#: resources\views\about.blade.php:18
 msgid "Registering on the site will give you access to the full set of tools, including the ability to collect data via your own Kobotoolbox account, have it synchronised to the platform, and then automatically merged into downloadable datasets."
 msgstr "Registrarse en el sitio le dará acceso al conjunto completo de herramientas, incluida la capacidad de recopilar datos a través de su propia cuenta de Kobotoolbox, sincronizarlos con la plataforma y luego fusionarlos automáticamente en conjuntos de datos descargables."
 
-#: resources/views/about.blade.php:19
+#: resources\views\about.blade.php:19
 msgid "To make full use of the platform, you need to have a kobotoolbox account for your project – if you don’t have one, you can set one up easily at"
 msgstr "Para hacer un uso completo de la plataforma, debe tener una cuenta de kobotoolbox para su proyecto; si no tiene una, puede configurarla fácilmente en"
 
-#: resources/views/about.blade.php:19
+#: resources\views\about.blade.php:19
 msgid "This platform integrates with Kobotoolbox to let you collect soil sample and analysis data with the same tools you use for other data collection activities."
 msgstr "Esta plataforma se integra con Kobotoolbox para permitirle recolectar muestras de suelo y datos de análisis con las mismas herramientas que usa para otras actividades de recolección de datos."
 
-#: resources/views/about.blade.php:20
+#: resources\views\about.blade.php:20
 msgid "To get started, use the links in the sidebar to register a new project account. The RMS or Soils team will be notified and will be able to confirm your account and help you get started."
 msgstr "Para comenzar, use los enlaces en la barra lateral para registrar una nueva cuenta de proyecto. El equipo de RMS o Soils será notificado y podrá confirmar su cuenta y ayudarlo a comenzar."
 
-#: resources/views/about.blade.php:24
+#: resources\views\about.blade.php:24
 msgid "2. Just use the ODK forms"
 msgstr "2. Solo usa los formularios ODK"
 
-#: resources/views/about.blade.php:25
+#: resources\views\about.blade.php:25
 msgid "Using the downloadable resources requires no sign-up, simply download the XLS forms you wish to use from our downloads page."
 msgstr "El uso de los recursos descargables no requiere registrarse, simplemente descargue los formularios XLS que desea utilizar desde nuestra página de descargas."
 
-#: resources/views/about.blade.php:26
+#: resources\views\about.blade.php:26
 msgid "The different analysis protocols all require some level of calculation. The ODK forms we have developed have these calculations programmed in, to help save time and reduce the chance of errors in your results."
 msgstr "Los diferentes protocolos de análisis requieren algún nivel de cálculo. Los formularios ODK que hemos desarrollado tienen estos cálculos programados para ayudar a ahorrar tiempo y reducir la posibilidad de errores en sus resultados."
 
-#: resources/views/about.blade.php:27
+#: resources\views\about.blade.php:27
 msgid "The analysis forms require you to scan a QR or barcode at the start of the process, to identify your soil sample. We highly recommend using QR codes for uniquely identifying your physical samples, as they can be printed out and kept with the sample. See the QR code generation page for more information."
 msgstr "Los formularios de análisis requieren que escanee un QR o código de barras al comienzo del proceso, para identificar su muestra de suelo. Recomendamos encarecidamente utilizar códigos QR para identificar de forma exclusiva sus muestras físicas, ya que pueden imprimirse y guardarse con la muestra. Consulte la página de generación de código QR para obtener más información."
 
-#: resources/views/about.blade.php:28
+#: resources\views\about.blade.php:28
 msgid "To see all the forms available and choose ones to download, go to our downloads page."
 msgstr "Para ver todos los formularios disponibles y elegir los que desea descargar, vaya a nuestra página de descargas."
 
-#: resources/views/confirm_project.blade.php:4
-msgid "Congratulation.</b> Now you are allow to access the"
-msgstr "Enhorabuena. </b> Ahora puede acceder a"
+#: resources\views\confirm_project.blade.php:4
+msgid "Congratulation."
+msgstr ""
 
-#: resources/views/confirm_project.blade.php:6
-msgid "You are not register.</b> Before to continue you must"
-msgstr "No estas registrado.</b> Antes de continuar debes"
+#: resources\views\confirm_project.blade.php:4
+msgid "Now you are allow to access the"
+msgstr ""
 
-#: resources/views/create_project.blade.php:5
+#: resources\views\create_project.blade.php:5
 msgid "Project"
 msgstr "Proyecto"
 
-#: resources/views/create_project.blade.php:8
+#: resources\views\create_project.blade.php:8
 msgid "1.Details"
 msgstr "1. Detalles"
 
-#: resources/views/create_project.blade.php:9
+#: resources\views\create_project.blade.php:9
 msgid "2. Settings"
 msgstr "2. Configuraciones"
 
-#: resources/views/create_project.blade.php:10
+#: resources\views\create_project.blade.php:10
 msgid "3. Photo"
 msgstr "3. Foto"
 
-#: resources/views/create_project.blade.php:11
+#: resources\views\create_project.blade.php:11
 msgid "4. Send Invites"
 msgstr "4. Enviar invitaciones"
 
-#: resources/views/create_project.blade.php:21
-#: resources/views/project_account.blade.php:180
+#: resources\views\create_project.blade.php:21
+#: resources\views\project_account.blade.php:180
 msgid "Group Name (required)"
 msgstr "Nombre del grupo (requerido)"
 
-#: resources/views/create_project.blade.php:25
-#: resources/views/project_account.blade.php:184
+#: resources\views\create_project.blade.php:25
+#: resources\views\project_account.blade.php:184
 msgid "Group Description (required)"
 msgstr "Descripción del grupo (requerido)"
 
-#: resources/views/create_project.blade.php:28
+#: resources\views\create_project.blade.php:28
 msgid "CREATE A GROUP AND CONTINUE"
 msgstr "CREAR UN GRUPO Y CONTINUAR"
 
-#: resources/views/create_project.blade.php:34
-#: resources/views/project_account.blade.php:191
+#: resources\views\create_project.blade.php:34
+#: resources\views\project_account.blade.php:191
 msgid "Privacy Options"
 msgstr "Opciones de Privacidad"
 
-#: resources/views/create_project.blade.php:38
-#: resources/views/project_account.blade.php:194
+#: resources\views\create_project.blade.php:38
+#: resources\views\project_account.blade.php:194
 msgid "This is a public group"
 msgstr "Este es un grupo público"
 
-#: resources/views/create_project.blade.php:40
+#: resources\views\create_project.blade.php:40
 msgid "Any site member can join this group."
 msgstr "Cualquier miembro del sitio puede unirse a este grupo."
 
-#: resources/views/create_project.blade.php:41
-#: resources/views/create_project.blade.php:51
+#: resources\views\create_project.blade.php:41
+#: resources\views\create_project.blade.php:51
 msgid "This group will be listed in the groups directory and in search results."
 msgstr "Este grupo aparecerá en el directorio de grupos y en los resultados de búsqueda."
 
-#: resources/views/create_project.blade.php:42
+#: resources\views\create_project.blade.php:42
 msgid "Group content and activity will be visible to any site member."
 msgstr "El contenido y la actividad del grupo serán visibles para cualquier miembro del sitio."
 
-#: resources/views/create_project.blade.php:48
-#: resources/views/project_account.blade.php:197
+#: resources\views\create_project.blade.php:48
+#: resources\views\project_account.blade.php:197
 msgid "This is a private group"
 msgstr "Este es un grupo privado"
 
-#: resources/views/create_project.blade.php:50
+#: resources\views\create_project.blade.php:50
 msgid "Only users who request membership and are accepted can join the group."
 msgstr "Solo los usuarios que solicitan membresía y son aceptados pueden unirse al grupo."
 
-#: resources/views/create_project.blade.php:52
-#: resources/views/create_project.blade.php:62
+#: resources\views\create_project.blade.php:52
+#: resources\views\create_project.blade.php:62
 msgid "Group content and activity will only be visible to members of the group."
 msgstr "El contenido y la actividad del grupo solo serán visibles para los miembros del grupo."
 
-#: resources/views/create_project.blade.php:58
-#: resources/views/project_account.blade.php:200
+#: resources\views\create_project.blade.php:58
+#: resources\views\project_account.blade.php:200
 msgid "This is a hidden group"
 msgstr "Este es un grupo oculto"
 
-#: resources/views/create_project.blade.php:60
+#: resources\views\create_project.blade.php:60
 msgid "Only users who are invited can join the group."
 msgstr "Solo los usuarios invitados pueden unirse al grupo."
 
-#: resources/views/create_project.blade.php:61
+#: resources\views\create_project.blade.php:61
 msgid "This group will not be listed in the groups directory or search results."
 msgstr "Este grupo no aparecerá en el directorio de grupos ni en los resultados de búsqueda."
 
-#: resources/views/create_project.blade.php:67
-#: resources/views/project_account.blade.php:205
+#: resources\views\create_project.blade.php:67
+#: resources\views\project_account.blade.php:205
 msgid "Group Invitations"
 msgstr "Invitaciones grupales"
 
-#: resources/views/create_project.blade.php:68
+#: resources\views\create_project.blade.php:68
 msgid "Which members of this group are allowed to invite others?"
 msgstr "¿Qué miembros de este grupo pueden invitar a otros?"
 
-#: resources/views/create_project.blade.php:72
-#: resources/views/project_account.blade.php:209
+#: resources\views\create_project.blade.php:72
+#: resources\views\project_account.blade.php:209
 msgid "All group members"
 msgstr "Todos los miembros del grupo"
 
-#: resources/views/create_project.blade.php:76
-#: resources/views/project_account.blade.php:213
+#: resources\views\create_project.blade.php:76
+#: resources\views\project_account.blade.php:213
 msgid "Group admins only"
 msgstr "Solo administradores de grupo"
 
-#: resources/views/create_project.blade.php:80
-#: resources/views/create_project.blade.php:128
-#: resources/views/create_project.blade.php:161
+#: resources\views\create_project.blade.php:80
+#: resources\views\create_project.blade.php:128
+#: resources\views\create_project.blade.php:161
 msgid "BACK TO PREVIOUS STEP"
 msgstr "VOLVER AL PASO ANTERIOR"
 
-#: resources/views/create_project.blade.php:81
-#: resources/views/create_project.blade.php:129
+#: resources\views\create_project.blade.php:81
+#: resources\views\create_project.blade.php:129
 msgid "NEXT STEP"
 msgstr "PRÓXIMO PASO"
 
-#: resources/views/create_project.blade.php:98
+#: resources\views\create_project.blade.php:98
 msgid "Upload Photo"
 msgstr "Subir Foto"
 
-#: resources/views/create_project.blade.php:100
+#: resources\views\create_project.blade.php:100
 msgid "Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results."
 msgstr "Suba una imagen para usarla como foto de perfil para este grupo. La imagen se mostrará en la página principal del grupo y en los resultados de búsqueda."
 
-#: resources/views/create_project.blade.php:101
+#: resources\views\create_project.blade.php:101
 msgid "To skip the group profile photo upload process, hit the 'Next Step' button."
 msgstr "Para omitir el proceso de carga de fotos de perfil de grupo, presione el botón 'Siguiente paso'."
 
-#: resources/views/create_project.blade.php:119
-#: resources/views/project_account.blade.php:238
-#: resources/views/user_account.blade.php:101
+#: resources\views\create_project.blade.php:119
+#: resources\views\project_account.blade.php:238
+#: resources\views\user_account.blade.php:101
 msgid "Select Photo for Upload"
 msgstr "Seleccionar Foto para Subir"
 
-#: resources/views/create_project.blade.php:136
-#: resources/views/project_account.blade.php:106
+#: resources\views\create_project.blade.php:136
+#: resources\views\project_account.blade.php:106
 msgid "Search for members to invite:"
 msgstr "Busque miembros para invitar:"
 
-#: resources/views/create_project.blade.php:158
-#: resources/views/project_account.blade.php:128
+#: resources\views\create_project.blade.php:158
+#: resources\views\project_account.blade.php:128
 msgid "Enter the email addresses of people to invite."
 msgstr "Ingrese las direcciones de correo electrónico de las personas a invitar."
 
-#: resources/views/create_project.blade.php:167
-#: resources/views/project_account.blade.php:138
+#: resources\views\create_project.blade.php:162
+msgid "FINISH"
+msgstr ""
+
+#: resources\views\create_project.blade.php:167
+#: resources\views\project_account.blade.php:138
 msgid "Select people to invite from your friends list."
 msgstr "Seleccione personas para invitar desde su lista de amigos."
 
-#: resources/views/data_management.blade.php:6
+#: resources\views\data_management.blade.php:6
 msgid "To view data for a project you must first be invited to the group. Please either go to the projects page and request membership for your project, or contact rms@stats4sd.org."
 msgstr "Para ver los datos de un proyecto, primero debe ser invitado al grupo. Vaya a la página de proyectos y solicite membresía para su proyecto, o comuníquese con rms@stats4sd.org."
 
-#: resources/views/data_management.blade.php:9
+#: resources\views\data_management.blade.php:9
 msgid "Form and Data Management"
 msgstr "Gestión de Formularios y Datos"
 
-#: resources/views/data_management.blade.php:10
+#: resources\views\data_management.blade.php:10
 msgid "This page is where you manage the forms that are shared with you through Kobotoolbox, and review and download data collected through those forms."
 msgstr "Esta página es donde administra los formularios que se comparten con usted a través de Kobotoolbox, y revisa y descarga los datos recopilados a través de esos formularios."
 
-#: resources/views/data_management.blade.php:11
-#: resources/views/start_sampling.blade.php:7
+#: resources\views\data_management.blade.php:11
+#: resources\views\start_sampling.blade.php:7
 msgid "To collect data through this platform, please do the following:"
 msgstr "Para recopilar datos a través de esta plataforma, haga lo siguiente:"
 
-#: resources/views/data_management.blade.php:13
+#: resources\views\data_management.blade.php:13
 msgid "Instructions"
 msgstr "Instrucciones"
 
-#: resources/views/data_management.blade.php:17
+#: resources\views\data_management.blade.php:17
 msgid "1. Sync Forms to Kobotoolbox"
 msgstr "1. Sincronizar formularios con Kobotoolbox"
 
-#: resources/views/data_management.blade.php:18
+#: resources\views\data_management.blade.php:18
 msgid "The table below shows the forms available for your project. Deployed forms are shared with your Kobotoolbox account - you should be able to see them by logging into Kobotools using your project account. To deploy a form, click the button in the Status column."
 msgstr "La siguiente tabla muestra los formularios disponibles para su proyecto. Los formularios desplegados se comparten con su cuenta de Kobotoolbox: debe poder verlos iniciando sesión en Kobotools utilizando su cuenta de proyecto. Para implementar un formulario, haga clic en el botón en la columna Estado."
 
-#: resources/views/data_management.blade.php:19
+#: resources\views\data_management.blade.php:19
 msgid "2. Collect Data"
 msgstr "2. Recopilar datos"
 
-#: resources/views/data_management.blade.php:20
+#: resources\views\data_management.blade.php:20
 msgid "With your forms deployed, you can collect data via Kobotoolbox / ODK Collect in the normal way. To pull new records from Kobotoolbox, click the button above. This will update the table with the number of records collected with each form."
 msgstr "Con sus formularios desplegados, puede recopilar datos a través de Kobotoolbox / ODK Collect de la manera normal. Para extraer nuevos registros de Kobotoolbox, haga clic en el botón de arriba. Esto actualizará la tabla con el número de registros recopilados con cada formulario."
 
-#: resources/views/data_management.blade.php:21
+#: resources\views\data_management.blade.php:21
 msgid "3. Merge and download data"
 msgstr "3. Fusionar y descargar datos"
 
-#: resources/views/data_management.blade.php:22
+#: resources\views\data_management.blade.php:22
 msgid "You can download data from Kobotoolbox directly, but this will give you one data file per form. Using this platform, you can get a merged dataset, containing 1 row per soil sample and data from all the forms above."
 msgstr "Puede descargar datos de Kobotoolbox directamente, pero esto le dará un archivo de datos por formulario. Con esta plataforma, puede obtener un conjunto de datos combinado, que contiene 1 fila por muestra de suelo y datos de todos los formularios anteriores."
 
-#: resources/views/data_management.blade.php:29
+#: resources\views\data_management.blade.php:29
 msgid "Forms and Data"
 msgstr "Formularios y Datos"
 
-#: resources/views/downloads.blade.php:4
-#: resources/views/layouts/layout.blade.php:48
+#: resources\views\downloads.blade.php:4
+#: resources\views\layouts\layout.blade.php:48
 msgid "Downloads"
 msgstr "Descargar"
 
-#: resources/views/downloads.blade.php:5
+#: resources\views\downloads.blade.php:5
 msgid "This page contains links to find and download resources to help you during your soil analysis. Full details of each analysis process can be found at"
 msgstr "Esta página contiene enlaces para buscar y descargar recursos que lo ayudarán durante su análisis del suelo. Los detalles completos de cada proceso de análisis se pueden encontrar en"
 
-#: resources/views/downloads.blade.php:11
+#: resources\views\downloads.blade.php:11
 msgid "View protocol online"
 msgstr "Ver protocolo en línea"
 
-#: resources/views/downloads.blade.php:11
+#: resources\views\downloads.blade.php:11
 msgid "(redirects to smallholder.sha.org)"
 msgstr "(redirige a smallholder.sha.org)"
 
-#: resources/views/downloads.blade.php:12
+#: resources\views\downloads.blade.php:12
 msgid "Download"
 msgstr "Descargar"
 
-#: resources/views/downloads.blade.php:12
+#: resources\views\downloads.blade.php:12
 msgid "form"
 msgstr "Formar"
 
-#: resources/views/home.blade.php:7
-#: resources/views/layouts/layout.blade.php:31
+#: resources\views\home.blade.php:4
+msgid "You must login to access this page."
+msgstr ""
+
+#: resources\views\home.blade.php:8
+#: resources\views\layouts\layout.blade.php:31
 msgid "Introduction"
 msgstr "Introducción"
 
-#: resources/views/home.blade.php:8
+#: resources\views\home.blade.php:9
 msgid "This data platform is intended to help CCRP research projects collect and organise their soil sample data."
 msgstr "Esta plataforma de datos está  destinada a ayudar a los proyectos de investigación del CCRP  para recolectar y organizar los datos de las muestras de suelo."
 
-#: resources/views/home.blade.php:9
+#: resources\views\home.blade.php:10
 msgid "Using the tools within the platform will help you:"
 msgstr "El uso de las herramientas en la plataforma le ayudará a:"
 
-#: resources/views/home.blade.php:11
+#: resources\views\home.blade.php:12
 msgid "Uniquely identify each soil sample your project collects with a QR code."
 msgstr "Identificar de forma única con un código QR cada muestra de suelo que su proyecto recolecte"
 
-#: resources/views/home.blade.php:12
+#: resources\views\home.blade.php:13
 msgid "Enter data about the soil samples, such as location, date of sampling and other key information."
 msgstr "Ingresar datos de la muestra como la ubicación, fecha de muestreo y otra información clave"
 
-#: resources/views/home.blade.php:13
+#: resources\views\home.blade.php:14
 msgid "Enter readings from your soil analyses and automatically calculate the results."
 msgstr "Ingresar las lecturas de sus análisis y automaticamente calcualr los resultados"
 
-#: resources/views/home.blade.php:14
+#: resources\views\home.blade.php:15
 msgid "Save the readings and results to a secure database."
 msgstr "Guardar las lecturas y resultados en una base de datos segura"
 
-#: resources/views/home.blade.php:15
+#: resources\views\home.blade.php:16
 msgid "Automatically merge results from different analyses with your main sample information into a single dataset."
 msgstr "Combinar automaticamente los resultados de diferentes análisis con la información de su muestra principal en un solo grupo de datos."
 
-#: resources/views/home.blade.php:17
+#: resources\views\home.blade.php:18
 msgid "If you work with soils, and are interested in using the Soil Health Assessment Toolkit developed by the team at"
 msgstr "Si trabaja con suelos y está interesado en utilizar el Kit de herramientas de evaluación de la salud del suelo desarrollado por el equipo de"
 
-#: resources/views/home.blade.php:17
+#: resources\views\home.blade.php:18
 msgid "we recommend exploring this platform to see how these tools can help your workflow."
 msgstr "se recomienda la exploración de esta plataforma para ver cómo estas herramientas pueden ayudar a su flujo de trabajo."
 
-#: resources/views/home.blade.php:21
+#: resources\views\home.blade.php:22
 msgid "Who are we?"
 msgstr "¿Quienes somos?"
 
-#: resources/views/home.blade.php:22
+#: resources\views\home.blade.php:23
 msgid "The platform is a collaboration between the Research Methods Support team at"
 msgstr "La plataforma es una colaboración entre el equipo de Soporte de Métodos de Investigación en"
 
-#: resources/views/home.blade.php:22
+#: resources\views\home.blade.php:23
 msgid "and the Cross-cutting Soils project funded by the McKnight foundation’s"
 msgstr ""
 
-#: resources/views/home.blade.php:23
+#: resources\views\home.blade.php:24
 msgid "This website and associated resources are created by the CCRP Research Methods Support team and Cross-cutting Soils Project, in association with the"
 msgstr "Este sitio web y los recursos asociados son creados por el equipo de Soporte de Métodos de Investigación de CCRP y el Proyecto de suelos transversales, en asociación con el"
 
-#: resources/views/home.blade.php:23
+#: resources\views\home.blade.php:24
 msgid "All data present in the platform remains the property of the individual projects using the platform."
 msgstr "Todos los datos presentes en la plataforma siguen siendo propiedad de los proyectos individuales que utilizan la plataforma."
 
-#: resources/views/invite_member_email.blade.php:4
+#: resources\views\invite_member_email.blade.php:135
+msgid "This is a invitation to join the Soils Platform"
+msgstr ""
+
+#: resources\views\invite_member_email.blade.php:143
 msgid "has invited you to join the group:"
 msgstr "te ha invitado a unirte al grupo:"
 
-#: resources/views/invite_member_email.blade.php:5
-msgid "Go here to accept your invitation</a> or "
-msgstr "Vaya aquí para aceptar su invitación</a> o"
+#: resources\views\invite_member_email.blade.php:151
+msgid "Go"
+msgstr ""
 
-#: resources/views/invite_member_email.blade.php:5
-msgid "visit the group</a> to learn more."
-msgstr "visite al grupo</a> para aprender más."
+#: resources\views\invite_member_email.blade.php:151
+msgid "here"
+msgstr ""
 
-#: resources/views/layouts/layout.blade.php:26
+#: resources\views\invite_member_email.blade.php:151
+msgid "to accept your invitation or "
+msgstr ""
+
+#: resources\views\invite_member_email.blade.php:151
+msgid "visit the"
+msgstr ""
+
+#: resources\views\invite_member_email.blade.php:151
+msgid "group"
+msgstr ""
+
+#: resources\views\invite_member_email.blade.php:151
+msgid "to learn more."
+msgstr ""
+
+#: resources\views\layouts\layout.blade.php:26
 msgid "CCRP Soils Data Platform"
 msgstr "Plataforma de datos de suelos CCRP"
 
-#: resources/views/layouts/layout.blade.php:29
+#: resources\views\layouts\layout.blade.php:29
 msgid "Home"
 msgstr "Casa"
 
-#: resources/views/layouts/layout.blade.php:32
+#: resources\views\layouts\layout.blade.php:32
 msgid "About"
 msgstr "Acerca de"
 
-#: resources/views/layouts/layout.blade.php:37
-#: resources/views/layouts/layout.blade.php:39
-#: resources/views/start_sampling.blade.php:4
+#: resources\views\layouts\layout.blade.php:37
+#: resources\views\layouts\layout.blade.php:39
+#: resources\views\start_sampling.blade.php:4
 msgid "Start Sampling"
 msgstr "Iniciar Muestreo"
 
-#: resources/views/layouts/layout.blade.php:40
+#: resources\views\layouts\layout.blade.php:40
 msgid "Data Management"
 msgstr "Gestión de Datos"
 
-#: resources/views/layouts/layout.blade.php:45
+#: resources\views\layouts\layout.blade.php:45
 msgid "Tools"
 msgstr "Herramientas"
 
-#: resources/views/layouts/layout.blade.php:47
+#: resources\views\layouts\layout.blade.php:47
 msgid "QR Codes"
 msgstr "Códigos QR"
 
-#: resources/views/layouts/layout.blade.php:61
-#: resources/views/projects.blade.php:9
+#: resources\views\layouts\layout.blade.php:62
+#: resources\views\projects.blade.php:9
 msgid "All Projects"
 msgstr "Todos los proyectos"
 
-#: resources/views/layouts/layout.blade.php:65
+#: resources\views\layouts\layout.blade.php:66
 msgid "Create a Project"
 msgstr "Crear un Proyecto"
 
-#: resources/views/layouts/layout.blade.php:68
-#: resources/views/project_account.blade.php:287
+#: resources\views\layouts\layout.blade.php:69
+#: resources\views\project_account.blade.php:287
 msgid "Admin"
 msgstr "Administración"
 
-#: resources/views/project_account.blade.php:23
+#: resources\views\project_account.blade.php:16
+msgid "Group"
+msgstr ""
+
+#: resources\views\project_account.blade.php:23
 msgid "Group Admins"
 msgstr "Administradores de Grupo"
 
-#: resources/views/project_account.blade.php:41
+#: resources\views\project_account.blade.php:41
 msgid "Form and Data"
 msgstr "Formulario y datos"
 
-#: resources/views/project_account.blade.php:42
-#: resources/views/project_account.blade.php:251
+#: resources\views\project_account.blade.php:42
+#: resources\views\project_account.blade.php:251
 msgid "Members"
 msgstr "Miembros"
 
-#: resources/views/project_account.blade.php:43
+#: resources\views\project_account.blade.php:43
 msgid "Manage"
 msgstr "Gestionar"
 
-#: resources/views/project_account.blade.php:53
+#: resources\views\project_account.blade.php:53
 msgid "Form Name"
 msgstr "Nombre del formulario"
 
-#: resources/views/project_account.blade.php:54
+#: resources\views\project_account.blade.php:54
 msgid "Kobotools Form ID"
 msgstr "ID de Formulario de Kobotools"
 
-#: resources/views/project_account.blade.php:55
+#: resources\views\project_account.blade.php:55
 msgid "Records"
 msgstr "Archivos"
 
-#: resources/views/project_account.blade.php:56
-#: resources/views/project_account.blade.php:257
+#: resources\views\project_account.blade.php:56
+#: resources\views\project_account.blade.php:257
 msgid "Status"
 msgstr "Estado"
 
-#: resources/views/project_account.blade.php:57
+#: resources\views\project_account.blade.php:57
 msgid "Action"
 msgstr "Acción"
 
-#: resources/views/project_account.blade.php:68
+#: resources\views\project_account.blade.php:69
 msgid "deployed"
 msgstr "desplegado"
 
-#: resources/views/project_account.blade.php:70
+#: resources\views\project_account.blade.php:71
 msgid "undeployed"
 msgstr "sin desplegar"
 
-#: resources/views/project_account.blade.php:87
+#: resources\views\project_account.blade.php:77
+msgid "DEPLOY"
+msgstr ""
+
+#: resources\views\project_account.blade.php:87
 msgid "GET DATA"
 msgstr "OBTENER DATOS"
 
-#: resources/views/project_account.blade.php:88
+#: resources\views\project_account.blade.php:88
 msgid "DOWNLOAD DATA"
 msgstr "DESCARGAR DATOS"
 
-#: resources/views/project_account.blade.php:96
+#: resources\views\project_account.blade.php:96
 msgid "INVITE"
 msgstr ""
 "INVITACIÓN\n"
 ""
 
-#: resources/views/project_account.blade.php:98
+#: resources\views\project_account.blade.php:98
 msgid "SHARE"
 msgstr "COMPARTIR"
 
-#: resources/views/project_account.blade.php:132
+#: resources\views\project_account.blade.php:132
 msgid "SUBMIT"
 msgstr "ENVIAR"
 
-#: resources/views/project_account.blade.php:160
+#: resources\views\project_account.blade.php:160
 msgid "created at :"
 msgstr "Creado en :"
 
-#: resources/views/project_account.blade.php:224
+#: resources\views\project_account.blade.php:224
 msgid "Photo"
 msgstr "Foto"
 
-#: resources/views/project_account.blade.php:244
+#: resources\views\project_account.blade.php:244
 msgid "UPDATE GROUP"
 msgstr "ACTUALIZAR GRUPO"
 
-#: resources/views/project_account.blade.php:255
+#: resources\views\project_account.blade.php:255
 msgid "Avatar"
 msgstr "Avatar"
 
-#: resources/views/project_account.blade.php:256
+#: resources\views\project_account.blade.php:256
 msgid "Username"
 msgstr "Nombre de usuario"
 
-#: resources/views/project_account.blade.php:258
+#: resources\views\project_account.blade.php:258
 msgid "Actions"
 msgstr "Acciones"
 
-#: resources/views/project_account.blade.php:289
+#: resources\views\project_account.blade.php:289
 msgid "User"
 msgstr "Usuario"
 
-#: resources/views/project_account.blade.php:296
+#: resources\views\project_account.blade.php:296
 msgid "CHANGE STATUS"
 msgstr "Cambiar Estado"
 
-#: resources/views/project_account.blade.php:297
+#: resources\views\project_account.blade.php:297
 msgid "DELETE"
 msgstr ""
 "BORRAR\n"
 ""
 
-#: resources/views/project_account.blade.php:310
+#: resources\views\project_account.blade.php:310
 msgid "INVITE MEMBERS"
 msgstr "INVITAR A LOS MIEMBROS"
 
-#: resources/views/project_account.blade.php:316
+#: resources\views\project_account.blade.php:316
 msgid "Delete Project"
 msgstr "Borrar Proyecto"
 
-#: resources/views/project_account.blade.php:317
+#: resources\views\project_account.blade.php:317
 msgid "You are about to delete this project."
 msgstr "Estás a punto de eliminar este proyecto."
 
-#: resources/views/project_account.blade.php:319
+#: resources\views\project_account.blade.php:319
 msgid "You will no longer be able to access the data of this project"
 msgstr "Ya no podrás acceder a los datos de este proyecto"
 
-#: resources/views/project_account.blade.php:320
+#: resources\views\project_account.blade.php:320
 msgid "You will no longer be able to access the forms for this project"
 msgstr "Ya no podrá acceder a los formularios para este proyecto"
 
-#: resources/views/project_account.blade.php:326
+#: resources\views\project_account.blade.php:326
 msgid "DELETE PROJECT"
 msgstr "BORRAR PROYECTO"
 
-#: resources/views/project_account.blade.php:332
+#: resources\views\project_account.blade.php:332
 msgid "Access is not allowed.</b> Only the admins of this project have the permission for this page."
 msgstr "El acceso no está permitido. Solo los administradores de este proyecto tienen permiso para esta página."
 
-#: resources/views/project_account.blade.php:338
+#: resources\views\project_account.blade.php:338
 msgid "This is a private group."
 msgstr "Este es un grupo privado."
 
-#: resources/views/project_account.blade.php:338
+#: resources\views\project_account.blade.php:338
 msgid "To join you must be a registered site member and request group membership."
 msgstr "Para unirse debe ser un miembro registrado del sitio y solicitar la membresía de grupo."
 
-#: resources/views/projects.blade.php:10
-msgid "My Projects"
-msgstr "Mis Proyectos"
-
-#: resources/views/projects.blade.php:12
-msgid "Create Project"
-msgstr "Crear Proyecto"
-
-#: resources/views/qr_code.blade.php:5
-msgid "Generate QR Codes"
-msgstr "Generar Códigos QR"
-
-#: resources/views/qr_code.blade.php:6
-msgid "Use this page to generate QR codes that aren't linked to a specific location or farmer. This is used if you are getting quickly setup, or are mainly using the toolkit to aid with analysis of samples, and are managing your data elsewhere."
-msgstr "Use esta página para generar códigos QR que no estén vinculados a una ubicación específica o agricultor. Esto se usa si está configurando rápidamente, o está utilizando principalmente el kit de herramientas para ayudar con el análisis de muestras, y está administrando sus datos en otro lugar."
-
-#: resources/views/qr_code.blade.php:7
-msgid "Click the button below to generate a sheet of 6 sample codes for printing. Every code will be unique within the system. Simply generate and print as many sheets as you need for your work."
-msgstr "Haga clic en el botón de abajo para generar una hoja de 6 códigos de muestra para imprimir. Cada código será único dentro del sistema. Simplemente genere e imprima tantas hojas como necesite para su trabajo."
-
-#: resources/views/qr_code.blade.php:26
-msgid "GENERATE CODE SHEET FOR PRINTING"
-msgstr "GENERAR HOJA DE CÓDIGOS PARA IMPRIMIR"
-
-#: resources/views/register.blade.php:6
-msgid "Create an Account"
-msgstr "Crea una Cuenta"
-
-#: resources/views/register.blade.php:7
-msgid "Registering for this site is easy. Just fill in the fields below, and we'll get a new account set up for you in no time."
-msgstr "Registrarse en este sitio es fácil. Simplemente complete los campos a continuación, y obtendremos una nueva cuenta configurada para usted en poco tiempo."
-
-#: resources/views/register.blade.php:10
-msgid "Account Details"
-msgstr "detalles de la cuenta"
-
-#: resources/views/register.blade.php:15
-#: resources/views/user_account.blade.php:151
-msgid "Username (required)"
-msgstr "Nombre de Usuario (requerido)"
-
-#: resources/views/register.blade.php:24
-#: resources/views/user_account.blade.php:155
-msgid "Email Address (required)"
-msgstr "Dirección de correo electrónico: (obligatorio)"
-
-#: resources/views/register.blade.php:33
-#: resources/views/user_account.blade.php:216
-msgid "Choose a Password (required)"
-msgstr "Elija una contraseña (requerida)"
-
-#: resources/views/register.blade.php:42
-#: resources/views/user_account.blade.php:220
-msgid "Confirm Password (required)"
-msgstr "Confirmar contraseña (requerido)"
-
-#: resources/views/register.blade.php:50
-msgid "Complete Sign Up"
-msgstr "Registro completo"
-
-#: resources/views/register.blade.php:55
-msgid "Profile Details"
-msgstr "Detalles del Perfil"
-
-#: resources/views/register.blade.php:57
-#: resources/views/user_account.blade.php:170
-msgid "Name (required)"
-msgstr "Nombre (requerido)"
-
-#: resources/views/register.blade.php:68
-msgid "Kobotools Account"
-msgstr "Cuenta Kobotools"
-
-#: resources/views/register.blade.php:73
-#: resources/views/user_account.blade.php:175
-msgid "Who can see this field?"
-msgstr "¿Quién puede ver este campo?"
-
-#: resources/views/register.blade.php:76
-#: resources/views/user_account.blade.php:178
-msgid "Everyone"
-msgstr "Todo el mundo"
-
-#: resources/views/register.blade.php:81
-#: resources/views/user_account.blade.php:183
-msgid "Only Me"
-msgstr "Solo yo"
-
-#: resources/views/register.blade.php:86
-#: resources/views/user_account.blade.php:188
-msgid "All Members"
-msgstr "Todos los miembros"
-
-#: resources/views/start_sampling.blade.php:5
-msgid "Option 1 – use this data platform"
-msgstr "Opción 1: use esta plataforma de datos"
-
-#: resources/views/start_sampling.blade.php:6
-msgid "For more information on the platform, how it’s built and how it can help your data collection and processing for soil data, see the About page."
-msgstr "Para obtener más información sobre la plataforma, cómo está construida y cómo puede ayudar a su recolección y procesamiento de datos del suelo, consulte la página Acerca de."
-
-#: resources/views/start_sampling.blade.php:9
-msgid "Check that you have added your Kobotoolbox username to your project."
-msgstr "Compruebe que ha agregado su nombre de usuario Kobotoolbox a su proyecto."
-
-#: resources/views/start_sampling.blade.php:10
-msgid "Go to the Data Management page, to create a set of forms and see data you have collected."
-msgstr "Vaya a la página de Gestión de datos, para crear un conjunto de formularios y ver los datos que ha recopilado."
-
-#: resources/views/start_sampling.blade.php:13
-msgid "Option 2 – use your own system"
-msgstr "Opción 2: usa tu propio sistema"
-
-#: resources/views/start_sampling.blade.php:14
-msgid "To start sampling using our forms within your own data management system, you will need to:"
-msgstr "Para comenzar a utilizar nuestros formularios en su propio sistema de gestión de datos, deberá:"
-
-#: resources/views/start_sampling.blade.php:16
-msgid "Download the XLS forms from our downloads page"
-msgstr "Descargue los formularios XLS de nuestra página de descargas"
-
-#: resources/views/start_sampling.blade.php:17
-msgid "Upload them to your ODK Aggregate service. (e.g. Kobotoolbox, Ona.io, SurveyCTO)."
-msgstr "Subirlos a su servicio ODK Agregado. (por ejemplo, Kobotoolbox, Ona.io, SurveyCTO)."
-
-#: resources/views/start_sampling.blade.php:18
-msgid "Use our QR generation tool to create QR codes for your soil samples."
-msgstr "Use nuestra herramienta de generación de QR para crear códigos QR para sus muestras de suelo."
-
-#: resources/views/user_account.blade.php:20
-msgid "Kobotoolbox:"
-msgstr "Kobotoolbox:"
-
-#: resources/views/user_account.blade.php:21
-msgid "Groups:"
-msgstr "Grupos:"
-
-#: resources/views/user_account.blade.php:23
-#: resources/views/user_account.blade.php:54
-msgid "Email:"
-msgstr "Email:"
-
-#: resources/views/user_account.blade.php:25
-msgid "Created:"
-msgstr "Creado:"
-
-#: resources/views/user_account.blade.php:33
-msgid "Profile"
-msgstr "Perfil"
-
-#: resources/views/user_account.blade.php:34
+#: resources\views\projects.blade.php:5
+#: resources\views\user_account.blade.php:34
 msgid "Projects"
 msgstr "Proyectos"
 
-#: resources/views/user_account.blade.php:35
+#: resources\views\projects.blade.php:10
+msgid "My Projects"
+msgstr "Mis Proyectos"
+
+#: resources\views\projects.blade.php:12
+msgid "Create Project"
+msgstr "Crear Proyecto"
+
+#: resources\views\projects.blade.php:19
+msgid "There are not project in the platform"
+msgstr ""
+
+#: resources\views\projects.blade.php:46
+msgid "There are not project in your account. Please go in the 'Create Project' section for creating one."
+msgstr ""
+
+#: resources\views\qr_code.blade.php:5
+msgid "Generate QR Codes"
+msgstr "Generar Códigos QR"
+
+#: resources\views\qr_code.blade.php:6
+msgid "Use this page to generate QR codes that aren't linked to a specific location or farmer. This is used if you are getting quickly setup, or are mainly using the toolkit to aid with analysis of samples, and are managing your data elsewhere."
+msgstr "Use esta página para generar códigos QR que no estén vinculados a una ubicación específica o agricultor. Esto se usa si está configurando rápidamente, o está utilizando principalmente el kit de herramientas para ayudar con el análisis de muestras, y está administrando sus datos en otro lugar."
+
+#: resources\views\qr_code.blade.php:7
+msgid "Click the button below to generate a sheet of 6 sample codes for printing. Every code will be unique within the system. Simply generate and print as many sheets as you need for your work."
+msgstr "Haga clic en el botón de abajo para generar una hoja de 6 códigos de muestra para imprimir. Cada código será único dentro del sistema. Simplemente genere e imprima tantas hojas como necesite para su trabajo."
+
+#: resources\views\qr_code.blade.php:18
+msgid "How many QR codes do you need?"
+msgstr ""
+
+#: resources\views\qr_code.blade.php:21
+msgid "QR Codes will be split over multiple pages as necessary"
+msgstr ""
+
+#: resources\views\qr_code.blade.php:26
+msgid "GENERATE CODE SHEET FOR PRINTING"
+msgstr "GENERAR HOJA DE CÓDIGOS PARA IMPRIMIR"
+
+#: resources\views\register.blade.php:6
+msgid "Create an Account"
+msgstr "Crea una Cuenta"
+
+#: resources\views\register.blade.php:7
+msgid "Registering for this site is easy. Just fill in the fields below, and we'll get a new account set up for you in no time."
+msgstr "Registrarse en este sitio es fácil. Simplemente complete los campos a continuación, y obtendremos una nueva cuenta configurada para usted en poco tiempo."
+
+#: resources\views\register.blade.php:10
+msgid "Account Details"
+msgstr "detalles de la cuenta"
+
+#: resources\views\register.blade.php:15
+#: resources\views\user_account.blade.php:151
+msgid "Username (required)"
+msgstr "Nombre de Usuario (requerido)"
+
+#: resources\views\register.blade.php:24
+#: resources\views\user_account.blade.php:155
+msgid "Email Address (required)"
+msgstr "Dirección de correo electrónico: (obligatorio)"
+
+#: resources\views\register.blade.php:33
+#: resources\views\user_account.blade.php:216
+msgid "Choose a Password (required)"
+msgstr "Elija una contraseña (requerida)"
+
+#: resources\views\register.blade.php:42
+#: resources\views\user_account.blade.php:220
+msgid "Confirm Password (required)"
+msgstr "Confirmar contraseña (requerido)"
+
+#: resources\views\register.blade.php:50
+msgid "Complete Sign Up"
+msgstr "Registro completo"
+
+#: resources\views\register.blade.php:55
+msgid "Profile Details"
+msgstr "Detalles del Perfil"
+
+#: resources\views\register.blade.php:57
+#: resources\views\user_account.blade.php:170
+msgid "Name (required)"
+msgstr "Nombre (requerido)"
+
+#: resources\views\register.blade.php:68
+msgid "Kobotools Account"
+msgstr "Cuenta Kobotools"
+
+#: resources\views\register.blade.php:73
+#: resources\views\user_account.blade.php:175
+msgid "Who can see this field?"
+msgstr "¿Quién puede ver este campo?"
+
+#: resources\views\register.blade.php:76
+#: resources\views\user_account.blade.php:178
+msgid "Everyone"
+msgstr "Todo el mundo"
+
+#: resources\views\register.blade.php:81
+#: resources\views\user_account.blade.php:183
+msgid "Only Me"
+msgstr "Solo yo"
+
+#: resources\views\register.blade.php:86
+#: resources\views\user_account.blade.php:188
+msgid "All Members"
+msgstr "Todos los miembros"
+
+#: resources\views\start_sampling.blade.php:5
+msgid "Option 1 – use this data platform"
+msgstr "Opción 1: use esta plataforma de datos"
+
+#: resources\views\start_sampling.blade.php:6
+msgid "For more information on the platform, how it’s built and how it can help your data collection and processing for soil data, see the About page."
+msgstr "Para obtener más información sobre la plataforma, cómo está construida y cómo puede ayudar a su recolección y procesamiento de datos del suelo, consulte la página Acerca de."
+
+#: resources\views\start_sampling.blade.php:9
+msgid "Check that you have added your Kobotoolbox username to your project."
+msgstr "Compruebe que ha agregado su nombre de usuario Kobotoolbox a su proyecto."
+
+#: resources\views\start_sampling.blade.php:10
+msgid "Go to the Data Management page, to create a set of forms and see data you have collected."
+msgstr "Vaya a la página de Gestión de datos, para crear un conjunto de formularios y ver los datos que ha recopilado."
+
+#: resources\views\start_sampling.blade.php:13
+msgid "Option 2 – use your own system"
+msgstr "Opción 2: usa tu propio sistema"
+
+#: resources\views\start_sampling.blade.php:14
+msgid "To start sampling using our forms within your own data management system, you will need to:"
+msgstr "Para comenzar a utilizar nuestros formularios en su propio sistema de gestión de datos, deberá:"
+
+#: resources\views\start_sampling.blade.php:16
+msgid "Download the XLS forms from our downloads page"
+msgstr "Descargue los formularios XLS de nuestra página de descargas"
+
+#: resources\views\start_sampling.blade.php:17
+msgid "Upload them to your ODK Aggregate service. (e.g. Kobotoolbox, Ona.io, SurveyCTO)."
+msgstr "Subirlos a su servicio ODK Agregado. (por ejemplo, Kobotoolbox, Ona.io, SurveyCTO)."
+
+#: resources\views\start_sampling.blade.php:18
+msgid "Use our QR generation tool to create QR codes for your soil samples."
+msgstr "Use nuestra herramienta de generación de QR para crear códigos QR para sus muestras de suelo."
+
+#: resources\views\user_account.blade.php:20
+msgid "Kobotoolbox:"
+msgstr "Kobotoolbox:"
+
+#: resources\views\user_account.blade.php:21
+msgid "Groups:"
+msgstr "Grupos:"
+
+#: resources\views\user_account.blade.php:23
+#: resources\views\user_account.blade.php:54
+msgid "Email:"
+msgstr "Email:"
+
+#: resources\views\user_account.blade.php:25
+msgid "Created:"
+msgstr "Creado:"
+
+#: resources\views\user_account.blade.php:33
+msgid "Profile"
+msgstr "Perfil"
+
+#: resources\views\user_account.blade.php:35
 msgid "Settings"
 msgstr "Ajustes"
 
-#: resources/views/user_account.blade.php:42
+#: resources\views\user_account.blade.php:42
 msgid "PERSONAL DETAILS"
 msgstr "DETALLES PERSONALES"
 
-#: resources/views/user_account.blade.php:52
+#: resources\views\user_account.blade.php:52
 msgid "Name:"
 msgstr "Nombre:"
 
-#: resources/views/user_account.blade.php:53
+#: resources\views\user_account.blade.php:53
 msgid "Username:"
 msgstr "Nombre de usuario:"
 
-#: resources/views/user_account.blade.php:55
+#: resources\views\user_account.blade.php:55
 msgid "Privacy:"
 msgstr "Intimidad:"
 
-#: resources/views/user_account.blade.php:85
+#: resources\views\user_account.blade.php:85
 msgid "UPLOAD PICTURE PROFILE"
 msgstr "CARGAR PERFIL DE IMAGEN"
 
-#: resources/views/user_account.blade.php:113
-#: resources/views/user_account.blade.php:127
+#: resources\views\user_account.blade.php:113
+#: resources\views\user_account.blade.php:127
 msgid "KOBOTOOLBOX ACCOUNT"
 msgstr "CUENTA KOBOTOOLBOX"
 
-#: resources/views/user_account.blade.php:123
+#: resources\views\user_account.blade.php:123
 msgid "Enter with Kobotoolbox Account"
 msgstr "Ingrese con la cuenta de Kobotoolbox"
 
-#: resources/views/user_account.blade.php:131
+#: resources\views\user_account.blade.php:131
 msgid "Current Account"
 msgstr "Cuenta actual"
 
-#: resources/views/user_account.blade.php:140
+#: resources\views\user_account.blade.php:140
 msgid "UPDATE PERSONAL DETAILS"
 msgstr "ACTUALIZAR DETALLES PERSONALES"
 
-#: resources/views/user_account.blade.php:165
+#: resources\views\user_account.blade.php:165
 msgid "Update Profile"
 msgstr "Actualización del Perfil"
 
-#: resources/views/user_account.blade.php:201
-#: resources/views/user_account.blade.php:224
+#: resources\views\user_account.blade.php:201
+#: resources\views\user_account.blade.php:224
 msgid "CHANGE PASSWORD"
 msgstr "Cambiar la contraseña"
 
-#: resources/views/user_account.blade.php:212
+#: resources\views\user_account.blade.php:212
 msgid "Enter a Old Password (required)"
 msgstr "Ingrese una contraseña anterior (requerida)"
 
-#: resources/views/user_account.blade.php:232
-#: resources/views/user_account.blade.php:249
+#: resources\views\user_account.blade.php:232
+#: resources\views\user_account.blade.php:249
 msgid "DELETE PROFILE"
 msgstr "BORRAR PERFIL"
 
-#: resources/views/user_account.blade.php:241
+#: resources\views\user_account.blade.php:241
 msgid "You are about to permanently delete yuor profile"
 msgstr "Está a punto de eliminar permanentemente su perfil"
 
-#: resources/views/user_account.blade.php:243
+#: resources\views\user_account.blade.php:243
 msgid "You will no longer be able to access to your project data."
 msgstr "Ya no podrá acceder a los datos de su proyecto."
 
-#: resources/views/user_account.blade.php:244
+#: resources\views\user_account.blade.php:244
 msgid "You will no longer be able to access to the forms for your projects."
 msgstr "Ya no podrá acceder a los formularios para sus proyectos."

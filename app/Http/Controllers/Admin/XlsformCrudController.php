@@ -8,6 +8,7 @@ use App\Models\Projectxlsform;
 use App\Models\Xlsform;
 use Backpack\CRUD\CrudPanel;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
  * Class XlsformCrudController
@@ -16,6 +17,12 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
  */
 class XlsformCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    
     public function setup()
     {
         /*
@@ -23,22 +30,14 @@ class XlsformCrudController extends CrudController
         | CrudPanel Basic Information
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Xlsform');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/xlsform');
-        $this->crud->setEntityNameStrings('xlsform', 'xlsforms');
+        CRUD::setModel('App\Models\Xlsform');
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/xlsform');
+        CRUD::setEntityNameStrings('xlsform', 'xlsforms');
 
-        /*
-        |--------------------------------------------------------------------------
-        | CrudPanel Configuration
-        |--------------------------------------------------------------------------
-        */
+    }
 
-        // TODO: remove setFromDb() and manually define Fields and Columns
-        //$this->crud->setFromDb();
-
-        // add asterisk for fields that are required in XlsformRequest
-        $this->crud->setRequiredFields(StoreRequest::class, 'create');
-        $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
+    protected function setupListOperation()
+    {
         $this->crud->setColumns([
             [
                 'name' => 'form_title',
@@ -72,16 +71,36 @@ class XlsformCrudController extends CrudController
                 'function' => function($entry){
                     $page = $entry->link_page;
                     return '<a href="'.url(''.$page.'').'" target="_blank">'.$page.'</a>';
-                } 
+                },
+               
             ],
             [
                 'name' => 'description',
                 'label' => 'Description',
                 'type' => 'text',
+                'limit' => 20,
             ],
+            [
+                'name' => 'media',
+                'label' => 'Media',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'created_at',
+                'label' => 'Created at',
+                'type' => 'dateTime'
+            ],
+            [
+                'name' => 'updated_at',
+                'label' => 'Updated at',
+                'type' => 'dateTime'
+            ]
         ]);
+    }
         
-    
+    protected function setupCreateOperation()
+    {
+
         $this->crud->addFields([
 
             [
@@ -113,7 +132,7 @@ class XlsformCrudController extends CrudController
 
 
             ],
-            [   // Upload
+            [   // Upload xls form 
                 'name' => 'path_file',
                 'label' => 'File',
                 'type' => 'upload',
@@ -133,27 +152,22 @@ class XlsformCrudController extends CrudController
                 'type' => 'simplemde',
                 'hint' => '<b>Insert a description that you want to display for the form</b>',
             ],
+            [
+                'name' => 'media',
+                'label' => 'Upload media File',
+                'type' => 'upload_multiple',
+                'upload' => true,
+                'disk' => 'uploads',
+            ],
         ]);
     }
 
-    public function store(StoreRequest $request)
+    
+
+    protected function setupUpdateOperation()
     {
-        // your additional operations before save here
-        $redirect_location = parent::storeCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        $this->setupCreateOperation();
+        // Projectxlsform::where('xlsform_id', $id)->update(['deployed'=>0]);
     }
-
-    public function update(UpdateRequest $request, $id)
-    {
-        // your additional operations before save here
-        $redirect_location = parent::updateCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        Projectxlsform::where('xlsform_id', $id)->update(['deployed'=>0]);
-
-
-        return $redirect_location;
-    }
+   
 }

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class ConfirmProjectController extends Controller
 {
-    public function index($en, $project_id, $user_id, $key)
+    public function index($locale, $project_id, $user_id, $key)
     {
         $key_confirm = $key;
     	$project = Project::find($project_id);

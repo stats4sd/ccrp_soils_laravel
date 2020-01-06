@@ -22,12 +22,12 @@
      <div class="card card-login mx-5 mt-5">
        <div class="card-header"><strong>MY ACCOUNT</strong></div>
        <div class="card-body">
-         <form method="post" action="{{ url('logout') }}">
+         <form method="post" action="{{ url(app()->getLocale()).'\logout'}}">
           @csrf
          
           <div class="img_group mb-3">
 
-            <a href={{url('en/projects/members/'.Auth::user()->username)}}><img src={{Auth::user()->avatar}} id="avatar" >
+            <a href="{{url(app()->getLocale().'/users/'.Auth::user()->slug)}}"><img src={{Auth::user()->avatar}} id="avatar" >
               <strong>{{ Auth::user()->username}}</strong></a>
             </div>
                   
@@ -39,7 +39,7 @@
       <div class="card-body">
         @if(auth()->check())
           @foreach($array_projects as $prop)
-            <a href="/en/projects/{{$prop['slug']}}">     
+            <a href="{{url(app()->getLocale().'/projects/'.$prop['slug'])}}">     
               <div class="img_group mb-3">
                 <img src="{{$prop['image']}}" alt="Person" width="96" height="96">
               {{$prop['name']}}
