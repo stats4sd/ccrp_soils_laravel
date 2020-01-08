@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Jobs\DeployKobotoolsForm;
-use App\Jobs\PublishFormToKobotools;
+use App\Jobs\PublishNewFormToKobotools;
 use App\Jobs\PullDataFromProjectForms;
 use App\Jobs\ShareFormToKobotools;
 use App\Models\Project;
@@ -18,17 +18,16 @@ use Illuminate\Support\Facades\Storage;
 class KoboController extends Controller
 {
 
-    public function publish (Request $request)
+    public function publish ($locale, Project $project, $formId)
     {
-        $project = Project::find($request->projectId);
 
-        // When a model is serialised to be passed to a job, it loses any "pivot" properties. So we send the formId instead of the actual form model:
-        dispatch(new PublishFormToKobotools($request->formId, $project));
-
+        // Enter from the project side. Then get the xls_form via relationship (to include pivot)
+        dispatch(new PublishNewFormToKobotools($project, $formId));
 
 
-        dispatch(new ImportFormToKobotools($formId, $projectId));
-        Projectxlsform::where('project_id', $projectId)->where('xlsform_id', $formId)->update(['deployed'=>1]);
+
+        // dispatch(new ImportFormToKobotools($formId, $projectId));
+        // Projectxlsform::where('project_id', $projectId)->where('xlsform_id', $formId)->update(['deployed'=>1]);
         return   $response = [
                     'status' => 'deployed',
             ];

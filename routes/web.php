@@ -78,7 +78,7 @@ Route::group([
             'users' => 'UserController',
             'projects' => 'ProjectController'
         ]);
-        
+
         //User
         Route::post('/users/{id}/upload', 'UserController@upload');
         Route::post('/users/{id}/validateDetails', 'UserController@validateDetails');
@@ -97,10 +97,10 @@ Route::group([
         Route::get('/projects/{id}/download-samples-merged', 'ProjectController@download');
         Route::get('/projects/{id}/downloaddata', 'SubmissionController@download');
 
-    
-        Route::post('/kobo/publish', 'KoboController@publish');
-        Route::post('/kobo/pull', 'KoboController@getProjectData');
-        Route::post('/kobo/share', 'KoboController@share');
+
+        Route::get('/projects/{project}/form/{form}/publish', 'KoboController@publish')->name("kobo.publish");
+        Route::get('/projects/{project}/form/{form}/pull', 'KoboController@getProjectData')->name("kobo.pull");
+        Route::post('/projects/{project}/form/{form}/share/{user}', 'KoboController@share')->name("kobo.share");
 
     });
 

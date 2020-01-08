@@ -75,7 +75,17 @@
 				  							<td>
 				  								<div class="w3-show-inline-block">
 												  	<div class="w3-bar">
-												    	<button class="btn btn-dark btn-sm" id="deploy-form-button{{$xls_form->id}}" onclick="deploy({{$project->id}},{{$xls_form->id}})">{{ t("DEPLOY") }}</button>
+												    	<a
+                                                            href="{{ route('kobo.publish', [
+                                                                'locale' => app()->getLocale(),
+                                                                'project' => $project->slug,
+                                                                'form' => $xls_form->id ]
+                                                                )}}"
+                                                            class="btn btn-dark btn-sm"
+                                                            id="deploy-form-button{{$xls_form->id}}"
+                                                            onclick="deploy(event)">
+                                                            {{ t("DEPLOY") }}
+                                                        </a>
 
 												 	 </div>
 												</div>
@@ -86,7 +96,7 @@
 			  					</tbody>
 			  				</table>
 
-							<a class="btn btn-dark btn-sm text-light" href="{{ url(APP()->getLocale().'/projects/' . $project->id . '/download-samples-merged') }}"  onclick="getDownload(event)" data-toggle="popover">{{ t("DOWNLOAD DATA") }}</a>
+							<a class="btn btn-dark btn-sm text-light" href="{{ url(APP()->getLocale().'/projects/' . $project->slug . '/download-samples-merged') }}"  onclick="getDownload(event)" data-toggle="popover">{{ t("DOWNLOAD DATA") }}</a>
 							<div hidden class="alert alert-danger alert-block" id="error"></div>
 			 			</div>
 			   		</div>
