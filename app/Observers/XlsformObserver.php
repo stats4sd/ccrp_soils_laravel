@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Jobs\PublishNewFormToKobotools;
 use App\Xlsform;
 
 class XlsformObserver
@@ -14,11 +15,7 @@ class XlsformObserver
      */
     public function created(Xlsform $xlsform)
     {
-        // pass the file
-
-        // parse the file
-
-        // add lots of variables
+        dispatch( new PublishNewFormToKobotools($xlsform));
     }
 
     /**
@@ -29,11 +26,7 @@ class XlsformObserver
      */
     public function updated(Xlsform $xlsform)
     {
-        // delete existing variables
-
-        // as above, so below
-        //
-        //
+        dispatch( new UpdateExitingFormOnKobotools($xlsform));
     }
 
     /**

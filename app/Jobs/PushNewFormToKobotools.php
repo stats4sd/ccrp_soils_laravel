@@ -26,7 +26,7 @@ use Illuminate\Support\Str;
 /**
  * Job to push a specific XLS file to Kobotools as a new "Import". For use ONLY with the originals for each Xlsform.
  */
-class PublishNewFormToKobotools implements ShouldQueue
+class PushNewFormToKobotools implements ShouldQueue
 {
      /**
      * The number of times the job may be attempted.
@@ -34,8 +34,7 @@ class PublishNewFormToKobotools implements ShouldQueue
      * @var int
      */
     public $tries = 1;
-    private $formId;
-    private $project;
+    private $form;
 
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -44,10 +43,9 @@ class PublishNewFormToKobotools implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($project, $formId)
+    public function __construct(Xlsform $form)
     {
-        $this->formId = $formId;
-        $this->project = $project;
+        $this->form = $form;
     }
 
     /**
@@ -58,11 +56,10 @@ class PublishNewFormToKobotools implements ShouldQueue
     public function handle()
     {
 
-        $form = $this->project->xls_forms->find($this->formId);
-
         // update form metadata with project info
         $client = KoboHelper::getClient();
 
+        $filePath = $this->form->path_file;
 
         $post = [
             [
@@ -71,20 +68,31 @@ class PublishNewFormToKobotools implements ShouldQueue
             ],
             [
                 'name' => 'file',
-                'contents' => fopen( public_path("uploads/$form->path_file"), 'r'),
-                'filename' => Str::slug($form->form_title),
+                'contents' => fopen( public_path("uploads/$filePath"), 'r'),
+                'filename' => Str::slug($this->form->form_title),
             ],
         ];
 
+        if($this->form->kobo_id != null) {
+            $post[] = [
+                'name' => 'assetUid',
+                'contents' => $this->form->kobo_id,
+            ];
+            $post[] = [
+                'name' => 'destination',
+                'contents' => config('services.kobo.endpoint') . "/api/v2/assets/" . $this->form->kobo_id . "/",
+            ];
+        }
+
         try {
 
-            $res = $client->request('POST', 'imports/', [
+            $res = $client->request('POST', "imports/", [
                 'multipart' => $post,
             ]);
 
             $body = json_decode($res->getBody());
 
-            dispatch(new CheckImportedKobotoolsForm($body->uid, $form))
+            dispatch(new CheckImportedKobotoolsForm($body->uid, $this->form))
             ->delay(now()->addSeconds(2));
 
         }

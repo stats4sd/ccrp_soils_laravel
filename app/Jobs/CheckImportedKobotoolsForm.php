@@ -10,10 +10,13 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * To be run after PublishNewFormToKobotools. Checks if the importing is complete on Kobo's servers.
+ */
 class CheckImportedKobotoolsForm implements ShouldQueue
 {
     // try this as many times as needed to get a "success" response.
-    public $tries = 1;
+    public $tries = 0;
     private $uid;
     private $form;
 
@@ -40,7 +43,7 @@ class CheckImportedKobotoolsForm implements ShouldQueue
     {
         $client = KoboHelper::getClient();
 
-        $res = $client->request('GET', "/imports/$this->uid");
+        $res = $client->request('GET', "/imports/$this->uid/");
 
         $response = json_decode($res->getBody());
 
@@ -50,7 +53,13 @@ class CheckImportedKobotoolsForm implements ShouldQueue
 
         // created is an array (to account for possibilities that a single import created multiple assets);
         // here, we assume that we've just uploaded a single xls form file, so just get the [0]th entry.
-        $uid = $response->messages->created[0]->uid;
+        if(isset($response->messages->created)) {
+            $uid = $response->messages->created[0]->uid;
+        }
+        // When re-deploying, object is called "updated";
+        else {
+            $uid = $response->messages->updated[0]->uid;
+        }
 
         $formRes = $client->request('GET', "api/v2/assets/$uid/");
 
@@ -58,8 +67,18 @@ class CheckImportedKobotoolsForm implements ShouldQueue
 
         //update ODK form:
         $this->form->content = json_encode($formResponse->content);
-
+        $this->form->kobo_id = $uid;
+        $this->form->kobo_import_id = $this->uid;
         $this->form->save();
 
+        //deploy form
+        dispatch(new DeployKobotoolsForm($uid));
+
+
+    }
+
+    public function failed ($exception)
+    {
+        Log::error($excpetion->getMessage());
     }
 }

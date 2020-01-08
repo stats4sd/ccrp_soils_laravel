@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Jobs\DeployKobotoolsForm;
-use App\Jobs\PublishNewFormToKobotools;
+use App\Jobs\PushNewFormToKobotools;
 use App\Jobs\PullDataFromProjectForms;
 use App\Jobs\ShareFormToKobotools;
 use App\Models\Project;
@@ -21,16 +21,12 @@ class KoboController extends Controller
     public function publish ($locale, Project $project, $formId)
     {
 
+        $form = Xlsform::find($formId);
+
         // Enter from the project side. Then get the xls_form via relationship (to include pivot)
-        dispatch(new PublishNewFormToKobotools($project, $formId));
+       dispatch(new PushNewFormToKobotools($form));
 
-
-
-        // dispatch(new ImportFormToKobotools($formId, $projectId));
-        // Projectxlsform::where('project_id', $projectId)->where('xlsform_id', $formId)->update(['deployed'=>1]);
-        return   $response = [
-                    'status' => 'deployed',
-            ];
+        return response("deployment in progress", 200);
     }
 
 
