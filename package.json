@@ -27,5 +27,38 @@
         "cropper": "^4.0.0",
         "jquery-jcrop": "^0.9.13",
         "noty": "^3.2.0-beta"
+    },
+    "eslintConfig": {
+        "env": {
+            "es6": true,
+            "browser": true,
+            "commonjs": true,
+            "jquery": true,
+            "node": true
+            },
+        "extends": [
+            "eslint:recommended",
+            "plugin:vue/recommended"
+        ],
+        "rules": {
+            "no-unused-vars": "off",
+            "indent": ["error", 4],
+            "vue/script-indent": ["error", 4, { "baseIndent": 1 }],
+            "vue/html-indent": ["error", 4, { "baseIndent": 1 }],
+            "no-console": 0,
+            "allowImportExportEverywhere":true
+        },
+        "parserOptions":{
+            "sourceType":"module",
+            "ecmaVersion": 2017
+        },
+        "overrides": [
+        {
+            "files": ["*.vue"],
+            "rules": {
+                "indent": "off"
+            }
+        }
+        ]
     }
 }
