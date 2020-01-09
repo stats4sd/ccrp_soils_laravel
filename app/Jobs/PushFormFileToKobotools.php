@@ -26,7 +26,7 @@ use Illuminate\Support\Str;
 /**
  * Job to push a specific XLS file to Kobotools as a new "Import". For use ONLY with the originals for each Xlsform.
  */
-class PushNewFormToKobotools implements ShouldQueue
+class PushFormFileToKobotools implements ShouldQueue
 {
      /**
      * The number of times the job may be attempted.
