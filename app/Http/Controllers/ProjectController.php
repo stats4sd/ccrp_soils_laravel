@@ -29,13 +29,13 @@ class ProjectController extends Controller
      */
 	public function index()
     {
-    	$projects = Project::where('deleted_at', null)->whereIn('status', ['Private', 'Public'])->get();
+    	$projects = Project::whereIn('status', ['Private', 'Public'])->get();
     	return view('projects', compact('projects'));
     }
 
-    
+
     /**
-     * 
+     *
      * @param  [type]  $locale  [description]
      * @param  Project $project [description]
      * @return [view]           Project account
@@ -49,13 +49,13 @@ class ProjectController extends Controller
         });
         $is_admin = $auth->pluck('id')->contains(Auth::id());
         $invitations = $this->invitations($project, $is_admin, $is_member);
-            
-        return view('project_account', compact('users', 'project', 'is_admin', 'is_member', 'invitations'));    
-    } 
+
+        return view('project_account', compact('users', 'project', 'is_admin', 'is_member', 'invitations'));
+    }
 
     /**
      * checks the status of the project and return a positive value if the current user is allowed to view the project details or false if he is not.
-     * @param  [Object] $project  
+     * @param  [Object] $project
      * @return [integer]          positive value if the user can view the project
      */
     public function privacy($project)
@@ -74,10 +74,10 @@ class ProjectController extends Controller
 
     /**
      * ckeck if the current user can invite new members to the project
-     * @param  [Object] $project   
-     * @param  [boolean] $is_admin  
-     * @param  [integer] $is_member 
-     * @return [integer]            
+     * @param  [Object] $project
+     * @param  [boolean] $is_admin
+     * @param  [integer] $is_member
+     * @return [integer]
      */
     public function invitations($project, $is_admin, $is_member)
     {
@@ -88,9 +88,9 @@ class ProjectController extends Controller
             return $is_member;
         }
     }
- 
+
     /**
-     * Upload image for the project profile 
+     * Upload image for the project profile
      * @param  Request $request  image to upload
      * @param  [type]  $locale   locale language
      * @param  [type]  $id       project id
@@ -138,8 +138,8 @@ class ProjectController extends Controller
             return response()->json(["type"=>'info', "status"=>'User']);
 
         }
-        
-       
+
+
     }
 
     public function deleteMember(Request $request)
@@ -174,12 +174,12 @@ class ProjectController extends Controller
         } else{
             $this->update($request, $locale, $id);
             return response()->json(["type"=>"success", "message"=>"Updated group successfully", "project_id"=>$id]);
-        } 
+        }
     }
 
     public function update (Request $request, $en, $id)
     {
-        
+
         $project = DB::table('projects')->where('id', $id)->update(
             [
                 'name' => $request->name,
@@ -187,7 +187,7 @@ class ProjectController extends Controller
                 'status' => $request->status,
                 'group_invitations' => $request->group_invitations,
             ]);
-    
+
         return $project;
     }
 
@@ -196,29 +196,29 @@ class ProjectController extends Controller
         $project = Project::find($id);
         $creator_id = $project->creator_id;
         $creator_name = User::find($creator_id)->name;
-        
+
         if(!empty($request->name_selected))
         {
-            foreach ($request->name_selected as $user_id) 
+            foreach ($request->name_selected as $user_id)
             {
                 $user_invited = User::find(($user_id));
                 $key = str_random(32);
-                $this->createProjectMember($user_id, $id, $key); 
+                $this->createProjectMember($user_id, $id, $key);
 
-                $data = [ "creator_name"=> $creator_name, 
+                $data = [ "creator_name"=> $creator_name,
                     "email"=>$user_invited->email, "project_id"=>$project->id, "name_project"=>$project->name, "user_id"=>$user_id, 'url'=>url("en/projects/".$project->slug),
                     "key_confirmed" =>$key
                 ];
-               
-                Mail::to($user_invited->email)->send(new InviteMember($data));   
+
+                Mail::to($user_invited->email)->send(new InviteMember($data));
             }
         }
         if(!empty($request->email_inserted))
         {
             $email_multiple = explode(",", $request->email_inserted);
-        
+
             foreach($email_multiple as $email)
-            { 
+            {
                 $user = User::where('email', $email)->get();
                 $user_first = $user->first();
                 $is_user = 0;
@@ -228,27 +228,27 @@ class ProjectController extends Controller
                 }
                 $key = str_random(32);
                 $this->createInvite($creator_id,  $email, $id, $key);
-                $data = [ "creator_name"=> $creator_name, 
+                $data = [ "creator_name"=> $creator_name,
                     "email"=>$email, "name_project"=>$project->name, "project_id"=>$project->id, "user_id"=>$is_user, 'url'=>url("en/projects/".$project->slug),
                     "key_confirmed" =>$key
                 ];
 
                 Mail::to($email)->send(new InviteMember($data));
-            }  
-        } 
-                
+            }
+        }
+
         return Redirect::back();
     }
 
      public function createProjectMember($user_id, $id, $key)
-    {   
+    {
         $projects_members = new ProjectMember();
         $projects_members->project_id = $id;
         $projects_members->inviter_id = Auth::user()->id;
         $projects_members->user_id = $user_id;
         $projects_members->key_confirm = $key;
         $projects_members->save();
-   
+
         return $projects_members;
     }
 
@@ -271,16 +271,16 @@ class ProjectController extends Controller
         $file_name = date('c')."samplesMerged.csv";
 
         //python script accepts 4 arguments in this order: base_path(), query, params and file name
-       
+
         $process = new Process("python3.7 {$scriptPath} {$base_path} {$file_name} {$id}");
         $process->run();
-        
+
         if(!$process->isSuccessful()) {
-            
+
            throw new ProcessFailedException($process);
-        
+
         } else {
-            
+
             $process->getOutput();
         }
         Log::info("python done.");
