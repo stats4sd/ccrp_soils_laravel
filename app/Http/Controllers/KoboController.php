@@ -7,6 +7,7 @@ use App\Jobs\DeployKobotoolsForm;
 use App\Jobs\PushFormFileToKobotools;
 use App\Jobs\PullDataFromProjectForms;
 use App\Jobs\ShareFormToKobotools;
+use App\Jobs\DeployFormForProject;
 use App\Models\Project;
 use App\Models\Projectxlsform;
 use App\Models\Xlsform;
@@ -24,7 +25,9 @@ class KoboController extends Controller
         $form = Xlsform::find($formId);
 
         // Enter from the project side. Then get the xls_form via relationship (to include pivot)
-       dispatch(new PushFormFileToKobotools($form));
+       // dispatch(new PushFormFileToKobotools($form));
+
+        dispatch(new DeployFormForProject($project,$form));
 
         return response("deployment in progress", 200);
     }

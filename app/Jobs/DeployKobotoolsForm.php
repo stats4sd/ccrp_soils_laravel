@@ -46,7 +46,7 @@ class DeployKobotoolsForm implements ShouldQueue
 
         //Get asset to check if deploy or REdeploy is needed
 
-        $res = $client->request('GET', "api/v2/assets/$this->uid");
+        $res = $client->request('GET', "api/v2/assets/$this->uid/");
         $asset = json_decode($res->getBody());
 
         if($asset->has_deployment) {

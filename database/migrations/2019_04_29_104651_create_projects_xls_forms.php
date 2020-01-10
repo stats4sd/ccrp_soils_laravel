@@ -17,10 +17,9 @@ class CreateProjectsXlsForms extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('project_id');
             $table->bigInteger('xlsform_id');
-            $table->integer('form_kobo_id')->nullable();
             $table->tinyInteger('deployed')->default(0);
             $table->integer('records')->default(0);
-            $table->string('form_kobo_id_string', 255)->nullable();
+            $table->string('kobo_id', 255)->nullable();
             $table->timestamps();
         });
     }

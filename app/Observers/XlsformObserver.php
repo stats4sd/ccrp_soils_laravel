@@ -15,7 +15,7 @@ class XlsformObserver
      */
     public function created(Xlsform $xlsform)
     {
-        dispatch( new PublishNewFormToKobotools($xlsform));
+        dispatch( new PushFormFileToKobotools($xlsform));
     }
 
     /**
@@ -26,7 +26,7 @@ class XlsformObserver
      */
     public function updated(Xlsform $xlsform)
     {
-        dispatch( new UpdateExitingFormOnKobotools($xlsform));
+        dispatch( new PushFormFileToKobotools($xlsform));
     }
 
     /**
@@ -37,28 +37,8 @@ class XlsformObserver
      */
     public function deleted(Xlsform $xlsform)
     {
-        //
+        distpatch( new DeleteKobotoolsForm($xlsform->kobo_id));
     }
 
-    /**
-     * Handle the xlsform "restored" event.
-     *
-     * @param  \App\Xlsform  $xlsform
-     * @return void
-     */
-    public function restored(Xlsform $xlsform)
-    {
-        //
-    }
 
-    /**
-     * Handle the xlsform "force deleted" event.
-     *
-     * @param  \App\Xlsform  $xlsform
-     * @return void
-     */
-    public function forceDeleted(Xlsform $xlsform)
-    {
-        //
-    }
 }
