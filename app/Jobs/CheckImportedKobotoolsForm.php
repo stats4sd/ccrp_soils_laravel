@@ -3,6 +3,8 @@
 namespace App\Jobs;
 
 use App\Helpers\KoboHelper;
+use App\Jobs\DeployKobotoolsForm;
+use App\Jobs\PushMediaToKobotoolsForm;
 use App\Models\Xlsform;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -65,7 +67,7 @@ class CheckImportedKobotoolsForm implements ShouldQueue
 
         $formResponse = json_decode($formRes->getBody());
 
-        //update ODK form:
+
         $this->form->content = json_encode($formResponse->content);
         $this->form->kobo_id = $uid;
         $this->form->kobo_import_id = $this->uid;
@@ -73,6 +75,7 @@ class CheckImportedKobotoolsForm implements ShouldQueue
 
         //deploy form
         dispatch(new DeployKobotoolsForm($uid));
+        dispatch(new PushMediaToKobotoolsForm($this->form));
 
 
     }

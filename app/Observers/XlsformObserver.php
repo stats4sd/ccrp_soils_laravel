@@ -2,8 +2,10 @@
 
 namespace App\Observers;
 
+use App\Jobs\DeleteKobotoolsForm;
 use App\Jobs\PublishNewFormToKobotools;
-use App\Xlsform;
+use App\Jobs\PushFormFileToKobotools;
+use App\Models\Xlsform;
 
 class XlsformObserver
 {
@@ -37,7 +39,7 @@ class XlsformObserver
      */
     public function deleted(Xlsform $xlsform)
     {
-        distpatch( new DeleteKobotoolsForm($xlsform->kobo_id));
+        dispatch( new DeleteKobotoolsForm($xlsform->kobo_id));
     }
 
 
