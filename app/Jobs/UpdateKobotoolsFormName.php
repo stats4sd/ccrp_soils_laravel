@@ -3,15 +3,16 @@
 namespace App\Jobs;
 
 use App\Helpers\KoboHelper;
+use App\Models\Xlsform;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class DeleteKobotoolsForm implements ShouldQueue
+class UpdateKobotoolsFormName implements ShouldQueue
 {
-    private $uid;
+    private $form;
 
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -20,10 +21,10 @@ class DeleteKobotoolsForm implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($uid)
+    public function __construct(Xlsform $form)
     {
         //
-        $this->uid = $uid;
+        $this->form = $form;
     }
 
     /**
@@ -35,7 +36,12 @@ class DeleteKobotoolsForm implements ShouldQueue
     {
         $client = KoboHelper::getClient();
 
-        $deployRes = $client->request("DELETE", "api/v2/assets/$this->uid/");
+    $res = $client->request('PATCH', "api/v2/assets/" . $this->form->kobo_id . "/", [
+            'form_params' => [
+                'name' => $this->form->name,
+            ],
+        ]);
 
     }
 }
+

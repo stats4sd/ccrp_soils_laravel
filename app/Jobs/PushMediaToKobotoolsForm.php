@@ -12,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 class PushMediaToKobotoolsForm implements ShouldQueue
 {
     private $form;
+    public $tries = 1;
 
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -43,8 +44,10 @@ class PushMediaToKobotoolsForm implements ShouldQueue
 
         $response = json_decode($res->getBody());
 
+        error_log($response);
+
         //queries in this format return an array.
-        $koboform = $response[0];
+        $koboform = $response;
 
         //********** TODO: turn xls_form_media into a seperate table, to track individual files instead of doing this ugly bulk delete / re-upload on every xlsform save...
 
@@ -97,7 +100,7 @@ class PushMediaToKobotoolsForm implements ShouldQueue
                             'filename' => $fileName,
                         ],
                     ]
-                ]
+                ];
 
                 $res = $oldClient->request('POST', "api/v1/metadata", $post);
 

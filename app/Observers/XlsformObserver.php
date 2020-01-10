@@ -28,7 +28,16 @@ class XlsformObserver
      */
     public function updated(Xlsform $xlsform)
     {
-        dispatch( new PushFormFileToKobotools($xlsform));
+
+        $original = $xlsform->getOriginal();
+
+        if(
+            $xlsform->form_title != $original['form_title']
+            || $xlsform->path_file != $original['path_file']
+            || $xlsform->media != $original['media']
+        ) {
+            dispatch( new PushFormFileToKobotools($xlsform));
+        }
     }
 
     /**
