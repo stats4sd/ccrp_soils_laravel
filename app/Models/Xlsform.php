@@ -43,10 +43,9 @@ class Xlsform extends Model
     {
         return $this->belongsToMany(Project::class)->using(Projectxlsform::class)
         ->withPivot([
-            'form_kobo_id',
+            'kobo_id',
             'deployed',
             'records',
-            'form_kobo_id_string'
             ]);
     }
 
@@ -121,7 +120,7 @@ class Xlsform extends Model
         }
     }
 
-    //Mutator for media files 
+    //Mutator for media files
 
     public function setMediaAttribute($value)
     {
@@ -157,7 +156,7 @@ class Xlsform extends Model
         if ($request->hasFile($attribute_name)) {
             foreach ($request->file($attribute_name) as $file) {
                 if ($file->isValid()) {
-                   
+
                     // 1. Move the new file to the correct path with the original name
                     $file_path = $file->storeAs($destination_path,$file->getClientOriginalName(), $disk);
 

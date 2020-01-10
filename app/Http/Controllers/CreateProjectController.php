@@ -38,8 +38,8 @@ class CreateProjectController extends Controller
 
         } else{
             return response()->json(["type" => "success"]);
-        } 
-    
+        }
+
     }
 
 
@@ -86,9 +86,9 @@ class CreateProjectController extends Controller
 
         $project_id = $project->id;
         $this->syncProjectXlsForm($project_id);
-    
-        $this->creatorProject($creator_id, $project_id); 
-    
+
+        $this->creatorProject($creator_id, $project_id);
+
         return response()->json(["type"=>"stored successfully", "project_id"=>$project_id]);
     }
 
@@ -103,19 +103,19 @@ class CreateProjectController extends Controller
         $projects_members->is_admin = 1;
         $projects_members->is_confirmed = 1;
         $projects_members->save();
-   
+
         return $projects_members;
-        
+
     }
 
-    public function syncProjectXlsForm($id) 
+    public function syncProjectXlsForm($id)
     {
 
         $project = Project::find($id);
         $sync=$project->xls_forms()->sync(Xlsform::all()->pluck('id')->toArray());
         return true;
 
-    }  
+    }
 
 
     public function sendEmail (Request $request)
@@ -126,18 +126,18 @@ class CreateProjectController extends Controller
 
         if(!empty($request->name_selected))
         {
-            foreach ($request->name_selected as $user_id) 
+            foreach ($request->name_selected as $user_id)
             {
                 $user_invited = User::find(($user_id));
                 $key = str_random(32);
-                $this->createProjectMember($user_id, $request->project_id, $key); 
+                $this->createProjectMember($user_id, $request->project_id, $key);
 
-                $data = [ "creator_name"=> $creator_name, 
+                $data = [ "creator_name"=> $creator_name,
                     "email"=>$user_invited->email, "project_id"=>$project->id, "name_project"=>$project->name, "user_id"=>$user_id, 'url'=>url("en/projects/".$project->slug),
                     "key_confirmed" =>$key
                 ];
-               
-                Mail::to($user_invited->email)->send(new InviteMember($data));   
+
+                Mail::to($user_invited->email)->send(new InviteMember($data));
             }
         }
         if(!empty($request->email_inserted))
@@ -145,32 +145,32 @@ class CreateProjectController extends Controller
             $email_multiple = explode(",", $request->email_inserted);
 
             foreach($email_multiple as $email)
-            {         
+            {
                 $key = str_random(32);
                 $this->createInvite($project->creator_id,  $email, $project->id, $key);
-                $data = [ "creator_name"=> $creator_name, 
+                $data = [ "creator_name"=> $creator_name,
                     "email"=>$email, "name_project"=>$project->name, "project_id"=>$project->id, "user_id"=>0, 'url'=>url("en/projects/".$project->slug),
                     "key_confirmed" =>$key
                 ];
 
                 Mail::to($email)->send(new InviteMember($data));
-             
-            }  
-        } 
-        
-        
-        return redirect(app()->getLocale()."\projects/".$project->slug);
+
+            }
+        }
+
+
+        return redirect(app()->getLocale()."/projects/".$project->slug);
     }
 
     public function createProjectMember($user_id, $id, $key)
-    {   
+    {
         $projects_members = new ProjectMember();
         $projects_members->project_id = $id;
         $projects_members->inviter_id = Auth::user()->id;
         $projects_members->user_id = $user_id;
         $projects_members->key_confirm = $key;
         $projects_members->save();
-        
+
         return $projects_members;
     }
 

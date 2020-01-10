@@ -24,6 +24,7 @@ class CreateXlsForms extends Migration
             $table->string('link_page')->nullable();
             $table->text('description')->nullable();
             $table->text('media')->nullable();
+            $tabke->json('content')->nullable();
             $table->timestamps();
 
         });

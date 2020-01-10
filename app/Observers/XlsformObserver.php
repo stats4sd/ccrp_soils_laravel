@@ -2,7 +2,12 @@
 
 namespace App\Observers;
 
-use App\Xlsform;
+use App\Jobs\DeleteKobotoolsForm;
+use App\Jobs\PublishNewFormToKobotools;
+use App\Jobs\PushFormFileToKobotools;
+use App\Models\Project;
+use App\Models\Xlsform;
+use Illuminate\Support\Arr;
 
 class XlsformObserver
 {
@@ -14,11 +19,11 @@ class XlsformObserver
      */
     public function created(Xlsform $xlsform)
     {
-        // pass the file
+        dispatch( new PushFormFileToKobotools($xlsform));
 
-        // parse the file
+        $projects = Project::all()->pluck('id')->toArray();
+        $xlsform->projects()->sync($projects);
 
-        // add lots of variables
     }
 
     /**
@@ -29,11 +34,18 @@ class XlsformObserver
      */
     public function updated(Xlsform $xlsform)
     {
-        // delete existing variables
 
-        // as above, so below
-        //
-        //
+        $changes = $xlsform->getChanges();
+
+
+        if(
+            isset($changes['form_title'])
+            || isset($changes['path_file'])
+            || isset($changes['media'])
+        ) {
+            dispatch( new PushFormFileToKobotools($xlsform));
+        }
+
     }
 
     /**
@@ -44,28 +56,8 @@ class XlsformObserver
      */
     public function deleted(Xlsform $xlsform)
     {
-        //
+        dispatch( new DeleteKobotoolsForm($xlsform->kobo_id));
     }
 
-    /**
-     * Handle the xlsform "restored" event.
-     *
-     * @param  \App\Xlsform  $xlsform
-     * @return void
-     */
-    public function restored(Xlsform $xlsform)
-    {
-        //
-    }
 
-    /**
-     * Handle the xlsform "force deleted" event.
-     *
-     * @param  \App\Xlsform  $xlsform
-     * @return void
-     */
-    public function forceDeleted(Xlsform $xlsform)
-    {
-        //
-    }
 }

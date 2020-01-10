@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 
+use App\Jobs\DeployFormForProject;
 use App\Jobs\DeployKobotoolsForm;
-use App\Jobs\ImportFormToKobotools;
 use App\Jobs\PullDataFromProjectForms;
+use App\Jobs\PushFormFileToKobotools;
+use App\Jobs\PushMediaToKobotoolsForm;
 use App\Jobs\ShareFormToKobotools;
 use App\Models\Project;
 use App\Models\Projectxlsform;
@@ -18,28 +20,21 @@ use Illuminate\Support\Facades\Storage;
 class KoboController extends Controller
 {
 
-    /**
-     * Function to create a new instance of the requested form on Kobotoolbox, and then share the new form with the requested project.
-     * @param  Request $request A POST request including:
-     *                          - formId;
-     *                          - projectId;
-     * @return array           An array containing the response data:
-     *                            - HTTP response code from Kobotools request;
-     *                            - The UID of the form on Kobotools;
-     */
-
-
-    public function publish(Request $request)
+    public function publish ($locale, Project $project, $formId)
     {
-        $formId = $request->formId;
-        $projectId = $request->projectId;
 
-        dispatch(new ImportFormToKobotools($formId, $projectId));
-        Projectxlsform::where('project_id', $projectId)->where('xlsform_id', $formId)->update(['deployed'=>1]);
-        return   $response = [
-                    'status' => 'deployed',
-            ];
+        $form = Xlsform::find(22);
+
+        // Enter from the project side. Then get the xls_form via relationship (to include pivot)
+       // dispatch(new PushFormFileToKobotools($form));
+
+       //  dispatch(new DeployFormForProject($project,$form));
+
+        dispatch(new PushMediaToKobotoolsForm($form));
+        return response("deployment in progress", 200);
     }
+
+
 
     public function getProjectData (Request $request)
     {

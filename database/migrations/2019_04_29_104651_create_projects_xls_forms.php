@@ -15,13 +15,15 @@ class CreateProjectsXlsForms extends Migration
     {
         Schema::create('project_xlsform', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('project_id');
-            $table->bigInteger('xlsform_id');
-            $table->integer('form_kobo_id')->nullable();
+            $table->bigInteger('project_id')->unsigned();
+            $table->bigInteger('xlsform_id')->unsigned();
             $table->tinyInteger('deployed')->default(0);
             $table->integer('records')->default(0);
-            $table->string('form_kobo_id_string', 255)->nullable();
+            $table->string('kobo_id', 255)->nullable();
             $table->timestamps();
+
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->foreign('xlsform_id')->references('id')->on('xlsforms')->onDelete('cascade');
         });
     }
 

@@ -2,7 +2,7 @@
 
 @section('content')
 
-	
+
 	 	<section class="content mb-5" id="group">
 		    <h1 class="mb-5"><b>{{$project->name}}</b></h1>
 	    	<div class="container-fluid">
@@ -60,7 +60,6 @@
 			  						</tr>
 			  					</thead>
 			  					<tbody>
-			  						
 				  						@foreach( $project->xls_forms as $xls_form)
 				  						<tr>
 				  							<td>{{ $xls_form->form_title }}</td>
@@ -76,18 +75,28 @@
 				  							<td>
 				  								<div class="w3-show-inline-block">
 												  	<div class="w3-bar">
-												    	<button class="btn btn-dark btn-sm" id="deploy-form-button{{$xls_form->id}}" onclick="deploy({{$project->id}},{{$xls_form->id}})">{{ t("DEPLOY") }}</button>	
-												 
+												    	<a
+                                                            href="{{ route('kobo.publish', [
+                                                                'locale' => app()->getLocale(),
+                                                                'project' => $project->slug,
+                                                                'form' => $xls_form->id ]
+                                                                )}}"
+                                                            class="btn btn-dark btn-sm"
+                                                            id="deploy-form-button{{$xls_form->id}}"
+                                                            onclick="deploy(event)">
+                                                            {{ t("DEPLOY") }}
+                                                        </a>
+
 												 	 </div>
 												</div>
 				  							</td>
 				  						</tr>
 				  						@endforeach
-			  					
+
 			  					</tbody>
 			  				</table>
-							
-							<a class="btn btn-dark btn-sm text-light" href="{{ url(APP()->getLocale().'/projects/' . $project->id . '/download-samples-merged') }}"  onclick="getDownload(event)" data-toggle="popover">{{ t("DOWNLOAD DATA") }}</a>
+
+							<a class="btn btn-dark btn-sm text-light" href="{{ url(APP()->getLocale().'/projects/' . $project->slug . '/download-samples-merged') }}"  onclick="getDownload(event)" data-toggle="popover">{{ t("DOWNLOAD DATA") }}</a>
 							<div hidden class="alert alert-danger alert-block" id="error"></div>
 			 			</div>
 			   		</div>
@@ -160,7 +169,7 @@
 										<p class="card-text"><small class="text-muted"><b>{{ t("created at :") }}</b> {{$member->created_at->diffForHumans()}}</small></p>
 									</div>
 							    </div>
-							</div>	
+							</div>
 		          		</div>
 
 		      		@endforeach
@@ -313,7 +322,7 @@
 
 						<div class="row mt-3">
 						<form action="{{$project->id}}/destroy" method="post">
-							
+
 							@csrf
 							<div class="col-sm-8">
 						  		<b>{{ t("Delete Project") }}</b>
@@ -343,7 +352,7 @@
 				</div>
 			@endif
 	    </section>
-	
+
 
 @endsection
 
@@ -358,7 +367,7 @@
 function changeStatus(projectId, userId)
 {
 	event.preventDefault();
-	jQuery.ajax('{{ url(app()->getLocale().'/projects/changeStatus') }}', {
+	jQuery.ajax('{{ url(app()->getLocale()."/projects/changeStatus") }}', {
             method: "POST",
             data: {
                 projectId: projectId,
@@ -421,6 +430,7 @@ jQuery(document).ready(function(){
 		var form_data = new FormData(form);
 
         $.ajax({
+
 	        url : '{{$project->id}}/uploadImage',
 	        type : 'POST',
 	        data : form_data,
@@ -464,6 +474,7 @@ jQuery(document).ready(function(){
 		console.log(form_data);
 
 		$.ajax({
+
 	        url : '{{$project->id}}/validateGroup',
 	        type : 'POST',
 	        data : form_data,
@@ -516,7 +527,7 @@ if(typeof getDownload != 'function') {
       		var target = e.target;
       		target.disabled = true;
 			target.innerHTML = `<div class="spinner-border spinner-border-sm"></div> Preparing...`;
-	      	
+
 			$.ajax({
 				"url": "{{ url(APP()->getLocale().'/projects/' . $project->id . '/download-samples-merged') }}",
 				"method":"GET",
@@ -534,11 +545,11 @@ if(typeof getDownload != 'function') {
 				"complete": function() {
 					target.disabled = false;
 					target.innerHTML = `<div class></div> DOWNLOAD DATA`;
-					
+
 				}
 			})
 		}
-	 
+
 	}
 </script>
 @endsection

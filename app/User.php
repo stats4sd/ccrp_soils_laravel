@@ -17,8 +17,8 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'id', 'name', 'email', 'username', 'privacy', 'kobo_id', 'admin'
+    protected $guarded = [
+        'id'
     ];
 
     /**
@@ -52,5 +52,5 @@ class User extends Authenticatable
     }
 
 
- 
+
 }
