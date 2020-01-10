@@ -76,6 +76,7 @@ class CheckImportedKobotoolsForm implements ShouldQueue
         //deploy form
         dispatch(new DeployKobotoolsForm($uid));
         dispatch(new PushMediaToKobotoolsForm($this->form));
+        dispatch(new UpdateKobotoolsFormName($this->form));
 
 
     }

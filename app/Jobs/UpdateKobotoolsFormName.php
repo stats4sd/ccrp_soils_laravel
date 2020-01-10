@@ -38,7 +38,7 @@ class UpdateKobotoolsFormName implements ShouldQueue
 
     $res = $client->request('PATCH', "api/v2/assets/" . $this->form->kobo_id . "/", [
             'form_params' => [
-                'name' => $this->form->name,
+                'name' => $this->form->form_title,
             ],
         ]);
 

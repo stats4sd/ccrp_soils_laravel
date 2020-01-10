@@ -40,11 +40,11 @@ class PushMediaToKobotoolsForm implements ShouldQueue
         //********** TODO: Fix to use api/v2 once Kobotools team have finished writing the media file uploader!
 
         //get correct form id for OLD API
-        $res = $oldClient->request('GET', "api/v1/forms?id_string=$this->form->kobo_id");
+        $res = $oldClient->request('GET', "api/v1/forms?id_string=" . $this->form->kobo_id);
 
         $response = json_decode($res->getBody());
 
-        error_log($response);
+        error_log((string) $res->getBody());
 
         //queries in this format return an array.
         $koboform = $response;
