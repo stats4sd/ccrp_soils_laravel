@@ -21,6 +21,9 @@ class CreateProjectsXlsForms extends Migration
             $table->integer('records')->default(0);
             $table->string('kobo_id', 255)->nullable();
             $table->timestamps();
+
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->foreign('xlsform_id')->references('id')->on('xlsforms')->onDelete('cascade');;
         });
     }
 

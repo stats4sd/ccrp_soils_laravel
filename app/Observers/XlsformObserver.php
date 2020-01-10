@@ -5,7 +5,9 @@ namespace App\Observers;
 use App\Jobs\DeleteKobotoolsForm;
 use App\Jobs\PublishNewFormToKobotools;
 use App\Jobs\PushFormFileToKobotools;
+use App\Models\Project;
 use App\Models\Xlsform;
+use Illuminate\Support\Arr;
 
 class XlsformObserver
 {
@@ -18,6 +20,10 @@ class XlsformObserver
     public function created(Xlsform $xlsform)
     {
         dispatch( new PushFormFileToKobotools($xlsform));
+
+        $projects = Project::all()->pluck('id')->toArray();
+        $xlsform->projects()->sync($projects);
+
     }
 
     /**
