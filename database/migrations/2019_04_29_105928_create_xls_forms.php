@@ -14,7 +14,7 @@ class CreateXlsForms extends Migration
     public function up()
     {
         Schema::create('xlsforms', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('form_title')->nullable();
             $table->string('path_file')->nullable();
             $table->string('default_language')->nullable();
@@ -24,7 +24,7 @@ class CreateXlsForms extends Migration
             $table->string('link_page')->nullable();
             $table->text('description')->nullable();
             $table->text('media')->nullable();
-            $tabke->json('content')->nullable();
+            $table->json('content')->nullable();
             $table->timestamps();
 
         });

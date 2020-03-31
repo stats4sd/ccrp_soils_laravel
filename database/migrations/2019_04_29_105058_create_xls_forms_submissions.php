@@ -14,7 +14,7 @@ class CreateXlsFormsSubmissions extends Migration
     public function up()
     {
         Schema::create('xls_forms_submissions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->longText('record_data');
             $table->bigInteger('form_kobo_id')->nullable();
             $table->string('uuid')->nullable();

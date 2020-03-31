@@ -14,7 +14,7 @@ class CreatePlots extends Migration
     public function up()
     {
         Schema::create('plots', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('plot_name', 250);
             $table->string('plot_gradient', 100)->nullable();
             $table->string('farmer_kn_soil', 250)->nullable();

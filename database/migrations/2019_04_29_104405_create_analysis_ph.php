@@ -14,7 +14,7 @@ class CreateAnalysisPh extends Migration
     public function up()
     {
         Schema::create('analysis_ph', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('sample_id', 100);
             $table->date('analysis_date')->nullable();
             $table->decimal('weight_soil', 6,3)->nullable();

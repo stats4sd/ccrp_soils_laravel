@@ -14,7 +14,7 @@ class CreateBarcodes extends Migration
     public function up()
     {
         Schema::create('barcodes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('code', 100);
             $table->string('farm_id', 50)->nullable();
             $table->string('status', 50);
