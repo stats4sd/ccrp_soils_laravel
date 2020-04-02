@@ -41,6 +41,11 @@ class User extends Authenticatable
 
     public $incrementing = true;
 
+    public function isAdmin ()
+    {
+        return $this->admin == 1 ? true : false;
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';
