@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Tio\Laravel\Middleware;
+
+use Tio\Laravel\Facade as Translation;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Session;
-use Tio\Laravel\Middleware\Translation;
 
-
-class SetLocale
+class SetLocaleMiddleware
 {
     /**
     * Handle an incoming request and set the right locale depending on the
@@ -22,7 +20,6 @@ class SetLocale
     */
     public function handle($request, Closure $next)
     {
-
         $targetLocales = config('translation.target_locales');
         $sourceLocale = config('translation.source_locale');
 
@@ -38,7 +35,6 @@ class SetLocale
             $sourceLocale
         ];
 
-
         # Keep the locales included in $availableLocales
         $eligibleLocales = array_filter($priorityLocales, function($locale) use ($availableLocales) {
             return in_array($locale, $availableLocales);
@@ -50,23 +46,8 @@ class SetLocale
         # Store in session for next time
         session(['locale' => $locale]);
 
-        App::setLocale(Session::get('locale'));
-
-        $pathSegments = explode('/', $request->path());
-
-        if($request->query('locale') != session()->get('locale')) {
-
-            if( count($pathSegments) == 0 || ! in_array($pathSegments[0], $availableLocales) ) {
-
-                $path = array_prepend($pathSegments, $locale);
-
-                return redirect(url(implode('/', $path)));
-            }
-        }
-
         # Set Locale for Gettext and Laravel PHP
-       // Translation::setLocale($locale);
-
+        Translation::setLocale($locale);
 
         return $next($request);
     }

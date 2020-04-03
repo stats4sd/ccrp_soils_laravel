@@ -101,5 +101,10 @@ return [
     'unique'               => 'El :attribute ya ha sido tomado.',
     'uploaded'             => 'El :attribute no se pudo cargar.',
     'url'                  => 'El formato :attribute no es válido.',
-    'uuid'                 => 'El :attribute debe ser un UUID válido.'
+    'uuid'                 => 'El :attribute debe ser un UUID válido.',
+    'custom'               => [
+        'attribute-name' => [
+            'rule-name' => 'mensaje personalizado'
+        ]
+    ]
 ];

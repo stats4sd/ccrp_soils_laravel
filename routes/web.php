@@ -3,15 +3,12 @@
 Route::get('/', function() {
     return redirect(app()->getLocale());
 });
-Route::get('email', function() {
-    return view('invite_member_email');
-});
-Route::group([
-    'prefix' => '{locale}',
-    'where' => ['locale' => '[a-zA-Z]{2}'],
-    'middleware' => ['setlocale'],
-], function() {
-    // Authentication Routes...
+
+// Solution 3: prefix your routes with the locale and apply it.
+//             => https://yourdomain.com/fr
+//             => https://yourdomain.com/fr/...
+Route::prefix('{locale?}')->middleware('set.locale')->group(function() {
+// Authentication Routes...
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Auth\LoginController@login');
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -103,11 +100,5 @@ Route::group([
         Route::post('/projects/{project}/form/{form}/share/{user}', 'KoboController@share')->name("kobo.share");
 
     });
-
-
-    // Auth::routes();
-
 });
-
-
 

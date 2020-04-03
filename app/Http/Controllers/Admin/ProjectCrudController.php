@@ -17,10 +17,10 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class ProjectCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    #use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-    
+
     public function setup()
     {
         /*
@@ -56,7 +56,6 @@ class ProjectCrudController extends CrudController
                 'label' => 'Name',
                 'type' => 'text',
             ],
-            
             [
                 'name' => 'description',
                 'label' => 'Description',
@@ -90,7 +89,7 @@ class ProjectCrudController extends CrudController
             ]
         ]);
     }
-        
+
     protected function setupCreateOperation()
     {
 
@@ -108,7 +107,7 @@ class ProjectCrudController extends CrudController
                 'label' => 'Name of the Project',
                 'type' => 'text',
             ],
-            
+
             [
                 'name' => 'description',
                 'label' => 'Description',
@@ -141,7 +140,7 @@ class ProjectCrudController extends CrudController
         ]);
     }
 
-    
+
 
     protected function setupUpdateOperation()
     {

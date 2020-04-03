@@ -35,30 +35,47 @@
             "commonjs": true,
             "jquery": true,
             "node": true
-            },
+        },
         "extends": [
             "eslint:recommended",
             "plugin:vue/recommended"
         ],
         "rules": {
             "no-unused-vars": "off",
-            "indent": ["error", 4],
-            "vue/script-indent": ["error", 4, { "baseIndent": 1 }],
-            "vue/html-indent": ["error", 4, { "baseIndent": 1 }],
+            "indent": [
+                "error",
+                4
+            ],
+            "vue/script-indent": [
+                "error",
+                4,
+                {
+                    "baseIndent": 1
+                }
+            ],
+            "vue/html-indent": [
+                "error",
+                4,
+                {
+                    "baseIndent": 1
+                }
+            ],
             "no-console": 0,
-            "allowImportExportEverywhere":true
+            "allowImportExportEverywhere": true
         },
-        "parserOptions":{
-            "sourceType":"module",
+        "parserOptions": {
+            "sourceType": "module",
             "ecmaVersion": 2017
         },
         "overrides": [
-        {
-            "files": ["*.vue"],
-            "rules": {
-                "indent": "off"
+            {
+                "files": [
+                    "*.vue"
+                ],
+                "rules": {
+                    "indent": "off"
+                }
             }
-        }
         ]
     }
 }
