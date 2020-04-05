@@ -1,5 +1,5 @@
 
-@extends('layouts.layout')
+@extends('layouts.app')
 
 @section('content')
 <div class="row">
@@ -17,9 +17,9 @@
 			</div>
 
 			<div id="All_Projects" class="tabcontent">
-				
+
 				@foreach($projects as $project)
-	   		     
+
 	          		<div class="card mb-3" style="max-width: 540px;">
 	          			<div class="row no-gutters">
 						    <div class="col-md-4 img_card_project mb-3 mt-3">
@@ -32,16 +32,16 @@
 									<p class="card-text"><small class="text-muted"><b>Created at :</b>{{$project->created_at}}</small></p>
 								</div>
 						    </div>
-						</div>	
+						</div>
 	          		</div>
-	    		        
+
 	  			@endforeach
-		   		
+
 			</div>
 			<div id="My_Projects" class="tabcontent">
-				
+
 	   		    @foreach( Auth::user()->projects as $project)
-	   		     
+
 	          		<div class="card mb-3" style="max-width: 540px;">
 	          			<div class="row no-gutters">
 						    <div class="col-md-4 img_card_project mb-3 mt-3">
@@ -54,11 +54,11 @@
 									<p class="card-text"><small class="text-muted">{{$project->created_at->diffForHumans()}}</small></p>
 								</div>
 						    </div>
-						</div>	
+						</div>
 	          		</div>
-	    		        
+
 	  			@endforeach
-	          		
+
 			</div>
 	    </section>
 	</div>

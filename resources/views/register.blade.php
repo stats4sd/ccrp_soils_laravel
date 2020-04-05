@@ -1,5 +1,5 @@
 
-@extends('layouts.layout')
+@extends('layouts.app')
 
 @section('content')
   <body>
@@ -68,7 +68,7 @@
           </div>
           <div class="form-group">
             <label><b>{{ t("Kobotools Account")}}</b></label>
-            <input class="form-control" type="text" name="kobo_id"> 
+            <input class="form-control" type="text" name="kobo_id">
           </div>
 
           <br>

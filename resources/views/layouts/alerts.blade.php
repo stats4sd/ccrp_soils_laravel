@@ -2,8 +2,7 @@
 <script type="text/javascript">
   Noty.overrideDefaults({
     layout   : 'topCenter',
-    
-    timeout  : 2500, 
+    timeout  : 2500,
     closeWith: ['click', 'button'],
   });
 

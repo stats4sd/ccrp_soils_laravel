@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -7,7 +7,7 @@
 
 	 		@if($user->privacy || Auth::id()==$user->id)
 			    <h1 class="mb-5"><b>{{$user->name}}</b></h1>
-		    @else 
+		    @else
 		    	<h1 class="mb-5"><b>{{$user->username}}</b></h1>
 		    @endif
 
@@ -26,7 +26,7 @@
 						@endif
 						<p><b>{{ t("Created:") }}</b> {{$user->created_at->diffForHumans()}}</p>
 					</div>
-					
+
 				</div>
 			</div>
 
@@ -48,7 +48,7 @@
 							<div class="col-sm-4">
 								<div class="img_group_default">
 									<img src="{{url($user->avatar)}}" id="avatar_card">
-								</div>								
+								</div>
 							</div>
 							<div class="col-sm-6">
 								<p><b>{{ t("Name:") }}</b> {{$user->name}}</p>
@@ -59,11 +59,11 @@
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
 
 			<div id="Projects" class="tabcontent">
-				@foreach($user->projects as $project)   		     
+				@foreach($user->projects as $project)
 	          		<div class="card mb-3" style="max-width: 540px;">
 	          			<div class="row no-gutters">
 						    <div class="col-md-4 img_card_project mb-3 mt-3">
@@ -76,11 +76,11 @@
 									<p class="card-text"><small class="text-muted">{{$project->created_at->diffForHumans()}}</small></p>
 								</div>
 						    </div>
-						</div>	
+						</div>
 	          		</div>
       			@endforeach
 			</div>
-			
+
 			<div id="Settings" class="tabcontent">
 				<div class="card">
 					<div class="card-header">
@@ -92,7 +92,7 @@
 								<div class="img_group_default mt-3">
 								  	<img id='image' src="{{$user->avatar}}">
 								</div>
-								
+
 							</div>
 							<div class="col-sm-8 mt-5">
 								<form method="post" action="{{ url('avatar/upload')}}" name="Upload" id="upload_image">
@@ -100,7 +100,7 @@
 						  		<div class="form-group">
 						  			<div class="alert alert-danger alert-block" id="error"></div>
 									<div class="alert alert-success alert-block" id="success"></div>
-								
+
 									<label> {{ t("Select Photo for Upload") }}</label>
 									<br>
 									<input type="file" id="file" name="select_file">
@@ -108,7 +108,7 @@
 								</div>
 								</form>
 							</div>
-						</div>	
+						</div>
 					</div>
 				</div>
 				<div class="card">
@@ -120,21 +120,21 @@
 							<div class="col-sm-6">
 								<form method="post" action="/en/projects/members/{{$user->id}}/kobo-user" id="kobo">
 						            {{csrf_field()}}
-						         
+
 						            <div class="form-group">
 							            <label><b>{{ t("Enter with Kobotoolbox Account") }}</b></label>
 							            <input class="form-control" type="text" name="kobo_id">
 						            </div>
-						           
+
 						            <button type="submit" class="btn btn-dark btn-block" id="kobo-user">{{ t("KOBOTOOLBOX ACCOUNT") }}</button>
 						        </form>
 					        </div>
 					        <div class="col-sm-6">
 					        	<label><b>{{ t("Current Account") }}</b></label>
 					        	<p id="current_account">{{$user->kobo_id}}</p>
-					        	
+
 					        </div>
-				        </div>	
+				        </div>
 					</div>
 				</div>
 				<div class="card">
@@ -161,17 +161,17 @@
 						                </span>
 						              @endif
 						            </div>
-						           
+
 
 						            <button type="submit" class="btn btn-dark btn-block" id="prof_details">{{ t("Update Profile") }}</button>
-						  
+
 					        </div>
 					        <div class="col-sm-6">
 					        	<div class="form-group">
 						            <label><b>{{ t("Name (required)") }}</b></label>
-						            <input class="form-control"  type="text" name="name" value="{{$user->name}}">       
+						            <input class="form-control"  type="text" name="name" value="{{$user->name}}">
 						        </div>
-					          
+
 						        <br>
 						        <label><b>{{ t("Who can see this field?") }}</b></label>
 								<div class="choice">
@@ -184,18 +184,18 @@
 						            <label for="choice_2">{{ t("Only Me") }}</label>
 						        </div>
 
-						        <div class="choice">    
+						        <div class="choice">
 						            <input id="choice_3" type="radio" name="privacy" value="All Members" />
 						            <label for="choice_3">{{ t("All Members") }}</label>
 								</div>
-					       
-					        	
+
+
 					        </div>
 					        </form>
 						</div>
-			
+
 					</div>
-					
+
 				</div>
 				<div class="card">
 					<div class="card-header">
@@ -224,7 +224,7 @@
 						            <button type="submit" class="btn btn-dark btn-block" id="change_password">{{ t("CHANGE PASSWORD") }}</button>
 						        </form>
 					        </div>
-				        </div>	
+				        </div>
 					</div>
 				</div>
 				<div class="card">
@@ -236,19 +236,19 @@
 							<div class="col-sm-12">
 								<form method="post" action="/en/projects/members/{{$user->id}}/deleteProfile" id="delete">
 						            {{csrf_field()}}
-						           
+
 						            	<p>{{ t("You are about to permanently delete yuor profile") }}</p>
 						            	<ul style="list-style-type: circle;">
 								            <li>{{ t("You will no longer be able to access to your project data.") }}</li>
 										    <li>{{ t("You will no longer be able to access to the forms for your projects.") }}</li>
 										</ul>
-        
+
 					        </div>
 					        <div class="col-sm-6">
 					        	<button type="submit" class="btn btn-dark btn-block" id="delete_profile">{{ t("DELETE PROFILE") }}</button>
-						        </form>					        	
+						        </form>
 					        </div>
-				        </div>	
+				        </div>
 					</div>
 				</div>
 			</div>
@@ -260,8 +260,8 @@
 @endsection
 
 @section('script')
-<script type="text/javascript">	
-	
+<script type="text/javascript">
+
 
 //check file image validation
 
@@ -273,12 +273,12 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 		var form = document.getElementById('upload_image');
 		var form_data = new FormData(form);
-       
+
         $.ajax({
-	        url : '{{$user->id}}/upload', 
+	        url : '{{$user->id}}/upload',
 	        type : 'POST',
 	        data : form_data,
-	        processData: false, 
+	        processData: false,
 	        contentType: false,
 	        success : function(result){
 	        	var type = result.type;
@@ -298,11 +298,11 @@ jQuery(document).ready(function(){
 	    			jQuery('#success').show();
 	    			jQuery("#success").html(message);
 	   				var url = window.location.origin+'/'+result.image_path;
-	    			jQuery("#image").attr('src', url);	 
-	    			jQuery("#avatar").attr('src', url); 
-	    			jQuery("#avatar_card").attr('src', url); 
+	    			jQuery("#image").attr('src', url);
+	    			jQuery("#avatar").attr('src', url);
+	    			jQuery("#avatar_card").attr('src', url);
 
-	    		}	        	
+	    		}
 			}
 		});
 	});
@@ -311,17 +311,17 @@ jQuery(document).ready(function(){
 //validation profile details
 jQuery(document).ready(function(){
 	jQuery('#validate_danger').hide();
-	jQuery('#validate_success').hide();	
+	jQuery('#validate_success').hide();
 	jQuery("#prof_details").click(function(event){
 		event.preventDefault();
 		var form = document.getElementById('profile_details');
 		var form_data = new FormData(form);
 
 		$.ajax({
-	        url : '{{$user->id}}/validateDetails', 
+	        url : '{{$user->id}}/validateDetails',
 	        type : 'POST',
 	        data : form_data,
-	        processData: false, 
+	        processData: false,
 	        contentType: false,
 	        success : function(result){
 	        	if(!result.success){
@@ -330,7 +330,7 @@ jQuery(document).ready(function(){
 	        		jQuery("#validate_danger").html(result.message);
 				} else {
 					jQuery('#validate_success').show();
-					jQuery('#validate_danger').hide();	
+					jQuery('#validate_danger').hide();
 	        		jQuery("#validate_success").html('Account updated');
 	        		location.reload();
 				}
@@ -351,13 +351,13 @@ jQuery(document).ready(function(){
 		var form_data = new FormData(form);
 
 		$.ajax({
-	        url : '{{$user->id}}/changePassword', 
+	        url : '{{$user->id}}/changePassword',
 	        type : 'POST',
 	        data : form_data,
-	        processData: false, 
+	        processData: false,
 	        contentType: false,
 	        success : function(result){
-	        	
+
 	        	var type = result.type;
 	        	var message = result.message;
 	        	console.log(result);
@@ -368,9 +368,9 @@ jQuery(document).ready(function(){
 	        		jQuery("#password_danger").html(message);
 				} else {
 					jQuery('#password_success').show();
-					jQuery('#password_danger').hide();	
+					jQuery('#password_danger').hide();
 					jQuery("#password_success").html('New pasword updated');
-	        		
+
 	        		//location.reload();
 
 				}
@@ -384,21 +384,21 @@ jQuery(document).ready(function(){
 jQuery(document).ready(function(){
 	jQuery("#delete_profile").click(function(event){
 		event.preventDefault();
-	
+
 		if (confirm('Are you sure to delete your profile {{$user->username}}?')) {
 		    $.ajax({
-	        url : '{{$user->id}}/deleteProfile', 
+	        url : '{{$user->id}}/deleteProfile',
 	        type : 'POST',
-	        processData: false, 
+	        processData: false,
 	        contentType: false,
 	        success : function(result){
 		        	if(result.type=="success")
 		        	{
 		        		window.location.replace("/en/home");
-		        	}      	        	        	
+		        	}
 		        }
-		    });	
-		} 		
+		    });
+		}
 	});
 });
 
@@ -410,13 +410,13 @@ jQuery(document).ready(function(){
 		var form_data = new FormData(form);
 
 		$.ajax({
-	        url : '{{$user->id}}/kobo-user', 
+	        url : '{{$user->id}}/kobo-user',
 	        type : 'POST',
 	        data : form_data,
-	        processData: false, 
+	        processData: false,
 	        contentType: false,
 	        success : function(result){
-	        	
+
 	        	var type = result.type;
 	        	var message = result.message;
 	        	jQuery("#current_account").html(message);

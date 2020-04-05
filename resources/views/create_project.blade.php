@@ -1,5 +1,5 @@
 
-@extends('layouts.layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -37,7 +37,7 @@
 			<h3><b>{{ t("Privacy Options") }}</b></h3>
 			<div class="form-group" >
 				<div>
-					<input type="radio" name="status" value="Public" checked> 
+					<input type="radio" name="status" value="Public" checked>
 					<label for="public_group" style="color: grey">{{ t("This is a public group") }}</label>
 					<ul>
 						<li>{{ t("Any site member can join this group.") }}</li>
@@ -47,7 +47,7 @@
 				</div>
 
 				<div>
-					<input type="radio" name="status" value="Private"> 
+					<input type="radio" name="status" value="Private">
 					<label for="private_group" style="color: grey">{{ t("This is a private group") }}</label>
 					<ul>
 						<li>{{ t("Only users who request membership and are accepted can join the group.") }}</li>
@@ -57,7 +57,7 @@
 				</div>
 
 				<div>
-					<input type="radio" name="status" value="Hidden"> 
+					<input type="radio" name="status" value="Hidden">
 					<label for="private_group" style="color: grey">{{ t("This is a hidden group") }}</label>
 					<ul>
 						<li>{{ t("Only users who are invited can join the group.") }}</li>
@@ -71,11 +71,11 @@
 			<p>{{ t("Which members of this group are allowed to invite others?") }}</p>
 			<div class="form-group">
 				<div>
-					<input type="radio" name="group_invitations" value="all_members" checked> 
+					<input type="radio" name="group_invitations" value="all_members" checked>
 					<label for="group_invitations" style="color: grey">{{ t("All group members") }}</label>
 				</div>
 				<div>
-					<input type="radio" name="group_invitations" value="group_admins"> 
+					<input type="radio" name="group_invitations" value="group_admins">
 					<label for="group_invitations" style="color: grey">{{ t("Group admins only") }}</label>
 				</div>
 			</div>
@@ -91,9 +91,9 @@
 					<div class="col-sm-4">
 						<div class="container">
 			  				<div class="img_group_default mt-3">
-		  					
+
 							  	<img id='image' src={{url("images/mystery-group.png")}}>
-							  
+
 							</div>
 						</div>
 					</div>
@@ -107,30 +107,30 @@
 			</div>
 
 		  	<div class="container">
-		  		
+
 		  		<br/>
-		  	
+
 		  		<div class="alert alert-danger alert-block" id="error"></div>
-		  	
+
 		  		<div class="alert alert-success alert-block" id="success"></div>
 
 			  	<form method="post" action="{{ url('create-project/upload')}}" name="Upload" id="upload_image">
 			  		{{ csrf_field() }}
 			  		<div class="form-group">
-					
+
 						<label> {{ t("Select Photo for Upload") }}</label>
 						<br>
 						<input type="file" id="file" name="select_file">
 						<input type="submit" id="Upload" name="upload" class="btn btn-dark btn-sm" value="Upload">
 					</div>
 				</form>
-			
+
 		  	</div>
 
 		  		<a href="#" onclick="openPage(event, 'Settings')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
 		  		<button type="submit" onclick="openPage(event, 'Invites')" id="store_details" class="btn btn-dark btn-sm">{{ t("NEXT STEP") }}</button>
 		</div>
-		
+
 		<div id="Invites" class="tabcontent">
 			<div class="container-fluid">
 				<div class="row">
@@ -146,7 +146,7 @@
 									@foreach($users as $user)
 									@if(Auth::id()!=$user->id)
 									<tr>
-										<td><input class="checkboxClass" type="checkbox" name="name_selected[]" id="{{$user->id}}" value="{{$user->id}}"> {{$user->name}}</td>		
+										<td><input class="checkboxClass" type="checkbox" name="name_selected[]" id="{{$user->id}}" value="{{$user->id}}"> {{$user->name}}</td>
 									</tr>
 									@endif
 									@endforeach
@@ -160,15 +160,15 @@
 				    			<input style="width: 100%;" type="email" class="form-control" name="email_inserted" multiple>
 				    		</div>
 				    		<a href="#" onclick="openPage(event, 'Photo')" class="btn btn-dark btn-sm" aria-pressed="true">{{ t("BACK TO PREVIOUS STEP") }}</a>
-				    		<button type="submit" class="btn btn-dark btn-sm" id="send_email">{{ t("FINISH") }}</button>	
+				    		<button type="submit" class="btn btn-dark btn-sm" id="send_email">{{ t("FINISH") }}</button>
 						</form>
 						</div>
 						<div class="col-sm-6">
 							<div class="alert alert-info">
 								<strong> {{ t("Select people to invite from your friends list.") }}</strong>
-							</div>	
+							</div>
 							<br>
-						</div>	
+						</div>
 					</div>
 				</div>
 			</div>
@@ -178,7 +178,7 @@
 @endsection
 
 @section('script')
-<script type="text/javascript">	
+<script type="text/javascript">
 
 
 function openPage(evt, pageName) {
@@ -200,7 +200,7 @@ window.onload = function openDefaultPage() {
 }
 
 function search() {
-  // Declare variables 
+  // Declare variables
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
@@ -217,24 +217,24 @@ function search() {
       } else {
         tr[i].style.display = "none";
       }
-    } 
+    }
   }
 }
 
 //validation group name and group description
 jQuery(document).ready(function(){
 	jQuery('#validate_details').hide();
-	
+
 	jQuery("#group_name_descrip").click(function(event){
 		event.preventDefault();
 		var form = document.getElementById('group_details');
 		var form_data = new FormData(form);
 		console.log(form_data);
 		$.ajax({
-	        url : 'create-project/validateValue', 
+	        url : 'create-project/validateValue',
 	        type : 'POST',
 	        data : form_data,
-	        processData: false, 
+	        processData: false,
 	        contentType: false,
 	        success : function(result){
 	        	var type = result.type;
@@ -261,12 +261,12 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 		var form = document.getElementById('upload_image');
 		var form_data = new FormData(form);
-       
+
         $.ajax({
-	        url : 'create-project/upload', 
+	        url : 'create-project/upload',
 	        type : 'POST',
 	        data : form_data,
-	        processData: false, 
+	        processData: false,
 	        contentType: false,
 	        success : function(result){
 	        	var type = result.type;
@@ -286,17 +286,17 @@ jQuery(document).ready(function(){
 	    			jQuery('#success').show();
 	    			jQuery("#success").html(message);
 	   				var url = window.location.origin+'/'+result.image_path;
-	    			jQuery("#image").attr('src',url);	    			
-	    		}	        	
+	    			jQuery("#image").attr('src',url);
+	    		}
 			}
 		});
 	});
 });
 
-//store details project 
+//store details project
 
 jQuery(document).ready(function(){
-	
+
 	jQuery("#store_details").click(function(event){
 		event.preventDefault();
 		var form = document.getElementById('group_details');
@@ -304,22 +304,22 @@ jQuery(document).ready(function(){
 
 		var images = $('#image').attr('src');
 		form_data.append('image', images );
-		
+
         $.ajax({
-	        url : 'create-project/store', 
+	        url : 'create-project/store',
 	        type : 'POST',
 	        data : form_data,
-	        processData: false, 
+	        processData: false,
 	        contentType: false,
 	        success : function(result){
 	        	$("#invite").submit(function(event){
-	        	
+
 	        		$(this).append('<input type="hidden" id="project_id" name="project_id" value="'+result.project_id+'" />');
 	        		return true;
 	        	});
-     	
+
 	        	console.log(result);
-	        	
+
 			}
 		});
 	});
