@@ -1,9 +1,5 @@
 <?php
 
-Route::get('/', function() {
-    return redirect(app()->getLocale());
-});
-
 // Solution 3: prefix your routes with the locale and apply it.
 //             => https://yourdomain.com/fr
 //             => https://yourdomain.com/fr/...
@@ -31,10 +27,6 @@ Route::prefix('{locale?}')->middleware('set.locale')->group(function() {
     Route::get('/', function() {
         return view('home');
     })->name('home');
-
-    Route::get('home', function() {
-        return redirect()->route('home', app()->getLocale());
-    });
 
     //default pages
     Route::get('about', function() {
