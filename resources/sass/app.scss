@@ -6,6 +6,8 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
 
 // Front-end Notifications
 @import '~noty/src/noty.scss';
@@ -77,13 +79,15 @@
   width: 300px;
 }
 
+
+.btn-primary {
+    background-color: $soil-green !important;
+}
 /*
 |--------------------------------------------------------------------------
 | Create Project
 |--------------------------------------------------------------------------
 */
-
-body {font-family: Arial}
 
 /* Style the tab */
 .tab {
@@ -242,3 +246,68 @@ div.scroll_list {
   width: 30%;
 }
 
+// Front page buttons
+.hero-section,.splash {
+
+    .btn {
+    color: #fff;
+    background-color: $grey;
+    border: 2px solid #fff;
+    border-radius: 0rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+    width: 15rem;
+    padding: 1.4rem 0.75rem;
+    margin-right: 0.7rem;
+    margin-bottom: 1.5rem;
+
+    }
+    .btn:hover {
+        color: #fff;
+        background-color: #f46036;
+        border-color: #f46036;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.2s ease-in-out;
+
+    }
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+.splash {
+    p,h1,h2,h3,h4,h5 {
+    color: #fff;
+    }
+    //row-no-margin {
+       // align-content: space-between;
+    //}
+    h4 {
+        font-weight: 100;
+        line-height: 2.05rem;
+        font-size: 1.3rem;
+    }
+    h1 {
+        font-weight: 900;
+    }
+    .btn-primary {
+        color: $blue;
+        background-color: #fff;
+        border-color: #fff;
+        font-weight: 600;
+    }
+}
+
+.site-btn {
+    display: inline-block;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    min-width: 186px;
+    padding: 17px 25px;
+    border-radius: 14px;
+    background: #f46036;
+    color: #fff;
+    line-height: 1;
+    cursor: pointer;
+    text-align: center;
+}

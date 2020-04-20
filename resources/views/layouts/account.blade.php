@@ -8,7 +8,7 @@
                 @csrf
 
                 <div class="img_group mb-3">
-                    <a href="{{url(app()->getLocale().'/users/'.Auth::user()->slug)}}"><img src={{Auth::user()->avatar}} id="avatar" >
+                    <a href="{{url(app()->getLocale().'/users/'.Auth::user()->slug)}}"><img src="{{Auth::user()->avatar}}" id="avatar" >
                         <strong>{{ Auth::user()->username}}</strong>
                     </a>
                 </div>

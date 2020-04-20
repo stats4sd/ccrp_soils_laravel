@@ -39,7 +39,7 @@ Route::prefix('{locale?}')->middleware('set.locale')->group(function() {
     //default pages
     Route::get('about', function() {
         return view('about');
-    });
+    })->name('about');
 
     Route::get('start-sampling', function() {
         return view('start_sampling');
