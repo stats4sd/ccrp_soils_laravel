@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         @if(auth()->check())
-            <form method="post" action="{{ url(app()->getLocale()).'\logout'}}">
+            <form method="post" action="{{ route('logout') }}">
                 @csrf
 
                 <div class="img_group mb-3">
@@ -33,7 +33,7 @@
                 @endif
             </div>
         @else
-            <form method="post" action="{{ route('login', app()->getLocale()) }}">
+            <form method="post" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
@@ -66,8 +66,8 @@
                 <button type="submit" class="btn btn-dark btn-block" name="login_user">Login</button>
             </form>
             <div class="text-center">
-                <a class="d-block small mt-3" href={{url(app()->getLocale().'\register')}}>Register an Account</a>
-                <a class="d-block small" href={{url(app()->getLocale().'\password\reset')}}>Forgot Password?</a>
+                <a class="d-block small mt-3" href={{ route('register') }}>Register an Account</a>
+                <a class="d-block small" href={{ route('password.request') }}>Forgot Password?</a>
             </div>
         @endif
     </div>

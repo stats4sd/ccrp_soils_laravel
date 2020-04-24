@@ -14,24 +14,17 @@ Route::get('about', function() {
     return view('about');
 })->name('about');
 
-Route::get('start-sampling', function() {
-    return view('start_sampling');
-});
-
 // QR Code Stuff
 Route::get('qr-codes', function() {
     return view('qr_code');
-});
+})->name('qr-codes');
 
-Route::post('qr-newcodes', 'QrController@newCodes');
-Route::get('qr-print', 'QrController@printView');
+Route::post('qr-newcodes', 'QrController@newCodes')->name('qr-newcodes');
+Route::get('qr-print', 'QrController@printView')->name('qr-print');
 
 
 
-Route::get('downloads', 'DownloadsController@index');
-
-Route::post('home/login', 'HomeController@login');
-Route::post('home/admin', 'HomeController@checkAdmin');
+Route::get('downloads', 'DownloadsController@index')->name('downloads');
 
 
 Route::group([
@@ -74,11 +67,3 @@ Route::group([
 
 });
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

@@ -6,7 +6,7 @@
             <div class="card mt-4">
                 <div class="card-header"><h1><b>{{ t("Create an Account") }}</b></h1></div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register', app()->getLocale()) }}">
+                    <form method="POST" action="{{ route('register') }}">
                             @csrf
 
                         <div class="form-group row">

@@ -24,13 +24,13 @@
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-4 px-0 mx-0 order-1 order-md-2 d-flex flex-row justify-content-center">
-                            <a href="{{ url('login') }}" class="btn btn-primary btn-lg d-flex flex-column justify-content-center text-center">
+                            <a href="{{ route('login') }}" class="btn btn-primary btn-lg d-flex flex-column justify-content-center text-center">
                                 <i class="fas fa-user-alt pb-4" style="font-size:5em"></i>
                                 Login / Register
                             </a>
                         </div>
                         <div class="col-xl-3 col-md-4 px-0 mx-0 order-3 order-md-3 d-flex flex-row justify-content-center">
-                            <a href="{{ url('contact') }}" class="btn btn-lg d-flex flex-column justify-content-center text-center">
+                            <a href="{{ route('contact') }}" class="btn btn-lg d-flex flex-column justify-content-center text-center">
                                 <i class="fas fa-comment-alt pb-4" style="font-size:5em"></i>
                                 Contact Us
                             </a>

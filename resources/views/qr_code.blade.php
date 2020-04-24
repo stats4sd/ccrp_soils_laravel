@@ -14,7 +14,7 @@
 		<div class="card card-primary">
 			<div class="card-body">
 
-				<form method="post" action="{{ url(session()->get('locale') . '/qr-newcodes') }}">
+				<form method="post" action="{{ route('qr-newcodes') }}">
 					@csrf
 					<div class="form-group row">
 						<label for="qrNumber" class="col-sm-4">{{ t("How many QR codes do you need?") }}</label>

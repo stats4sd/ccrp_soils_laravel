@@ -16,7 +16,7 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             \Alert::add('error','Please logging')->flash();
-            return route('home', app()->getLocale());
+            return route('home');
         }
     }
 }
