@@ -1,15 +1,13 @@
-@extends('layouts.app')
-
+@extends('layouts.full_width')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
+            <div class="card mt-4">
+                <div class="card-header"><h1><b>{{ t("Create an Account") }}</b></h1></div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register', app()->getLocale()) }}">
-                        @csrf
+                            @csrf
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
@@ -60,9 +58,24 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <hr/>
+                        <p class="form-text">
+                            In order to share ODK forms directly with you on Kobotoolbox, we need the username for your Kobotoolbox account.
+                        </p>
+                        <p class="form-text">
+                            We do not require your Kobotoolbox password, and will never ask for direct access to your Kobo account.
+                        </p>
+                        <div class="form-group row">
+                            <label for="kobo-id" class="col-md-4 col-form-label text-md-right">Kobotoolbox Username</label>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6">
+                                <input id="kobo-id" type="password" class="form-control" name="kobo_id">
+                            </div>
+                        </div>
+                        <hr/>
+
+                        <div class="form-group row mb-0 ">
+                            <div class="col-md-10 d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
@@ -75,3 +88,4 @@
     </div>
 </div>
 @endsection
+

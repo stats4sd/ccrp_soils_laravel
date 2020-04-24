@@ -21,6 +21,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{url(app()->getLocale().'\downloads')}}">{{ t("Downloads") }}</a>
                 </li>
+                @if(auth()->guest())
+                    <li class="nav-item ml-4">
+                        <a class="nav-link" href="{{url(app()->getLocale().'\login')}}">{{ t("Login") }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url(app()->getLocale().'\register')}}">{{ t("Register") }}</a>
+                    </li>
+                @endif
+                @if(auth()->check())
+                    <li class="nav-item ml-4">
+                        <a href="{{route('logout')}}" class="nav-link">{{ t("Logout") }}</a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
         if ($exception instanceof NotFoundHttpException) {
 
             $availableLocales = config('app.available_locales');
-
+gmp_scan0(a, start)
             # based on the Tio set.locale middleware
             # Choose the most appropriate "default locale"
             $priorityLocales = [

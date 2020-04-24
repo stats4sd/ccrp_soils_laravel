@@ -16,7 +16,7 @@
                         <div class="col-xl-3 col-md-4 px-0 mx-0 order-2 order-md-1 d-flex flex-row justify-content-center">
                             <div class="">
 
-                                <a href="{{ url('about') }}" class="btn btn-lg d-flex flex-column justify-content-center text-center">
+                                <a href="{{ route('about') }}" class="btn btn-lg d-flex flex-column justify-content-center text-center">
                                     <i class="fas fa-sitemap pb-4" style="font-size:5em"></i>
                                     About the Platform
                                 </a>

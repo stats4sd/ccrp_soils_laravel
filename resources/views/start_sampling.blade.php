@@ -1,5 +1,4 @@
-
-@extends('layouts.app')
+@extends('layouts.two_panel')
 
 @section('content')
 <div class="col-sm-12">

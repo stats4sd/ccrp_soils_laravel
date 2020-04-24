@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Jobs\ShareFormToKobotools;
 use App\Models\Invite;
@@ -22,7 +22,7 @@ class RegisterController extends Controller
             $email = null;
         }
 
-    	return view('register', compact('email'));
+    	return view('auth.register', compact('email'));
     }
 
     public function validator(Request $request)
@@ -76,7 +76,7 @@ class RegisterController extends Controller
             return $projects_members;
 
         }
-        
+
         return $invite;
     }
 

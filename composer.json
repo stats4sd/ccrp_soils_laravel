@@ -15,6 +15,7 @@
         "laravel/horizon": "^3.4",
         "laravel/telescope": "^2.0",
         "laravel/tinker": "^1.0",
+        "laravel/ui": "^1.0",
         "nesbot/carbon": "^2.21",
         "simplesoftwareio/simple-qrcode": "^2.0",
         "tio/laravel": "^1.6"
