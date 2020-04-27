@@ -26,21 +26,22 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         //from https://laracasts.com/discuss/channels/laravel/optional-language-for-all-routes
 
-        Route::pattern('_locale', \implode('|', $this->app['config']['app.available_locales']));
+        // Route::pattern('_locale', \implode('|', $this->app['config']['app.available_locales']));
 
-        Route::matched(function (RouteMatched $event) {
-            // Get language from route.
-            $locale = $event->route->parameter('_locale');
+        // Route::matched(function (RouteMatched $event) {
+        //     // Get language from route.
+        //     $locale = $event->route->parameter('_locale');
 
-            // Ensure, that all built urls would have "_locale" parameter set from url.
-            url()->defaults(array('_locale' => $locale));
+        //     // Ensure, that all built urls would have "_locale" parameter set from url.
+        //     url()->defaults(array('_locale' => $locale));
 
-            // Change application locale.
-            app()->setLocale($locale);
-            Translation::setLocale($locale);
-        });
+        //     // Change application locale.
+        //     app()->setLocale($locale);
+        //     Translation::setLocale($locale);
+        // });
 
         parent::boot();
     }
@@ -69,10 +70,16 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         // Added "->prefix(...` line to auto-prefix all routes with locale.
+        $availableLocales = config('app.available_locales');
+        $locale = null;
+
+        if(in_array(request()->segment(1), $availableLocales)) {
+            $locale = request()->segment(1);
+        }
 
         Route::middleware('web')
+             ->prefix($locale)
              ->namespace($this->namespace)
-             ->prefix('{_locale}')
              ->group(base_path('routes/web.php'));
     }
 

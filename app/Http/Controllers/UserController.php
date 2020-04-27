@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        // only for admins
     }
 
     /**
@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        // only available via backpack crud or register via front-end
     }
 
     /**
@@ -38,7 +38,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // only available via backpack crud or register via front-end
     }
 
     /**
@@ -47,7 +47,7 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($en, User $user)
+    public function show(User $user)
     {
         return view('user_account', compact('user'));
     }
@@ -115,7 +115,7 @@ class UserController extends Controller
 
     public function validateDetails(Request $request, $locale, $id)
     {
-        $validator = $request->validate( 
+        $validator = $request->validate(
         [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
@@ -134,27 +134,27 @@ class UserController extends Controller
                 'username' => $request->username,
                 'privacy' => $request->privacy,
             ]);
-    
+
         return $user;
     }
 
     public function changePassword(Request $request, $locale, $id)
     {
-    
+
         $user = User::find($id);
         if (Hash::check($request->password, $user->password) && Hash::check($request->new_password, $request->new_password_confirm)){
-            
+
            $user->fill([
-            
+
             'password' => Hash::make($request->new_password)
-            
+
             ])->save();
 
             Auth::logout();
-            return response()->json(['type'=>'success','message'=>"New password updated"]);   
+            return response()->json(['type'=>'success','message'=>"New password updated"]);
         }
-            
-        return response()->json(['type'=>'error','message'=>'Password Invalid']);   
+
+        return response()->json(['type'=>'error','message'=>'Password Invalid']);
 
     }
 
@@ -168,12 +168,12 @@ class UserController extends Controller
 
     public function koboUser(Request $request, $en, $id)
     {
-     
+
         User::where('id', $id)->update(
             [
                 'kobo_id' => $request->kobo_id,
             ]);
-    
+
         return response()->json(['type'=>'success','message'=>$request->kobo_id]);;
     }
 
@@ -186,12 +186,12 @@ class UserController extends Controller
         }else if($user->privacy =="Only Me")
         {
             return false;
-        }else if ($user->privacy == "All Members") 
+        }else if ($user->privacy == "All Members")
         {
             $projects = $user->projects;
 
             foreach ($projects as $proj) {
-                $projects = Project::find($proj->id); 
+                $projects = Project::find($proj->id);
                 $members = $projects->users;
                 $is_member = $members->contains(Auth::id());
                 if($is_member){
@@ -200,8 +200,8 @@ class UserController extends Controller
 
             }
         }
-            
-           
+
+
     }
 
 }

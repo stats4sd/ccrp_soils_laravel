@@ -46,10 +46,10 @@ class User extends Authenticatable
         return $this->admin == 1 ? true : false;
     }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+    // public function getRouteKeyName()
+    // {
+    //     return 'slug';
+    // }
 
     public function projects()
     {

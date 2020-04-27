@@ -17,6 +17,7 @@
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.0",
         "nesbot/carbon": "^2.21",
+        "facade/ignition": "^1.16",
         "simplesoftwareio/simple-qrcode": "^2.0",
         "tio/laravel": "^1.6"
     },

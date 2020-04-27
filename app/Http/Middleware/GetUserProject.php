@@ -19,13 +19,12 @@ class GetUserProject
      */
     public function handle($request, Closure $next)
     {
-
         if(auth()->check()){
 
             $projects = Auth::user()->projects;
-    
-             View::share('array_projects', $projects);   
-        } 
+
+             View::share('array_projects', $projects);
+        }
         return $next($request);
     }
 

@@ -26,7 +26,6 @@
 						@endif
 						<p><b>{{ t("Created:") }}</b> {{$user->created_at->diffForHumans()}}</p>
 					</div>
-
 				</div>
 			</div>
 

@@ -22,6 +22,9 @@ Route::get('qr-codes', function() {
 Route::post('qr-newcodes', 'QrController@newCodes')->name('qr-newcodes');
 Route::get('qr-print', 'QrController@printView')->name('qr-print');
 
+Route::get('contact', function() {
+    return view('contact');
+})->name('contact');
 
 
 Route::get('downloads', 'DownloadsController@index')->name('downloads');
@@ -38,16 +41,18 @@ Route::group([
     Route::post('/create-project/send', 'CreateProjectController@sendEmail');
 
     Route::resources([
-        'users' => 'UserController',
-        'projects' => 'ProjectController'
+        'user' => 'UserController',
+        'project' => 'ProjectController'
     ]);
 
+
+
     //User
-    Route::post('/users/{id}/upload', 'UserController@upload');
-    Route::post('/users/{id}/validateDetails', 'UserController@validateDetails');
-    Route::post('/users/{id}/changePassword', 'UserController@changePassword');
-    Route::post('/users/{id}/deleteProfile', 'UserController@deleteProfile');
-    Route::post('/users/{id}/kobo-user', 'UserController@koboUser');
+    // Route::post('/users/{id}/upload', 'UserController@upload');
+    // Route::post('/users/{id}/validateDetails', 'UserController@validateDetails');
+    // Route::post('/users/{id}/changePassword', 'UserController@changePassword');
+    // Route::post('/users/{id}/deleteProfile', 'UserController@deleteProfile');
+    // Route::post('/users/{id}/kobo-user', 'UserController@koboUser');
 
     //Projects
     Route::get('/projects', 'ProjectController@index');
