@@ -31,7 +31,10 @@
                 @endif
                 @if(auth()->check())
                     <li class="nav-item ml-4">
-                        <a href="{{ route('logout') }}" class="nav-link">{{ t("Logout") }}</a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button name="logout" type="submit" class="nav-link btn btn-link">{{ t("Logout") }}</button>
+                        </form>
                     </li>
                 @endif
             </ul>

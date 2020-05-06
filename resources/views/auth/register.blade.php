@@ -9,7 +9,7 @@
                     <form method="POST" action="{{ route('register') }}">
                             @csrf
 
-                        <div class="form-group row">
+                        <div class="form-group row required">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
@@ -23,7 +23,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row required">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
@@ -37,7 +37,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row required">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row required">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
@@ -69,7 +69,7 @@
                             <label for="kobo-id" class="col-md-4 col-form-label text-md-right">Kobotoolbox Username</label>
 
                             <div class="col-md-6">
-                                <input id="kobo-id" type="password" class="form-control" name="kobo_id">
+                                <input id="kobo-id" type="text" class="form-control" name="kobo_id">
                             </div>
                         </div>
                         <hr/>

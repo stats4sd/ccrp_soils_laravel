@@ -2,34 +2,22 @@
 
 Auth::routes();
 
-Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
+Route::view('/', 'home')->middleware('guest')->name('home');
 
-// Handle multiple ways to get 'home'
-Route::get('/', function() {
-    return view('home');
-})->name('home');
+Route::view('about', 'about')->name('about');
+Route::view('qr-codes', 'qr_code')->name('qr-codes');
+Route::view('contact', 'contact')->name('contact');
 
-//default pages
-Route::get('about', function() {
-    return view('about');
-})->name('about');
-
-// QR Code Stuff
-Route::get('qr-codes', function() {
-    return view('qr_code');
-})->name('qr-codes');
 
 Route::post('qr-newcodes', 'QrController@newCodes')->name('qr-newcodes');
 Route::get('qr-print', 'QrController@printView')->name('qr-print');
 
-Route::get('contact', function() {
-    return view('contact');
-})->name('contact');
 
 
 Route::get('downloads', 'DownloadsController@index')->name('downloads');
 
 
+Route::get('/confirm-project/{project_id}/{user_id}/{key}', 'ConfirmProjectController@index');
 Route::group([
     'middleware' => ['auth'],
 ], function() {
@@ -41,11 +29,13 @@ Route::group([
     Route::post('/create-project/send', 'CreateProjectController@sendEmail');
 
     Route::resources([
-        'user' => 'UserController',
-        'project' => 'ProjectController'
+        'users' => 'UserController',
+        'projects' => 'ProjectController'
     ]);
 
-
+    Route::get('my-account', 'UserController@account')->name('users.account');
+    Route::get('users/{user}/password', 'UserController@editPassword')->name('users.password.edit');
+    Route::put('users/{user}/password', 'UserController@updatePassword')->name('users.password.update');
 
     //User
     // Route::post('/users/{id}/upload', 'UserController@upload');

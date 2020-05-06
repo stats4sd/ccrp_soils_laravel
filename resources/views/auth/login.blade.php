@@ -67,6 +67,22 @@
                     </form>
                 </div>
             </div>
+            @if (config('app.registrations'))
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <div class="form-group row mb-0">
+                            <label class="col-md-4 col-form-label text-md-right">
+                                Don't have an account?
+                            </label>
+                            <div class="col-md-8">
+                                <a href="{{ route('register') }}" class="btn btn-info text-white">
+                                    {{ __('Register here') }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>

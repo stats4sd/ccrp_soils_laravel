@@ -17301,3 +17301,8 @@ div.scroll_list {
   text-align: center;
 }
 
+.form-group.required label:not(:empty)::after {
+  content: " *";
+  color: #ff0000;
+}
+

@@ -46,15 +46,22 @@ class User extends Authenticatable
         return $this->admin == 1 ? true : false;
     }
 
-    // public function getRouteKeyName()
-    // {
-    //     return 'slug';
-    // }
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function projects()
     {
         return $this->belongsToMany('App\Models\Project', 'projects_members')->withPivot('is_admin');;
     }
+
+    public function setAvatarAttribute($value)
+       {
+           $disk = "public";
+           $destination_path = "uploads/avatars";
+           $this->uploadFileToDisk($value, "avatar", $disk, $destination_path);
+       }
 
 
 

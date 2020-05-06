@@ -311,3 +311,8 @@ div.scroll_list {
     cursor: pointer;
     text-align: center;
 }
+
+.form-group.required label:not(:empty)::after {
+    content: ' *';
+    color: #ff0000;
+}
