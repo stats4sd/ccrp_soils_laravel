@@ -14,7 +14,7 @@ class UserController extends Controller
 
     public function index ()
     {
-        $this->authorize('viewAny');
+        $this->authorize('viewAny', User::class);
 
         return view('users.index');
     }
@@ -52,19 +52,17 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->authorize('update', $user);
+
         $validatedData = $request->validate(
             [
                 'name' => ['required'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
                 'kobo_id' => ['nullable', 'string', 'max:255'],
-            //    'avatar' => ['nullable', 'file'],
+                'avatar' => ['nullable', 'image'],
             ],
         );
 
-        $user->update(
-            [
-                'avatar' => $request->avatar,
-            ]);
+        $user->update($validatedData);
 
         return redirect()->route('users.show', [$user]);
 
@@ -80,6 +78,8 @@ class UserController extends Controller
     {
         $this->authorize('destroy', $user);
         $user->delete();
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -94,6 +94,11 @@ class UserController extends Controller
     }
 
 
+    /**
+     * Show the Edit password form
+     * @param  User   $user [description]
+     * @return [type]       [description]
+     */
     public function editPassword (User $user)
     {
         return view('users.edit-password', compact('user'));
@@ -124,39 +129,7 @@ class UserController extends Controller
 
     }
 
-    public function deleteProfile($locale, $id)
-    {
-        $user = User::find($id);
-        $user->projects()->detach();
-        $user->delete();
-        return response()->json(['type'=>'success','message'=>"Profile Deleted"]);
-    }
-
-    public function privacy($username)
-    {
-        $user = User::where('username', $username)->first();
-        if($user->privacy == "Everyone")
-        {
-            return true;
-        }else if($user->privacy =="Only Me")
-        {
-            return false;
-        }else if ($user->privacy == "All Members")
-        {
-            $projects = $user->projects;
-
-            foreach ($projects as $proj) {
-                $projects = Project::find($proj->id);
-                $members = $projects->users;
-                $is_member = $members->contains(Auth::id());
-                if($is_member){
-                    return true;
-                }
-
-            }
-        }
 
 
-    }
 
 }

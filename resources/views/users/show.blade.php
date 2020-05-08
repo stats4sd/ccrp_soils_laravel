@@ -15,7 +15,7 @@
 	    		<div class="row mb-4">
 	    			<div class="col-md-3">
 				    	<div class="img_group_default">
-							<img src="{{url($user->avatar)}}" id="avatar">
+							<img src="{{ url($user->avatar) }}" id="avatar">
 						</div>
 					</div>
 					<div class="col-md-5">
@@ -61,30 +61,8 @@
                 @endcan
 			</div>
 
-            <!-- Tab links -->
-            <ul class="nav nav-tabs mt-4" id="usertabs" roles="tablist">
-                <li class="nav-item">
-                    <a id="projects-tab"class="nav-link active" data-toggle="tab" href="#projects">{{ t("My Projects") }}</a>
-                </li>
-                <li class="nav-item">
-                    <a id="profile-tab" class="nav-link" data-toggle="tab" href="#profile">{{ t("My Profile") }}</a>
-                </li>
+            @include('users.projects-tab')
 
-            </ul>
-
-            <div id="tabcontent" class="tab-content">
-
-                <div class="tab-pane fade  show active" id="projects" role="tabpanel" aria-labelledby="projects-tab">
-                    @include('users.projects-tab')
-                </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="py-4">
-                        @include('users.profile-tab')
-                    </div>
-                </div>
-
-            </div>
-	    </section>
 	</div>
 
 

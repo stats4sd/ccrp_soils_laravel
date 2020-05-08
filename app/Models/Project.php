@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Sample;
 use App\Models\Submission;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -18,20 +19,35 @@ class Project extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'projects';
-    // protected $primaryKey = 'id';
-    public $timestamps = true;
     protected $guarded = ['id'];
-    protected $fillable = ['created_at'];
-    // protected $hidden = [];
-    // protected $dates = [];
 
+    protected $casts = [
+        'share_data' => 'boolean',
+    ];
 
     /*
     |--------------------------------------------------------------------------
-    | FUNCTIONS
+    | FUNCTIONS / Getters / Setters
     |--------------------------------------------------------------------------
     */
+
+    public function getAdminsAttribute ()
+    {
+        return $this->users->where('pivot.admin', true);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function setAvatarAttribute($value)
+    {
+        $disk = "public";
+        $destination_path = "projects/avatars";
+        $this->uploadFileToDisk($value, "avatar", $disk, $destination_path);
+    }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -51,34 +67,18 @@ class Project extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User', 'projects_members')->withPivot('is_admin');
+        return $this->belongsToMany('App\User', 'projects_members')->withPivot('admin');
     }
-
 
     public function submissions ()
     {
         return $this->hasMany(Submission::class);
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | SCOPES
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | ACCESORS
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | MUTATORS
-    |--------------------------------------------------------------------------
-    */
-    public function getRouteKeyName()
+    public function samples ()
     {
-        return 'slug';
+        return $this->hasMany(Sample::class);
     }
+
+
 }

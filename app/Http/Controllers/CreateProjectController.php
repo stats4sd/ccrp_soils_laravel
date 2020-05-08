@@ -17,13 +17,9 @@ use Illuminate\Support\Facades\Redirect;
 
 class CreateProjectController extends Controller
 {
-    public function index()
-    {
-    	$users = DB::table('users')->get();
-    	return view('create_project', ['users' => $users]);
-    }
 
-    
+
+
     public function validateValue(Request $request)
     {
         $group_name = $_POST['name'];
@@ -39,81 +35,6 @@ class CreateProjectController extends Controller
         } else{
             return response()->json(["type" => "success"]);
         }
-
-    }
-
-
-    public function upload(Request $request)
-    {
-        $allowed_image_extension = array("png","jpg","jpeg",'webp');
-        $image = $request->file('select_file');
-
-        if(empty($image)){
-            return response()->json(
-                ["type" => "empty", "message" => "Choose image file to upload."]
-            );
-        } else if (!empty($image)) {
-            $file_extension = strtolower($image->getClientOriginalExtension());
-            if(! in_array($file_extension, $allowed_image_extension)){
-                return response()->json(
-                    [ "type" => "error", "message" => "Upload invalid images. Only PNG, JPEG, JPG and WEBP are allowed."]
-                );
-            } else {
-            $new_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path("images"), $new_name);
-                return response()->json(
-                    ["type" => "success", "message" => "Image uploaded successfully.", "image_path" => 'images/'.$new_name]
-                );
-            }
-        }
-    }
-
-    public function store (Request $request)
-    {
-        $user = Auth::user();
-        $creator_id = $user->id;
-
-        $project = new Project();
-
-        $project->name = $request->name;
-        $project->creator_id = $creator_id;
-        $project->slug = preg_replace('/[^a-z0-9]+/i', '-', trim(strtolower($request->name)));
-        $project->description = $request->description;
-        $project->status = $request->status;
-        $project->image = substr($request['image'], strrpos($request['image'], '/' )-7);
-        $project->group_invitations = $request->group_invitations;
-        $project->save();
-
-        $project_id = $project->id;
-        $this->syncProjectXlsForm($project_id);
-
-        $this->creatorProject($creator_id, $project_id);
-
-        return response()->json(["type"=>"stored successfully", "project_id"=>$project_id]);
-    }
-
-    public function creatorProject($creator_id, $id)
-    {
-        $key = str_random(32);
-        $projects_members = new ProjectMember();
-        $projects_members->project_id = $id;
-        $projects_members->inviter_id = Auth::user()->id;
-        $projects_members->user_id = $creator_id;
-        $projects_members->key_confirm = $key;
-        $projects_members->is_admin = 1;
-        $projects_members->is_confirmed = 1;
-        $projects_members->save();
-
-        return $projects_members;
-
-    }
-
-    public function syncProjectXlsForm($id)
-    {
-
-        $project = Project::find($id);
-        $sync=$project->xls_forms()->sync(Xlsform::all()->pluck('id')->toArray());
-        return true;
 
     }
 

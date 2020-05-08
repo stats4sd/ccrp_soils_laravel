@@ -48,12 +48,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        // When we've got non-matched route resulting in "404 Not Found" response.
-        if ($exception instanceof NotFoundHttpException) {
-
-
-        }
-
         return parent::render($request, $exception);
     }
 }

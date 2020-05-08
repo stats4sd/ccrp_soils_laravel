@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
@@ -36,21 +37,70 @@ class ProjectController extends Controller
 
     /**
      *
-     * @param  [type]  $locale  [description]
      * @param  Project $project [description]
      * @return [view]           Project account
      */
-    public function show($locale, Project $project)
+    public function show(Project $project)
     {
-        $users = DB::table('users')->get();
-        $is_member = $this->privacy($project);
-        $auth = $project->users->filter(function($value){
-            return $value->pivot->is_admin==1;
-        });
-        $is_admin = $auth->pluck('id')->contains(Auth::id());
-        $invitations = $this->invitations($project, $is_admin, $is_member);
+        return view('projects.show', compact('project'));
+    }
 
-        return view('project_account', compact('users', 'project', 'is_admin', 'is_member', 'invitations'));
+    public function create ()
+    {
+        return view('projects.create');
+    }
+
+    public function store (Request $request)
+    {
+
+        $validatedData = $request->validate(
+            [
+                'name' => ['required', 'max:255'],
+                'description' => ['required', 'max:2000'],
+                'avatar' => ['nullable', 'image'],
+                'share_data' => ['boolean'],
+            ],
+        );
+
+        $validatedData['creator_id'] = auth()->user()->id;
+        $validatedData['slug'] = Str::slug($validatedData['name']);
+
+        $project = Project::create($validatedData);
+
+        return redirect()->route('projects.show', [$project]);
+    }
+
+    public function update (Request $request, Project $project)
+    {
+
+        $this->authorize('update', $project);
+
+        $validatedData = $request->validate(
+            [
+                'name' => ['required', 'max:255', 'unique:projects,name,' . $project->id],
+                'description' => ['required', 'max:2000'],
+                'status' => ['nullable'],
+                'avatar' => ['nullable', 'image'],
+            ]
+        );
+
+        $project->update($validatedData);
+
+        return redirect()->route('projects.show', [$project]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Project $project)
+    {
+        $this->authorize('destroy', $project);
+        $project->delete();
+
+        return redirect()->route('projects.index');
     }
 
     /**
@@ -138,8 +188,6 @@ class ProjectController extends Controller
             return response()->json(["type"=>'info', "status"=>'User']);
 
         }
-
-
     }
 
     public function deleteMember(Request $request)
@@ -150,13 +198,6 @@ class ProjectController extends Controller
         $username = User::find($user_id)->username;
 
         return response()->json(["type"=>'success', "message"=>"the user ".$username." is been deleted from the project"]);
-    }
-
-     // soft delete project
-    public function destroy($locale, $id)
-    {
-        $project_id = Project::find($id)->delete();
-        return response()->json(["type"=>'success', "project_id"=>$id]);
     }
 
     public function validateGroup(Request $request, $locale, $id)
@@ -177,19 +218,6 @@ class ProjectController extends Controller
         }
     }
 
-    public function update (Request $request, $en, $id)
-    {
-
-        $project = DB::table('projects')->where('id', $id)->update(
-            [
-                'name' => $request->name,
-                'description' => $request->description,
-                'status' => $request->status,
-                'group_invitations' => $request->group_invitations,
-            ]);
-
-        return $project;
-    }
 
      public function sendEmail (Request $request, $en, $id)
     {

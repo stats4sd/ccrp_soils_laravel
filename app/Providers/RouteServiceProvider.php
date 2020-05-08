@@ -75,7 +75,14 @@ class RouteServiceProvider extends ServiceProvider
 
         if(in_array(request()->segment(1), $availableLocales)) {
             $locale = request()->segment(1);
+
+            # Store in session for next time
+            session(['locale' => $locale]);
+
+            # Set Locale for Gettext and Laravel PHP
+            Translation::setLocale($locale);
         }
+
 
         Route::middleware('web')
              ->prefix($locale)

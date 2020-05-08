@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Project;
 use App\Models\ProjectMember;
 use App\Models\Xlsform;
+use App\Observers\ProjectObserver;
 use App\Observers\XlsformObserver;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
     {
 
         Xlsform::observe(XlsformObserver::class);
-
+        Project::observe(ProjectObserver::class);
     }
 
 

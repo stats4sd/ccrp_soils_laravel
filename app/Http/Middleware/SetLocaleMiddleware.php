@@ -18,7 +18,9 @@ class SetLocaleMiddleware
 
         $availableLocales = config('app.available_locales');
 
-        if(!array_key_exists($request->segment(1), $availableLocales)) {
+        if(
+            $request->segment(1) !== "admin" &&
+            !array_key_exists($request->segment(1), $availableLocales)) {
             # based on the Tio set.locale middleware
             # Choose the most appropriate "default locale"
             $priorityLocales = [
@@ -38,7 +40,7 @@ class SetLocaleMiddleware
                 // Redirect to same url with default locale prepended.
                 $uri = $request->getUriForPath('/' . $default_locale . $request->getPathInfo());
 
-                return redirect($uri, 301);
+                return redirect($uri, 302);
             }
         }
 

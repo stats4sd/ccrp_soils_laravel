@@ -37,13 +37,14 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'admin' => 'boolean',
     ];
 
     public $incrementing = true;
 
     public function isAdmin ()
     {
-        return $this->admin == 1 ? true : false;
+        return $this->admin ?: false;
     }
 
     public function getRouteKeyName()
@@ -53,13 +54,13 @@ class User extends Authenticatable
 
     public function projects()
     {
-        return $this->belongsToMany('App\Models\Project', 'projects_members')->withPivot('is_admin');;
+        return $this->belongsToMany('App\Models\Project', 'projects_members')->withPivot('admin');
     }
 
     public function setAvatarAttribute($value)
        {
            $disk = "public";
-           $destination_path = "uploads/avatars";
+           $destination_path = "users/avatars";
            $this->uploadFileToDisk($value, "avatar", $disk, $destination_path);
        }
 

@@ -17191,6 +17191,14 @@ div.scroll_list {
   border-radius: 50%;
 }
 
+.img_group_small img {
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+
 .img_card_project img {
   width: 75px;
   height: 75px;

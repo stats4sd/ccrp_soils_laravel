@@ -13,13 +13,10 @@ class CreateProjectsMembersTable extends Migration
     public function up()
     {
         Schema::create('projects_members', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('project_id');
             $table->bigInteger('user_id');
-            $table->bigInteger('inviter_id');
-            $table->tinyInteger('is_admin')->default(0);
-            $table->tinyInteger('is_confirmed')->default(0);
-            $table->string('key_confirm');
+            $table->tinyInteger('admin')->default(0);
             $table->unique(['project_id', 'user_id']);
             $table->timestamps();
         });

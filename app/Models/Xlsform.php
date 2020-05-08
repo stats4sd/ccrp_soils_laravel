@@ -103,7 +103,6 @@ class Xlsform extends Model
             \Storage::disk($disk)->delete($this->{$attribute_name});
             $this->attributes[$attribute_name] = null;
         }
-
         // if a new file is uploaded, store it on disk and its filename in the database
         if ($request->hasFile($attribute_name) && $request->file($attribute_name)->isValid()) {
             // 1. Generate a new file name
