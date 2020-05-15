@@ -7,6 +7,46 @@ use App\Models\Variable;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Xlsform
+ *
+ * @property int $id
+ * @property string|null $form_title
+ * @property string|null $path_file
+ * @property string|null $default_language
+ * @property string $version
+ * @property string|null $version_id
+ * @property string|null $instance_name
+ * @property string|null $link_page
+ * @property string|null $description
+ * @property array|null $media
+ * @property mixed|null $content
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Project[] $projects
+ * @property-read int|null $projects_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Submission[] $submissions
+ * @property-read int|null $submissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Variable[] $variables
+ * @property-read int|null $variables_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereDefaultLanguage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereFormTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereInstanceName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereLinkPage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereMedia($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform wherePathFile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereVersion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereVersionId($value)
+ * @mixin \Eloquent
+ */
 class Xlsform extends Model
 {
     use CrudTrait;

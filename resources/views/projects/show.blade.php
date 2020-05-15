@@ -230,166 +230,91 @@
 
             @endforeach
             </div>
+
+            <div class="container">
+                <div class="img_group mt-3">
+                    <b>{{ t("Members") }}</b>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">{{ t("Avatar") }}</th>
+                                <th scope="col">{{ t("Username") }}</th>
+                                <th scope="col">{{ t("Status") }}</th>
+                                <th scope="col">{{ t("Actions") }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <form method="post" action="" id="change_details">
+
+                                @csrf
+
+                                @foreach($project->users as $member)
+
+                                    <tr>
+                                        <td>
+                                            <div class="img_group mb-3">
+                                                <a href="members/{{$member->username}}">
+                                                    <img src="{{$member->avatar}}" alt="Person">
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+
+                                                <div id="change_id{{$member->id}}" value="{{$member->id}}">
+                                                    <a href="members/{{$member->username}}"><p>{{$member->username}}</p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div id="member_status{{$member->id}}">
+                                                @if($member->pivot->is_admin)
+                                                    <p>{{ t("Admin") }}</p>
+                                                @else
+                                                    <p>{{ t("User") }}</p>
+                                                @endif
+                                            </div>
+                                            <p id="status{{$member->id}}"></p>
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="btn btn-dark btn-sm" name="update_members" onclick="changeStatus({{$project->id}},{{$member->id}})">{{ t("CHANGE STATUS") }}</button>
+                                            <button type="submit" id="delete" class="btn btn-dark btn-sm" onclick="deleteMember({{$project->id}},{{$member->id}})" name="update_members">{{ t("DELETE") }}</button>
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </form>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button onclick="openPage(event, 'Members')" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("INVITE MEMBERS") }}</button>
+
         </div>
         <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-			<div class="row">
-	  			<div class="container">
-			        <form method="post" action="{{ url('project/store')}}" id="group_details">
-			        	 @csrf
-			           	<div class="form-group">
-							<div class="alert alert-danger alert-block" id="validate_danger"></div>
-							<div class="alert alert-success alert-block" id="validate_success"></div>
-			             	<label for="exampleInputEmail1"><b>{{ t("Group Name (required)") }}</b></label>
-			             	<input class="form-control"  type="text" name="name" value="{{$project->name}}">
-			           	</div>
-			           	<div class="form-group">
-			             	<label for="exampleInputEmail1"><b>{{ t("Group Description (required)") }}</b></label>
-			             	<textarea class="form-control"  rows="4" cols="50" name="description" form="group_details">{{$project->description}}</textarea>
-			           	</div>
-
-
-		           		<div class="row">
-		           			<div class="col-sm-6">
-		           				<b>{{ t("Privacy Options") }}</b>
-					           	<div class="form-group">
-					           		<input type="radio" name="status" value="Public" checked>
-										<label for="public_group" style="color: grey"> {{ t("This is a public group") }}</label>
-									<br>
-									<input type="radio" name="status" value="Private">
-										<label for="private_group" style="color: grey"> {{ t("This is a private group") }}</label>
-									<br>
-									<input type="radio" name="status" value="Hidden">
-										<label for="private_group" style="color: grey"> {{ t("This is a hidden group") }}</label>
-									<br>
-								</div>
-				   			</div>
-				   			<div class="col-sm-6">
-				   				<b>{{ t("Group Invitations") }}</b>
-				   				<div class="form-group">
-			   						<div>
-				   						<input type="radio" name="group_invitations" value="all_members" checked>
-										<label for="group_invitations" style="color: grey">{{ t("All group members") }}</label>
-									</div>
-									<div>
-										<input type="radio" name="group_invitations" value="group_admins">
-										<label for="group_invitations" style="color: grey">{{ t("Group admins only") }}</label>
-									</div>
-				   				</div>
-				   			</div>
-			           	</div>
-
-
-			           	<div class="row">
-							<div class="col-sm-4">
-								<div class="container">
-					  				<div class="img_group_default mt-3">
-					  					<b>{{ t("Photo") }}</b>
-
-									  	<img id='image' src={{$project->image}}>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-8 mt-5">
-
-								<div class="form-group">
-									<br>
-									<div class="alert alert-danger alert-block" id="error_photo"></div>
-									<div class="alert alert-success alert-block" id="success"></div>
-									<br>
-									<label> {{ t("Select Photo for Upload") }}</label>
-									<br>
-									<input type="file" id="file" name="select_file">
-									<input type="submit" id="Upload" name="upload" class="btn btn-dark btn-sm" value="Upload">
-								</div>
-							</div>
-				           <button type="submit" id="group_name_descrip" class="btn btn-dark btn-sm mt-5" name="create_group">{{ t("UPDATE GROUP") }}</button>
-			       		</div>
-
-					</form>
-				</div>
-				<div class="container">
-	  				<div class="img_group mt-3">
-	  					<b>{{ t("Members") }}</b>
-  					<table class="table table-hover">
-  						<thead>
-						    <tr>
-						      <th scope="col">{{ t("Avatar") }}</th>
-						      <th scope="col">{{ t("Username") }}</th>
-						      <th scope="col">{{ t("Status") }}</th>
-						      <th scope="col">{{ t("Actions") }}</th>
-						    </tr>
-						</thead>
-						<tbody>
-
-						<form method="post" action="" id="change_details">
-
-			        	@csrf
-
-						@foreach($project->users as $member)
-
-					    <tr>
-				   		<td>
-		          		<div class="img_group mb-3">
-          					<a href="members/{{$member->username}}">
-		            		<img src="{{$member->avatar}}" alt="Person"></a>
-	            		</div>
-		            	</td>
-		            	<td>
-		            		<div class="form-group">
-
-			            		<div id="change_id{{$member->id}}" value="{{$member->id}}">
-		            				<a href="members/{{$member->username}}"><p>{{$member->username}}</p></a>
-				            	</div>
-			            	</div>
-		            	</td>
-		            	<td>
-		            		<div id="member_status{{$member->id}}">
-			            		@if($member->pivot->is_admin)
-			            			<p>{{ t("Admin") }}</p>
-			            		@else
-			            			<p>{{ t("User") }}</p>
-			            		@endif
-			            	</div>
-		            		<p id="status{{$member->id}}"></p>
-
-		            	</td>
-		            	<td>
-		            		<button type="submit" class="btn btn-dark btn-sm" name="update_members" onclick="changeStatus({{$project->id}},{{$member->id}})">{{ t("CHANGE STATUS") }}</button>
-		            		<button type="submit" id="delete" class="btn btn-dark btn-sm" onclick="deleteMember({{$project->id}},{{$member->id}})" name="update_members">{{ t("DELETE") }}</button>
-
-		            	</td>
-		    		   	</tr>
-
-		      		@endforeach
-		      		 </form>
-
-				      	</tbody>
-						</table>
-					</div>
-
-			  </div>
-	           <button onclick="openPage(event, 'Members')" class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("INVITE MEMBERS") }}</button>
-       		</div>
-			<div class="row mt-3">
-			    <form action="{{$project->id}}/destroy" method="post">
-
-					@csrf
-					<div class="col-sm-8">
-				  		<b>{{ t("Delete Project") }}</b>
-				  		<p>{{ t("You are about to delete this project.") }}</p>
-				  		<ul style="list-style-type: circle;">
-						  <li>{{ t("You will no longer be able to access the data of this project") }}</li>
-						  <li>{{ t("You will no longer be able to access the forms for this project") }}</li>
-						</ul>
-					</div>
-
-
-					<div class="col-sm mt-5">
-			   			<button  id='delete_project' class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("DELETE PROJECT") }}</button>
-			   		</div>
-		   	     </form>
-       	   </div>
+            @include('projects.edit');
 		</div>
     </div>
+@endsection
+
+@section('scripts')
+
+<script type='text/javascript'>
+    function preview_image(event)
+    {
+        var reader = new FileReader();
+        reader.onload = function()
+        {
+            var output = document.getElementById('avatar');
+            var outputLabel = document.getElementById('avatar-caption');
+            output.src = reader.result;
+            outputLabel.innerHTML = "Preview of image to upload";
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
 @endsection

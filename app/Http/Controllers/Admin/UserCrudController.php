@@ -47,10 +47,12 @@ class UserCrudController extends CrudController
     {
       $this->crud->setFromDb();
     }
+
     protected function setupCreateOperation()
     {
         $this->crud->setFromDb();
     }
+
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();

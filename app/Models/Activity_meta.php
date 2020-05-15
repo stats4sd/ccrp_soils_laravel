@@ -5,6 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
+/**
+ * App\Models\Activity_meta
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Activity_meta newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Activity_meta newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Activity_meta query()
+ * @mixin \Eloquent
+ */
 class Activity_meta extends Model
 {
     use CrudTrait;

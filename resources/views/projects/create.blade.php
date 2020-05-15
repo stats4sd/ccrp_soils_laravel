@@ -138,7 +138,7 @@
             </div>
 
 
-            {{-- <h5>Terms of Use</h5>
+            <h5>Terms of Use</h5>
             <div class="form-check">
                 <input
                     class="form-check-input @error('share_summary') is-invalid @enderror"
@@ -155,8 +155,8 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-            </div> --}}
-
+            </div>
+Paragraph ! for ToS.
 
 
             <div class="form-group row mb-0">

@@ -2,8 +2,8 @@
     <div class="card-header">
         <strong>MY ACCOUNT</strong>
     </div>
-    <div class="card-body">
-        @if(auth()->check())
+    @if(auth()->check())
+        <div class="card-body">
             <form method="post" action="{{ route('logout') }}">
                 @csrf
 
@@ -16,24 +16,25 @@
 
                 <button type="submit" class="btn btn-dark btn-block " name="login_user">Logout</button>
             </form>
+        </div>
 
-            <div class="card-header">
-                <strong>MY PROJECTS</strong>
-            </div>
-            <div class="card-body">
-                @if(auth()->check())
-                @foreach($array_projects as $prop)
-                <a href="{{url(app()->getLocale().'/projects/'.$prop['slug'])}}">
-                    <div class="img_group mb-3">
-                        <img src="{{$prop['image']}}" alt="Person" width="96" height="96">
-                        {{$prop['name']}}
-                    </div>
-                </a>
-
-                @endforeach
-                @endif
-            </div>
-        @else
+        <div class="card-header">
+            <strong>MY PROJECTS</strong>
+        </div>
+        <ul class="list-group list-group-flush">
+            @foreach($userProjects as $project)
+                <div class="list-group-item">
+                    <a href="{{ route('projects.show', $project) }}">
+                        <div class="img_group">
+                            <img src="{{ url($project->avatar) }}" alt="Person" width="96" height="96" class="mr-4">
+                            {{ $project->name }}
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </ul>
+    @else
+        <div class="card-body">
             <form method="post" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group">
@@ -70,6 +71,6 @@
                 <a class="d-block small mt-3" href={{ route('register') }}>Register an Account</a>
                 <a class="d-block small" href={{ route('password.request') }}>Forgot Password?</a>
             </div>
-        @endif
-    </div>
+        </div>
+    @endif
 </div>
