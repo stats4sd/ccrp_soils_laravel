@@ -101,7 +101,7 @@
                             @foreach( $project->xls_forms as $xls_form)
                             <tr>
                                 <td>{{ $xls_form->form_title }}</td>
-                                <td>{{ $xls_form->pivot->form_kobo_id_string }}</td>
+                                <!-- <td>{{ $xls_form->pivot->form_kobo_id_string }}</td> -->
                                 <td>{{ $xls_form->pivot->records }}</td>
                                 <td>
                                     @if($xls_form->pivot->deployed)
@@ -115,9 +115,8 @@
                                         <div class="w3-bar">
                                             <a
                                                 href="{{ route('kobo.publish', [
-                                                    'locale' => app()->getLocale(),
-                                                    'project' => $project->slug,
-                                                    'form' => $xls_form->id ]
+                                                    'project' => $project,
+                                                    'form' => $xls_form ]
                                                     )}}"
                                                 class="btn btn-dark btn-sm"
                                                 id="deploy-form-button{{$xls_form->id}}"

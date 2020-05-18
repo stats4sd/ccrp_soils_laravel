@@ -156,8 +156,6 @@
                     </span>
                 @enderror
             </div>
-Paragraph ! for ToS.
-
 
             <div class="form-group row mb-0">
                 <div class="col-md-10 d-flex justify-content-end">
