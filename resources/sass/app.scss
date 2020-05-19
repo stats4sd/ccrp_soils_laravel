@@ -323,3 +323,13 @@ div.scroll_list {
     content: ' *';
     color: #ff0000;
 }
+
+// Repeating fields
+.entry:not(:first-of-type)
+{
+    margin-top: 10px;
+}
+.glyphicon
+{
+    font-size: 12px;
+}

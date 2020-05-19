@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use App\Models\Project;
 use App\Models\Xlsform;
-use App\User;
+use App\Models\User;
 
 class ProjectObserver
 {

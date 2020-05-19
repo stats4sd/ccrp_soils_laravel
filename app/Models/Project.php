@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $samples_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Submission[] $submissions
  * @property-read int|null $submissions_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  * @property-read int|null $users_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Xlsform[] $xls_forms
  * @property-read int|null $xls_forms_count
@@ -71,11 +71,6 @@ class Project extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function getAdminsAttribute ()
-    {
-        return $this->users->where('pivot.admin', true);
-    }
-
     public function getRouteKeyName()
     {
         return 'slug';
@@ -107,8 +102,20 @@ class Project extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User', 'projects_members')->withPivot('admin');
+        return $this->belongsToMany('App\Models\User', 'projects_members')->withPivot('admin');
     }
+
+    // Filtered sets of users();
+    public function admins ()
+    {
+       return $this->users()->wherePivot('admin', 1);
+    }
+
+    public function members ()
+    {
+       return $this->users()->wherePivot('admin', 0);
+    }
+
 
     public function submissions ()
     {

@@ -12,6 +12,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
+
 <body>
 
     <div class="d-flex flex-column justify-content-between wrapper">
@@ -20,7 +21,7 @@
 
         @yield('main')
 
-            <!-- Footer -->
+        <!-- Footer -->
         <footer class="py-3 mt-auto bg-dark footer">
             <div class="container">
                 <p class="m-0 text-center text-white">Something might go here in the footer... who knows?</p>
@@ -30,10 +31,10 @@
     </div>
 
 
-<script src={{asset("js/app.js")}}></script>
-@yield('scripts')
-
-@include('layouts.alerts')
+    <script src={{asset("js/app.js")}}></script>
+    @yield('scripts')
+    @stack('scripts')
+    @include('layouts.alerts')
 
 
 </body>

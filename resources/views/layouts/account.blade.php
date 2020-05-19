@@ -9,7 +9,7 @@
 
                 <div class="img_group mb-3">
                     <a href="{{ route('users.show', Auth::user()) }}">
-                        <img src="{{ url(Auth::user()->avatar)  }}" id="avatar" >
+                        <img src="{{ url(Auth::user()->avatar)  }}" id="user-avatar" >
                         <strong>{{ Auth::user()->name }}</strong>
                     </a>
                 </div>

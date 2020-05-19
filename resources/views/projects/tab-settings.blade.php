@@ -1,5 +1,5 @@
 <div class="container p-4">
-    <form method="post" action="{{ route('projects.update', $project) }}" id="group_details">
+    <form method="post" action="{{ route('projects.update', $project) }}" id="group_details" enctype="multipart/form-data">
         @csrf
         @method('put')
         @if ($errors->any())
@@ -48,7 +48,7 @@
                 Replace the project image
             </label>
             <div class="col-md-6">
-                <input type="file" id="avatar" class="form-control-file @error('avatar') is-invalid @enderror" name="avatar" onchange="preview_image(event)">
+                <input type="file" id="avatar-input" class="form-control-file @error('avatar') is-invalid @enderror" name="avatar" onchange="preview_image(event)">
 
                 @error('avatar')
                 <span class="invalid-feedback" role="alert">
@@ -129,3 +129,20 @@
         </form>
     </div> -->
 </div>
+
+@push('scripts')
+
+<script type='text/javascript'>
+    function preview_image(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('avatar');
+            var outputLabel = document.getElementById('avatar-caption');
+            output.src = reader.result;
+            outputLabel.innerHTML = "Preview of image to upload";
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
+@endpush
