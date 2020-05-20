@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserUpdateRequest;
 use App\Rules\MatchOldPassword;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -45,22 +46,15 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Requests\UserUpdateRequest  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
         $this->authorize('update', $user);
 
-        $validatedData = $request->validate(
-            [
-                'name' => ['required'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
-                'kobo_id' => ['nullable', 'string', 'max:255'],
-                'avatar' => ['nullable', 'image'],
-            ],
-        );
+        $validatedData = $request->validated();
 
         $user->update($validatedData);
 

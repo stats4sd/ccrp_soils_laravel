@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\createProjectMember;
+use App\Http\Requests\ProjectRequest;
 use App\Mail\InviteMember;
 use App\Models\Invite;
 use App\Models\Project;
@@ -40,11 +41,13 @@ class ProjectController extends Controller
      * @param  Project $project [description]
      * @return [view]           Project account
      */
-    public function show(Project $project)
+    public function show(Project $project, $tab = null)
     {
+
         $project->load(['users' => function($q) {
             $q->orderBy('pivot_admin', 'desc');
         }]);
+
         return view('projects.show', compact('project'));
     }
 
@@ -53,17 +56,10 @@ class ProjectController extends Controller
         return view('projects.create');
     }
 
-    public function store (Request $request)
+    public function store (ProjectRequest $request)
     {
 
-        $validatedData = $request->validate(
-            [
-                'name' => ['required', 'max:255'],
-                'description' => ['required', 'max:2000'],
-                'avatar' => ['nullable', 'image'],
-                'share_data' => ['boolean'],
-            ],
-        );
+        $validatedData = $request->validated();
 
         $validatedData['creator_id'] = auth()->user()->id;
         $validatedData['slug'] = Str::slug($validatedData['name']);
@@ -73,19 +69,12 @@ class ProjectController extends Controller
         return redirect()->route('projects.show', [$project]);
     }
 
-    public function update (Request $request, Project $project)
+    public function update (ProjectRequest $request, Project $project)
     {
 
         $this->authorize('update', $project);
 
-        $validatedData = $request->validate(
-            [
-                'name' => ['required', 'max:255', 'unique:projects,name,' . $project->id],
-                'description' => ['required', 'max:2000'],
-                'status' => ['nullable'],
-                'avatar' => ['nullable', 'image'],
-            ]
-        );
+        $validatedData = $request->validated();
 
         $project->update(array_filter($validatedData));
 

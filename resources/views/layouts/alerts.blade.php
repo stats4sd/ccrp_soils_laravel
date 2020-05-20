@@ -9,7 +9,7 @@
   @foreach (\Alert::getMessages() as $type => $messages)
 
       @foreach ($messages as $message)
-
+        console.log("new message", "{{ $message }}")
         new Noty({
           type: "{{ $type }}",
           text: "{!! str_replace('"', "'", $message) !!}"

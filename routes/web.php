@@ -23,13 +23,15 @@ Route::group([
         'projects' => 'ProjectController',
     ]);
 
+    Route::get('projects/{project}#{tab?}', 'ProjectController@show')->name('projects.show');
+
     // Modified Resource Controller for ProjectMember
     Route::get('projects/{project}/projectmembers/create', 'ProjectMemberController@create')->name('projectmembers.create');
     Route::post('projects/{project}/projectmembers', 'ProjectMemberController@store')->name('projectmembers.store');
     //show and index methods not required (yet)
-    Route::get('projectmembers/{projectmember}/edit', 'ProjectMemberController@edit')->name('projectmembers.edit');
-    Route::put('projectmembers/{projectmember}', 'ProjectMemberController@update')->name('projectmembers.update');
-    Route::delete('projectmembers/{projectmember}', 'ProjectMemberController@destroy')->name('projectmambers.destroy');
+    Route::get('projects/{project}/projectmembers/{user}/edit', 'ProjectMemberController@edit')->name('projectmembers.edit');
+    Route::put('projects/{project}/projectmembers/{user}', 'ProjectMemberController@update')->name('projectmembers.update');
+    Route::delete('projects/{project}/projectmembers/{user}', 'ProjectMemberController@destroy')->name('projectmembers.destroy');
 
     Route::get('my-account', 'UserController@account')->name('users.account');
     Route::get('users/{user}/password', 'UserController@editPassword')->name('users.password.edit');

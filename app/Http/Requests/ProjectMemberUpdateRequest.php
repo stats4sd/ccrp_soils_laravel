@@ -3,9 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class ProjectRequest extends FormRequest
+class ProjectMemberUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +28,7 @@ class ProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:255'],
-            'description' => ['required', 'max:2000'],
-            'avatar' => ['nullable', 'image'],
-            'share_data' => ['boolean'],
+            'admin' => ['boolean'],
         ];
     }
 
@@ -52,8 +51,6 @@ class ProjectRequest extends FormRequest
      */
     public function messages()
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

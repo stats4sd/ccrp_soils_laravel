@@ -43,7 +43,7 @@
 
 <script>
     $(document).ready(() => {
-        console.log("WHAAAA");
+
         let url = location.href.replace(/\/$/, "");
 
         if (location.hash) {

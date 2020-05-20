@@ -83,12 +83,29 @@ class Project extends Model
         $this->uploadFileToDisk($value, "avatar", $disk, $destination_path);
     }
 
+    public function sendInvites ($emails)
+    {
+       foreach($emails as $email) {
+            $this->invites()->create([
+                'email' => $email,
+                'inviter_id' => auth()->user()->id,
+                'token' => str_random(24),
+            ]);
+       }
+    }
+
 
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function invites ()
+    {
+       return $this->hasMany(Invite::class);
+    }
+
 
     public function xls_forms ()
     {
@@ -115,7 +132,6 @@ class Project extends Model
     {
        return $this->users()->wherePivot('admin', 0);
     }
-
 
     public function submissions ()
     {

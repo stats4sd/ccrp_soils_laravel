@@ -27,11 +27,11 @@
                     </td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->kobo_id }}</td>
-                    <td>Admin</td>
+                    <td>{{  $user->pivot->admin ? 'Admin' : 'Member' }}</td>
                     @can('update', $project)
                         <td>
-                            <button class="btn btn-dark btn-sm" name="edit_member{{ $user->id }}" onclick="">{{ t("EDIT") }}</button>
-                            <button class="btn btn-dark btn-sm" name="delete_member{{ $user->id }}">{{ t("DELETE") }}</button>
+                            <a href="{{ route('projectmembers.edit', [$project, $user]) }}" class="btn btn-dark btn-sm" name="edit_member{{ $user->id }}" onclick="">{{ t("EDIT") }}</a>
+                            <button class="btn btn-dark btn-sm remove-button" data-user="{{ $user->id }}" data-toggle="modal" data-target="#removeUserModal{{ $user->id }}">{{ t("REMOVE") }}</button>
                         </td>
                     @endcan
                 </tr>
@@ -39,5 +39,42 @@
 
         </tbody>
     </table>
+    <hr/>
+    <h4>Pending Invites</h4>
+    <ul class="list-group">
+        @foreach($project->invites as $invite)
+            <li class="list-group-item list-group-flush d-flex">
+                <div class="w-50">{{ $invite->email }}</div>
+                <div class="w-25">Invited on {{ $invite->invite_day }}</div>
+            </li>
+        @endforeach
+    </ul>
 </div>
-<button class="btn btn-dark btn-sm mt-5" name="update_members">{{ t("INVITE MEMBERS") }}</button>
+<a class="btn btn-dark btn-sm mt-5" href="{{ route('projectmembers.create', $project) }}">{{ t("INVITE MEMBERS") }}</a>
+
+@foreach($project->users as $user)
+<div class="modal fade" id="removeUserModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="removeUserModalLabel{{ $user->id }}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="removeUserModalLabel{{ $user->id }}">Remove User From {{ $project->name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you wish to remove {{ $user->name }} from {{ $project->name }}? After removing, they will no longer have access to any project data or forms on Kobotoolbox.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <form action="{{ route('projectmembers.destroy', [$project, $user]) }}" method="POST">
+            @csrf
+            @method('delete')
+            <button type="submit" class="btn btn-primary">Confirm Remove</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
+

@@ -3,9 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class ProjectMemberRequest extends FormRequest
+class ProjectMemberStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +28,14 @@ class ProjectMemberRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'emails.*' => [
+                'email',
+                'nullable',
+            ],
+            'users.*' => [
+                'nullable',
+                Rule::in(User::all()->pluck('id', 'id')->toArray()),
+            ],
         ];
     }
 
@@ -49,8 +58,6 @@ class ProjectMemberRequest extends FormRequest
      */
     public function messages()
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

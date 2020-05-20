@@ -4,14 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * App\Models\Invite
  *
  * @property int $id
  * @property string $email
- * @property int $project_id
  * @property int $inviter_id
+ * @property int $project_id
  * @property string $key_confirm
  * @property int $is_confirmed
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -40,12 +42,19 @@ class Invite extends Model
     */
 
     protected $table = 'invites';
-    // protected $primaryKey = 'id';
-    // public $timestamps = false;
-    // protected $guarded = ['id'];
-    protected $fillable = [];
-    // protected $hidden = [];
-    // protected $dates = [];
+    protected $guarded = ['id', 'is_confirmed'];
+    protected $casts = [
+        'is_confirmed' => 'boolean',
+    ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('unconfirmed', function (Builder $builder) {
+            $builder->where('is_confirmed', false);
+        });
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -53,27 +62,37 @@ class Invite extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function confirm ()
+    {
+       $this->is_confirmed = true;
+
+       return $this->is_confirmed;
+    }
+
+    public function getInviteDayAttribute ()
+    {
+       return Carbon::parse($this->created_at)
+       ->locale(session()->get('locale'))
+       ->toDayDateTimeString();
+
+    }
+
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | SCOPES
-    |--------------------------------------------------------------------------
-    */
+    public function project ()
+    {
+       return $this->belongsTo(Project::class);
+    }
 
-    /*
-    |--------------------------------------------------------------------------
-    | ACCESORS
-    |--------------------------------------------------------------------------
-    */
+    public function inviter ()
+    {
+       return $this->belongsTo(User::class);
+    }
 
-    /*
-    |--------------------------------------------------------------------------
-    | MUTATORS
-    |--------------------------------------------------------------------------
-    */
+
 }
