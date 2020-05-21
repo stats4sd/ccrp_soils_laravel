@@ -47,10 +47,8 @@ class Invite extends Model
         'is_confirmed' => 'boolean',
     ];
 
-    protected static function boot()
+    protected static function booted()
     {
-        parent::boot();
-
         static::addGlobalScope('unconfirmed', function (Builder $builder) {
             $builder->where('is_confirmed', false);
         });

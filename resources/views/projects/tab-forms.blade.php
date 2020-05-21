@@ -17,7 +17,7 @@
                 <td>{{ $xls_form->pivot->records }}</td>
                 <td>
                     @if($xls_form->pivot->deployed)
-                    <p>{{ t("deployed") }}</p>
+                    <p>Deployed (<a href="https://kf.kobotoolbox.org/#/forms/{{ $xls_form->pivot->form_kobo_id_string }}/summary">Show on Kobotoolbox</a>)</p>
                     @else
                     <p>{{ t("undeployed") }}</p>
                     @endif

@@ -93,12 +93,6 @@ class Xlsform extends Model
     {
         return $this->hasMany(Submission::class);
     }
-
-    public function variables ()
-    {
-        return $this->hasMany(Variable::class);
-    }
-
     /*
     |--------------------------------------------------------------------------
     | SCOPES
