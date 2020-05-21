@@ -42,7 +42,7 @@ class Invite extends Model
     */
 
     protected $table = 'invites';
-    protected $guarded = ['id', 'is_confirmed'];
+    protected $guarded = ['id'];
     protected $casts = [
         'is_confirmed' => 'boolean',
     ];
@@ -64,7 +64,8 @@ class Invite extends Model
 
     public function confirm ()
     {
-       $this->is_confirmed = true;
+       $this->is_confirmed = 1;
+       $this->save();
 
        return $this->is_confirmed;
     }

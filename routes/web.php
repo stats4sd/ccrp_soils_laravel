@@ -2,6 +2,9 @@
 
 Auth::routes();
 
+// //Override the regsiter route to include optional invite
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+
 Route::view('/', 'home')->middleware('guest')->name('home');
 
 Route::view('about', 'about')->name('about');

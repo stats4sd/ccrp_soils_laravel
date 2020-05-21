@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
+use App\Models\Invite;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -42,6 +43,14 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        $invite = null;
+        if(request()->has('token')) {
+            $invite = Invite::where('token', '=', request()->token)->first();
+        }
+        return view('auth.register', compact('invite'));
+    }
     /**
      * Get a validator for an incoming registration request.
      *

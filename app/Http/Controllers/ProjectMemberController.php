@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Project;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\ProjectMemberStoreRequest;
 use App\Http\Requests\ProjectMemberUpdateRequest;
@@ -32,6 +33,8 @@ class ProjectMemberController extends Controller
         }
 
         if(isset($data['emails']) && count(array_filter($data['emails'])) > 0) {
+            Log::info('helloooo from the projectmember controller');
+
             $project->sendInvites($data['emails']);
         }
 

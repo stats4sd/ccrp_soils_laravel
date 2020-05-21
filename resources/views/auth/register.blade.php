@@ -6,6 +6,11 @@
             <div class="card mt-4">
                 <div class="card-header"><h1><b>{{ t("Create an Account") }}</b></h1></div>
                 <div class="card-body">
+                    @if($invite)
+                        <div class="alert alert-info">
+                            You have been invited to join the <b>{{ $invite->project->name }}</b> project. <br/><br/>Please use the same email address to get immediate access to the project data and forms after registration. We have pre-filled the email address field below.
+                        </div>
+                    @endif
                     <form method="POST" action="{{ route('register') }}">
                             @csrf
 
@@ -27,7 +32,14 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input
+                                id="email"
+                                type="email"
+                                class="form-control @error('email') is-invalid @enderror"
+                                name="email"
+                                value="{{ old('email') ?: ($invite ? $invite->email : null )}}"
+                                required
+                                autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">

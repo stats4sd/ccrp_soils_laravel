@@ -11,17 +11,16 @@ class InviteMember extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct($data)
-    {
-        $this->info = $data;
+    public $invite;
 
-        //dd($data);
-        //no-reply@stats4sd.org
+        /**
+         * Create a new message instance.
+         *
+         * @return void
+         */
+        public function __construct($invite)
+        {
+            $this->invite = $invite;
     }
 
     /**
@@ -31,6 +30,8 @@ class InviteMember extends Mailable
      */
     public function build()
     {
-        return $this->from("no-reply@stats4sd.org")->subject('[CCRP Soils Data Platform] You have an invitation to the group: '.$this->info['name_project'])->view('invite_member_email')->with('info', $this->info);
+        return $this->from("no-reply@stats4sd.org")
+        ->subject('CCRP Soils Platform: Invitation to Register to ' . $this->invite->project->name )
+        ->markdown('emails.invite');
     }
 }
