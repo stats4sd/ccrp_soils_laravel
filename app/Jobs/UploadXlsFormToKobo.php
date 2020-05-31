@@ -42,7 +42,7 @@ class UploadXlsFormToKobo implements ShouldQueue
             ->withHeaders(["Accept" => "application/json"])
             ->attach(
                 'file',
-                file_get_contents( public_path('uploads/'.$this->form->xlsfile)),
+                file_get_contents( public_path($this->form->xlsfile)),
                 Str::slug($this->form->title)
             )
             ->post(config('services.kobo.endpoint').'/imports/', [

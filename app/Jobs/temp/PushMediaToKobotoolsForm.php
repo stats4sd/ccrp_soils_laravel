@@ -75,7 +75,7 @@ class PushMediaToKobotoolsForm implements ShouldQueue
 
             foreach($newMedia as $filePath) {
 
-                $file = Storage::disk('uploads')->get($filePath);
+                $file = Storage::disk('public')->get($filePath);
 
                 $fileName = explode(".", basename($filePath));
                 array_pop($fileName);

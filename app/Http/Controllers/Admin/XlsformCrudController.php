@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use Alert;
-use App\Http\Requests\XlsformRequest as StoreRequest;
-use App\Http\Requests\XlsformRequest as UpdateRequest;
-use App\Jobs\DeployFormToKobo;
-use App\Models\Projectxlsform;
 use App\Models\Xlsform;
 use Backpack\CRUD\CrudPanel;
+use App\Jobs\GetDataFromKobo;
+use App\Jobs\DeployFormToKobo;
+use App\Models\Projectxlsform;
+use Backpack\CRUD\app\Library\Widget;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\XlsformRequest as StoreRequest;
+use App\Http\Requests\XlsformRequest as UpdateRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -40,10 +43,6 @@ class XlsformCrudController extends CrudController
 
     protected function setupListOperation()
     {
-        Crud::button('deploy')
-        ->stack('line')
-        ->view('crud::buttons.deploy');
-
         $this->crud->setColumns([
             [
                 'name' => 'title',
@@ -72,15 +71,6 @@ class XlsformCrudController extends CrudController
                 'type' => 'boolean',
             ],
             [
-                'name' => 'xlsfile',
-                'label' => 'XLSForm File',
-                'type' => 'closure',
-                'function' => function($entry){
-                    $file = $entry->file;
-                    return '<a href="'.url('/uploads/'.$file.'').'" target="_blank">'.$file.'</a>';
-                }
-            ],
-            [
                 'name' => 'link_page',
                 'label' => 'Associated Guide(s)',
                 'type' => "closure",
@@ -105,53 +95,110 @@ class XlsformCrudController extends CrudController
 
             [
                 'name' => 'title',
-                'label' => 'Form Title',
                 'type' => 'text',
-                'hint' => '<b>Choose a title for the downloads page</b>',
-            ],
-            [
-                'name' => 'version',
-                'label' => 'Version',
-                'type' => 'date',
-                'default' => today(),
-                'hint' => '<b>Insert the date of uploading the new form</b>',
+                'label' => 'Choose a title for the downloads page',
             ],
             [   // Upload xls form
                 'name' => 'xlsfile',
-                'label' => 'File',
                 'type' => 'upload',
                 'upload' => true,
-                'disk' => 'uploads' ,
-                'hint' => '<b>Upload the file that you want to download from the downloads page</b>',
+                'disk' => 'public' ,
+                'label' => 'Upload the XLS Form file',
             ],
             [
                 'name' => 'link_page',
-                'label' => 'Page',
                 'type' => 'url',
-                'hint' => '<b>Insert the page tha you want to link from the downloads page</b>',
+                'label' => 'Add the url to the online guide for this form',
             ],
             [   // CKEditor
                 'name' => 'description',
-                'label' => 'Description',
                 'type' => 'simplemde',
-                'hint' => '<b>Insert a description that you want to display for the form</b>',
+                'label' => 'Add a description for the form',
             ],
             [
                 'name' => 'media',
-                'label' => 'Upload media File',
+                'label' => 'Upload any csv or image files required by the ODK form',
                 'type' => 'upload_multiple',
                 'upload' => true,
-                'disk' => 'uploads',
+                'disk' => 'public',
             ],
         ]);
     }
-
-
 
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
     }
+
+    public function setupShowOperation ()
+    {
+        $this->crud->set('show.setFromDb', false);
+
+        Crud::button('deploy')
+        ->stack('line')
+        ->view('crud::buttons.deploy');
+
+        Crud::button('sync')
+        ->stack('line')
+        ->view('crud::buttons.sync');
+
+        $form = $this->crud->getCurrentEntry();
+
+        $submissions = $form->submissions;
+
+
+        Widget::add()
+        ->to('after_content')
+        ->type('card')
+        ->content([
+            'header' => 'Form Data',
+            'body' => '<ul class="list-group">
+                <li class="list-group-item d-flex">
+                    <div class="w-50">No. of Submissions:</div>
+                    <div class="w-50"><b>'.$submissions->count().'</b></div>
+                </li>
+            </ul>'
+        ]);
+
+        $this->crud->addColumns([
+            [
+                'name' => 'title',
+                'label' => 'Title',
+                'type' => 'text'
+            ],
+            [
+                'name' => 'link_page',
+                'label' => 'Guide for this Form',
+                'type' => 'text',
+                'wrapper' => [
+                    'href' => function($crud, $column, $entry, $related_key) {
+                        return $entry->link_page;
+                    }
+                ]
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Description',
+                'type' => 'textarea'
+            ],
+            [
+                'name' => 'xlsfile',
+                'label' => 'XLS Form File',
+                'type' => 'upload',
+                'limit' => 1000,
+                'wrapper' => [
+                    'href' => function ($crud, $column, $entry, $related_key) {
+                        return Storage::disk('public')->url($entry->xlsfile);
+                    }                ]
+            ],
+            [
+                'name' => 'media',
+                'label' => 'Attached Media files (csv / images)',
+                'type' => 'upload_multiple'
+            ],
+        ]);
+    }
+
 
     public function deployToKobo(Xlsform $xlsform)
     {
@@ -162,5 +209,15 @@ class XlsformCrudController extends CrudController
             'user' => auth()->user()->email,
         ]);
     }
+
+    public function syncData (Xlsform $xlsform)
+    {
+       GetDataFromKobo::dispatchNow($xlsform);
+
+       $submissions = $xlsform->submissions;
+
+       return $submissions->toJson();
+    }
+
 
 }

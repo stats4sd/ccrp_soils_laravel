@@ -37,7 +37,7 @@ class Submission extends Model
     protected $table = 'submissions';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     // protected $hidden = [];
     // protected $dates = [];

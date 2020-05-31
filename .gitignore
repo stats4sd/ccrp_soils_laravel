@@ -1,13 +1,11 @@
 /node_modules
 /public/hot
 /public/storage
-/public/uploads
 /public/packages
 /public/vendor
 /public/css
 /public/js
 /public/mix-manifest.json
-/storage/*.key
 /vendor
 .env
 .phpunit.result.cache

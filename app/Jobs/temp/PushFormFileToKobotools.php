@@ -69,7 +69,7 @@ class PushFormFileToKobotools implements ShouldQueue
             ],
             [
                 'name' => 'file',
-                'contents' => fopen( public_path("uploads/$filePath"), 'r'),
+                'contents' => fopen( public_path($filePath), 'r'),
                 'filename' => Str::slug($this->form->title),
             ],
         ];

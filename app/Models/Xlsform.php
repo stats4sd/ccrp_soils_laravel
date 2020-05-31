@@ -93,10 +93,10 @@ class Xlsform extends Model
         return $this->hasMany(Submission::class);
     }
 
-    public function setFileAttribute($value)
+public function setXlsfileAttribute($value)
     {
-        $attribute_name = "file";
-        $disk = "uploads";
+        $attribute_name = "xlsfile";
+        $disk = "public";
         $destination_path = "xlsforms";
 
 
@@ -141,7 +141,7 @@ class Xlsform extends Model
     public function setMediaAttribute($value)
     {
         $attribute_name = "media";
-        $disk = "uploads";
+        $disk = "public";
         $destination_path = "media";
 
         $this->uploadMultipleFilesToDisk($value, $attribute_name, $disk, $destination_path);
