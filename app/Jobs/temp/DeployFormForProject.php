@@ -39,7 +39,7 @@ class DeployFormForProject implements ShouldQueue
     public function handle()
     {
         $form = $this->project->xls_forms->find($this->form->id);
-        $name = $this->project->name . " - " . $form->form_title;
+        $name = $this->project->name . " - " . $form->title;
 
         $client = KoboHelper::getClient();
 
@@ -59,7 +59,6 @@ class DeployFormForProject implements ShouldQueue
             $this->form->id,
             [
                 'kobo_id' => $body->uid,
-                'deployed' => 1,
             ]
         );
 

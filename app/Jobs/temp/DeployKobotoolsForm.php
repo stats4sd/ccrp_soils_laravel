@@ -54,7 +54,7 @@ class DeployKobotoolsForm implements ShouldQueue
 
             $deployRes = $client->request("PATCH", "api/v2/assets/$this->uid/deployment/", [
                 "form_params" => [
-                    "version_id" => $asset->version_id,
+                    "kobo_version_id" => $asset->kobo_version_id,
                 ],
             ]);
 

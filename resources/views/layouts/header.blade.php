@@ -21,6 +21,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('downloads') }}">{{ t("Downloads") }}</a>
                 </li>
+                @if(auth()->user()->isAdmin())
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('backpack') }}">{{ t("Admin Panel") }}</a>
+                    </li>
+                @endif
                 @if(auth()->guest())
                     <li class="nav-item ml-4">
                         <a class="nav-link" href="{{ route('login') }}">{{ t("Login") }}</a>

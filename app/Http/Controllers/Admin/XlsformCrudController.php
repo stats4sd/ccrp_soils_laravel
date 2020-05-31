@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Alert;
 use App\Http\Requests\XlsformRequest as StoreRequest;
 use App\Http\Requests\XlsformRequest as UpdateRequest;
+use App\Jobs\DeployFormToKobo;
 use App\Models\Projectxlsform;
 use App\Models\Xlsform;
 use Backpack\CRUD\CrudPanel;
@@ -22,7 +24,7 @@ class XlsformCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
-    
+
     public function setup()
     {
         /*
@@ -38,87 +40,74 @@ class XlsformCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        Crud::button('deploy')
+        ->stack('line')
+        ->view('crud::buttons.deploy');
+
         $this->crud->setColumns([
             [
-                'name' => 'form_title',
+                'name' => 'title',
                 'label' => 'Form Title',
                 'type' => 'text',
             ],
             [
-                'name' => 'default_language',
-                'label' => 'Language',
-                'type' => 'text',
-            ],
-            [
                 'name' => 'version',
-                'label' => 'Version',
+                'label' => 'Version - Uploaded',
                 'type' => 'date',
-
             ],
             [
-                'name' => 'path_file',
-                'label' => 'File',
+                'name' => 'kobo_id',
+                'label' => 'View on Kobotools',
+                'type' => 'closure',
+                'function' => function($entry) {
+                    if($entry->kobo_id) {
+                        return "<a href='https://kf.kobotoolbox.org/#/forms/".$entry->kobo_id."'>Kobotoolbox Link</a>";
+                    }
+                    return "<span class='text-secondary'>Not Deployed</span>";
+                },
+            ],
+            [
+                'name' => 'live',
+                'label' => 'Is Form Available to Projects?',
+                'type' => 'boolean',
+            ],
+            [
+                'name' => 'xlsfile',
+                'label' => 'XLSForm File',
                 'type' => 'closure',
                 'function' => function($entry){
-                    $file = $entry->path_file;
+                    $file = $entry->file;
                     return '<a href="'.url('/uploads/'.$file.'').'" target="_blank">'.$file.'</a>';
-                } 
+                }
             ],
             [
                 'name' => 'link_page',
-                'label' => 'Page',
+                'label' => 'Associated Guide(s)',
                 'type' => "closure",
                 'function' => function($entry){
                     $page = $entry->link_page;
                     return '<a href="'.url(''.$page.'').'" target="_blank">'.$page.'</a>';
                 },
-               
-            ],
-            [
-                'name' => 'description',
-                'label' => 'Description',
-                'type' => 'text',
-                'limit' => 20,
+
             ],
             [
                 'name' => 'media',
-                'label' => 'Media',
+                'label' => 'Attached Media Files',
                 'type' => 'text',
             ],
-            [
-                'name' => 'created_at',
-                'label' => 'Created at',
-                'type' => 'dateTime'
-            ],
-            [
-                'name' => 'updated_at',
-                'label' => 'Updated at',
-                'type' => 'dateTime'
-            ]
         ]);
     }
-        
+
     protected function setupCreateOperation()
     {
 
         $this->crud->addFields([
 
             [
-                'name' => 'form_title',
+                'name' => 'title',
                 'label' => 'Form Title',
                 'type' => 'text',
                 'hint' => '<b>Choose a title for the downloads page</b>',
-                'attributes' => [
-                'required' => true,
-            ],
-            ],
-            [
-                'name' => 'default_language',
-                'label' => 'Language',
-                'type' => 'select_from_array',
-                'options' => ['english' => 'English', 'spanish' => 'Spanish'],
-                'allows_null' => false, 
-                'default' => 'english',
             ],
             [
                 'name' => 'version',
@@ -126,14 +115,9 @@ class XlsformCrudController extends CrudController
                 'type' => 'date',
                 'default' => today(),
                 'hint' => '<b>Insert the date of uploading the new form</b>',
-                'attributes' => [
-                'required' => true,
             ],
-
-
-            ],
-            [   // Upload xls form 
-                'name' => 'path_file',
+            [   // Upload xls form
+                'name' => 'xlsfile',
                 'label' => 'File',
                 'type' => 'upload',
                 'upload' => true,
@@ -162,12 +146,21 @@ class XlsformCrudController extends CrudController
         ]);
     }
 
-    
+
 
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
-        // Projectxlsform::where('xlsform_id', $id)->update(['deployed'=>0]);
     }
-   
+
+    public function deployToKobo(Xlsform $xlsform)
+    {
+        DeployFormToKobo::dispatch($xlsform, auth()->user(), 'admin');
+
+        return response()->json([
+            'title' => $xlsform->title,
+            'user' => auth()->user()->email,
+        ]);
+    }
+
 }

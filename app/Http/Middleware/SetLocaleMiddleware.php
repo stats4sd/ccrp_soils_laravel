@@ -19,8 +19,6 @@ class SetLocaleMiddleware
         $availableLocales = config('app.available_locales');
 
         if(
-            $request->segment(1) !== "admin" &&
-            $request->segment(1) !== "telescope" &&
             !array_key_exists($request->segment(1), $availableLocales)) {
             # based on the Tio set.locale middleware
             # Choose the most appropriate "default locale"

@@ -15,11 +15,11 @@ class CreateXlsForms extends Migration
     {
         Schema::create('xlsforms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('form_title')->nullable();
-            $table->string('path_file')->nullable();
+            $table->string('title')->nullable();
+            $table->string('file')->nullable();
             $table->string('default_language')->nullable();
             $table->dateTimeTz('version');
-            $table->string('version_id')->nullable();
+            $table->string('kobo_version_id')->nullable();
             $table->string('instance_name')->nullable();
             $table->string('link_page')->nullable();
             $table->text('description')->nullable();

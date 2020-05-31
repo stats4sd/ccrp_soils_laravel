@@ -21,7 +21,7 @@ class ProjectxlsformCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-    
+
     public function setup()
     {
         /*
@@ -33,7 +33,7 @@ class ProjectxlsformCrudController extends CrudController
         CRUD::setRoute(config('backpack.base.route_prefix') . '/projectxlsform');
         CRUD::setEntityNameStrings('project xlsform', 'project Xlsforms');
     }
-    
+
     protected function setupListOperation()
     {
         $this->crud->setColumns([
@@ -50,7 +50,7 @@ class ProjectxlsformCrudController extends CrudController
                 'label' => 'Select the xls form for this project',
                 'type' => 'select',
                 'entity' => 'xls_form',
-                'attribute' => 'form_title',
+                'attribute' => 'title',
                 'model' => Xlsform::class,
             ],
             [
@@ -59,24 +59,24 @@ class ProjectxlsformCrudController extends CrudController
                 'type' => 'number',
             ],
             [
-                'name' => 'deployed',
-                'label' => 'Is the form deployed?',
-                'type' => 'checkbox',      
-            ], 
+                'name' => 'kobo_version_id',
+                'label' => 'Kobotoolbox deployment version_id',
+                'type' => 'checkbox',
+            ],
             [
                 'name' => 'records',
                 'label' => 'Number of records',
-                'type' => 'number',      
+                'type' => 'number',
             ],
             [
                 'name' => 'form_kobo_id_string',
                 'label' => 'Form kobo id string',
                 'type' => 'text',
             ],
-            
+
         ]);
     }
-        
+
     protected function setupCreateOperation()
     {
         $this->crud->addFields([
@@ -93,7 +93,7 @@ class ProjectxlsformCrudController extends CrudController
                 'label' => 'Select the xls form for this project',
                 'type' => 'select2',
                 'entity' => 'xls_form',
-                'attribute' => 'form_title',
+                'attribute' => 'title',
                 'model' => Xlsform::class,
             ],
             [
@@ -102,14 +102,14 @@ class ProjectxlsformCrudController extends CrudController
                 'type' => 'number',
             ],
             [
-                'name' => 'deployed',
+                'name' => 'kobo_version_id',
                 'label' => 'Is the form deployed?',
-                'type' => 'checkbox',      
-            ], 
+                'type' => 'checkbox',
+            ],
             [
                 'name' => 'records',
                 'label' => 'Number of records',
-                'type' => 'number',      
+                'type' => 'number',
             ],
             [
                 'name' => 'form_kobo_id_string',
@@ -120,12 +120,12 @@ class ProjectxlsformCrudController extends CrudController
         ]);
     }
 
-    
+
 
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
     }
 
-    
+
 }

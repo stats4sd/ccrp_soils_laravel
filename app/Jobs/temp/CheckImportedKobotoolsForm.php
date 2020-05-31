@@ -2,15 +2,16 @@
 
 namespace App\Jobs;
 
-use App\Helpers\KoboHelper;
-use App\Jobs\DeployKobotoolsForm;
-use App\Jobs\PushMediaToKobotoolsForm;
 use App\Models\Xlsform;
+use App\Helpers\KoboHelper;
 use Illuminate\Bus\Queueable;
+use App\Jobs\DeployKobotoolsForm;
+use Illuminate\Support\Facades\Log;
+use App\Jobs\PushMediaToKobotoolsForm;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 
 /**
  * To be run after PublishNewFormToKobotools. Checks if the importing is complete on Kobo's servers.
@@ -83,6 +84,6 @@ class CheckImportedKobotoolsForm implements ShouldQueue
 
     public function failed ($exception)
     {
-        Log::error($excpetion->getMessage());
+        Log::error($exception->getMessage());
     }
 }

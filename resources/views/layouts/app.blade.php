@@ -10,7 +10,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    @livewireStyles
 </head>
 
 <body>
@@ -35,6 +35,6 @@
     @yield('scripts')
     @stack('scripts')
     @include('layouts.alerts')
-
+    @livewireScripts
 
 </body>

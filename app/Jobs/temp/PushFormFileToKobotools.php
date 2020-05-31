@@ -2,26 +2,27 @@
 
 namespace App\Jobs;
 
-use App\Helpers\KoboHelper;
-use App\Jobs\CheckImportedKobotoolsForm;
-use App\Jobs\DeployKobotoolsForm;
-use App\Jobs\RedeployFormToKobotools;
-use App\Jobs\ReplaceFormToKobotools;
-use App\Jobs\ShareFormToKobotools;
-use App\Models\Project;
-use App\Models\Projectxlsform;
-use App\Models\Xlsform;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
+use App\Models\Project;
+use App\Models\Xlsform;
+use App\Helpers\KoboHelper;
+use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+use App\Models\Projectxlsform;
+use App\Jobs\DeployKobotoolsForm;
+use App\Jobs\ShareFormToKobotools;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Jobs\ReplaceFormToKobotools;
+use App\Jobs\RedeployFormToKobotools;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use App\Jobs\CheckImportedKobotoolsForm;
+use Illuminate\Queue\InteractsWithQueue;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
 
 /**
  * Job to push a specific XLS file to Kobotools. Pushes as a 'new' form if Xlsform->kobo_id is null. Otherwise assumes form already exists on Kobotools and sends an update request.
@@ -59,7 +60,7 @@ class PushFormFileToKobotools implements ShouldQueue
         // update form metadata with project info
         $client = KoboHelper::getClient();
 
-        $filePath = $this->form->path_file;
+        $filePath = $this->form->xlsfile;
 
         $post = [
             [
@@ -69,7 +70,7 @@ class PushFormFileToKobotools implements ShouldQueue
             [
                 'name' => 'file',
                 'contents' => fopen( public_path("uploads/$filePath"), 'r'),
-                'filename' => Str::slug($this->form->form_title),
+                'filename' => Str::slug($this->form->title),
             ],
         ];
 
@@ -97,12 +98,12 @@ class PushFormFileToKobotools implements ShouldQueue
 
         }
 
-        catch(\ClientException $e) {
+        catch(ClientException $e) {
             Log::emergency("Out of cheese error");
             Log::info("Error message: " . $e->getResponse()->getBody(true));
         }
 
-        catch(\RequestException $e) {
+        catch(RequestException $e) {
             //dd($e);
         }
 

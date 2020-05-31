@@ -39,8 +39,8 @@ class XlsformObserver
 
 
         // if(
-        //     isset($changes['form_title'])
-        //     || isset($changes['path_file'])
+        //     isset($changes['title'])
+        //     || isset($changes['file'])
         //     || isset($changes['media'])
         // ) {
         //     dispatch( new PushFormFileToKobotools($xlsform));

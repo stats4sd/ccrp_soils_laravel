@@ -11,11 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\Xlsform
  *
  * @property int $id
- * @property string|null $form_title
- * @property string|null $path_file
- * @property string|null $default_language
+ * @property string|null $title
+ * @property string|null $file
  * @property string $version
- * @property string|null $version_id
+ * @property string|null $kobo_version_id
  * @property string|null $instance_name
  * @property string|null $link_page
  * @property string|null $description
@@ -84,7 +83,7 @@ class Xlsform extends Model
         return $this->belongsToMany(Project::class)->using(Projectxlsform::class)
         ->withPivot([
             'kobo_id',
-            'deployed',
+            'kobo_version_id',
             'records',
             ]);
     }
@@ -93,26 +92,10 @@ class Xlsform extends Model
     {
         return $this->hasMany(Submission::class);
     }
-    /*
-    |--------------------------------------------------------------------------
-    | SCOPES
-    |--------------------------------------------------------------------------
-    */
 
-    /*
-    |--------------------------------------------------------------------------
-    | ACCESORS
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | MUTATORS
-    |--------------------------------------------------------------------------
-    */
-    public function setPathFileAttribute($value)
+    public function setFileAttribute($value)
     {
-        $attribute_name = "path_file";
+        $attribute_name = "file";
         $disk = "uploads";
         $destination_path = "xlsforms";
 

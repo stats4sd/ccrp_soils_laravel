@@ -44,9 +44,13 @@ class ProjectController extends Controller
     public function show(Project $project, $tab = null)
     {
 
-        $project->load(['users' => function($q) {
-            $q->orderBy('pivot_admin', 'desc');
-        }]);
+        $project = $project->load([
+            'users' => function($q) {
+                $q->orderBy('pivot_admin', 'desc');
+            },
+            'xls_forms',
+            ]
+        );
 
         return view('projects.show', compact('project'));
     }

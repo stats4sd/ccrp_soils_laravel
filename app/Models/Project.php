@@ -112,7 +112,7 @@ class Project extends Model
         return $this->belongsToMany(Xlsform::class)->using(Projectxlsform::class)
         ->withPivot([
             'kobo_id',
-            'deployed',
+            'kobo_version_id',
             'records',
         ]);
     }

@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @property int $id
  * @property int $project_id
  * @property int $xlsform_id
- * @property int $deployed
+ * @property string|null $kobo_version_id
  * @property int $records
  * @property string|null $kobo_id
  * @property \Illuminate\Support\Carbon|null $created_at

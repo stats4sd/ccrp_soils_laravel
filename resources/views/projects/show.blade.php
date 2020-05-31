@@ -25,7 +25,7 @@
 
 <div class="tab-content" id="project-tab-content">
     <div class="tab-pane fade show active" id="forms" role="tabpanel" aria-labelledby="forms-tab">
-        @include('projects.tab-forms')
+         <livewire:forms-table :project="$project">
     </div>
     <div class="tab-pane fade" id="data" role="tabpanel" aria-labelledby="data-tab">
         @include('projects.tab-data')
