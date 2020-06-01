@@ -6,6 +6,10 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+
+// Front-end Notifications
 @import '~noty/src/noty.scss';
 @import '~noty/src/themes/mint.scss';
 
@@ -17,14 +21,27 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+
 /*
 |--------------------------------------------------------------------------
 | Layout
 |--------------------------------------------------------------------------
 */
 
-body{
-  background-color: $soil;
+.wrapper {
+    min-height: 100vh;
+}
+
+.account-card {
+    min-width: 300px;
+}
+
+.footer, .push {
+    height: 55px;
+}
+
+.bg-soils {
+    background-color: $soil;
 }
 
 .dropdown-toggle{
@@ -57,18 +74,20 @@ body{
 }
 
 .card-login {
-  position: relative;  
+  position: relative;
   /*top: 100px;*/
   width: 300px;
-} 
+}
 
+
+.btn-primary {
+    background-color: $soil-green !important;
+}
 /*
 |--------------------------------------------------------------------------
 | Create Project
 |--------------------------------------------------------------------------
 */
-
-body {font-family: Arial}
 
 /* Style the tab */
 .tab {
@@ -120,7 +139,7 @@ body {font-family: Arial}
 
 /*
 |--------------------------------------------------------------------------
-| Filter/Search List Invitation 
+| Filter/Search List Invitation
 |--------------------------------------------------------------------------
 */
 
@@ -128,7 +147,7 @@ body {font-family: Arial}
   background-position: 10px 12px; /* Position the search icon */
   background-repeat: no-repeat; /* Do not repeat the icon image */
   width: 100%; /* Full-width */
-  
+
   padding: 12px 20px 12px 40px; /* Add some padding */
   border: 1px solid #ddd; /* Add a grey border */
   margin-bottom: 12px; /* Add some space below the input */
@@ -138,7 +157,7 @@ body {font-family: Arial}
   border-collapse: collapse; /* Collapse borders */
   width: 100%; /* Full-width */
   border: 1px solid #ddd; /* Add a grey border */
-  
+
 }
 
 #myTable th, #myTable td {
@@ -148,7 +167,7 @@ body {font-family: Arial}
 
 #myTable tr {
   /* Add a bottom border to all table rows */
-  border-bottom: 1px solid #ddd; 
+  border-bottom: 1px solid #ddd;
 }
 
 #myTable tr.header, #myTable tr:hover {
@@ -159,7 +178,7 @@ body {font-family: Arial}
 //Scroll list for invitation
 
 div.scroll_list {
-  
+
   height: 300px;
   overflow: auto;
 }
@@ -183,6 +202,13 @@ div.scroll_list {
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.img_group_small img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .img_card_project img {
@@ -227,3 +253,83 @@ div.scroll_list {
   width: 30%;
 }
 
+// Front page buttons
+.hero-section,.splash {
+
+    .btn {
+    color: #fff;
+    background-color: $grey;
+    border: 2px solid #fff;
+    border-radius: 0rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+    width: 15rem;
+    padding: 1.4rem 0.75rem;
+    margin-right: 0.7rem;
+    margin-bottom: 1.5rem;
+
+    }
+    .btn:hover {
+        color: #fff;
+        background-color: #f46036;
+        border-color: #f46036;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.2s ease-in-out;
+
+    }
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+.splash {
+    p,h1,h2,h3,h4,h5 {
+    color: #fff;
+    }
+    //row-no-margin {
+       // align-content: space-between;
+    //}
+    h4 {
+        font-weight: 100;
+        line-height: 2.05rem;
+        font-size: 1.3rem;
+    }
+    h1 {
+        font-weight: 900;
+    }
+    .btn-primary {
+        color: $blue;
+        background-color: #fff;
+        border-color: #fff;
+        font-weight: 600;
+    }
+}
+
+.site-btn {
+    display: inline-block;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    min-width: 186px;
+    padding: 17px 25px;
+    border-radius: 14px;
+    background: #f46036;
+    color: #fff;
+    line-height: 1;
+    cursor: pointer;
+    text-align: center;
+}
+
+.form-group.required label:not(:empty)::after {
+    content: ' *';
+    color: #ff0000;
+}
+
+// Repeating fields
+.entry:not(:first-of-type)
+{
+    margin-top: 10px;
+}
+.glyphicon
+{
+    font-size: 12px;
+}

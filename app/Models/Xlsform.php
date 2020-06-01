@@ -7,6 +7,45 @@ use App\Models\Variable;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Xlsform
+ *
+ * @property int $id
+ * @property string|null $title
+ * @property string|null $file
+ * @property string $version
+ * @property string|null $kobo_version_id
+ * @property string|null $instance_name
+ * @property string|null $link_page
+ * @property string|null $description
+ * @property array|null $media
+ * @property mixed|null $content
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Project[] $projects
+ * @property-read int|null $projects_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Submission[] $submissions
+ * @property-read int|null $submissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Variable[] $variables
+ * @property-read int|null $variables_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereDefaultLanguage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereFormTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereInstanceName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereLinkPage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereMedia($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform wherePathFile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereVersion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereVersionId($value)
+ * @mixin \Eloquent
+ */
 class Xlsform extends Model
 {
     use CrudTrait;
@@ -44,7 +83,7 @@ class Xlsform extends Model
         return $this->belongsToMany(Project::class)->using(Projectxlsform::class)
         ->withPivot([
             'kobo_id',
-            'deployed',
+            'kobo_version_id',
             'records',
             ]);
     }
@@ -54,32 +93,10 @@ class Xlsform extends Model
         return $this->hasMany(Submission::class);
     }
 
-    public function variables ()
+public function setXlsfileAttribute($value)
     {
-        return $this->hasMany(Variable::class);
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | SCOPES
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | ACCESORS
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | MUTATORS
-    |--------------------------------------------------------------------------
-    */
-    public function setPathFileAttribute($value)
-    {
-        $attribute_name = "path_file";
-        $disk = "uploads";
+        $attribute_name = "xlsfile";
+        $disk = "public";
         $destination_path = "xlsforms";
 
 
@@ -103,7 +120,6 @@ class Xlsform extends Model
             \Storage::disk($disk)->delete($this->{$attribute_name});
             $this->attributes[$attribute_name] = null;
         }
-
         // if a new file is uploaded, store it on disk and its filename in the database
         if ($request->hasFile($attribute_name) && $request->file($attribute_name)->isValid()) {
             // 1. Generate a new file name
@@ -125,7 +141,7 @@ class Xlsform extends Model
     public function setMediaAttribute($value)
     {
         $attribute_name = "media";
-        $disk = "uploads";
+        $disk = "public";
         $destination_path = "media";
 
         $this->uploadMultipleFilesToDisk($value, $attribute_name, $disk, $destination_path);

@@ -14,7 +14,7 @@ class CreateXlsFormsQuestions extends Migration
     public function up()
     {
         Schema::create('xls_forms_questions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('type')->nullable();
             $table->string('name');
             $table->text('hint::english');

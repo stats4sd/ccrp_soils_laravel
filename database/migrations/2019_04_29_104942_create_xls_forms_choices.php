@@ -14,7 +14,7 @@ class CreateXlsFormsChoices extends Migration
     public function up()
     {
         Schema::create('xls_forms_choices', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('list_name')->nullable();
             $table->string('name')->nullable();
             $table->text('label::english');

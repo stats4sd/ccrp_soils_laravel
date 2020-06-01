@@ -10,10 +10,11 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.13.0",
         "axios": "^0.19.0",
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
-        "jquery": "^3.4.1",
+        "jquery": "^3.2",
         "laravel-mix": "^4.1.2",
         "lodash": "^4.17.15",
         "popper.js": "^1.12",
@@ -26,7 +27,9 @@
     "dependencies": {
         "cropper": "^4.0.0",
         "jquery-jcrop": "^0.9.13",
-        "noty": "^3.2.0-beta"
+        "laravel-echo": "^1.8.0",
+        "noty": "^3.2.0-beta",
+        "pusher-js": "^6.0.3"
     },
     "eslintConfig": {
         "env": {
@@ -35,30 +38,47 @@
             "commonjs": true,
             "jquery": true,
             "node": true
-            },
+        },
         "extends": [
             "eslint:recommended",
             "plugin:vue/recommended"
         ],
         "rules": {
             "no-unused-vars": "off",
-            "indent": ["error", 4],
-            "vue/script-indent": ["error", 4, { "baseIndent": 1 }],
-            "vue/html-indent": ["error", 4, { "baseIndent": 1 }],
+            "indent": [
+                "error",
+                4
+            ],
+            "vue/script-indent": [
+                "error",
+                4,
+                {
+                    "baseIndent": 1
+                }
+            ],
+            "vue/html-indent": [
+                "error",
+                4,
+                {
+                    "baseIndent": 1
+                }
+            ],
             "no-console": 0,
-            "allowImportExportEverywhere":true
+            "allowImportExportEverywhere": true
         },
-        "parserOptions":{
-            "sourceType":"module",
+        "parserOptions": {
+            "sourceType": "module",
             "ecmaVersion": 2017
         },
         "overrides": [
-        {
-            "files": ["*.vue"],
-            "rules": {
-                "indent": "off"
+            {
+                "files": [
+                    "*.vue"
+                ],
+                "rules": {
+                    "indent": "off"
+                }
             }
-        }
         ]
     }
 }

@@ -13,17 +13,15 @@ class CreateProjectsTable extends Migration
     public function up()
     {
          Schema::create('projects', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('creator_id');
-            $table->string('name', 100)->unique();
-            $table->string('slug', 200);
+            $table->string('name')->unique();
+            $table->string('slug');
             $table->longText('description');
-            $table->string('status', 10)->default('public');
-            $table->string('group_invitations')->default('all_members');
-            $table->string('image');
-            $table->softDeletes();
+            $table->string('avatar')->default("/images/mystery-group.png");
+            $table->boolean('share_data');
             $table->timestamps();
-
+            $table->softDeletes();
         });
     }
 

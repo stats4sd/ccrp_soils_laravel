@@ -15,8 +15,8 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            \Alert::add('error','Please logging')->flash();
-            return route('home', app()->getLocale());
+            \Alert::add('error','Please log in')->flash();
+            return route('home');
         }
     }
 }

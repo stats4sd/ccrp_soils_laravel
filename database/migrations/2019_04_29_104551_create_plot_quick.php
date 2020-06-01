@@ -14,7 +14,7 @@ class CreatePlotQuick extends Migration
     public function up()
     {
         Schema::create('plot_quick', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('community', 250);
             $table->string('farmer', 250);
             $table->timestamps();

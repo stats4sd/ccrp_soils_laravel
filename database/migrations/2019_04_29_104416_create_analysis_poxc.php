@@ -14,7 +14,7 @@ class CreateAnalysisPoxc extends Migration
     public function up()
     {
         Schema::create('analysis_poxc', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->date('analysis_date')->nullable();
             $table->string('sample_id', 50);
             $table->decimal('weight_soil', 6,3)->nullable();

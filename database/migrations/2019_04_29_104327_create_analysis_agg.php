@@ -14,7 +14,7 @@ class CreateAnalysisAgg extends Migration
     public function up()
     {
         Schema::create('analysis_agg', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('sample_id', 100);
             $table->decimal('weight_soil', 10,4)->nullable();
             $table->decimal('weight_cloth', 10,4)->nullable();

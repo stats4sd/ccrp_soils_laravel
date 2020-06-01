@@ -36,6 +36,7 @@ return [
 
     'kobo' => [
         'endpoint' => env('KOBO_ENDPOINT', 'https://kf.kobotoolbox.org/'),
+        'endpoint_v2' => env('KOBO_ENDPOINT').'/api/v2/', 'https://kf.kobotoolbox.org/api/v2',
         'old_endpoint' => env('KOBO_OLD_ENDPOINT', 'https://kc.kobotoolbox.org'),
         'token' => env('KOBO_TOKEN', ''),
         'username' => env('KOBO_USERNAME', ''),
