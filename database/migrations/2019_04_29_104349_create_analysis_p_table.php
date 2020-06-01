@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnalysisP extends Migration
+class CreateAnalysisPTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateAnalysisP extends Migration
     public function up()
     {
         Schema::create('analysis_p', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('id');
             $table->string('sample_id', 100)->nullable();
             $table->date('analysis_date');
             $table->decimal('weight_soil', 10,4)->nullable();

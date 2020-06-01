@@ -13,7 +13,7 @@ class CreateProjectsTable extends Migration
     public function up()
     {
          Schema::create('projects', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id('id');
             $table->bigInteger('creator_id');
             $table->string('name')->unique();
             $table->string('slug');

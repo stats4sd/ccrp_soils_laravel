@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnalysisAgg extends Migration
+class CreateAnalysisAggTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateAnalysisAgg extends Migration
     public function up()
     {
         Schema::create('analysis_agg', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('id');
             $table->string('sample_id', 100);
             $table->decimal('weight_soil', 10,4)->nullable();
             $table->decimal('weight_cloth', 10,4)->nullable();

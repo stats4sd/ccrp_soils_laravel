@@ -14,12 +14,15 @@ class CreateSubmissionsTable extends Migration
     public function up()
     {
         Schema::create('submissions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigInteger('id');
             $table->string('uuid');
-            $table->integer('project_id')->unsigned();
-            $table->integer('xlsform_id')->unsigned();
+            $table->timestamp('submitted_at');
+            $table->foreignId('project_id')->constrained();
+            $table->foreignId('xlsform_id')->constrained();
             $table->json('content');
             $table->timestamps();
+
+            $table->primary('id');
         });
     }
 

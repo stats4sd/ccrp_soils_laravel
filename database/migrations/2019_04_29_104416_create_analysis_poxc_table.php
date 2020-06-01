@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnalysisPoxc extends Migration
+class CreateAnalysisPoxcTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateAnalysisPoxc extends Migration
     public function up()
     {
         Schema::create('analysis_poxc', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('id');
             $table->date('analysis_date')->nullable();
             $table->string('sample_id', 50);
             $table->decimal('weight_soil', 6,3)->nullable();

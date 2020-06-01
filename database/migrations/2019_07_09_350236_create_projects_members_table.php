@@ -13,9 +13,9 @@ class CreateProjectsMembersTable extends Migration
     public function up()
     {
         Schema::create('projects_members', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('project_id');
-            $table->bigInteger('user_id');
+            $table->id('id');
+            $table->foreignId('project_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->tinyInteger('admin')->default(0);
             $table->unique(['project_id', 'user_id']);
             $table->timestamps();

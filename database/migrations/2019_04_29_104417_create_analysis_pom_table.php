@@ -14,7 +14,7 @@ class CreateAnalysisPomTable extends Migration
     public function up()
     {
         Schema::create('analysis_pom', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id('id');
             $table->string('sample_id');
             $table->decimal('weight_soil', 6, 3)->nullable();
             $table->decimal('diameter_circ_pom', 6, 3)->nullable();

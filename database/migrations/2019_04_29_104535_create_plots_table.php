@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlots extends Migration
+class CreatePlotsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreatePlots extends Migration
     public function up()
     {
         Schema::create('plots', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('id');
             $table->string('plot_name', 250);
             $table->string('plot_gradient', 100)->nullable();
             $table->string('farmer_kn_soil', 250)->nullable();
