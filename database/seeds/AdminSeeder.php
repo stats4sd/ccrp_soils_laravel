@@ -12,7 +12,7 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        if(App::environment('local')) {
+        if(App::environment(['local','staging'])) {
             User::create([
                 'name' => 'Test Admin',
                 'email' => 'test@test.com',
