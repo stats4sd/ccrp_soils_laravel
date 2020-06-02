@@ -32,12 +32,8 @@
                         </div>
                     </div>
                 </td>
-                @if($showNotify)
-                <h1>WOW - IT WORKS</h1>
-                @endif
             </tr>
             @endforeach
-
         </tbody>
     </table>
 </div>
@@ -46,7 +42,7 @@
 
 <script>
 Echo.private('App.User.{{ auth()->user()->id }}')
-    .listen('NewFormDeployedToKobo', (e) => {
+    .listen('KoboDeployementReturnedSuccess', (e) => {
         console.log("Yo " + e.user.name);
     })
 

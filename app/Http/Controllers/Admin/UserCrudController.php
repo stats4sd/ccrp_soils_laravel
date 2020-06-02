@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use Backpack\CRUD\app\Http\Requests\CrudRequest;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\UserStoreRequest as StoreRequest;
@@ -50,23 +49,30 @@ class UserCrudController extends CrudController
             [
                 'name' => 'name',
                 'type' => 'text',
-                'label' => 'User\'s Name'
+                'label' => 'Name'
             ],
             [
                 'name' => 'email',
                 'type' => 'email',
-                'label' => 'Enter user\'s email address',
+                'label' => 'Email Address',
+            ],
+            [
+                'name' => 'admin',
+                'type' => 'boolean',
+                'label' => 'Is Admin?',
             ],
             [
                 'name' => 'kobo_id',
                 'type' => 'text',
-                'label' => 'Enter user\'s Kobotoolbox username',
+                'label' => 'Kobotoolbox Username',
             ],
         ]);
     }
 
     protected function setupCreateOperation()
     {
+        $this->crud->setValidation(StoreRequest::class);
+
         Crud::addFields([
             [
                 'name' => 'name',
@@ -84,6 +90,12 @@ class UserCrudController extends CrudController
                 'label' => 'Enter user\'s Kobotoolbox username',
             ],
             [
+                'name' => 'admin',
+                'type' => 'checkbox',
+                'label' => 'Is this user an admin?',
+                'hint' => 'Admin users have access to this backend dashboard and to data from all projects. Only RMS and Soils CCRP project members should have admin access.',
+            ],
+            [
                 'name' => 'password',
                 'type' => 'password',
                 'label' => 'Enter password for user',
@@ -93,16 +105,14 @@ class UserCrudController extends CrudController
                 'type' => 'password',
                 'label' => 'Confirm password for user',
             ],
-            [
-                'name' => 'slug',
-                'type' => 'hidden',
-            ]
         ]);
     }
 
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+        $this->crud->setValidation(UpdateRequest::class);
+
     }
 
     /**
@@ -113,7 +123,6 @@ class UserCrudController extends CrudController
     public function store(StoreRequest $request)
     {
         $this->handlePasswordInput();
-        $this->handleSlug();
         return $this->traitStore($request);
     }
 
@@ -125,7 +134,6 @@ class UserCrudController extends CrudController
     public function update(UpdateRequest $request)
     {
         $this->handlePasswordInput();
-        $this->handleSlug();
         return $this->traitUpdate($request);
     }
 
@@ -152,18 +160,5 @@ class UserCrudController extends CrudController
 
         $this->crud->setRequest($crud_request);
     }
-
-    protected function handleSlug ()
-    {
-       $crud_request = $this->crud->getRequest();
-
-       if($crud_request->input('email')) {
-            $slug = Str::slug($crud_request->input('email'));
-            $crud_request->request->set('slug', $slug);
-
-            $this->crud->setRequest($crud_request);
-       }
-    }
-
 
 }

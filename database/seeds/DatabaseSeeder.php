@@ -11,10 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-        $this->call('XlsformTableSeeder');
-        $this->command->info('Xlsform table seeded!');
-
-
+        $this->call(AdminSeeder::class);
     }
 }

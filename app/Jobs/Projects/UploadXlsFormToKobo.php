@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Projects;
 
 use App\Models\User;
-use App\Models\Xlsform;
+use App\Models\Projectxlsform;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Log;
@@ -28,7 +28,7 @@ class UploadXlsFormToKobo implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(User $user, Xlsform $form)
+    public function __construct(User $user, Projectxlsform $form)
     {
         $this->user = $user;
         $this->form = $form;

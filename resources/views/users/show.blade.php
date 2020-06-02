@@ -6,9 +6,7 @@
 	 	<section class="content mb-5" id="group">
 
 		    <h1 class="mb-5"><b>
-                @if(Auth::user()->id == $user->id)
-                    {{$user->name}}
-                @endif
+                {{ $user->name }}
             </b></h1>
 
 	    	<div class="container-fluid mb-4">
@@ -37,12 +35,14 @@
                             </div>
                             {{$user->projects->count()}}
                         </div>
-						<div class="d-flex flex-row border border-top-0 border-left-0 border-right-0 py-1">
-                            <div class="text-left w-50">
-                                <b>{{ t("Email:") }}</b>
+                        @can('update', $user)
+                            <div class="d-flex flex-row border border-top-0 border-left-0 border-right-0 py-1">
+                                <div class="text-left w-50">
+                                    <b>{{ t("Email:") }}</b>
+                                </div>
+                                {{$user->email}}
                             </div>
-                            {{$user->email}}
-                        </div>
+                        @endcan
 						<div class="d-flex flex-row border border-top-0 border-left-0 border-right-0 py-1">
                             <div class="text-left w-50">
                                 <b>{{ t("Created:") }}</b>
@@ -61,7 +61,7 @@
                 @endcan
 			</div>
 
-            @include('users.projects-tab')
+            @include('users.projects')
 
 	</div>
 

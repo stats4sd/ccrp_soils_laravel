@@ -31,7 +31,7 @@ class ProjectController extends Controller
      */
 	public function index()
     {
-    	$projects = Project::whereIn('status', ['Private', 'Public'])->get();
+    	$projects = Project::all();
     	return view('projects.index', compact('projects'));
     }
 

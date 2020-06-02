@@ -21,8 +21,8 @@ class CreateProjectsXlsFormsTable extends Migration
             $table->string('kobo_id', 255)->nullable()->comment('If null; form is not on Kobo');
             $table->string('kobo_version_id')->nullable()->comment('If null; form is not deployed');
             $table->boolean('processing')->default(0)->comment('If true, this entire entry should not be editable');
+            $table->boolean('is_active')->default(0)->comment('If true, this project-form is deployed and active on Kobotoolbox');
             $table->timestamps();
-
 
 
         });

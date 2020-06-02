@@ -10,6 +10,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('packages/backpack/base/css/bundle.css') }}" rel="stylesheet">
     @livewireStyles
 </head>
 
@@ -34,7 +35,7 @@
     <script src={{asset("js/app.js")}}></script>
     @yield('scripts')
     @stack('scripts')
-    @include('layouts.alerts')
+    @include('vendor.backpack.base.inc.alerts')
     @livewireScripts
 
 </body>

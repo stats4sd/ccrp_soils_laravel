@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Projects;
 
 use App\Models\User;
-use App\Models\Xlsform;
+use App\Models\Projectxlsform;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Queue\SerializesModels;
@@ -22,10 +22,10 @@ class SetKoboFormToActive implements ShouldQueue
     /**
      * Create a new job instance.
      * @param User $user
-     * @param Xlsform $form
+     * @param Projectxlsform $form
      * @return void
      */
-    public function __construct(User $user, Xlsform $form)
+    public function __construct(User $user, Projectxlsform $form)
     {
         $this->user = $user;
         $this->form = $form;

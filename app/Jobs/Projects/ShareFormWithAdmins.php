@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Projects;
 
 use App\Models\User;
-use App\Models\Xlsform;
+use App\Models\Projectxlsform;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Queue\SerializesModels;
@@ -22,7 +22,7 @@ class ShareFormWithAdmins implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Xlsform $form)
+    public function __construct(Projectxlsform $form)
     {
         //
         $this->form = $form;

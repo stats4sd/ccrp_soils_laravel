@@ -28,7 +28,8 @@ class ProjectRequest extends FormRequest
         return [
             'name' => ['required', 'max:255'],
             'description' => ['required', 'max:2000'],
-            'avatar' => ['nullable', 'image'],
+            'creator_id' => ['required'],
+            'avatar' => ['nullable'],
             'share_data' => ['boolean'],
         ];
     }

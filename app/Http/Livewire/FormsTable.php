@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Jobs\Projects\DeployFormToKobo;
 use App\Models\Project;
 use App\Models\Xlsform;
 use Livewire\Component;
@@ -31,7 +32,7 @@ class FormsTable extends Component
     public function deployForm ($form_id)
     {
 
-        // $form = $this->project->xls_forms->find($form_id);
+        $form = $this->project->xls_forms->find($form_id);
 
         $this->project->xls_forms()
         ->updateExistingPivot($form_id, [
@@ -39,7 +40,7 @@ class FormsTable extends Component
         ]);
 
         //dispatch deployment job
-        //CreateNewKoboForm::dispatch($form, )
+        DeployFormToKobo::dispatch(auth()->user(), $form);
 
         //reply to user
 

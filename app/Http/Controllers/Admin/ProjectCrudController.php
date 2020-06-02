@@ -62,36 +62,13 @@ class ProjectCrudController extends CrudController
                 'type' => 'text',
                 'limit' => 20
             ],
-            [
-                'name' => 'status',
-                'label' => 'Status',
-                'type' => 'text',
-            ],
-            [
-                'name' => 'group_invitations',
-                'label' => 'Who can invite',
-                'type' => 'text',
-            ],
-            [
-                'name' => 'image',
-                'label' => 'Project Image',
-                'type' => 'text',
-            ],
-            [
-                'name' => 'created_at',
-                'label' => 'Created at',
-                'type' => 'date'
-            ],
-            [
-                'name' => 'updated_at',
-                'label' => 'Updated at',
-                'type' => 'date'
-            ]
         ]);
     }
 
     protected function setupCreateOperation()
     {
+        $this->crud->setValidation(StoreRequest::class);
+
 
         $this->crud->addFields([
             [
@@ -107,35 +84,20 @@ class ProjectCrudController extends CrudController
                 'label' => 'Name of the Project',
                 'type' => 'text',
             ],
-
             [
                 'name' => 'description',
                 'label' => 'Description',
                 'type' => 'textarea',
             ],
             [
-                'name' => 'status',
-                'label' => 'Status',
-                'type' => 'select_from_array',
-                'options' => [
-                    'Public' => 'Public',
-                    'Private' => 'Private',
-                    'Hidden' => 'Hidden'
-                ],
-            ],
-            [
-                'name' => 'group_invitations',
-                'label' => 'Who can invite',
-                'type' => 'select_from_array',
-                'options' => [
-                    'all_members' => 'All group members',
-                    'group_admins' => 'Group admins only',
-                ],
-            ],
-            [
-                'name' => 'image',
+                'name' => 'avatar',
                 'label' => 'Project Image',
-                'type' => 'text',
+                'type' => 'upload',
+            ],
+            [
+                'name' => 'share_data',
+                'label' => 'Does this project consent to share aggregated / anonymised data?',
+                'type' => 'boolean',
             ],
         ]);
     }
@@ -145,5 +107,7 @@ class ProjectCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+        $this->crud->setValidation(UpdateRequest::class);
+
     }
 }

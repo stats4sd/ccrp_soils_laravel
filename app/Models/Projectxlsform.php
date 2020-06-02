@@ -70,12 +70,12 @@ class Projectxlsform extends Pivot
     */
     public function project()
     {
-        return $this->belongsToMany(Project::class);
+        return $this->belongsTo(Project::class);
     }
 
     public function xls_form()
     {
-        return $this->belongsToMany(Xlsform::class);
+        return $this->belongsTo(Xlsform::class);
     }
 
 

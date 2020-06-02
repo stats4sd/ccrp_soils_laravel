@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\KoboUploadReturnedSuccess;
+use App\Jobs\DeployKobotoolsForm;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;

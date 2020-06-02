@@ -15,6 +15,7 @@ Route::group([
 
     Route::post('xlsform/{xlsform}/deploytokobo', 'XlsformCrudController@deployToKobo');
     Route::post('xlsform/{xlsform}/syncdata', 'XlsformCrudController@syncData');
+    Route::post('xlsform/{xlsform}/archive', 'XlsformCrudController@archiveOnKobo');
 
 
     Route::crud('project', 'ProjectCrudController');

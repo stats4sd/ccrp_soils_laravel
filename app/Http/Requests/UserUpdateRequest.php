@@ -27,8 +27,8 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['string', 'min:8', 'confirmed'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['confirmed'],
             'kobo_id' => ['nullable', 'string', 'max:255'],
         ];
     }

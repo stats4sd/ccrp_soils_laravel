@@ -157,6 +157,7 @@
                 @enderror
             </div>
 
+            <input type="hidden" value="{{ auth()->user()->id }}" name="creator_id"/>
             <div class="form-group row mb-0">
                 <div class="col-md-10 d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">

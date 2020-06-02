@@ -1,5 +1,5 @@
 @if ($crud->hasAccess('update'))
-	<a href="javascript:void(0)" onclick="syncData(this)" data-route="{{ url($crud->route.'/'.$entry->getKey().'/syncdata') }}" class="btn btn-sm btn-success" data-button-type="sync"><i class="la la-trash"></i> Get Data from Kobo</a>
+	<a href="javascript:void(0)" onclick="archiveForm(this)" data-route="{{ url($crud->route.'/'.$entry->getKey().'/archive') }}" class="btn btn-sm btn-warning" data-button-type="sync"> Archive Form on Kobo</a>
 @endif
 
 {{-- Button Javascript --}}
@@ -8,10 +8,10 @@
 @push('after_scripts') @if (request()->ajax()) @endpush @endif
 <script>
 
-	if (typeof syncData != 'function') {
+	if (typeof archiveForm != 'function') {
 	    $("[data-button-type=sync]").unbind('click');
 
-	    function syncData(button) {
+	    function archiveForm(button) {
 		    // ask for confirmation before deleting an item
 		    // e.preventDefault();
             var button = $(button);
@@ -25,7 +25,7 @@
                     console.log(result);
                     new Noty({
                         type: "info",
-                        text: "Sync Data Successful"
+                        text: "Archive Request Sent to Kobotoolbox"
                     }).show();
                 },
                 error: function(result) {

@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\User;
 use App\Models\Invite;
+use Illuminate\Support\Str;
 
 class UserObserver
 {
@@ -15,6 +16,7 @@ class UserObserver
      */
     public function created(User $user)
     {
+
         // check for any invites sent to the new user's email address...
         $invites = Invite::where('email', '=', $user->email)->get();
 
@@ -27,47 +29,9 @@ class UserObserver
 
     }
 
-    /**
-     * Handle the user "updated" event.
-     *
-     * @param  \App\Models\User  $user
-     * @return void
-     */
-    public function updated(User $user)
+    public function saving (User $user)
     {
-        //
+       $user->slug = Str::slug($user->email);
     }
 
-    /**
-     * Handle the user "deleted" event.
-     *
-     * @param  \App\Models\User  $user
-     * @return void
-     */
-    public function deleted(User $user)
-    {
-        //
-    }
-
-    /**
-     * Handle the user "restored" event.
-     *
-     * @param  \App\Models\User  $user
-     * @return void
-     */
-    public function restored(User $user)
-    {
-        //
-    }
-
-    /**
-     * Handle the user "force deleted" event.
-     *
-     * @param  \App\Models\User  $user
-     * @return void
-     */
-    public function forceDeleted(User $user)
-    {
-        //
-    }
 }

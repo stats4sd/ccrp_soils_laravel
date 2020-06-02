@@ -12,23 +12,28 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class NewFormDeployedToKobo implements ShouldBroadcast
+class KoboArchiveRequestReturnedError implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $user;
-    public $xlsform;
+    public $form;
+    public $errorType;
+    public $errorMessage;
 
     /**
      * Create a new event instance.
-     *
+     * @param User $user
+     * @param Xlsform $form
      * @return void
      */
-    public function __construct(User $user, Xlsform $xlsform)
+    public function __construct(User $user, Xlsform $form, $errorType, $errorMessage)
     {
         //
         $this->user = $user;
-        $this->xlsform = $xlsform;
+        $this->form = $form;
+        $this->errorType = $errorType;
+        $this->errorMessage = $errorMessage;
     }
 
     /**
@@ -38,6 +43,6 @@ class NewFormDeployedToKobo implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel("App.User.{$this->user->id}");
+        return new PrivateChannel('channel-name');
     }
 }

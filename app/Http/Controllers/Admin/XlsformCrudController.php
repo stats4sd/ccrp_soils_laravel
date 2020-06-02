@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Alert;
 use App\Models\Xlsform;
 use Backpack\CRUD\CrudPanel;
+use App\Jobs\ArchiveKoboForm;
 use App\Jobs\GetDataFromKobo;
 use App\Jobs\DeployFormToKobo;
 use App\Models\Projectxlsform;
@@ -142,23 +143,17 @@ class XlsformCrudController extends CrudController
         ->stack('line')
         ->view('crud::buttons.sync');
 
+        Crud::button('archive')
+        ->stack('line')
+        ->view('crud::buttons.archive');
+
         $form = $this->crud->getCurrentEntry();
 
-        $submissions = $form->submissions;
-
-
-        Widget::add()
-        ->to('after_content')
-        ->type('card')
-        ->content([
-            'header' => 'Form Data',
-            'body' => '<ul class="list-group">
-                <li class="list-group-item d-flex">
-                    <div class="w-50">No. of Submissions:</div>
-                    <div class="w-50"><b>'.$submissions->count().'</b></div>
-                </li>
-            </ul>'
-        ]);
+        Widget::add([
+            'type' => 'view',
+            'view' => 'crud::widgets.xlsform_kobo_info',
+            'form' => $form,
+        ])->to('after_content');
 
         $this->crud->addColumns([
             [
@@ -202,7 +197,7 @@ class XlsformCrudController extends CrudController
 
     public function deployToKobo(Xlsform $xlsform)
     {
-        DeployFormToKobo::dispatch($xlsform, auth()->user(), 'admin');
+        DeployFormToKobo::dispatch(auth()->user(), $xlsform);
 
         return response()->json([
             'title' => $xlsform->title,
@@ -217,6 +212,17 @@ class XlsformCrudController extends CrudController
        $submissions = $xlsform->submissions;
 
        return $submissions->toJson();
+    }
+
+    public function archiveOnKobo (Xlsform $xlsform)
+    {
+       ArchiveKoboForm::dispatch(auth()->user(), $xlsform);
+
+       return response()->json([
+           'title' => $xlsform->title,
+           'user' => auth()->user()->email,
+       ]);
+
     }
 
 
