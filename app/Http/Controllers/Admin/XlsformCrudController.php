@@ -8,7 +8,7 @@ use Backpack\CRUD\CrudPanel;
 use App\Jobs\ArchiveKoboForm;
 use App\Jobs\GetDataFromKobo;
 use App\Jobs\DeployFormToKobo;
-use App\Models\Projectxlsform;
+use App\Models\ProjectXlsform;
 use Backpack\CRUD\app\Library\Widget;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\XlsformRequest as StoreRequest;
@@ -207,11 +207,11 @@ class XlsformCrudController extends CrudController
 
     public function syncData (Xlsform $xlsform)
     {
-       GetDataFromKobo::dispatchNow($xlsform);
+        GetDataFromKobo::dispatchNow(auth()->user(), $xlsform);
 
-       $submissions = $xlsform->submissions;
+        $submissions = $xlsform->submissions;
 
-       return $submissions->toJson();
+        return $submissions->toJson();
     }
 
     public function archiveOnKobo (Xlsform $xlsform)

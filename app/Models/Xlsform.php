@@ -80,7 +80,7 @@ class Xlsform extends Model
     */
     public function projects ()
     {
-        return $this->belongsToMany(Project::class)->using(Projectxlsform::class)
+        return $this->belongsToMany(Project::class)->using(ProjectXlsform::class)
         ->withPivot([
             'kobo_id',
             'kobo_version_id',
@@ -90,7 +90,7 @@ class Xlsform extends Model
 
     public function project_xlsforms ()
     {
-       return $this->hasMany(Projectxlsform::class);
+       return $this->hasMany(ProjectXlsform::class);
     }
 
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\ProjectxlsformRequest as StoreRequest;
-use App\Http\Requests\ProjectxlsformRequest as UpdateRequest;
+use App\Http\Requests\ProjectXlsformRequest as StoreRequest;
+use App\Http\Requests\ProjectXlsformRequest as UpdateRequest;
 use App\Models\Project;
 use App\Models\Xlsform;
 use Backpack\CRUD\CrudPanel;
@@ -11,11 +11,11 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class ProjectxlsformCrudController
+ * Class ProjectXlsformCrudController
  * @package App\Http\Controllers\Admin
  * @property-read CrudPanel $crud
  */
-class ProjectxlsformCrudController extends CrudController
+class ProjectXlsformCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -29,7 +29,7 @@ class ProjectxlsformCrudController extends CrudController
         | CrudPanel Basic Information
         |--------------------------------------------------------------------------
         */
-        CRUD::setModel('App\Models\Projectxlsform');
+        CRUD::setModel('App\Models\ProjectXlsform');
         CRUD::setRoute(config('backpack.base.route_prefix') . '/projectxlsform');
         CRUD::setEntityNameStrings('project xlsform', 'project Xlsforms');
     }

@@ -7,7 +7,7 @@ use App\Models\Project;
 use App\Models\Xlsform;
 use Livewire\Component;
 use App\Jobs\TestNotificationSystem;
-use App\Models\Projectxlsform;
+use App\Models\ProjectXlsform;
 
 class FormsTable extends Component
 {
@@ -33,17 +33,18 @@ class FormsTable extends Component
         $this->showNotify = false;
     }
 
-    public function deployForm (ProjectXlsform $projectform)
+    public function deployForm ($projectform_id)
     {
+        $projectform = ProjectXlsform::find($projectform_id);
 
         $projectform->update([
             'processing' => true,
         ]);
 
-        $this->projectforms = $this->project->project_xlsforms;
+
 
         //dispatch deployment job
-        DeployFormToKobo::dispatch(auth()->user(), $projectform);
+        //DeployFormToKobo::dispatch(auth()->user(), $projectform);
 
         //reply to user
 

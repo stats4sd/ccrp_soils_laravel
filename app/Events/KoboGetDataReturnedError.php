@@ -2,38 +2,32 @@
 
 namespace App\Events;
 
-use App\Models\User;
-use App\Models\Xlsform;
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
-class KoboArchiveRequestReturnedError implements ShouldBroadcast
+class KoboGetDataReturnedError implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $user;
     public $form;
-    public $errorType;
-    public $errorMessage;
+    public $response;
 
     /**
      * Create a new event instance.
-     * @param User $user
-     * @param Xlsform|ProjectXlsform $form
+     *
      * @return void
      */
-    public function __construct(User $user, $form, $errorType, $errorMessage)
+    public function __construct($user, $form, $response)
     {
-        //
         $this->user = $user;
         $this->form = $form;
-        $this->errorType = $errorType;
-        $this->errorMessage = $errorMessage;
+        $this->response = $response;
     }
 
     /**

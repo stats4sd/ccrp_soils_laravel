@@ -3,7 +3,7 @@
 namespace App\Jobs\Projects;
 
 use App\Models\User;
-use App\Models\Projectxlsform;
+use App\Models\ProjectXlsform;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Log;
@@ -28,7 +28,7 @@ class UploadXlsFormToKobo implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(User $user, Projectxlsform $form)
+    public function __construct(User $user, ProjectXlsform $form)
     {
         $this->user = $user;
         $this->form = $form;
@@ -47,12 +47,12 @@ class UploadXlsFormToKobo implements ShouldQueue
             ->attach(
                 'file',
                 Storage::get($this->form->xlsform->xlsfile),
-                Str::slug($this->form->xlsform->title)
+                Str::slug($this->form->title)
             )
             ->post(config('services.kobo.endpoint').'/imports/', [
                 'destination' => config('services.kobo.endpoint_v2').'/assets/'.$this->form->kobo_id.'/',
                 'assetUid' => $this->form->kobo_id,
-                'name' => $this->form->xlsform->title,
+                'name' => $this->form->title,
             ])
             ->throw()
             ->json();

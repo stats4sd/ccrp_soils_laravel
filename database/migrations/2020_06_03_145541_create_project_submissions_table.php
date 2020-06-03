@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateSubmissionsTable extends Migration
+class CreateProjectSubmissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateSubmissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('submissions', function (Blueprint $table) {
-            $table->bigInteger('id');
+        Schema::create('project_submissions', function (Blueprint $table) {
+            $table->id();
             $table->string('uuid');
             $table->timestamp('submitted_at');
-            $table->foreignId('xlsform_id')->constrained();
+            $table->foreignId('project_xlsform_id');
             $table->json('content');
             $table->timestamps();
-            $table->primary('id');
         });
     }
 
@@ -31,6 +30,6 @@ class CreateSubmissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('submissions');
+        Schema::dropIfExists('project_submissions');
     }
 }

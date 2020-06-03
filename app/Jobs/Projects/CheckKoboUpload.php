@@ -3,7 +3,7 @@
 namespace App\Jobs\Projects;
 
 use App\Models\User;
-use App\Models\Projectxlsform;
+use App\Models\ProjectXlsform;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Queue\SerializesModels;
@@ -26,11 +26,11 @@ class CheckKoboUpload implements ShouldQueue
     /**
      * Create a new job instance.
      * @param User $user
-     * @param Projectxlsform $form
+     * @param ProjectXlsform $form
      * @param String $importUid
      * @return void
      */
-    public function __construct(User $user, Projectxlsform $form, String $importUid)
+    public function __construct(User $user, ProjectXlsform $form, String $importUid)
     {
         $this->user = $user;
         $this->form = $form;
@@ -87,7 +87,7 @@ class CheckKoboUpload implements ShouldQueue
 
             // run other actions on Kobo that required a succesfully imported form:
             SetKoboFormToActive::withChain([
-                new ShareFormWithAdmins($this->form),
+                new ShareFormWithProjectMembers($this->form),
                 new DeploymentSuccessMessage($this->user, $this->form),
             ])->dispatch($this->user, $this->form);
         }

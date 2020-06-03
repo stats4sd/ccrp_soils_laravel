@@ -1,5 +1,24 @@
 <?php
 
+/**
+ * Routes for making requests that require Authentication, but should not be translated
+ */
+Route::group([
+    'middleware' => ['auth'],
+], function(){
+
+    Route::get('projects/{project}/projectxlsforms', 'ProjectXlsformController@index')->name('projectxlsforms.get');
+
+    Route::post('projectxlsforms/{project_xlsform}/deploytokobo', 'ProjectXlsformController@deployToKobo')->name('projectxlsforms.deploy');
+
+    Route::post('projectxlsforms/{project_xlsform}/syncdata', 'ProjectXlsformController@syncData')->name('projectxlsforms.sync');
+
+    Route::post('projectxlsforms/{project_xlsform}/getdata', 'ProjectXlsformController@getData')->name('projectxlsforms.getdata');
+});
+
+/**
+ * Routes that should involve translation (and redirect to en/ fr/ es/ etc )
+ */
 Route::group([
     'middleware' => 'locale',
 ], function() {
@@ -33,7 +52,7 @@ Route::group([
 
         Route::get('projects/{project}#{tab?}', 'ProjectController@show')->name('projects.show');
 
-        // Modified Resource Controller for ProjectMember
+        // // Modified Resource Controller for ProjectMember
         Route::get('projects/{project}/projectmembers/create', 'ProjectMemberController@create')->name('projectmembers.create');
         Route::post('projects/{project}/projectmembers', 'ProjectMemberController@store')->name('projectmembers.store');
         //show and index methods not required (yet)
@@ -41,9 +60,9 @@ Route::group([
         Route::put('projects/{project}/projectmembers/{user}', 'ProjectMemberController@update')->name('projectmembers.update');
         Route::delete('projects/{project}/projectmembers/{user}', 'ProjectMemberController@destroy')->name('projectmembers.destroy');
 
-        Route::get('my-account', 'UserController@account')->name('users.account');
-        Route::get('users/{user}/password', 'UserController@editPassword')->name('users.password.edit');
-        Route::put('users/{user}/password', 'UserController@updatePassword')->name('users.password.update');
+        // Route::get('my-account', 'UserController@account')->name('users.account');
+        // Route::get('users/{user}/password', 'UserController@editPassword')->name('users.password.edit');
+        // Route::put('users/{user}/password', 'UserController@updatePassword')->name('users.password.update');
 
         //User
         // Route::post('/users/{id}/upload', 'UserController@upload');
@@ -53,12 +72,12 @@ Route::group([
         // Route::post('/users/{id}/kobo-user', 'UserController@koboUser');
 
         //Projects
-        Route::post('/projects/changeStatus', 'ProjectController@changeStatusUser');
-        Route::post('/projects/deleteMember', 'ProjectController@deleteMember');
-        Route::post('/projects/{id}/validateGroup', 'ProjectController@validateGroup');
-        Route::post('/projects/{id}/send', 'ProjectController@sendEmail');
-        Route::get('/projects/{id}/download-samples-merged', 'ProjectController@download');
-        Route::get('/projects/{id}/downloaddata', 'SubmissionController@download');
+        // Route::post('/projects/changeStatus', 'ProjectController@changeStatusUser');
+        // Route::post('/projects/deleteMember', 'ProjectController@deleteMember');
+        // Route::post('/projects/{id}/validateGroup', 'ProjectController@validateGroup');
+        // Route::post('/projects/{id}/send', 'ProjectController@sendEmail');
+        // Route::get('/projects/{id}/download-samples-merged', 'ProjectController@download');
+        // Route::get('/projects/{id}/downloaddata', 'SubmissionController@download');
 
 
         // Route::get('/projects/{project}/form/{form}/publish', 'KoboController@publish')->name("kobo.publish");

@@ -17,14 +17,12 @@ class CreateProjectsXlsFormsTable extends Migration
             $table->id('id');
             $table->foreignId('project_id');
             $table->foreignId('xlsform_id');
-            $table->integer('records')->default(0);
             $table->string('kobo_id', 255)->nullable()->comment('If null; form is not on Kobo');
-            $table->string('kobo_version_id')->nullable()->comment('If null; form is not deployed');
+            $table->string('kobo_version_id')->nullable()->comment('If null; form has never been deployed/active on Kobo');
+            $table->string('enketo_url')->nullable()->comment('If null; form is not currently deployed/active on Kobo');
             $table->boolean('processing')->default(0)->comment('If true, this entire entry should not be editable');
-            $table->boolean('is_active')->default(0)->comment('If true, this project-form is deployed and active on Kobotoolbox');
+            $table->boolean('is_active')->default(0)->comment('If true, this project-form is deployed and active on Kobo');
             $table->timestamps();
-
-
         });
     }
 

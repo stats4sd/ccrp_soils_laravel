@@ -3,7 +3,7 @@
 namespace App\Jobs\Projects;
 
 use App\Models\User;
-use App\Models\Projectxlsform;
+use App\Models\ProjectXlsform;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Queue\SerializesModels;
@@ -24,7 +24,7 @@ class DeployFormToKobo implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(User $user, Projectxlsform $form)
+    public function __construct(User $user, ProjectXlsform $form)
     {
         //
         $this->user = $user;
@@ -45,7 +45,7 @@ class DeployFormToKobo implements ShouldQueue
             $response = Http::withBasicAuth(config('services.kobo.username'), config('services.kobo.password'))
             ->withHeaders(["Accept" => "application/json"])
             ->post(config('services.kobo.endpoint')."/api/v2/assets/", [
-                "name" => $this->form->project->title . " - " . $this->form->xls_form->title,
+                "name" => $this->form->title,
                 "asset_type" => "survey",
             ])
             ->throw() // throw error and halt if 4** or 5**

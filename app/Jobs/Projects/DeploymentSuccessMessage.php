@@ -3,7 +3,7 @@
 namespace App\Jobs\Projects;
 
 use App\Models\User;
-use App\Models\Projectxlsform;
+use App\Models\ProjectXlsform;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -23,7 +23,7 @@ class DeploymentSuccessMessage implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(User $user, Projectxlsform $form)
+    public function __construct(User $user, ProjectXlsform $form)
     {
         $this->user = $user;
         $this->form = $form;

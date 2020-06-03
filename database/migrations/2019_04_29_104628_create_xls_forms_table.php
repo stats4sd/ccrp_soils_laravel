@@ -21,7 +21,6 @@ class CreateXlsFormsTable extends Migration
             $table->string('kobo_version_id')->nullable();
             $table->boolean('is_active')->default(0)->comment('If true, form is active and deployed on Kobotools');
             $table->string('enketo_url')->nullable();
-            $table->string('instance_name')->nullable();
             $table->string('link_page')->nullable();
             $table->text('description')->nullable();
             $table->text('media')->nullable();

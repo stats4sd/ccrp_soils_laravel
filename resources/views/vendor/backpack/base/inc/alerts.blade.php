@@ -64,7 +64,7 @@
             // UPLOAD MESSAGES
             .listen('KoboUploadReturnedSuccess', (e) => {
                 new Noty({
-                    type: "success",
+                    type: "info",
                     text: "The " + e.form.title + " Form has been successfully uploaded to Kobotools.",
                     timeout: false
                 }).show();

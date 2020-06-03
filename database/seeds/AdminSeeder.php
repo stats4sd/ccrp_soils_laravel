@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Project;
 use Illuminate\Database\Seeder;
 
 class AdminSeeder extends Seeder
@@ -22,5 +23,6 @@ class AdminSeeder extends Seeder
                 'admin' => 1,
             ]);
         }
+
     }
 }

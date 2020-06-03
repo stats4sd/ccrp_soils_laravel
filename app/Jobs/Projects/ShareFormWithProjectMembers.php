@@ -3,7 +3,7 @@
 namespace App\Jobs\Projects;
 
 use App\Models\User;
-use App\Models\Projectxlsform;
+use App\Models\ProjectXlsform;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Queue\SerializesModels;
@@ -11,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class ShareFormWithAdmins implements ShouldQueue
+class ShareFormWithProjectMembers implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -22,9 +22,8 @@ class ShareFormWithAdmins implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Projectxlsform $form)
+    public function __construct(ProjectXlsform $form)
     {
-        //
         $this->form = $form;
     }
 
@@ -35,24 +34,22 @@ class ShareFormWithAdmins implements ShouldQueue
      */
     public function handle()
     {
-        $admins = User::where('admin', '=', 1)->get();
+        $members = $this->form->project->users;
 
         $payload = [];
 
         $permissions = ['change_asset', 'add_submissions', 'change_submissions', 'validate_submissions'];
 
-        foreach($admins as $admin) {
-            if($admin->kobo_id) {
+        foreach($members as $member) {
+            if($member->kobo_id) {
                 foreach($permissions as $permission) {
                     $payload[] = [
                         'permission' => config('services.kobo.endpoint_v2').'/permissions/'.$permission.'/',
-                        'user' => config('services.kobo.endpoint_v2').'/users/'.$admin->kobo_id.'/',
+                        'user' => config('services.kobo.endpoint_v2').'/users/'.$member->kobo_id.'/',
                     ];
                 }
             }
         }
-
-        \Log::info(json_encode($payload));
 
         $response = Http::withBasicAuth(config('services.kobo.username'), config('services.kobo.password'))
         ->withHeaders(['Accept' => 'application/json'])

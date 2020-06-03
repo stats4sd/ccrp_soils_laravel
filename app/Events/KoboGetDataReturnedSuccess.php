@@ -3,7 +3,6 @@
 namespace App\Events;
 
 use App\Models\User;
-use App\Models\Xlsform;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -12,14 +11,12 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class KoboArchiveRequestReturnedError implements ShouldBroadcast
+class KoboGetDataReturnedSuccess implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $user;
     public $form;
-    public $errorType;
-    public $errorMessage;
 
     /**
      * Create a new event instance.
@@ -27,13 +24,10 @@ class KoboArchiveRequestReturnedError implements ShouldBroadcast
      * @param Xlsform|ProjectXlsform $form
      * @return void
      */
-    public function __construct(User $user, $form, $errorType, $errorMessage)
+    public function __construct(User $user, $form)
     {
-        //
         $this->user = $user;
         $this->form = $form;
-        $this->errorType = $errorType;
-        $this->errorMessage = $errorMessage;
     }
 
     /**

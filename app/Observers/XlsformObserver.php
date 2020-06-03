@@ -19,11 +19,8 @@ class XlsformObserver
      */
     public function created(Xlsform $xlsform)
     {
-        // dispatch( new PushFormFileToKobotools($xlsform));
-
         $projects = Project::all()->pluck('id')->toArray();
         $xlsform->projects()->sync($projects);
-
     }
 
     /**
@@ -34,17 +31,6 @@ class XlsformObserver
      */
     public function updated(Xlsform $xlsform)
     {
-
-        // $changes = $xlsform->getChanges();
-
-
-        // if(
-        //     isset($changes['title'])
-        //     || isset($changes['file'])
-        //     || isset($changes['media'])
-        // ) {
-        //     dispatch( new PushFormFileToKobotools($xlsform));
-        // }
 
     }
 

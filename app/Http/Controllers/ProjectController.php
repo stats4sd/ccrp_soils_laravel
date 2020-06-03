@@ -8,7 +8,7 @@ use App\Mail\InviteMember;
 use App\Models\Invite;
 use App\Models\Project;
 use App\Models\ProjectMember;
-use App\Models\Projectxlsform;
+use App\Models\ProjectXlsform;
 use App\Models\Xlsform;
 use App\Models\User;
 use Carbon\Carbon;
@@ -48,7 +48,7 @@ class ProjectController extends Controller
             'users' => function($q) {
                 $q->orderBy('pivot_admin', 'desc');
             },
-            'xls_forms',
+            'project_xlsforms.xlsform',
             ]
         );
 
