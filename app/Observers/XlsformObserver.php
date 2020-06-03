@@ -19,8 +19,11 @@ class XlsformObserver
      */
     public function created(Xlsform $xlsform)
     {
-        $projects = Project::all()->pluck('id')->toArray();
-        $xlsform->projects()->sync($projects);
+        if($xlsform->live) {
+            $projects = Project::all()->pluck('id')->toArray();
+            $xlsform->projects()->sync($projects);
+        }
+
     }
 
     /**
@@ -31,7 +34,10 @@ class XlsformObserver
      */
     public function updated(Xlsform $xlsform)
     {
-
+        if ($xlsform->live) {
+            $projects = Project::all()->pluck('id')->toArray();
+            $xlsform->projects()->sync($projects);
+        }
     }
 
     /**

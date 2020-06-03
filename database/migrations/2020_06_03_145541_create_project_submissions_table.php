@@ -14,12 +14,14 @@ class CreateProjectSubmissionsTable extends Migration
     public function up()
     {
         Schema::create('project_submissions', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('id');
             $table->string('uuid');
             $table->timestamp('submitted_at');
             $table->foreignId('project_xlsform_id');
             $table->json('content');
             $table->timestamps();
+
+            $table->primary('id');
         });
     }
 

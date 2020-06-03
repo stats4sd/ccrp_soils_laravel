@@ -40,6 +40,7 @@ class AnalysisPh extends Model
 {
 
     public $table = "analysis_ph";
+    protected $guarded = [];
 
     public function sample ()
     {

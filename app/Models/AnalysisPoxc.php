@@ -53,6 +53,7 @@ class AnalysisPoxc extends Model
 {
 
     public $table = "analysis_poxc";
+    protected $guarded = [];
 
     public function sample ()
     {

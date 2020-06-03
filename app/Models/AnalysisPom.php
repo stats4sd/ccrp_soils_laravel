@@ -38,6 +38,7 @@ class AnalysisPom extends Model
 {
 
     public $table = "analysis_pom";
+    protected $guarded = [];
 
 
     public function sample ()

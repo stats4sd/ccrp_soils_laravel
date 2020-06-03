@@ -56,6 +56,11 @@ class XlsformCrudController extends CrudController
                 'type' => 'date',
             ],
             [
+                'name' => 'data_map_id',
+                'type' => 'text',
+                'label' => 'Data Map',
+            ],
+            [
                 'name' => 'kobo_id',
                 'label' => 'View on Kobotools',
                 'type' => 'closure',
@@ -99,12 +104,24 @@ class XlsformCrudController extends CrudController
                 'type' => 'text',
                 'label' => 'Choose a title for the downloads page',
             ],
-            [   // Upload xls form
+            [
                 'name' => 'xlsfile',
                 'type' => 'upload',
                 'upload' => true,
                 'disk' => 'public' ,
                 'label' => 'Upload the XLS Form file',
+            ],
+            [
+                'name' => 'data_map_id',
+                'type' => 'relationship',
+                'label' => 'Which data table does this form link to?',
+                'hint' => 'This determines how the variables from the XLS form are matched to the database `sample` and `analysis` tables',
+                'default' => 'none',
+            ],
+            [
+                'name' => 'live',
+                'label' => 'Is Form Available to Projects?',
+                'type' => 'boolean',
             ],
             [
                 'name' => 'link_page',
@@ -184,7 +201,8 @@ class XlsformCrudController extends CrudController
                 'wrapper' => [
                     'href' => function ($crud, $column, $entry, $related_key) {
                         return Storage::disk('public')->url($entry->xlsfile);
-                    }                ]
+                    }
+                ]
             ],
             [
                 'name' => 'media',

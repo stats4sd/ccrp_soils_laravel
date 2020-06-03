@@ -3,14 +3,17 @@
 namespace App\Jobs\Projects;
 
 use App\Models\User;
+use App\Models\Sample;
 use Illuminate\Bus\Queueable;
 use App\Models\ProjectXlsform;
 use App\Models\ProjectSubmission;
 use Illuminate\Support\Facades\Http;
 use App\Events\GetDataFromKoboFailed;
 use Illuminate\Queue\SerializesModels;
+use App\Events\KoboGetDataReturnedError;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Events\KoboGetDataReturnedSuccess;
+use App\Http\Controllers\DataMapController;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
@@ -64,13 +67,62 @@ class GetDataFromKobo implements ShouldQueue
 
         foreach($data as $newSubmission) {
             if(!in_array($newSubmission['_id'], $submissions->pluck('id')->toArray())) {
-                ProjectSubmission::create([
-                    'id' => $newSubmission['_id'],
-                    'uuid' => $newSubmission['_uuid'],
-                    'project_xlsform_id' => $this->form->id,
-                    'content' => json_encode($newSubmission),
-                    'submitted_at' => $newSubmission['_submission_time'],
-                ]);
+                $projectSubmission = new ProjectSubmission;
+
+                $projectSubmission->id = $newSubmission['_id'];
+                $projectSubmission->uuid = $newSubmission['_uuid'];
+                $projectSubmission->project_xlsform_id = $this->form->id;
+                $projectSubmission->content = json_encode($newSubmission);
+                $projectSubmission->submitted_at = $newSubmission['_submission_time'];
+
+                $projectSubmission->save();
+
+                $dataMap = $this->form->xlsform->data_map_id;
+                $submissionId = $newSubmission['_id'];
+                $projectId = $this->form->project->id;
+                $data = $newSubmission;
+
+
+                // Do the funky mapping dance
+                switch ($dataMap) {
+                    case 'sample':
+                        \Log::info("sample data found");
+
+                    break;
+
+                    case 'analysis_p':
+                        \Log::info("analysis_p data found");
+                        DataMapController::analysis_p($newSubmission, $submissionId);
+                        break;
+
+                    case 'analysis_ph':
+                        \Log::info("analysis_ph data found");
+                        DataMapController::analysis_ph($newSubmission, $submissionId);
+                        break;
+
+                    case 'analysis_poxc':
+                        \Log::info("analysis_poxc data found");
+
+                        DataMapController::analysis_poxc($newSubmission, $submissionId);
+                        break;
+
+                    case 'analysis_pom':
+                        \Log::info("analysis_pom data found");
+
+                        DataMapController::analysis_pom($newSubmission, $submissionId);
+                        break;
+
+                    case 'analysis_agg':
+                        \Log::info("analysis_agg data found");
+
+                        DataMapController::analysis_agg($newSubmission, $submissionId);
+                        break;
+
+                    default:
+                        \Log::warning('No Mapping Found');
+                        break;
+                }
+
             }
         }
 

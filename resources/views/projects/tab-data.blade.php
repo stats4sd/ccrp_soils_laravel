@@ -7,11 +7,17 @@
             <tr>
                 <th>Sample Id</th>
                 <th>POXC Value</th>
+                <th>P Value</th>
+                <th>pH Value</th>
+                <th>POM Value</th>
             </tr>
             @foreach($project->samples as $sample)
             <tr>
                 <td>{{ $sample->id }}</td>
                 <td>{{ $sample->poxc_result }}</td>
+                <td>{{ $sample->p_result }}</td>
+                <td>{{ $sample->ph_result }}</td>
+                <td>{{ $sample->pom_result }}</td>
             </tr>
             @endforeach
         </table>

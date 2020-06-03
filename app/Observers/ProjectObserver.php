@@ -20,7 +20,7 @@ class ProjectObserver
         $user = User::find($project->creator_id);
         $project->users()->attach($user, ['admin' => true]);
 
-        $project->xls_forms()->sync(Xlsform::all());
+        $project->xls_forms()->sync(Xlsform::where('live', '=', true)->get());
 
     }
 

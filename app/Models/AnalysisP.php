@@ -50,6 +50,7 @@ use Illuminate\Database\Eloquent\Model;
 class AnalysisP extends Model
 {
     public $table = "analysis_p";
+    protected $guarded = [];
 
     public function sample ()
     {

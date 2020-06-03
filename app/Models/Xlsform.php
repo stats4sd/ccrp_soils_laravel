@@ -69,12 +69,6 @@ class Xlsform extends Model
 
     /*
     |--------------------------------------------------------------------------
-    | FUNCTIONS
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
@@ -99,7 +93,14 @@ class Xlsform extends Model
         return $this->hasMany(Submission::class);
     }
 
-public function setXlsfileAttribute($value)
+    public function data_map ()
+    {
+       return $this->belongsTo(DataMap::class);
+    }
+
+
+
+    public function setXlsfileAttribute($value)
     {
         $attribute_name = "xlsfile";
         $disk = "public";

@@ -66,7 +66,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sample extends Model
 {
     public $incrementing = false;
-
+    public $guarded = [];
 
     public function project ()
     {
@@ -77,6 +77,33 @@ class Sample extends Model
     {
         if($this->analysis_poxc) {
             return $this->analysis_poxc->avg('poxc_soil');
+        }
+
+        return null;
+    }
+
+    public function getPResultAttribute()
+    {
+        if ($this->analysis_p) {
+            return $this->analysis_p->avg('olsen_p');
+        }
+
+        return null;
+    }
+
+    public function getPhResultAttribute()
+    {
+        if ($this->analysis_ph) {
+            return $this->analysis_ph->avg('reading_ph');
+        }
+
+        return null;
+    }
+
+    public function getPomResultAttribute()
+    {
+        if ($this->analysis_pom) {
+            return $this->analysis_pom->avg('percent_pom');
         }
 
         return null;
@@ -101,5 +128,10 @@ class Sample extends Model
     public function analysis_poxc ()
     {
         return $this->hasMany(AnalysisPoxc::class);
+    }
+
+    public function analysis_agg()
+    {
+        return $this->hasMany(AnalysisAgg::class);
     }
 }

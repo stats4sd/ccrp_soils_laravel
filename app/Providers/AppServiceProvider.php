@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Models\Invite;
 use App\Models\Project;
+use App\Models\ProjectSubmission;
 use App\Models\User;
 use App\Models\Xlsform;
 use App\Observers\InviteObserver;
 use App\Observers\ProjectObserver;
+use App\Observers\ProjectSubmissionObserver;
 use App\Observers\UserObserver;
 use App\Observers\XlsformObserver;
 use Illuminate\Support\ServiceProvider;
@@ -31,10 +33,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Xlsform::observe(XlsformObserver::class);
-        Project::observe(ProjectObserver::class);
         Invite::observe(InviteObserver::class);
+        Project::observe(ProjectObserver::class);
+        ProjectSubmission::observe(ProjectSubmissionObserver::class);
         User::observe(UserObserver::class);
+        Xlsform::observe(XlsformObserver::class);
+
     }
 
 
