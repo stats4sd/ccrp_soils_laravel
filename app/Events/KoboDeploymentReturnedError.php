@@ -3,7 +3,6 @@
 namespace App\Events;
 
 use App\Models\User;
-use App\Models\Xlsform;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -24,12 +23,12 @@ class KoboDeploymentReturnedError implements ShouldBroadcast
     /**
      * Create a new event instance.
      * @param User $user
-     * @param Xlsform $form
+     * @param Xlsform|ProjectXlsform $form
      * @param String $errorType
      * @param String $errorMessage
      * @return void
      */
-    public function __construct(User $user, Xlsform $form, $errorType, $errorMessage)
+    public function __construct(User $user, $form, $errorType, $errorMessage)
     {
         //
         $this->user = $user;

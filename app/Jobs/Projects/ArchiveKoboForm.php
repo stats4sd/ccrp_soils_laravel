@@ -18,7 +18,6 @@ class ArchiveKoboForm implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $user;
-
     public $form;
 
     /**

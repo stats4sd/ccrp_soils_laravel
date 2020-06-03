@@ -88,6 +88,12 @@ class Xlsform extends Model
             ]);
     }
 
+    public function project_xlsforms ()
+    {
+       return $this->hasMany(Projectxlsform::class);
+    }
+
+
     public function submissions ()
     {
         return $this->hasMany(Submission::class);

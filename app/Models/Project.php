@@ -117,6 +117,11 @@ class Project extends Model
         ]);
     }
 
+    public function project_xlsforms()
+    {
+        return $this->hasMany(Projectxlsform::class);
+    }
+
     public function users()
     {
         return $this->belongsToMany('App\Models\User', 'projects_members')->withPivot('admin');
@@ -142,6 +147,7 @@ class Project extends Model
     {
         return $this->hasMany(Sample::class);
     }
+
 
 
 }

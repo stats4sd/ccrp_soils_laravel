@@ -24,10 +24,10 @@ class KoboArchiveRequestReturnedError implements ShouldBroadcast
     /**
      * Create a new event instance.
      * @param User $user
-     * @param Xlsform $form
+     * @param Xlsform|Projectxlsform $form
      * @return void
      */
-    public function __construct(User $user, Xlsform $form, $errorType, $errorMessage)
+    public function __construct(User $user, $form, $errorType, $errorMessage)
     {
         //
         $this->user = $user;

@@ -7,11 +7,12 @@ use App\Models\Project;
 use App\Models\Xlsform;
 use Livewire\Component;
 use App\Jobs\TestNotificationSystem;
+use App\Models\Projectxlsform;
 
 class FormsTable extends Component
 {
     public $project;
-    public $forms;
+    public $projectforms;
     public $showNotify;
 
     protected function getListeners()
@@ -19,37 +20,39 @@ class FormsTable extends Component
         $userId = auth()->user()->id;
 
         return [
-            "echo-private:App.User.{$userId},NewProjectFormDeployedToKobo" => 'notifyNewDeployment'];
+            "echo-private:App.User.{$userId},KoboDeployementReturnedSuccess" => 'koboFormDeployed',
+            "echo-private:App.User.{$userId},KoboArchiveRequestReturnedSuccess" => 'koboFormArchived',
+        ];
 
     }
 
     public function mount(Project $project)
     {
         $this->project = $project;
+        $this->projectforms = $project->project_xlsforms;
         $this->showNotify = false;
     }
 
-    public function deployForm ($form_id)
+    public function deployForm (ProjectXlsform $projectform)
     {
 
-        $form = $this->project->xls_forms->find($form_id);
-
-        $this->project->xls_forms()
-        ->updateExistingPivot($form_id, [
-            'processing' => true
+        $projectform->update([
+            'processing' => true,
         ]);
 
+        $this->projectforms = $this->project->project_xlsforms;
+
         //dispatch deployment job
-        DeployFormToKobo::dispatch(auth()->user(), $form);
+        DeployFormToKobo::dispatch(auth()->user(), $projectform);
 
         //reply to user
 
         //TestNotificationSystem::dispatch($form, auth()->user());
     }
 
-    public function notifyNewDeployment ()
+    public function koboFormDeployed ($event)
     {
-        $this->showNotify = true;
+        ddd($event);
     }
 
 

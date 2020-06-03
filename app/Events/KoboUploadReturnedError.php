@@ -24,7 +24,7 @@ class KoboUploadReturnedError implements ShouldBroadcast
      * Create a new event instance
      *
      * @param User $user
-     * @param Xlsform $form
+     * @param Xlsform|ProjectXlsform $form
      * @param String $errorType
      * @param String $errorMessage
      */

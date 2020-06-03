@@ -10,14 +10,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($project->xls_forms as $form)
+            @foreach($projectforms as $form)
             <tr>
-                <td>{{ $form->title }}</td>
-                <!-- <td>{{ $form->pivot->form_kobo_id_string }}</td> -->
-                <td>{{ $form->pivot->records }}</td>
+                <td>{{ $form->xlsform->title }}</td>
+                <!-- <td>{{ $form->form_kobo_id_string }}</td> -->
+                <td>{{ $form->records }}</td>
                 <td>
-                    @if($form->pivot->deployed)
-                    <p>Deployed (<a href="https://kf.kobotoolbox.org/#/forms/{{ $form->pivot->form_kobo_id_string }}/summary">Show on Kobotoolbox</a>)</p>
+                    @if($form->deployed)
+                    <p>Deployed (<a href="https://kf.kobotoolbox.org/#/forms/{{ $form->form_kobo_id_string }}/summary">Show on Kobotoolbox</a>)</p>
                     @else
                     <p>{{ t("undeployed") }}</p>
                     @endif
@@ -25,7 +25,9 @@
                 <td>
                     <div class="w3-show-inline-block">
                         <div class="w3-bar">
-                            <button class="btn btn-dark btn-sm text-white" wire:click="deployForm({{ $form->id }})">
+                            <button
+                            class="btn btn-dark btn-sm text-white" wire:click="deployForm({{ $form }})"
+                            {{ $form->processing ? 'disabled' : '' }}>
                                 Deploy Form
                             </button>
 

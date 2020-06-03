@@ -3,7 +3,6 @@
 namespace App\Events;
 
 use App\Models\User;
-use App\Models\Xlsform;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -22,10 +21,10 @@ class KoboUploadReturnedSuccess implements ShouldBroadcast
     /**
      * Create a new event instance.
      * @param User $user
-     * @param Xlsform $form
+     * @param Xlsform|ProjectXlsform $form
      * @return void
      */
-    public function __construct(User $user, Xlsform $form)
+    public function __construct(User $user, $form)
     {
         $this->user = $user;
         $this->form = $form;
