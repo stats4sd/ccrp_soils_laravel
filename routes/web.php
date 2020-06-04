@@ -29,6 +29,9 @@ Route::group([
     Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 
     Route::view('/', 'home')->middleware('guest')->name('home');
+    Route::get('home', function() {
+        return redirect('/');
+    });
 
     Route::view('about', 'about')->name('about');
     Route::view('qr-codes', 'qr_code')->name('qr-codes');
