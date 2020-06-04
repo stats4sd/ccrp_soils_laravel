@@ -65,11 +65,11 @@ Route::group([
         // Route::put('users/{user}/password', 'UserController@updatePassword')->name('users.password.update');
 
         //User
-        // Route::post('/users/{id}/upload', 'UserController@upload');
-        // Route::post('/users/{id}/validateDetails', 'UserController@validateDetails');
-        // Route::post('/users/{id}/changePassword', 'UserController@changePassword');
-        // Route::post('/users/{id}/deleteProfile', 'UserController@deleteProfile');
-        // Route::post('/users/{id}/kobo-user', 'UserController@koboUser');
+        Route::post('/users/{id}/upload', 'UserController@upload');
+        Route::post('/users/{id}/validateDetails', 'UserController@validateDetails');
+        Route::post('/users/{id}/changePassword', 'UserController@changePassword');
+        Route::post('/users/{id}/deleteProfile', 'UserController@deleteProfile');
+        Route::post('/users/{id}/kobo-user', 'UserController@koboUser');
 
         //Projects
         // Route::post('/projects/changeStatus', 'ProjectController@changeStatusUser');
