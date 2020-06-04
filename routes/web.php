@@ -60,16 +60,16 @@ Route::group([
         Route::put('projects/{project}/projectmembers/{user}', 'ProjectMemberController@update')->name('projectmembers.update');
         Route::delete('projects/{project}/projectmembers/{user}', 'ProjectMemberController@destroy')->name('projectmembers.destroy');
 
-        // Route::get('my-account', 'UserController@account')->name('users.account');
-        // Route::get('users/{user}/password', 'UserController@editPassword')->name('users.password.edit');
-        // Route::put('users/{user}/password', 'UserController@updatePassword')->name('users.password.update');
+        Route::get('my-account', 'UserController@account')->name('users.account');
+        Route::get('users/{user}/password', 'UserController@editPassword')->name('users.password.edit');
+        Route::put('users/{user}/password', 'UserController@updatePassword')->name('users.password.update');
 
-        //User
-        Route::post('/users/{id}/upload', 'UserController@upload');
-        Route::post('/users/{id}/validateDetails', 'UserController@validateDetails');
-        Route::post('/users/{id}/changePassword', 'UserController@changePassword');
-        Route::post('/users/{id}/deleteProfile', 'UserController@deleteProfile');
-        Route::post('/users/{id}/kobo-user', 'UserController@koboUser');
+        // //User
+        // Route::post('/users/{id}/upload', 'UserController@upload');
+        // Route::post('/users/{id}/validateDetails', 'UserController@validateDetails');
+        // Route::post('/users/{id}/changePassword', 'UserController@changePassword');
+        // Route::post('/users/{id}/deleteProfile', 'UserController@deleteProfile');
+        // Route::post('/users/{id}/kobo-user', 'UserController@koboUser');
 
         //Projects
         // Route::post('/projects/changeStatus', 'ProjectController@changeStatusUser');
