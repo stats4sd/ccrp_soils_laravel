@@ -26,10 +26,10 @@ class CreateSamplesTable extends Migration
             $table->decimal('latitude', 25,20)->nullable();
             $table->decimal('altitude', 25,20)->nullable();
             $table->decimal('accuracy', 25,20)->nullable();
-            $table->text('comment');
-            $table->text('community_quick');
+            $table->text('comment')->nullable();
+            $table->text('community_quick')->nullable();
             $table->integer('project_id');
-            $table->text('farmer_quick');
+            $table->text('farmer_quick')->nullable();
             $table->timestamps();
         });
     }

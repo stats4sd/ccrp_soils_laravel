@@ -16,7 +16,7 @@ class CreateAnalysisPhTable extends Migration
         Schema::create('analysis_ph', function (Blueprint $table) {
             $table->id('id');
             $table->string('sample_id', 100);
-            $table->date('analysis_date')->nullable();
+            $table->date('analysis_date');
             $table->decimal('weight_soil', 6,3)->nullable();
             $table->decimal('vol_water', 6,3)->nullable();
             $table->decimal('reading_ph', 5,3)->nullable();

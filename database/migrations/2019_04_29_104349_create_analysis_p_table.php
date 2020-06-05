@@ -15,7 +15,7 @@ class CreateAnalysisPTable extends Migration
     {
         Schema::create('analysis_p', function (Blueprint $table) {
             $table->id('id');
-            $table->string('sample_id', 100)->nullable();
+            $table->string('sample_id', 100);
             $table->date('analysis_date');
             $table->decimal('weight_soil', 10,4)->nullable();
             $table->decimal('vol_extract', 10,4)->nullable();

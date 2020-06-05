@@ -15,7 +15,7 @@ class CreateAnalysisPoxcTable extends Migration
     {
         Schema::create('analysis_poxc', function (Blueprint $table) {
             $table->id('id');
-            $table->date('analysis_date')->nullable();
+            $table->date('analysis_date');
             $table->string('sample_id', 50);
             $table->decimal('weight_soil', 6,3)->nullable();
             $table->decimal('color', 25,20)->nullable();
