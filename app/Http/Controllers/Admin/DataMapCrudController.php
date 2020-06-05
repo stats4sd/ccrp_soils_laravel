@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\DataMapRequest;
+use App\Http\Requests\DataMapStoreRequest;
+use App\Http\Requests\DataMapUpdateRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -17,7 +18,6 @@ class DataMapCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     public function setup()
     {
@@ -28,20 +28,44 @@ class DataMapCrudController extends CrudController
 
     protected function setupListOperation()
     {
-        // TODO: remove setFromDb() and manually define Columns, maybe Filters
-        $this->crud->setFromDb();
+        $this->crud->addColumns([
+            [
+                'name' => 'id',
+                'label' => 'value',
+            ],
+            [
+                'name' => 'title',
+                'label' => 'label'
+            ],
+        ]);
     }
 
     protected function setupCreateOperation()
-    {
-        $this->crud->setValidation(DataMapRequest::class);
+{
+        $this->crud->setValidation(DataMapStoreRequest::class);
 
-        // TODO: remove setFromDb() and manually define Fields
-        $this->crud->setFromDb();
+        $this->crud->addFields([
+            [
+                'name' => 'id',
+                'type' => 'text',
+                'label' => 'value',
+            ],
+            [
+                'name' => 'title',
+                'type' => 'text',
+                'label' => 'label',
+            ],
+        ]);
     }
 
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+        $this->crud->modifyField('id', [
+            'attributes' => [
+                'disabled' => true,
+            ],
+        ]);
+        $this->crud->setValidation(DataMapUpdateRequest::class);
     }
 }

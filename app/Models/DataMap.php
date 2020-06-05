@@ -19,7 +19,7 @@ class DataMap extends Model
     protected $primaryKey = 'id';
     public $incrementing = false;
     // public $timestamps = false;
-    protected $guarded = ['id'];
+    protected $guarded = [];
     // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
