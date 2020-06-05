@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="img_group_default">
-                <img src="{{ url($project->avatar) }}" id="img_group">
+                <img src="{{ Storage::url($project->avatar) }}" id="img_group">
             </div>
         </div>
         <div class="col-sm-5">
