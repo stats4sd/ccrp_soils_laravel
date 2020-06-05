@@ -66,7 +66,7 @@ class XlsformCrudController extends CrudController
                 'type' => 'closure',
                 'function' => function($entry) {
                     if($entry->kobo_id) {
-                        return "<a href='https://kf.kobotoolbox.org/#/forms/".$entry->kobo_id."'>Kobotoolbox Link</a>";
+                        return "<a target='_blank' href='https://kf.kobotoolbox.org/#/forms/".$entry->kobo_id."'>Kobotoolbox Link</a>";
                     }
                     return "<span class='text-secondary'>Not Deployed</span>";
                 },
@@ -185,7 +185,8 @@ class XlsformCrudController extends CrudController
                 'wrapper' => [
                     'href' => function($crud, $column, $entry, $related_key) {
                         return $entry->link_page;
-                    }
+                    },
+                    'target' => "_blank",
                 ]
             ],
             [
@@ -201,7 +202,7 @@ class XlsformCrudController extends CrudController
                 'wrapper' => [
                     'href' => function ($crud, $column, $entry, $related_key) {
                         return Storage::disk('public')->url($entry->xlsfile);
-                    }
+                    },
                 ]
             ],
             [
