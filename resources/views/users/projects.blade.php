@@ -18,7 +18,7 @@
             </ul>
         </div>
     @else
-        @can('update', $user)
+        @if($user === auth()->user())
             <div class="alert alert-info">
                 It looks like you are not a member of any projects. To use the platform, you can either:
                 <ul>
