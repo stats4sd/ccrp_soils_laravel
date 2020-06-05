@@ -22,6 +22,7 @@ class CheckKoboUpload implements ShouldQueue
     public $importUid;
 
     public $tries = 50;
+    public $maxExceptions = 1;
 
     /**
      * Create a new job instance.
@@ -76,7 +77,9 @@ class CheckKoboUpload implements ShouldQueue
             ));
 
             // Throw exception to prevent other jobs in chain running.
-            throw new \Exception('Error: ' . $importCheck['messages']['error']);
+            throw new \Exception('Error: ' . $importCheck['messages']['error_type'] . ' : ' . $importCheck['messages']['error']);
+
+            $this->delete();
         }
 
         if($importStatus == "complete") {
