@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\createProjectMember;
-use App\Http\Requests\ProjectRequest;
-use App\Mail\InviteMember;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Invite;
 use App\Models\Project;
+use App\Models\Xlsform;
+use App\Mail\InviteMember;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Models\ProjectMember;
 use App\Models\ProjectXlsform;
-use App\Models\Xlsform;
-use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ProjectStoreRequest;
+use App\Http\Requests\ProjectUpdateRequest;
+use App\Http\Controllers\createProjectMember;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class ProjectController extends Controller
 {
@@ -60,7 +61,7 @@ class ProjectController extends Controller
         return view('projects.create');
     }
 
-    public function store (ProjectRequest $request)
+    public function store (ProjectStoreRequest $request)
     {
 
         $validatedData = $request->validated();
@@ -73,7 +74,7 @@ class ProjectController extends Controller
         return redirect()->route('projects.show', [$project]);
     }
 
-    public function update (ProjectRequest $request, Project $project)
+    public function update (ProjectUpdateRequest $request, Project $project)
     {
 
         $this->authorize('update', $project);
