@@ -35,6 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnalysisPh whereVolWater($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnalysisPh whereWeightSoil($value)
  * @mixin \Eloquent
+ * @property int $project_submission_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnalysisPh whereProjectSubmissionId($value)
  */
 class AnalysisPh extends Model
 {

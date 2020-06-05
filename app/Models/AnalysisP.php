@@ -46,6 +46,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnalysisP whereVolTopup($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnalysisP whereWeightSoil($value)
  * @mixin \Eloquent
+ * @property int $project_submission_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnalysisP whereProjectSubmissionId($value)
  */
 class AnalysisP extends Model
 {

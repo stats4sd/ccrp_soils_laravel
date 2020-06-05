@@ -30,6 +30,9 @@ use Illuminate\Database\Eloquent\Builder;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Invite whereProjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Invite whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read mixed $invite_day
+ * @property-read \App\Models\User $inviter
+ * @property-read \App\Models\Project $project
  */
 class Invite extends Model
 {

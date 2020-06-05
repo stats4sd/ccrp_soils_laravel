@@ -29,7 +29,7 @@
         <div class="w-50 m-0 p-3">No. of Submissions:</div>
         <div class="w-50 m-0 p-3 d-flex">
             <b>{{ $widget['form']->submissions->count() }}</b>
-            <a href="#" class="btn btn-primary ml-4">Download Submissions</a>
+            <a href="{{ route('xlsforms.downloadsubmissions', $widget['form']) }}" class="btn btn-primary ml-4">Download Submissions</a>
         </div>
     </li>
 </ul>

@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnalysisPom whereWeightPom($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnalysisPom whereWeightSoil($value)
  * @mixin \Eloquent
+ * @property int $project_submission_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnalysisPom whereProjectSubmissionId($value)
  */
 class AnalysisPom extends Model
 {

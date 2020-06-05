@@ -4,9 +4,10 @@ namespace App\Models;
 
 use App\Models\Sample;
 use App\Models\Submission;
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use App\Models\Views\SampleMerged;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 /**
  * App\Models\Project
@@ -47,6 +48,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Project withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Project withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Invite[] $invites
+ * @property-read int|null $invites_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProjectXlsform[] $project_xlsforms
+ * @property-read int|null $project_xlsforms_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Views\SampleMerged[] $samples_merged
+ * @property-read int|null $samples_merged_count
  */
 class Project extends Model
 {
@@ -147,6 +154,12 @@ class Project extends Model
     {
         return $this->hasMany(Sample::class);
     }
+
+    public function samples_merged ()
+    {
+       return $this->hasMany(SampleMerged::class);
+    }
+
 
 
 

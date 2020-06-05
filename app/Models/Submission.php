@@ -30,6 +30,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Submission whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Submission whereXlsformId($value)
  * @mixin \Eloquent
+ * @property string $submitted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Submission whereSubmittedAt($value)
  */
 class Submission extends Model
 {

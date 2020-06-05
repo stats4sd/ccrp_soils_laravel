@@ -48,6 +48,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnalysisPoxc whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnalysisPoxc whereWeightSoil($value)
  * @mixin \Eloquent
+ * @property int $project_submission_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnalysisPoxc whereProjectSubmissionId($value)
  */
 class AnalysisPoxc extends Model
 {

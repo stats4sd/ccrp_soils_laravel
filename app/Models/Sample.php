@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Project;
 use App\Models\AnalysisP;
 use App\Models\AnalysisPh;
 use App\Models\AnalysisPom;
 use App\Models\AnalysisPoxc;
-use App\Models\Project;
+use App\Models\Views\SampleMerged;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -62,6 +63,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sample whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sample whereUsername($value)
  * @mixin \Eloquent
+ * @property int|null $plot_id
+ * @property int $project_submission_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\AnalysisAgg[] $analysis_agg
+ * @property-read int|null $analysis_agg_count
+ * @property-read mixed $p_result
+ * @property-read mixed $ph_result
+ * @property-read mixed $pom_result
+ * @property-read \App\Models\Views\SampleMerged|null $samples_merged
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sample wherePlotId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sample whereProjectSubmissionId($value)
  */
 class Sample extends Model
 {
@@ -133,5 +144,10 @@ class Sample extends Model
     public function analysis_agg()
     {
         return $this->hasMany(AnalysisAgg::class);
+    }
+
+    public function samples_merged()
+    {
+        return $this->hasOne(SampleMerged::class);
     }
 }

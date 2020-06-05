@@ -8,11 +8,8 @@ Route::group([
 ], function(){
 
     Route::get('projects/{project}/projectxlsforms', 'ProjectXlsformController@index')->name('projectxlsforms.get');
-
     Route::post('projectxlsforms/{project_xlsform}/deploytokobo', 'ProjectXlsformController@deployToKobo')->name('projectxlsforms.deploy');
-
     Route::post('projectxlsforms/{project_xlsform}/syncdata', 'ProjectXlsformController@syncData')->name('projectxlsforms.sync');
-
     Route::post('projectxlsforms/{project_xlsform}/getdata', 'ProjectXlsformController@getData')->name('projectxlsforms.getdata');
 });
 
@@ -54,6 +51,7 @@ Route::group([
         ]);
 
         Route::get('projects/{project}#{tab?}', 'ProjectController@show')->name('projects.show');
+        Route::get('projects/{project}/downloadsamples', 'SampleMergedController@download')->name('projects.downloadsamples');
 
         // // Modified Resource Controller for ProjectMember
         Route::get('projects/{project}/projectmembers/create', 'ProjectMemberController@create')->name('projectmembers.create');
@@ -63,10 +61,13 @@ Route::group([
         Route::put('projects/{project}/projectmembers/{user}', 'ProjectMemberController@update')->name('projectmembers.update');
         Route::delete('projects/{project}/projectmembers/{user}', 'ProjectMemberController@destroy')->name('projectmembers.destroy');
 
+
         Route::get('my-account', 'UserController@account')->name('users.account');
         Route::get('users/{user}/password', 'UserController@editPassword')->name('users.password.edit');
         Route::put('users/{user}/password', 'UserController@updatePassword')->name('users.password.update');
 
+
+        Route::get('xlsforms/{xlsform}/downloadsubmissions', 'SubmissionController@download')->name('xlsforms.downloadsubmissions');
         // //User
         // Route::post('/users/{id}/upload', 'UserController@upload');
         // Route::post('/users/{id}/validateDetails', 'UserController@validateDetails');

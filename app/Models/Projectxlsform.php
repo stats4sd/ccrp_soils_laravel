@@ -35,6 +35,17 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectXlsform whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectXlsform whereXlsformId($value)
  * @mixin \Eloquent
+ * @property int $processing If true, this entire entry should not be editable
+ * @property int $is_active If true, this project-form is deployed and active on Kobotoolbox
+ * @property string|null $enketo_url If null; for mis not currently deployed/active on Kobo
+ * @property-read mixed $title
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProjectSubmission[] $project_submissions
+ * @property-read int|null $project_submissions_count
+ * @property-read \App\Models\Xlsform $xlsform
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectXlsform whereEnketoUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectXlsform whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectXlsform whereKoboVersionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectXlsform whereProcessing($value)
  */
 class ProjectXlsform extends Pivot
 {

@@ -45,6 +45,23 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereVersion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereVersionId($value)
  * @mixin \Eloquent
+ * @property string|null $xlsfile
+ * @property string|null $kobo_id
+ * @property int $live If true, this form is available to projects to use
+ * @property string|null $enketo_url
+ * @property int $is_active If true, the form is active on Kobotools
+ * @property string $data_map_id
+ * @property-read \App\Models\DataMap $data_map
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProjectXlsform[] $project_xlsforms
+ * @property-read int|null $project_xlsforms_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereDataMapId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereEnketoUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereKoboId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereKoboVersionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereLive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Xlsform whereXlsfile($value)
  */
 class Xlsform extends Model
 {

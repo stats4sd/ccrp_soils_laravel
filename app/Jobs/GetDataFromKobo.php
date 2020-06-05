@@ -2,8 +2,9 @@
 
 namespace App\Jobs;
 
-use App\Models\Submission;
+use App\Models\User;
 use App\Models\Xlsform;
+use App\Models\Submission;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Queue\SerializesModels;
@@ -22,7 +23,7 @@ class GetDataFromKobo implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Xlsform $form)
+    public function __construct(User $user, Xlsform $form)
     {
         //
         $this->form = $form;
@@ -53,7 +54,6 @@ class GetDataFromKobo implements ShouldQueue
                 Submission::create([
                     'id' => $newSubmission['_id'],
                     'uuid' => $newSubmission['_uuid'],
-                    'project_id' => 1,
                     'xlsform_id' => $this->form->id,
                     'content' => json_encode($newSubmission),
                     'submitted_at' => $newSubmission['_submission_time'],
