@@ -75,6 +75,10 @@ class CheckKoboUpload implements ShouldQueue
                 $importCheck['messages']['error']
             ));
 
+            $this->form->update([
+                'processing' => 0,
+            ]);
+
             // Throw exception to prevent other jobs in chain running.
             throw new \Exception('Error: ' . $importCheck['messages']['error']);
         }

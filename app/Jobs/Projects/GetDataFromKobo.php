@@ -87,6 +87,7 @@ class GetDataFromKobo implements ShouldQueue
                 switch ($dataMap) {
                     case 'sample':
                         \Log::info("sample data found");
+                        DataMapController::sample($newSubmission, $submissionId, $projectId);
 
                     break;
 
