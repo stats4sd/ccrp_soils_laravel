@@ -89,7 +89,20 @@
                 this.projectForms = response.data
             })
 
-            // Listen for the 'NewBlogPost' event in the 'team.1' private channel
+            this.$echo.private('App.User.'+this.userId)
+            .listen('KoboUploadReturnedError', (payload) => {
+
+                console.log("BOOM! errr... wait...");
+
+                this.projectForms = this.projectForms.map( projectForm => {
+                    if(projectForm.id === payload.form.id) {
+                        return payload.form;
+                    }
+                    return projectForm
+                })
+            })
+
+
             this.$echo.private('App.User.'+this.userId)
             .listen('KoboDeploymentReturnedSuccess', (payload) => {
 

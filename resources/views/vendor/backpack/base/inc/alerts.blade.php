@@ -75,7 +75,7 @@
             .listen('KoboUploadReturnedError', (e) => {
                 new Noty({
                     type: "error",
-                    text: "The "+e.form.title+" Form could not be deployed to Kobotools.<br/>An error was returned<br/>Error Type: <b>"+e.errorType+"</b><br/>Error Message: <b>"+e.errorMessage+"</b>",
+                    text: "The "+e.form.title+" Form could not be uploaded to Kobotools.<br/>An error was returned<br/>Error Type: <b>"+e.errorType+"</b><br/>Error Message: <b>"+e.errorMessage+"</b><br/><br/>This may indicate errors in the XLSForm previously uploaded to this platform.",
                     timeout: false
                 }).show();
 
