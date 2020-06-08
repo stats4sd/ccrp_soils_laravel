@@ -28,12 +28,29 @@ class DataMapController extends Controller
 
         }
 
+        //yes-no to true,false
+        if(isset($data['at_plot']) && $data['at_plot']) {
+            switch ($data['at_plot']) {
+                case 'yes':
+                    $atPlot = true;
+                break;
+
+                case 'no':
+                    $atPlot = false;
+                break;
+
+                default:
+                    $atPlot = $data['at_plot'];
+                break;
+            }
+        }
+
         Sample::create([
             "id" => isset($data['sample_id']) ? $data['sample_id'] : $data['no_bar_code'],
             "date" => isset($date) ? $date : null,
             "depth" => isset($data['depth']) ? $data['depth'] : null,
             "texture" => isset($data['texture']) ? $data['texture'] : null,
-            "at_plot" => isset($data['at_plot']) ? $data['at_plot'] : null,
+            "at_plot" => isset($atPlot) ? $atPlot : null,
             "plot_photo" => isset($data['plot_photo']) ? $data['plot_photo'] : null,
             "longitude" => isset($location[1]) ? $location[1] : null,
             "latitude" => isset($location[0]) ? $location[0] : null,
