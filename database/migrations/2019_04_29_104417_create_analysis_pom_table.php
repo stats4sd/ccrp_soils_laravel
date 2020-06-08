@@ -16,6 +16,7 @@ class CreateAnalysisPomTable extends Migration
         Schema::create('analysis_pom', function (Blueprint $table) {
             $table->id('id');
             $table->string('sample_id');
+            $table->date('analysis_date')->nullable();
             $table->decimal('weight_soil', 6, 3)->nullable();
             $table->decimal('diameter_circ_pom', 6, 3)->nullable();
             $table->boolean('weigh_pom_yn')->nullable();

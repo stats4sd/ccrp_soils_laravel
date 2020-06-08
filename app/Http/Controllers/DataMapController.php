@@ -16,7 +16,7 @@ class DataMapController extends Controller
     public static function sample ($data, $submissionId, $projectId)
     {
         $location = null;
-        if (isset($data['location'])) {
+        if (isset($data['location']) && $data['location']) {
             $location = explode(" ", $data['location']);
         }
 
@@ -27,10 +27,10 @@ class DataMapController extends Controller
             "texture" => isset($data['texture']) ? $data['texture'] : null,
             "at_plot" => isset($data['at_plot']) ? $data['at_plot'] : null,
             "plot_photo" => isset($data['plot_photo']) ? $data['plot_photo'] : null,
-            "longitude" => $location[1] ?: null,
-            "latitude" => $location[0] ?: null,
-            "altitude" => $location[2] ?: null,
-            "accuracy" => $location[3] ?: null,
+            "longitude" => isset($location[1]) ? $location[1] : null,
+            "latitude" => isset($location[0]) ? $location[0] : null,
+            "altitude" => isset($location[2]) ? $location[2] : null,
+            "accuracy" => isset($location[3]) ? $location[3] : null,
             "comment" => isset($data['comment']) ? $data['comment'] : null,
             "community_quick" => isset($data['na_community']) ? $data['na_community'] : null,
             "project_id" => $projectId,
