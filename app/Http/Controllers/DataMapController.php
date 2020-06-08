@@ -10,6 +10,7 @@ use App\Models\AnalysisPom;
 use App\Models\AnalysisPoxc;
 use Illuminate\Http\Request;
 use App\Models\ProjectSubmission;
+use Carbon\Carbon;
 
 class DataMapController extends Controller
 {
@@ -20,9 +21,16 @@ class DataMapController extends Controller
             $location = explode(" ", $data['location']);
         }
 
+        if(isset($data['date']) && $data['date']) {
+            dump($data['date']);
+            $date = Carbon::parse($data['date']);
+            $date = $date->toDateString();
+
+        }
+
         Sample::create([
             "id" => isset($data['sample_id']) ? $data['sample_id'] : $data['no_bar_code'],
-            "date" => isset($data['date']) ? $data['date'] : null,
+            "date" => isset($date) ? $date : null,
             "depth" => isset($data['depth']) ? $data['depth'] : null,
             "texture" => isset($data['texture']) ? $data['texture'] : null,
             "at_plot" => isset($data['at_plot']) ? $data['at_plot'] : null,
