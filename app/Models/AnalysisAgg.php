@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 class AnalysisAgg extends Model
 {
     protected $guarded = [];
+    protected $table = "analysis_agg";
 
     public function sample()
     {
