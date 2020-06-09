@@ -70,7 +70,7 @@ class DataMapController extends Controller
     {
         AnalysisP::create([
             "sample_id" => isset($data['sample_id']) ? $data['sample_id'] : $data['no_bar_code'],
-             "analysis_date" => isset($data['analysis_date']) ? $data['analysis_date'] : null,
+            "analysis_date" => isset($data['analysis_date']) ? $data['analysis_date'] : null,
             "vol_extract" => isset($data['vol_extract']) ? $data['vol_extract'] : null,
             "vol_topup" => isset($data['vol_topup']) ? $data['vol_topup'] : null,
             "cloudy" => isset($data['cloudy']) ? $data['cloudy'] : null,

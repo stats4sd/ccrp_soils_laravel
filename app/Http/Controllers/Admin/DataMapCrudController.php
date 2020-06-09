@@ -55,6 +55,16 @@ class DataMapCrudController extends CrudController
                 'type' => 'text',
                 'label' => 'label',
             ],
+            [
+                'name' => 'variables',
+                'label' => 'What variables does this data map check for in the ODK?',
+                'type' => 'table',
+                'entity_singular' => 'variable',
+                'columns' => [
+                    'name' => 'variable name',
+                    'label' => 'label',
+                ],
+            ],
         ]);
     }
 
@@ -67,5 +77,30 @@ class DataMapCrudController extends CrudController
             ],
         ]);
         $this->crud->setValidation(DataMapUpdateRequest::class);
+    }
+
+    protected function setupShowOperation()
+    {
+        $this->crud->addColumns([
+            [
+                'name' => 'id',
+                'label' => 'value',
+            ],
+            [
+                'name' => 'title',
+                'label' => 'label'
+            ],
+            [
+                'name' => 'variables',
+                'label' => 'What variables does this data map check for in the ODK?',
+                'type' => 'table',
+                'entity_singular' => 'variable',
+                'columns' => [
+                    'name' => 'variable name',
+                    'label' => 'label',
+                ],
+            ],
+
+        ]);
     }
 }
