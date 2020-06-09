@@ -16,7 +16,7 @@ SELECT
     `samples`.`comment` AS `comment`,
     `samples`.`farmer_quick` AS `farmer_quick`,
     `samples`.`community_quick` AS `community_quick`,
-    `samples`.`plot_id` AS `plot_id`,
+
     `analysis_p`.`analysis_date` AS `analysis_p-date`,
     `analysis_p`.`weight_soil` AS `analysis_p-weight_soil`,
     `analysis_p`.`vol_extract` AS `analysis_p-vol_extract`,
@@ -29,11 +29,13 @@ SELECT
     `analysis_p`.`correct_moisture` AS `analysis_p-correct_moisture`,
     `analysis_p`.`moisture` AS `analysis_p-moisture`,
     `analysis_p`.`olsen_p_corrected` AS `analysis_p-olsen_p_corrected`,
+
     `analysis_ph`.`analysis_date` AS `analysis_ph-date`,
     `analysis_ph`.`weight_soil` AS `analysis_ph-weight_soil`,
     `analysis_ph`.`vol_water` AS `analysis_ph-vol_water`,
     `analysis_ph`.`reading_ph` AS `analysis_ph-reading_ph`,
     `analysis_ph`.`stability` AS `analysis_ph-stability`,
+
     `analysis_poxc`.`analysis_date` AS `analysis_poxc-date`,
     `analysis_poxc`.`weight_soil` AS `analysis_poxc-weight_soil`,
     `analysis_poxc`.`color` AS `analysis_poxc-color`,
@@ -46,10 +48,31 @@ SELECT
     `analysis_poxc`.`poxc_sample` AS `analysis_poxc-poxc_sample`,
     `analysis_poxc`.`correct_moisture` AS `analysis_poxc-correct_moisture`,
     `analysis_poxc`.`moisture` AS `analysis_poxc-moisture`,
-    `analysis_poxc`.`poxc_soil_corrected` AS `analysis_poxc-poxc_soil_corrected`
+    `analysis_poxc`.`poxc_soil_corrected` AS `analysis_poxc-poxc_soil_corrected`,
+
+    `analysis_pom`.`weight_soil` AS `analysis_pom-weight_soil`,
+	`analysis_pom`.`diameter_circ_pom` AS `analayis_pom-diameter_circ_pom`,
+	`analysis_pom`.`weigh_pom_yn` AS `analayis_pom-weigh_pom_yn`,
+	`analysis_pom`.`weight_cloth` AS `analayis_pom-weight_cloth`,
+	`analysis_pom`.`weight_pom` AS `analayis_pom-weight_pom`,
+	`analysis_pom`.`percent_pom` AS `analayis_pom-percent_pom`,
+    `analysis_pom`.`analysis_date` AS `analayis_pom-analysis_date`,
+
+    `analysis_agg`.`weight_soil` AS `analysis_agg-weight_soil`,
+    `analysis_agg`.`weight_cloth` AS `analysis_agg-weight_cloth`,
+    `analysis_agg`.`weight_stones2mm` AS `analysis_agg-weight_stones2mm`,
+    `analysis_agg`.`weight_2mm_aggreg` AS `analysis_agg-weight_2mm_aggreg`,
+    `analysis_agg`.`weight_cloth_250micron` AS `analysis_agg-weight_cloth_250micron`,
+    `analysis_agg`.`weight_250micron_aggreg` AS `analysis_agg-weight_250micron_aggreg`,
+    `analysis_agg`.`pct_stones` AS `analysis_agg-pct_stones`,
+    `analysis_agg`.`twomm_aggreg_pct` AS `analysis_agg-twomm_aggreg_pct`,
+    `analysis_agg`.`twofiftymicr_aggreg_pct` AS `analysis_agg-twofiftymicr_aggreg_pct`,
+    `analysis_agg`.`analysis_date` AS `analysis_agg-analysis_date`
 
 FROM `samples`
 
 LEFT JOIN `analysis_p` on `samples`.`id` = `analysis_p`.`sample_id`
-LEFT JOIN`analysis_ph` on `samples`.`id` = `analysis_ph`.`sample_id`
-LEFT JOIN `analysis_poxc` on((`samples`.`id` = `analysis_poxc`.`sample_id`
+LEFT JOIN `analysis_ph` on `samples`.`id` = `analysis_ph`.`sample_id`
+LEFT JOIN `analysis_poxc` on `samples`.`id` = `analysis_poxc`.`sample_id`
+LEFT JOIN `analysis_pom`  on `samples`.`id` = `analysis_pom`.`sample_id`
+LEFT JOIN `analysis_agg`  on `samples`.`id` = `analysis_agg`.`sample_id`
