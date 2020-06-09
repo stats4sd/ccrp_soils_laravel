@@ -148,7 +148,10 @@ class DataMapController extends Controller
             "pct_stones" => isset($data['pct_stones']) ? $data['pct_stones'] : null,
             "twomm_aggreg_pct" => isset($data['twomm_aggreg_pct']) ? $data['twomm_aggreg_pct'] : null,
             "twofiftymicr_aggreg_pct" => isset($data['twofiftymicr_aggreg_pct']) ? $data['twofiftymicr_aggreg_pct'] : null,
-
+            "twomm_aggreg_pct_result" => isset($data['twomm_aggreg_pct_result']) ? $data['twomm_aggreg_pct_result'] : null,
+            "twofiftymicron_aggreg_pct_result" => isset($data['twofiftymicron_aggreg_pct_result']) ? $data['twofiftymicron_aggreg_pct_result'] : null,
+            "percent_stones" => isset($data['percent_stones']) ? $data['percent_stones'] : null,
+            "total_stableaggregates" => isset($data['total_stableaggregates']) ? $data['total_stableaggregates'] : null,
             "project_submission_id" => $submission_id ?: null,
         ]);
     }

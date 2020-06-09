@@ -99,6 +99,9 @@ class Sample extends Model
     public function getPResultAttribute()
     {
         if ($this->analysis_p) {
+            if ($this->analysis_poxc->avg('olsen_p_corrected')) {
+                return $this->analysis_poxc->avg('olsen_p_corrected');
+            }
             return $this->analysis_p->avg('olsen_p');
         }
 
