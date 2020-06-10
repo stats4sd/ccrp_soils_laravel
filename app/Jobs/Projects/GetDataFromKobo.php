@@ -82,6 +82,9 @@ class GetDataFromKobo implements ShouldQueue
                 $projectId = $this->form->project->id;
                 $data = $newSubmission;
 
+                // go through submission variables and remove any group names
+
+
 
                 // Do the funky mapping dance
                 switch ($dataMap) {
