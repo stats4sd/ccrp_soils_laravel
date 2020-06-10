@@ -44,10 +44,10 @@ class SetKoboFormToActive implements ShouldQueue
 
             $getVersion = Http::withBasicAuth(config('services.kobo.username'), config('services.kobo.password'))
             ->withHeaders(['Accept' => 'application/json'])
-            ->get(config('services.kobo.endpoint_v2').'/assets/')
+            ->get(config('services.kobo.endpoint_v2').'/assets/'.$this->form->kobo_id.'/')
             ->throw()
             ->json();
-
+            \Log::info(json_encode($getVersion));
             $newVersionId = $getVersion['version_id'];
 
             // update deployment with new version
