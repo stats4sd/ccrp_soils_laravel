@@ -43,23 +43,24 @@ class DataMapController extends Controller
         }
 
         foreach($dataMap->variables as $variable) {
-            switch ($variable->type) {
+            $variableName = $variable['name'];
+            $value = null;
+
+            switch ($variable['type']) {
                 case 'boolean':
-                    if (isset($data[$variable]) && $data[$variable]) {
-                        switch ($data[$variable]) {
+                    if (isset($data[$variableName]) && $data[$variableName]) {
+                        switch ($data[$variableName]) {
                             case 'yes':
-                                $value = true;
+                                $value = 1;
                             break;
 
                             case 'no':
-                                $value = false;
+                                $value = 0;
                             break;
 
-                            case 1:
-                            case 0:
-                            case true:
-                            case false:
-                                $value = $data[$variable];
+                            case "1":
+                            case "0":
+                                $value = $data[$variableName];
                             break;
                             // error handling in a painfully basic way - set any unhandled values to null;
                             default:
@@ -70,22 +71,22 @@ class DataMapController extends Controller
                 break;
 
                 case 'photo':
-                    if(isset($data[$variable]) && $data[$variable]) {
-                        $value = $data[$variable];
+                    if(isset($data[$variableName]) && $data[$variableName]) {
+                        $value = $data[$variableName];
                         ImportAttachmentFromKobo::dispatch($value, $data);
                     }
                 break;
 
                 case 'date':
-                    if (isset($data[$variable]) && $data[$variable]) {
-                        $value = Carbon::parse($data[$variable]);
+                    if (isset($data[$variableName]) && $data[$variableName]) {
+                        $value = Carbon::parse($data[$variableName]);
                         $value = $value->toDateString();
                     }
                 break;
 
                 case 'datetime':
-                    if (isset($data[$variable]) && $data[$variable]) {
-                        $value = Carbon::parse($data[$variable]);
+                    if (isset($data[$variableName]) && $data[$variableName]) {
+                        $value = Carbon::parse($data[$variableName]);
                         $value = $value->toDateTimeString();
                     }
                 break;
@@ -96,12 +97,12 @@ class DataMapController extends Controller
                 break;
 
                 default:
-                    $value = $data[$variable];
+                    $value = isset($data[$variableName]) ? $data[$variableName] : null;
                 break;
             }
 
-            if($value) {
-                $newModel[$variable] = $value;
+            if(!is_null($value)) {
+                $newModel[$variableName] = $value;
             }
         }
 
@@ -109,6 +110,7 @@ class DataMapController extends Controller
         $newItem = new $class();
 
         $newItem->fill($newModel);
+        $newItem->save();
 
         \Log::info($class . " created");
         \Log::info("values: " . json_encode($newModel));

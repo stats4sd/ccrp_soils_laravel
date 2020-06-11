@@ -4,6 +4,8 @@ namespace App\Jobs\Projects;
 
 use App\Models\User;
 use App\Models\Sample;
+use App\Models\DataMap;
+use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
 use App\Models\ProjectXlsform;
 use App\Models\ProjectSubmission;
@@ -77,55 +79,29 @@ class GetDataFromKobo implements ShouldQueue
 
                 $projectSubmission->save();
 
-                $dataMap = $this->form->xlsform->data_map_id;
+                $dataMap = DataMap::findorfail($this->form->xlsform->data_map_id);
+
                 $submissionId = $newSubmission['_id'];
                 $projectId = $this->form->project->id;
                 $data = $newSubmission;
 
                 // go through submission variables and remove any group names
+                foreach($newSubmission as $key => $value) {
 
+                    // Keep this as it forms part of the media download url
+                    if($key == 'formhub/uuid') continue;
 
-
-                // Do the funky mapping dance
-                switch ($dataMap) {
-                    case 'sample':
-                        \Log::info("sample data found");
-                        DataMapController::sample($newSubmission, $submissionId, $projectId);
-
-                    break;
-
-                    case 'analysis_p':
-                        \Log::info("analysis_p data found");
-                        DataMapController::analysis_p($newSubmission, $submissionId);
-                        break;
-
-                    case 'analysis_ph':
-                        \Log::info("analysis_ph data found");
-                        DataMapController::analysis_ph($newSubmission, $submissionId);
-                        break;
-
-                    case 'analysis_poxc':
-                        \Log::info("analysis_poxc data found");
-
-                        DataMapController::analysis_poxc($newSubmission, $submissionId);
-                        break;
-
-                    case 'analysis_pom':
-                        \Log::info("analysis_pom data found");
-
-                        DataMapController::analysis_pom($newSubmission, $submissionId);
-                        break;
-
-                    case 'analysis_agg':
-                        \Log::info("analysis_agg data found");
-
-                        DataMapController::analysis_agg($newSubmission, $submissionId);
-                        break;
-
-                    default:
-                        \Log::warning('No Mapping Found');
-                        break;
+                    if(Str::contains($key,'/')){
+                        // e.g. replace $newSubmission['groupname/subgroup/name'] with $newSubmission['name']
+                        unset($newSubmission[$key]);
+                        $key = explode('/', $key);
+                        $key = end($key);
+                        $newSubmission[$key] = $value;
+                    }
                 }
+
+                \Log::info("Mapping data to correct model / tables...");
+                DataMapController::newRecord($dataMap, $newSubmission, $projectId);
 
             }
         }
