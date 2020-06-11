@@ -34,14 +34,15 @@ class DataMap extends Model
     */
 
     protected $table = 'data_maps';
+
     protected $primaryKey = 'id';
     public $incrementing = false;
-    // public $timestamps = false;
-    protected $guarded = [];
-    // protected $fillable = [];
-    // protected $hidden = [];
-    // protected $dates = [];
 
+    protected $guarded = [];
+
+    protected $casts = [
+        'variables' => 'array',
+    ];
 
     /*
     |--------------------------------------------------------------------------

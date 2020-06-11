@@ -2,19 +2,120 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Sample;
+use App\Models\DataMap;
 use App\Models\AnalysisP;
 use App\Models\AnalysisPh;
 use App\Models\AnalysisAgg;
 use App\Models\AnalysisPom;
 use App\Models\AnalysisPoxc;
 use Illuminate\Http\Request;
+use App\Jobs\ImportAttachmentFromKobo;
 use App\Models\ProjectSubmission;
-use Carbon\Carbon;
 
 class DataMapController extends Controller
 {
-    public static function sample ($data, $submissionId, $projectId)
+
+    public static function newRecord(DataMap $dataMap, Array $data, Int $projectId)
+    {
+        $newModel = [
+            "project_id" => $projectId,
+            "project_submission_id" => $data['_id'],
+        ];
+
+        // handle sample ID
+        if($dataMap->id == 'sample') {
+            $newModel['id'] = isset($data['sample_id']) ? $data['sample_id'] : $data['no_bar_code'];
+        }
+        else {
+            $newModel['sample_id'] = isset($data['sample_id']) ? $data['sample_id'] : $data['no_bar_code'];
+        }
+
+
+
+        if($dataMap->has_location && isset($data['location']) && $data['location']) {
+            $location = explode(" ", $data['location']);
+            $newModel["longitude"] = isset($location[1]) ? $location[1] : null;
+            $newModel["latitude"] = isset($location[0]) ? $location[0] : null;
+            $newModel["altitude"] = isset($location[2]) ? $location[2] : null;
+            $newModel["accuracy"] = isset($location[3]) ? $location[3] : null;
+        }
+
+        foreach($dataMap->variables as $variable) {
+            switch ($variable->type) {
+                case 'boolean':
+                    if (isset($data[$variable]) && $data[$variable]) {
+                        switch ($data[$variable]) {
+                            case 'yes':
+                                $value = true;
+                            break;
+
+                            case 'no':
+                                $value = false;
+                            break;
+
+                            case 1:
+                            case 0:
+                            case true:
+                            case false:
+                                $value = $data[$variable];
+                            break;
+                            // error handling in a painfully basic way - set any unhandled values to null;
+                            default:
+                                $value = null;
+                            break;
+                        }
+                    }
+                break;
+
+                case 'photo':
+                    if(isset($data[$variable]) && $data[$variable]) {
+                        $value = $data[$variable];
+                        ImportAttachmentFromKobo::dispatch($value, $data);
+                    }
+                break;
+
+                case 'date':
+                    if (isset($data[$variable]) && $data[$variable]) {
+                        $value = Carbon::parse($data[$variable]);
+                        $value = $value->toDateString();
+                    }
+                break;
+
+                case 'datetime':
+                    if (isset($data[$variable]) && $data[$variable]) {
+                        $value = Carbon::parse($data[$variable]);
+                        $value = $value->toDateTimeString();
+                    }
+                break;
+
+                case 'select_multiple':
+                case 'geopoint':
+                    $value = null;
+                break;
+
+                default:
+                    $value = $data[$variable];
+                break;
+            }
+
+            if($value) {
+                $newModel[$variable] = $value;
+            }
+        }
+
+        $class = 'App\\Models\\'.$dataMap->model;
+        $newItem = new $class();
+
+        $newItem->fill($newModel);
+
+        \Log::info($class . " created");
+        \Log::info("values: " . json_encode($newModel));
+
+    }
+
+    public static function sample (Array $data, Int $submissionId, Int $projectId)
     {
         $location = null;
         if (isset($data['location']) && $data['location']) {
@@ -70,7 +171,7 @@ class DataMapController extends Controller
     {
         AnalysisP::create([
             "sample_id" => isset($data['sample_id']) ? $data['sample_id'] : $data['no_bar_code'],
-             "analysis_date" => isset($data['analysis_date']) ? $data['analysis_date'] : null,
+            "analysis_date" => isset($data['analysis_date']) ? $data['analysis_date'] : null,
             "vol_extract" => isset($data['vol_extract']) ? $data['vol_extract'] : null,
             "vol_topup" => isset($data['vol_topup']) ? $data['vol_topup'] : null,
             "cloudy" => isset($data['cloudy']) ? $data['cloudy'] : null,
