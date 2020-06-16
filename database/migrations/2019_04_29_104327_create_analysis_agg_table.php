@@ -25,7 +25,21 @@ class CreateAnalysisAggTable extends Migration
             $table->decimal('pct_stones', 25,20)->nullable();
             $table->decimal('twomm_aggreg_pct', 25,20)->nullable();
             $table->decimal('twofiftymicr_aggreg_pct', 25,20)->nullable();
+            $table->decimal('twomm_aggreg_pct_result', 25, 20)->nullable();
+            $table->decimal('twofiftymicron_aggreg_pct_result', 25, 20)->nullable();
+            $table->decimal('percent_stones', 25, 20)->nullable();
+            $table->decimal('total_stableaggregates', 25, 20)->nullable();
+            $table->decimal('total_check', 25, 20)->nullable();
+            $table->decimal('validation_check', 25, 20)->nullable();
             $table->date('analysis_date');
+            $table->timestamps();
+
+
+
+
+
+
+
 
             $table->timestamps();
         });

@@ -18,6 +18,7 @@ class DataMapCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     public function setup()
     {
@@ -37,6 +38,17 @@ class DataMapCrudController extends CrudController
                 'name' => 'title',
                 'label' => 'label'
             ],
+            [
+                'name' => 'variables',
+                'label' => 'Number of variables',
+                'type' => 'closure',
+                'function' => function($entity) {
+                    if(isset($entity->variables) && is_countable($entity->variables)) {
+                        return count($entity->variables);
+                    }
+                    return '';
+                }
+            ]
         ]);
     }
 
@@ -56,13 +68,68 @@ class DataMapCrudController extends CrudController
                 'label' => 'label',
             ],
             [
+                'name' => 'model',
+                'type' => 'select2_from_array',
+                'label' => 'What Data Table will this form populate?',
+                'options' => [
+                    'Sample' => 'Sample Data',
+                    'AnalysisAgg' => 'analysis_agg',
+                    'AnalysisP' => 'analysis_p',
+                    'AnalysisPh' => 'analysis_ph',
+                    'AnalysisPom' => 'analysis_pom',
+                    'AnalysisPoxc' => 'analysis_poxc',
+                ],
+            ],
+            [
+                'name' => 'location',
+                'type' => 'boolean',
+                'hint' => 'The ODK variable name should be `location`',
+                'label' => 'Does this data map include a `location` field?',
+            ],
+            [
                 'name' => 'variables',
-                'label' => 'What variables does this data map check for in the ODK?',
-                'type' => 'table',
-                'entity_singular' => 'variable',
-                'columns' => [
-                    'name' => 'variable name',
-                    'label' => 'label',
+                'type' => 'repeatable',
+                'label' => 'Add the other variables the data map should look for in the ODK Form',
+                'hint' => 'Every Soils form will automatically look for the following variables:
+                    <ul>
+                        <li>sample_id</li>
+                        <li>no_bar_code (used as the sample_id if no bar code was scanned)</li>
+                    </ul>',
+                'fields' => [
+                    [
+                        'name' => 'name',
+                        'label' => 'Variable Name',
+                        'type' => 'text',
+                        'wrapper' => ['class' => 'form-group col-md-4'],
+                    ],
+                    [
+                        'name' => 'label',
+                        'label' => 'Label',
+                        'type' => 'text',
+                        'wrapper' => ['class' => 'form-group col-md-4'],
+                    ],
+                    [
+                        'name' => 'type',
+                        'label' => 'Select the variable type',
+                        'type' => 'select2_from_array',
+                        'wrapper' => ['class' => 'form-group col-md-4'],
+                        'options' => [
+                            'boolean' => 'Boolean (select_one with yes/no or 1/0 options)',
+                            'text' => 'text / select_one',
+                            'integer' => 'integer',
+                            'decimal' => 'decimal',
+                            'select_multiple' => 'select_multiple',
+                            'date' => 'date',
+                            'timestamp' => 'datetime',
+                            'gps' => 'geopoint',
+                            'photo' => 'photo',
+                        ],
+                    ],
+                    [
+                        'name' => 'in_db',
+                        'type' => 'hidden',
+                        'value' => 0,
+                    ],
                 ],
             ],
         ]);
@@ -73,7 +140,7 @@ class DataMapCrudController extends CrudController
         $this->setupCreateOperation();
         $this->crud->modifyField('id', [
             'attributes' => [
-                'disabled' => true,
+                'readonly' => true,
             ],
         ]);
         $this->crud->setValidation(DataMapUpdateRequest::class);
@@ -91,16 +158,25 @@ class DataMapCrudController extends CrudController
                 'label' => 'label'
             ],
             [
-                'name' => 'variables',
-                'label' => 'What variables does this data map check for in the ODK?',
-                'type' => 'table',
-                'entity_singular' => 'variable',
-                'columns' => [
-                    'name' => 'variable name',
-                    'label' => 'label',
-                ],
+                'name' => 'model',
+                'type' => 'text',
+                'label' => 'What Data Table will this form populate?',
             ],
-
+            [
+                'name' => 'location',
+                'type' => 'boolean',
+                'label' => 'Does this data map include a `location` field?',
+            ],
+            [
+                'name' => 'variables',
+                'label' => 'Variables',
+                'type' => 'table',
+                'columns' => [
+                    'name' => 'Name',
+                    'label' => 'Label',
+                    'type' => 'Type'
+                ]
+            ]
         ]);
     }
 }

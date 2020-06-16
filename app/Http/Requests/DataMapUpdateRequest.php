@@ -38,7 +38,8 @@ class DataMapUpdateRequest extends FormRequest
     public function attributes()
     {
         return [
-            //
+            'title' => 'required|max:255',
+            'variables' => 'required',
         ];
     }
 

@@ -39,15 +39,24 @@ class SetKoboFormToActive implements ShouldQueue
     public function handle()
     {
 
-        // Deployement already exists, so PATCH with existing version_id;
-        if($this->form->kobo_version_id) {
+        // Deployement already exists, so get new version_id to update deployment
+        if ($this->form->kobo_version_id) {
 
+            $getVersion = Http::withBasicAuth(config('services.kobo.username'), config('services.kobo.password'))
+            ->withHeaders(['Accept' => 'application/json'])
+            ->get(config('services.kobo.endpoint_v2') . '/assets/')
+            ->throw()
+                ->json();
+
+            $newVersionId = $getVersion['version_id'];
+
+            // update deployment with new version
             $response = Http::withBasicAuth(config('services.kobo.username'), config('services.kobo.password'))
-                ->withHeaders(['Accept' => 'application/json'])
-                ->patch(config('services.kobo.endpoint') . '/api/v2/assets/' . $this->form->kobo_id . '/deployment/', [
-                    'active' => true,
-                    'version_id' => $this->form->kobo_version_id,
-                ]);
+            ->withHeaders(['Accept' => 'application/json'])
+            ->patch(config('services.kobo.endpoint_v2') . '/assets/' . $this->form->kobo_id . '/deployment/', [
+                'active' => true,
+                'version_id' => $newVersionId,
+            ]);
         }
 
         // Deployment doesn't exist for this form, so POST;

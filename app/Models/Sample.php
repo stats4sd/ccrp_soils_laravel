@@ -87,6 +87,9 @@ class Sample extends Model
     public function getPoxcResultAttribute ()
     {
         if($this->analysis_poxc) {
+            if($this->analysis_poxc->avg('poxc_soil_corrected')) {
+                return $this->analysis_poxc->avg('poxc_soil_corrected');
+            }
             return $this->analysis_poxc->avg('poxc_soil');
         }
 
@@ -96,6 +99,9 @@ class Sample extends Model
     public function getPResultAttribute()
     {
         if ($this->analysis_p) {
+            if ($this->analysis_poxc->avg('olsen_p_corrected')) {
+                return $this->analysis_poxc->avg('olsen_p_corrected');
+            }
             return $this->analysis_p->avg('olsen_p');
         }
 
@@ -115,6 +121,33 @@ class Sample extends Model
     {
         if ($this->analysis_pom) {
             return $this->analysis_pom->avg('percent_pom');
+        }
+
+        return null;
+    }
+
+    public function getTotalStableaggregatesAttribute()
+    {
+        if ($this->analysis_pom) {
+            return $this->analysis_agg->avg('total_stableaggregates');
+        }
+
+        return null;
+    }
+
+    public function getTwommAggregPctResultAttribute()
+    {
+        if ($this->analysis_agg) {
+            return $this->analysis_agg->avg('twomm_aggreg_pct_result');
+        }
+
+        return null;
+    }
+
+    public function getTwofiftymicronAggregPctResultAttribute()
+    {
+        if ($this->analysis_agg) {
+            return $this->analysis_agg->avg('twofiftymicron_aggreg_pct_result');
         }
 
         return null;

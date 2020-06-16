@@ -24,7 +24,7 @@ class QrController extends Controller
             $qrcodes[] = $qrcode;
         }
 
-        return redirect(url(session()->get('locale') . '/qr-print'))->with('qrcodes', $qrcodes);
+        return redirect(route('qr-print'))->with('qrcodes', $qrcodes);
     }
 
     public function printView ()

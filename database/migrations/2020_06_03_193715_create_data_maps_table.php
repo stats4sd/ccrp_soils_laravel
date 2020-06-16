@@ -16,6 +16,9 @@ class CreateDataMapsTable extends Migration
         Schema::create('data_maps', function (Blueprint $table) {
             $table->string('id');
             $table->string('title');
+            $table->json('variables'); // ['name', 'label', 'type' (string, longtext, int, decimal, date, timestamp, boolean)]
+            $table->string('model');
+            $table->boolean('location')->default(0);
             $table->timestamps();
         });
 

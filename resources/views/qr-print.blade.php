@@ -18,11 +18,15 @@
                     </div>
                     {{-- End page --}}
                     </div>
+                    {{-- Start New Page --}}
                     <div class="page">
+                        {{-- Start New Row --}}
                         <div class="d-flex justify-content-between">
 
                 @elseif($loop->iteration % 3 == 0)
+                    {{-- End Row --}}
                     </div>
+                    {{-- Start New Row --}}
                     <div class="d-flex justify-content-between">
                 @endif
 

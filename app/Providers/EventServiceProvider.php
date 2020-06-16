@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\KoboUploadReturnedSuccess;
+use App\Events\NewDataVariableSpotted;
 use App\Jobs\DeployKobotoolsForm;
+use App\Listeners\NotifyAdminAboutNewVariable;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -19,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        NewDataVariableSpotted::class => [
+            NotifyAdminAboutNewVariable::class,
         ],
     ];
 
