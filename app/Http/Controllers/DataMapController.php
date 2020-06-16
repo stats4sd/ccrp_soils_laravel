@@ -17,15 +17,15 @@ use App\Models\ProjectSubmission;
 class DataMapController extends Controller
 {
 
-    public static function newRecord(DataMap $dataMap, Array $data, Int $projectId)
+    public static function newRecord(DataMap $dataMap, Array $data, Int $projectId = null)
     {
         $newModel = [
-            "project_id" => $projectId,
             "project_submission_id" => $data['_id'],
         ];
 
         // handle sample ID
         if($dataMap->id == 'sample') {
+            $newModel['project_id'] = $projectId ?: null;
             $newModel['id'] = isset($data['sample_id']) ? $data['sample_id'] : $data['no_bar_code'];
         }
         else {

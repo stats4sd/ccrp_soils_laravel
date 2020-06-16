@@ -22,13 +22,15 @@ class CreateAnalysisPoxcTable extends Migration
             $table->decimal('color100', 25,20)->nullable();
             $table->decimal('conc_digest', 25,20)->nullable();
             $table->string('cloudy', 50)->nullable();
-            $table->decimal('colorimeter', 25,20)->nullable();
+            $table->string('photo')->nullable();
+            $table->decimal('pct_reduction_color', 25,20)->nullable();
             $table->decimal('raw_conc', 25,20)->nullable();
             $table->decimal('poxc_sample', 25,20)->nullable();
             $table->decimal('poxc_soil', 25,20)->nullable();
             $table->integer('correct_moisture')->default(0);
             $table->decimal('moisture', 6,3)->nullable();
             $table->decimal('poxc_soil_corrected', 25,20)->nullable();
+
             $table->timestamps();
         });
     }
