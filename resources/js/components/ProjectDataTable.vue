@@ -16,8 +16,8 @@
                 </tr>
                 <tr class="w-100">
                     <th class="font-weight-normal">2mm</th>
-                    <th class="font-weight-normal">250μm</th>
-                    <th>Total</th>
+                    <th style="border-right: 1px solid lightgray" class="font-weight-normal">250μm</th>
+                    <th style="border-left: 1px solid lightgray">Total</th>
                 </tr>
 
                 <tr v-for="sample in samplesDisplay" :key="sample.id">
@@ -27,8 +27,8 @@
                     <td>{{ sample.ph_result }}</td>
                     <td style="border-right: 1px solid darkgray">{{ sample.pom_result }}</td>
                     <td style="border-left: 1px solid darkgray">{{ sample.twomm_aggreg_pct_result }} %</td>
-                    <td>{{ sample.twofiftymicron_aggreg_pct_result }} %</td>
-                    <td> =  {{ sample.total_stableaggregates }} %</td>
+                    <td style="border-right: 1px solid lightgray">{{ sample.twofiftymicron_aggreg_pct_result }} %</td>
+                    <td style="border-left: 1px solid lightgray">{{ sample.total_stableaggregates }} %</td>
                 </tr>
             </table>
 
