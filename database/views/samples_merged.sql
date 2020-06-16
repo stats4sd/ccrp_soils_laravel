@@ -29,6 +29,10 @@ SELECT
     `analysis_p`.`correct_moisture` AS `analysis_p-correct_moisture`,
     `analysis_p`.`moisture` AS `analysis_p-moisture`,
     `analysis_p`.`olsen_p_corrected` AS `analysis_p-olsen_p_corrected`,
+    `analysis_p`.`raw_conc_rounded` AS `analysis_p-raw_conc_rounded`,
+    `analysis_p`.`moisture_rounded` AS `analysis_p-moisture_rounded`,
+    `analysis_p`.`moisture_level_as_percentage` AS `analysis_p-moisture_level_as_percentage`,
+    `analysis_p`.`soil_conc_rounded` AS `analysis_p-soil_conc_rounded`,
 
     `analysis_ph`.`analysis_date` AS `analysis_ph-date`,
     `analysis_ph`.`weight_soil` AS `analysis_ph-weight_soil`,
@@ -42,7 +46,7 @@ SELECT
     `analysis_poxc`.`color100` AS `analysis_poxc-color100`,
     `analysis_poxc`.`conc_digest` AS `analysis_poxc-conc_digest`,
     `analysis_poxc`.`cloudy` AS `analysis_poxc-cloudy`,
-    `analysis_poxc`.`colorimeter` AS `analysis_poxc-colorimeter`,
+    `analysis_poxc`.`pct_reduction_color` AS `analysis_poxc-pct_reduction_color`,
     `analysis_poxc`.`raw_conc` AS `analysis_poxc-raw_conc`,
     `analysis_poxc`.`poxc_soil` AS `analysis_poxc-poxc_soil`,
     `analysis_poxc`.`poxc_sample` AS `analysis_poxc-poxc_sample`,
@@ -67,6 +71,12 @@ SELECT
     `analysis_agg`.`pct_stones` AS `analysis_agg-pct_stones`,
     `analysis_agg`.`twomm_aggreg_pct` AS `analysis_agg-twomm_aggreg_pct`,
     `analysis_agg`.`twofiftymicr_aggreg_pct` AS `analysis_agg-twofiftymicr_aggreg_pct`,
+    `analysis_agg`.`twomm_aggreg_pct_result` AS `analysis_agg-twomm_aggreg_pct_result`,
+    `analysis_agg`.`twofiftymicron_aggreg_pct_result` AS `analysis_agg-twofiftymicron_aggreg_pct_result`,
+    `analysis_agg`.`percent_stones` AS `analysis_agg-percent_stones`,
+    `analysis_agg`.`total_stableaggregates` AS `analysis_agg-total_stableaggregates`,
+    `analysis_agg`.`total_check` AS `analysis_agg-total_check`,
+    `analysis_agg`.`validation_check` AS `analysis_agg-validation_check`,
     `analysis_agg`.`analysis_date` AS `analysis_agg-analysis_date`
 
 FROM `samples`

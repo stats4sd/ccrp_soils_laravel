@@ -23,31 +23,36 @@
     </ul>
 </nav>
 
-<div class="tab-content" id="project-tab-content">
-    <div class="tab-pane fade show active" id="forms" role="tabpanel" aria-labelledby="forms-tab">
-        @if(!auth()->user()->kobo_id)
-            <div class="alert alert-info text-dark">
-                Note - you have not entered your KoboToolbox Username, which means you will not be able to see these formson KoboToolbox or ODK Collect. You can update your <a href="{{ route('users.edit', auth()->user()) }}">account here</a>.<br/><br/>
-                You still have access to all the data collected with these forms.
-            </div>
-        @endif
-        <div id="forms-table-vue">
-            <project-forms-table
-            :project="{{ $project->toJson() }}"
-            :project-forms="{{ $project->project_xlsforms->toJson() }}"
-            :user-id="{{ auth()->user()->id }}"
-            >
-            </project-forms-table>
+<div id="vue-app">
+    <div class="tab-content" id="project-tab-content">
+        <div class="tab-pane fade show active" id="forms" role="tabpanel" aria-labelledby="forms-tab">
+            @if(!auth()->user()->kobo_id)
+                <div class="alert alert-info text-dark">
+                    Note - you have not entered your KoboToolbox Username, which means you will not be able to see these formson KoboToolbox or ODK Collect. You can update your <a href="{{ route('users.edit', auth()->user()) }}">account here</a>.<br/><br/>
+                    You still have access to all the data collected with these forms.
+                </div>
+            @endif
+                <project-forms-table
+                :project="{{ $project->toJson() }}"
+                :project-forms="{{ $project->project_xlsforms->toJson() }}"
+                :user-id="{{ auth()->user()->id }}"
+                >
+                </project-forms-table>
         </div>
-    </div>
-    <div class="tab-pane fade" id="data" role="tabpanel" aria-labelledby="data-tab">
-        @include('projects.tab-data')
-    </div>
-    <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
-        @include('projects.tab-members')
-    </div>
-    <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-        @include('projects.tab-settings');
+        <div class="tab-pane fade" id="data" role="tabpanel" aria-labelledby="data-tab">
+            <project-data-table
+                :project="{{ $project->toJson() }}"
+                :user-id="{{ auth()->user()->id }}"
+                :samples="{{ $project->samples->toJson() }}"
+            ></project-data-table>
+            <a href="{{ route('projects.downloadsamples', $project) }}" class="btn btn-info">Download Merged Sample Data</a>
+        </div>
+        <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
+            @include('projects.tab-members')
+        </div>
+        <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+            @include('projects.tab-settings');
+        </div>
     </div>
 </div>
 @endsection

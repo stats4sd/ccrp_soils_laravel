@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import ProjectFormsTable from './components/ProjectFormsTable'
+import ProjectDataTable from './components/ProjectDataTable'
 
 import VueEcho from 'vue-echo-laravel';
 
@@ -17,8 +18,9 @@ Vue.use(VueEcho, {
 
 
 Vue.component("project-forms-table",ProjectFormsTable)
+Vue.component("project-data-table", ProjectDataTable)
 
 let app = new Vue({
-    el: '#forms-table-vue',
+    el: '#vue-app',
 });
 
