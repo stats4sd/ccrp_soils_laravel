@@ -125,6 +125,11 @@ class DataMapCrudController extends CrudController
                             'photo' => 'photo',
                         ],
                     ],
+                    [
+                        'name' => 'in_db',
+                        'type' => 'hidden',
+                        'value' => 0,
+                    ],
                 ],
             ],
         ]);

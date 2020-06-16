@@ -137,7 +137,7 @@ class Sample extends Model
 
     public function getTwommAggregPctResultAttribute()
     {
-        if ($this->analysis_pom) {
+        if ($this->analysis_agg) {
             return $this->analysis_agg->avg('twomm_aggreg_pct_result');
         }
 
@@ -146,7 +146,7 @@ class Sample extends Model
 
     public function getTwofiftymicronAggregPctResultAttribute()
     {
-        if ($this->analysis_pom) {
+        if ($this->analysis_agg) {
             return $this->analysis_agg->avg('twofiftymicron_aggreg_pct_result');
         }
 
