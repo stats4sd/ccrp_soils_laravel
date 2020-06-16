@@ -21,8 +21,6 @@ class CreateAnalysisPhTable extends Migration
             $table->decimal('vol_water', 6,3)->nullable();
             $table->decimal('reading_ph', 5,3)->nullable();
             $table->string('stability', 100)->nullable();
-            $table->string('start', 100)->nullable();
-            $table->string('end', 100)->nullable();
 
             $table->timestamps();
         });
