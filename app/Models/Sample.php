@@ -79,6 +79,16 @@ class Sample extends Model
     public $incrementing = false;
     public $guarded = [];
 
+    public $appends = [
+        'poxc_result',
+        'p_result',
+        'ph_result',
+        'pom_result',
+        'total_stableaggregates',
+        'twomm_aggreg_pct_result',
+        'twofiftymicron_aggreg_pct_result',
+    ];
+
     public function project ()
     {
         return $this->belongsTo(Project::class);

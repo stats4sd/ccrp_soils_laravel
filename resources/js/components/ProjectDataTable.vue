@@ -4,21 +4,31 @@
         Number of soil samples in database: <b> {{ samples.length }}</b>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <table class="table table-striped table-bordered">
+        <div class="col-md-11">
+            <table class="table table-striped table-bordered w-100">
                 <tr>
-                    <th>Sample Id</th>
-                    <th>POXC Value</th>
-                    <th>P Value</th>
-                    <th>pH Value</th>
-                    <th>POM Value</th>
+                    <th rowspan="2">Sample Id</th>
+                    <th rowspan="2">POXC Value</th>
+                    <th rowspan="2">P Value</th>
+                    <th rowspan="2">pH Value</th>
+                    <th rowspan="2" style="border-right: 1px solid darkgray">POM Value</th>
+                    <th colspan="3" style="border-left: 1px solid darkgray">Stable Aggregates</th>
                 </tr>
-                <tr v-for="sample in samples" :key="sample.id">
+                <tr class="w-100">
+                    <th class="font-weight-normal">2mm</th>
+                    <th class="font-weight-normal">250μm</th>
+                    <th>Total</th>
+                </tr>
+
+                <tr v-for="sample in samplesDisplay" :key="sample.id">
                     <td>{{ sample.id }}</td>
-                    <td>{{ sample.poxc_result }}</td>
-                    <td>{{ sample.p_result }}</td>
+                    <td>{{ sample.poxc_result }} Mg C/kg soil</td>
+                    <td>{{ sample.p_result }} Mg P/kg soil</td>
                     <td>{{ sample.ph_result }}</td>
-                    <td>{{ sample.pom_result }}</td>
+                    <td style="border-right: 1px solid darkgray">{{ sample.pom_result }}</td>
+                    <td style="border-left: 1px solid darkgray">{{ sample.twomm_aggreg_pct_result }} %</td>
+                    <td>{{ sample.twofiftymicron_aggreg_pct_result }} %</td>
+                    <td> =  {{ sample.total_stableaggregates }} %</td>
                 </tr>
             </table>
 
@@ -30,5 +40,24 @@
 export default {
     props: ['project','userId','samples'],
 
+    data() {
+        return {
+            samplesDisplay: [],
+        }
+    },
+    mounted: function(){
+        console.log("hi");
+        // round things for display
+        this.samplesDisplay = this.samples.map((sample) => {
+            sample.poxc_result = sample.poxc_result.toFixed(2);
+            sample.p_result = sample.p_result.toFixed(2);
+            sample.ph_result = sample.ph_result.toFixed(2);
+
+            sample.total_stableaggregates = sample.total_stableaggregates.toFixed(1);
+
+            return sample;
+
+        })
+    }
 }
 </script>

@@ -41,11 +41,11 @@
         </div>
         <div class="tab-pane fade" id="data" role="tabpanel" aria-labelledby="data-tab">
             <project-data-table
-            <project-forms-table
                 :project="{{ $project->toJson() }}"
                 :user-id="{{ auth()->user()->id }}"
                 :samples="{{ $project->samples->toJson() }}"
             ></project-data-table>
+            <a href="{{ route('projects.downloadsamples', $project) }}" class="btn btn-info">Download Merged Sample Data</a>
         </div>
         <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
             @include('projects.tab-members')
