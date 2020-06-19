@@ -57,13 +57,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="removeUserModalLabel{{ $user->id }}">{{ t("Remove User from %s", $project->name) }}</h5>
+        <h5 class="modal-title" id="removeUserModalLabel{{ $user->id }}">{{ t("Remove User from :projectName", ['projectName' => $project->name]) }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        {{ t("Are you sure you wish to remove %s from %s? After removing, they will no longer have access to any project data or forms on Kobotoolbox.", $user->name, $project->name ) }}
+        {{ t("Are you sure you wish to remove :userName from :projectName? After removing, they will no longer have access to any project data or forms on Kobotoolbox.", ['userName' => $user->name, 'projectName' => $project->name] ) }}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ t("Cancel") }}</button>

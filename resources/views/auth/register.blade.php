@@ -9,7 +9,7 @@
                     @if($invite)
                         <div class="alert alert-info">
 
-                            {{ t("You have been invited to join the %s project.", $invite->project->name) }}
+                            {{ t("You have been invited to join the :projectName project.", ['projectName' => $invite->project->name]) }}
                             <br/><br/>
                             {{ t("Your invite is attached to your email address. Please use this same address when registering to get immediate access to the project data and forms. You may change your email address after registration if you would prefer to use a different one.") }}
                         </div>

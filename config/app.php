@@ -187,6 +187,7 @@ return [
          * Custom Service Providers...
          */
         App\Providers\BladeServiceProvider::class,
+        App\Providers\TranslationVueServiceProvider::class,
 
 
 

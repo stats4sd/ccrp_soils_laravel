@@ -1,29 +1,35 @@
 <template>
 <div>
     <div class="container mt-4">
-        Number of soil samples in database: <b> {{ samples.length }}</b>
+        {{ __("vue.samples-count") }}: <b> {{ samples.length }}</b>
     </div>
     <div class="row">
         <div class="col-md-11">
             <table class="table table-striped table-bordered w-100">
                 <tr>
-                    <th rowspan="2">Sample Id</th>
-                    <th rowspan="2">POXC Value</th>
-                    <th rowspan="2">P Value</th>
-                    <th rowspan="2">pH Value</th>
-                    <th rowspan="2" style="border-right: 1px solid darkgray">POM Value</th>
-                    <th colspan="3" style="border-left: 1px solid darkgray">Stable Aggregates</th>
+                    <th rowspan="2">{{ __("vue.Sample ID") }}</th>
+                    <th rowspan="2">
+                        {{ __("vue.POXC Value") }}
+                        <br/>({{ __("vue.POXC Units")}})
+                    </th>
+                    <th rowspan="2">
+                        {{ __("vue.p Value") }}
+                        <br/>({{ __("vue.P Units")}})
+                    </th>
+                    <th rowspan="2">{{ __("vue.pH Value") }}</th>
+                    <th rowspan="2" style="border-right: 1px solid darkgray">{{__("vue.POM Value") }}</th>
+                    <th colspan="3" style="border-left: 1px solid darkgray">{{__("vue.Stable Aggregates") }}</th>
                 </tr>
                 <tr class="w-100">
                     <th class="font-weight-normal">2mm</th>
                     <th style="border-right: 1px solid lightgray" class="font-weight-normal">250μm</th>
-                    <th style="border-left: 1px solid lightgray">Total</th>
+                    <th style="border-left: 1px solid lightgray">{{ __("vue.Total") }}</th>
                 </tr>
 
                 <tr v-for="sample in samplesDisplay" :key="sample.id">
                     <td>{{ sample.id }}</td>
-                    <td>{{ sample.poxc_result }} Mg C/kg soil</td>
-                    <td>{{ sample.p_result }} Mg P/kg soil</td>
+                    <td>{{ sample.poxc_result }} </td>
+                    <td>{{ sample.p_result }} </td>
                     <td>{{ sample.ph_result }}</td>
                     <td style="border-right: 1px solid darkgray">{{ sample.pom_result }}</td>
                     <td style="border-left: 1px solid darkgray">{{ sample.twomm_aggreg_pct_result }} %</td>

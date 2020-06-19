@@ -11,7 +11,7 @@
 
 <div class="card">
     <div class="card-header">
-        <b>{{ t("Add new members to %s", $project->name) }}</b>
+        <b>{{ t("Add new members to :projectName", ['projectName' => $project->name]) }}</b>
     </div>
     <div class="card-body">
         <form method="POST" action="{{ route('projectmembers.store', $project)}}">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <br>
-                    <small>{{ t("Press %s for another field", "<span class='fa fa-plus gs'></span>") }}</small>
+                    <small>{{ t("Press :plus for another field", ['plus' => "<span class='fa fa-plus gs'></span>"]) }}</small>
                     @error('emails')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

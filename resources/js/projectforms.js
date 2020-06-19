@@ -4,6 +4,7 @@ import ProjectDataTable from './components/ProjectDataTable'
 
 import VueEcho from 'vue-echo-laravel';
 
+Vue.mixin(require('./trans'))
 
 Vue.use(VueEcho, {
     broadcaster: 'pusher',

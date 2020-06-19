@@ -11,7 +11,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ t("Edit Access to Project %s", "<b>".$project->name."</b>") }}
+        {{ t("Edit Access to Project :projectName", ["projectName" => "<b>".$project->name."</b>"]) }}
     </div>
     <div class="card-body">
     <form method="POST" action="{{ route('projectmembers.update', [$project, $user])}}">
@@ -40,7 +40,7 @@
             </div>
             <div class="form-group row required">
                 <label for="select-users" class="col-md-6 col-form-label text-md-right">
-                    {{ t("Assign access level for Project %s.", <b>{{ $project->name }}</b>) }}
+                    {{ t("Assign access level for Project :projectName.", ["projectName" => "<b>".$project->name."</b>"]) }}
                 </label>
                 <div class="col-md-6">
                     <select

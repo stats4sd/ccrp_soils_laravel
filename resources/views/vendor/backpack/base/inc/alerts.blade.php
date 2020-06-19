@@ -27,7 +27,7 @@
             .listen('KoboDeploymentReturnedSuccess', (e) => {
                 new Noty({
                     type: "success",
-                    text: "The " + e.form.title + " Form has been successfully uploaded and deployed to Kobotools.",
+                    text: "<b>{{ t('Form') }}: " + e.form.title + "</b><br/><br/>{{ t('The form has been successfully uploaded and deployed to Kobotools.') }}",
                     timeout: false
                 }).show();
 
@@ -46,7 +46,7 @@
             .listen('KoboDeploymentReturnedError', (e) => {
                 new Noty({
                     type: "error",
-                    text: "The <b>"+e.form.title+"</b> Form could not be deployed to Kobotools.<br/>An error was returned<hr/>Error Type: <b>"+e.errorType+"</b><hr/>Error Message: <b>"+e.errorMessage+"</b>",
+
                     timeout: false
                 }).show();
 
@@ -65,7 +65,7 @@
             .listen('KoboUploadReturnedSuccess', (e) => {
                 new Noty({
                     type: "info",
-                    text: "The " + e.form.title + " Form has been successfully uploaded to Kobotools.",
+                    text: "<b>{{ t('Form') }}: " + e.form.title + "</b><br/><br/>{{ t('The form has been successfully uploaded to Kobotools. It will now be deployed and shared with the users of the project') }}",
                     timeout: false
                 }).show();
 
@@ -75,9 +75,10 @@
             .listen('KoboUploadReturnedError', (e) => {
                 new Noty({
                     type: "error",
-                    text: "The "+e.form.title+" Form could not be uploaded to Kobotools.<br/>An error was returned<br/>Error Type: <b>"+e.errorType+"</b><br/>Error Message: <b>"+e.errorMessage+"</b><br/><hr/>This error may indicate errors in the XLSForm previously uploaded to this platform.",
+                    text: "<b>{{ t('Form') }}: "+e.form.title+"</b><br/><br/> {{ t('The form could not be deployed to Kobotools. An error was returned') }}<hr/>{{ t('Error Type') }}: <b>"+e.errorType+"</b><hr/>{{ t('Error Message') }}: <b>"+e.errorMessage+"</b><br/><br/>{{ t('This error may indicate errors in the XLSX form.') }}",
                     timeout: false
                 }).show();
+
 
                 console.log(e);
             })
@@ -86,7 +87,7 @@
             .listen('KoboArchiveRequestReturnedSuccess', (e) => {
                 new Noty({
                     type: "success",
-                    text: "The " + e.form.title + " Form has been successfully archived on Kobotools.",
+                    text: "<b>{{ t('Form') }}: " + e.form.title + "</b><br/><br/>{{ t('The form has been successfully archived on Kobotools, and is no longer available for data collection') }}",
                     timeout: false
                 }).show();
 
@@ -100,7 +101,7 @@
             .listen('KoboArchiveRequestReturnedError', (e) => {
                 new Noty({
                     type: "error",
-                    text: "The "+e.form.title+" Form could not be archived on Kobotools.<br/>An error was returned<br/>Error Type: <b>"+e.errorType+"</b><br/>Error Message: <b>"+e.errorMessage+"</b>",
+                    text: "<b>{{ t('Form') }}: "+e.form.title+"</b><br/><br/> {{ t('The form could not be archived. An error was returned') }}<hr/>{{ t('Error Type') }}: <b>"+e.errorType+"</b><hr/>{{ t('Error Message') }}: <b>"+e.errorMessage+"</b>",
                     timeout: false
                 }).show();
 

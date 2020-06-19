@@ -11,7 +11,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('packages/backpack/base/css/bundle.css') }}" rel="stylesheet">
-    @livewireStyles
 </head>
 
 <body>
@@ -31,11 +30,13 @@
         </footer>
     </div>
 
+    <script>
+        window._locale = '{{ app()->getLocale() }}';
+        window._translations = {!! cache('translations') !!};
+    </script>
 
     <script src={{asset("js/app.js")}}></script>
     @yield('scripts')
     @stack('scripts')
     @include('vendor.backpack.base.inc.alerts')
-    @livewireScripts
-
 </body>
