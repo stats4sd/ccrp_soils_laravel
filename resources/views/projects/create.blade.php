@@ -94,7 +94,7 @@
             </div>
 
             <hr/>
-{!!  app('commonmark')->convertToHtml(t(<<<EOD
+{!!  app('commonmark')->convertToHtml(t("
 
             #### Project Privacy Settings
 
@@ -102,7 +102,7 @@
 
             The data will be suitably anonymised before sharing. Any instances where individual data points might be recognisable will be discussed with the project before being shared publically.
 
-EOD)) !!}
+")) !!}
 
             <div class="form-group row">
                 <h5 class="col-md-4 col-form-label text-md-right">

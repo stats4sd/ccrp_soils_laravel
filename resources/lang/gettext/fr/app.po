@@ -7,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-06-19T16:20:21+00:00\n"
-"PO-Revision-Date: 2020-06-19 18:20+0200\n"
+"POT-Creation-Date: 2020-06-19T16:35:10+00:00\n"
+"PO-Revision-Date: 2020-06-19 18:35+0200\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
@@ -19,6 +19,36 @@ msgstr "Sur"
 
 #: resources/views/about.blade.php:3
 msgid "How the platform works"
+msgstr ""
+
+#: resources/views/about.blade.php:11
+msgid ""
+"\n"
+"\n"
+"There are three main components to this data platform:\n"
+"- A set of ODK forms for use when collecting and analysing soil samples;\n"
+"- A QR code generation tool, to help you uniquely identify and manage your physical samples;\n"
+"- A MySQL databse that helps organise data collected through the different forms.\n"
+"\n"
+"You can use these components in different ways, described below.\n"
+"\n"
+"### 1. Register to use the platform's database\n"
+"Registering on the site will give oyu access to the full set of tools, including the ability to collect data via your own Kobotoolbox account, have it synchronised on the platform, and the nautomatically merged into downloadable datasets for your project.\n"
+"\n"
+"To get started, use the links in the header or sidebar to register for an account. Once registered, you can add your CCRP project to the platform, or request to join if it already exists.\n"
+"\n"
+"When a new project account is created, the RMS and Soils team will be notified and will contact you to offer support on getting started. You can also contact us directly through the platform, and we will respond as soon as possible.\n"
+"\n"
+"### 2. Just use the ODK forms and QR codes; keep the data in your own system.\n"
+"\n"
+"Using the downloadable resources requires no sign-up. Simply download the XLS forms you wish to use from our downloads page.\n"
+"\n"
+"The different analysis protocols all require some level of calculation. The ODK forms have these calculations programmed in, so using them for analysis will improve the reliability of your data even if you choose not to use this platform. We are also regularly updating these forms, and many now have guidance on how to interpret your results directly within the form.\n"
+"\n"
+"We recommend using QR codes to uniquely identify your soil samples, even if you do not plan to store the physical samples after your analysis. This is to avoid potential typing errors when entering sample IDs into the different analysis forms. You can generate pages of unique QR codes on this platform without registering.\n"
+"\n"
+"To see all the forms available, go to our downloads page.\n"
+""
 msgstr ""
 
 #: resources/views/auth/register.blade.php:6
@@ -114,6 +144,15 @@ msgstr ""
 
 #: resources/views/home.blade.php:35
 msgid "Contact Us"
+msgstr ""
+
+#: resources/views/home.blade.php:50
+msgid ""
+"\n"
+"\n"
+"This soils platform is the result of a collaboration between the [Soils](https://smallholder-sha.org/) and the [Research Methods Support](https://stats4sd.org/ccrp) teams, a pair of cross-cutting projects from the [Collaborative Crop Research Program (CCRP)](https://ccrp.org).\n"
+"\n"
+""
 msgstr ""
 
 #: resources/views/layouts/account.blade.php:3
@@ -231,6 +270,20 @@ msgstr ""
 
 #: resources/views/projects/create.blade.php:95
 msgid "Add an image to identify the project"
+msgstr ""
+
+#: resources/views/projects/create.blade.php:139
+#: resources/views/projects/tab-settings.blade.php:116
+msgid ""
+"\n"
+"\n"
+"            #### Project Privacy Settings\n"
+"\n"
+"            As part of this platform, we would like to be able to use aggregated summaries to support broader research into soil quality in smallholder farms across the CCRP network and beyond. If you would like your project's data to contribute to this aggregation, please tick the box below.\n"
+"\n"
+"            The data will be suitably anonymised before sharing. Any instances where individual data points might be recognisable will be discussed with the project before being shared publically.\n"
+"\n"
+""
 msgstr ""
 
 #: resources/views/projects/create.blade.php:152

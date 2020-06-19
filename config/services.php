@@ -43,4 +43,9 @@ return [
         'password' => env('KOBO_PASSWORD', ''),
     ],
 
+    'recaptcha' => [
+        'key' => env('GOOGLE_RECAPTCHA_KEY', null),
+        'secret' => env('GOOGLE_RECAPTCHA_SECRET', null),
+    ],
+
 ];

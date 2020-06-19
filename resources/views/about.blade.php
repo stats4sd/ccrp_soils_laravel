@@ -10,7 +10,7 @@
 
 <div class="col-sm-12">
 
-{!!  app('commonmark')->convertToHtml(t(<<<EOD
+{!!  app('commonmark')->convertToHtml(t("
 
 There are three main components to this data platform:
 - A set of ODK forms for use when collecting and analysing soil samples;
@@ -35,6 +35,6 @@ The different analysis protocols all require some level of calculation. The ODK 
 We recommend using QR codes to uniquely identify your soil samples, even if you do not plan to store the physical samples after your analysis. This is to avoid potential typing errors when entering sample IDs into the different analysis forms. You can generate pages of unique QR codes on this platform without registering.
 
 To see all the forms available, go to our downloads page.
-EOD)) !!}
+")) !!}
 </div>
 @endsection

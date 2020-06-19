@@ -46,11 +46,11 @@
                 <div class="card-body">
 
 
-{!!  app('commonmark')->convertToHtml(t(<<<EOD
+{!!  app('commonmark')->convertToHtml(t("
 
 This soils platform is the result of a collaboration between the [Soils](https://smallholder-sha.org/) and the [Research Methods Support](https://stats4sd.org/ccrp) teams, a pair of cross-cutting projects from the [Collaborative Crop Research Program (CCRP)](https://ccrp.org).
 
-EOD)) !!}
+")) !!}
                 </div>
 
             </div>
