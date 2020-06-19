@@ -11,7 +11,7 @@
 
 <div class="card">
     <div class="card-header">
-        <b>Add new members to {{ $project->name }}</b>
+        <b>{{ t("Add new members to %s", $project->name) }}</b>
     </div>
     <div class="card-body">
         <form method="POST" action="{{ route('projectmembers.store', $project)}}">
@@ -28,11 +28,11 @@
 
             <div class="form-group row required">
                 <label for="select-users" class="col-md-4 col-form-label text-md-right">
-                    Add existing platform users
+                    {{ t("Add existing platform users to the project") }}
                 </label>
                 <div class="col-md-8">
                     <select
-                        data-placeholder="Select users to invite"
+                        data-placeholder="{{ t("Select users to invite") }}"
                         multiple
                         id="select-users"
                         name="users[]"
@@ -54,11 +54,11 @@
             </div>
 
             <hr/>
-            <h5>Invite New Users</h5>
-            <p>If you cannot find the users on the platform, you can send them an email invitation to join the platform (and this project).</p>
+            <h5>{{ t("Invite New Users") }}</h5>
+            <p>{{ t("If you cannot find the users on the platform, you can send them an email invitation to join the platform (and this project)") }}.</p>
             <div class="form-group row required">
                 <label for="description" class="col-md-4 col-form-label text-md-right">
-                    Enter the email addresses to send invites to. You can add as many email addresses as you need.
+                    {{ t("Enter the email addresses to send invites to. You can add as many email addresses as you need.") }}
                 </label>
                 <div class="col-md-8">
                     <div id="repeatingEmailFields">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <br>
-                    <small>Press <span class="fa fa-plus gs"></span> for another field</small>
+                    <small>{{ t("Press %s for another field", "<span class='fa fa-plus gs'></span>") }}</small>
                     @error('emails')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

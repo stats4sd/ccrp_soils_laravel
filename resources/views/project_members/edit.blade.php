@@ -11,7 +11,7 @@
 
 <div class="card">
     <div class="card-header">
-        Edit Access to Project <b>{{ $project->name }}</b>
+        {{ t("Edit Access to Project %s", "<b>".$project->name."</b>") }}
     </div>
     <div class="card-body">
     <form method="POST" action="{{ route('projectmembers.update', [$project, $user])}}">
@@ -28,19 +28,19 @@
             @endif
             <div class="form-group row">
                 <label class="col-md-6 col-form-label text-md-right">
-                    User Name
+                    {{ T("User Name") }}
                 </label>
                 <p class="col-md-6 col-form-label">{{ $user->name }}</p>
             </div>
             <div class="form-group row">
                 <label class="col-md-6 col-form-label text-md-right">
-                    User Email
+                    {{ T("User Email") }}
                 </label>
                 <p class="col-md-6 col-form-label">{{ $user->email }}</p>
             </div>
             <div class="form-group row required">
                 <label for="select-users" class="col-md-6 col-form-label text-md-right">
-                    Assign access level for Project <b>{{ $project->name }}</b>.
+                    {{ t("Assign access level for Project %s.", <b>{{ $project->name }}</b>) }}
                 </label>
                 <div class="col-md-6">
                     <select
@@ -49,8 +49,8 @@
                         class="select2 form-control @error('name') is-invalid @enderror"
                         value="{{ $user->pivot->admin }}"
                         >
-                            <option value="0" {{ !$user->pivot->admin ? 'selected' : '' }}>Project Member</option>
-                            <option value="1" {{ $user->pivot->admin ? 'selected' : '' }}>Project Administrator</option>
+                            <option value="0" {{ !$user->pivot->admin ? 'selected' : '' }}>{{ t("Project Member") }}</option>
+                            <option value="1" {{ $user->pivot->admin ? 'selected' : '' }}>{{ t("Project Administrator") }}</option>
 
                     </select>
                     @error('users')

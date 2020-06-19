@@ -17,7 +17,6 @@
                             <div class="card-body">
                                 <a href="projects/{{$project->slug}}"><h5 class="card-title"><b>{{$project->name}}</b></h5></a>
                                 <p class="card-text">{{$project->description}}</p>
-                                <p class="card-text"><small class="text-muted"><b>Created at :</b>{{$project->created_at}}</small></p>
                             </div>
                         </div>
                     </div>

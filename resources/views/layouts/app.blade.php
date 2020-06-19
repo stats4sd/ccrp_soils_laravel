@@ -24,8 +24,8 @@
 
         <!-- Footer -->
         <footer class="py-3 mt-auto bg-dark footer">
-            <div class="container">
-                <p class="m-0 text-center text-white">Something might go here in the footer... who knows?</p>
+            <div class="container d-flex flex-justify-between">
+                <p class="m-0 text-white">© 2020 Smallholder Soil Health Assessment & Stats4SD</p>
             </div>
             <!-- /.container -->
         </footer>

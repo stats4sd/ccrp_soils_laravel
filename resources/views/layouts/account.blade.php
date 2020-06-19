@@ -1,6 +1,6 @@
 <div class="card account-card m-3">
     <div class="card-header">
-        <strong>MY ACCOUNT</strong>
+        <strong>{{ t("MY ACCOUNT") }}</strong>
     </div>
     @if(auth()->check())
         <div class="card-body">
@@ -14,12 +14,12 @@
                     </a>
                 </div>
 
-                <button type="submit" class="btn btn-dark btn-block " name="login_user">Logout</button>
+                <button type="submit" class="btn btn-dark btn-block " name="login_user">{{ t("Logout") }}</button>
             </form>
         </div>
 
         <div class="card-header">
-            <strong>MY PROJECTS</strong>
+            <strong>{{ t("MY PROJECTS") }}</strong>
         </div>
         <ul class="list-group list-group-flush">
             @foreach($userProjects as $project)
@@ -38,7 +38,7 @@
             <form method="post" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
+                    <label for="exampleInputEmail1">{{ t("Email") }}</label>
                     <input class="form-control"  type="text" name="email">
 
                     @if($errors->has('email'))
@@ -48,7 +48,7 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
+                    <label for="exampleInputPassword1">{{ t("Password") }}</label>
                     <input class="form-control"  type="password" name="password">
 
                     @if($errors->has('password'))
@@ -61,15 +61,15 @@
                 <div class="form-group">
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox"> Remember Password
+                            <input class="form-check-input" type="checkbox"> {{ t("Remember Password") }}
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-dark btn-block" name="login_user">Login</button>
+                <button type="submit" class="btn btn-dark btn-block" name="login_user">{{  t("Login") }}</button>
             </form>
             <div class="text-center">
-                <a class="d-block small mt-3" href={{ route('register') }}>Register an Account</a>
-                <a class="d-block small" href={{ route('password.request') }}>Forgot Password?</a>
+                <a class="d-block small mt-3" href={{ route('register') }}>{{ t("Register an Account") }}</a>
+                <a class="d-block small" href={{ route('password.request') }}>{{ t("Forgot Password?") }}</a>
             </div>
         </div>
     @endif

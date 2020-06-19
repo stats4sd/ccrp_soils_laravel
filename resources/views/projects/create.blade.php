@@ -20,10 +20,10 @@
                 </div>
             @endif
 
-            <h4>Project Details</h4>
+            <h4>{{ t("Project Details") }}</h4>
             <div class="form-group row required">
                 <label for="name" class="col-md-4 col-form-label text-md-right">
-                    Project Name
+                    {{ t("Project Name") }}
                 </label>
                 <div class="col-md-8">
                     <input
@@ -44,7 +44,7 @@
 
             <div class="form-group row required">
                 <label for="description" class="col-md-4 col-form-label text-md-right">
-                    Brief Description
+                    {{ t("Brief Description") }}
                 </label>
                 <div class="col-md-8">
                     <textarea
@@ -65,7 +65,7 @@
 
             <div class="form-group row">
                 <label for="avatar" class="col-md-4 col-form-label text-md-right">
-                    Add an image to identify the project
+                    {{ t("Add an image to identify the project") }}
                 </label>
                 <div class="col-md-6">
                     <input
@@ -94,13 +94,19 @@
             </div>
 
             <hr/>
-            <h4>Project Privacy Settings</h4>
-            <p>As part of this platform, we would like to be able to use aggregated summaries to support broader research into soil quality in smallholder farms across the CCRP network and beyond. If you would like your project's data to contribute to this aggregation, please tick the box below.</p>
-            <p>The data will be suitably anonymised before sharing. Any instances where individual data points might be recognisable will be discussed with the project before being shared publically.</p>
+{!!  app('commonmark')->convertToHtml(t(<<<EOD
+
+            #### Project Privacy Settings
+
+            As part of this platform, we would like to be able to use aggregated summaries to support broader research into soil quality in smallholder farms across the CCRP network and beyond. If you would like your project's data to contribute to this aggregation, please tick the box below.
+
+            The data will be suitably anonymised before sharing. Any instances where individual data points might be recognisable will be discussed with the project before being shared publically.
+
+EOD)) !!}
 
             <div class="form-group row">
                 <h5 class="col-md-4 col-form-label text-md-right">
-                    Data Sharing
+                    {{ t("Data Sharing") }}
                 </h5>
                 <div class="col-md-8">
                     <div class="form-check mb-3">
@@ -111,7 +117,7 @@
                             value="1"
                             id="share_data_1">
                         <label class="form-check-label" for="share_data_1">
-                            I agree to have this project's data to be included in anonymous summaries produced by the CCRP Soils Cross-cutting Project.
+                            {{ t("I agree to have this project's data to be included in anonymous summaries produced by the CCRP Soils Cross-cutting Project.") }}
                         </label>
 
                     </div>
@@ -124,7 +130,7 @@
                             id="share_summary_0"
                             checked>
                         <label class="form-check-label" for="share_summary_0" >
-                            Do not include this project's data in summaries produced by the platform for use outside of this project's team.
+                            {{ t("Do not include this project's data in summaries produced by the platform for use outside of this project's team.") }}
                         </label>
 
                         @error('share_summary')
@@ -138,7 +144,7 @@
             </div>
 
 
-            <h5>Terms of Use</h5>
+            <h5>{{ t("Terms of Use") }}</h5>
             <div class="form-check">
                 <input
                     class="form-check-input @error('share_summary') is-invalid @enderror"
@@ -147,7 +153,7 @@
                     value="1"
                     id="share_summary">
               <label class="form-check-label" for="share_summary">
-                I agree to the terms of use laid out in the site policy page
+                {{ t("I agree to the terms of use laid out in the site policy page") }}
               </label>
 
                 @error('share_summary')

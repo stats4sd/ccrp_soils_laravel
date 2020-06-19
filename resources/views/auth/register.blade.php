@@ -8,7 +8,10 @@
                 <div class="card-body">
                     @if($invite)
                         <div class="alert alert-info">
-                            You have been invited to join the <b>{{ $invite->project->name }}</b> project. <br/><br/>Please use the same email address to get immediate access to the project data and forms after registration. We have pre-filled the email address field below.
+
+                            {{ t("You have been invited to join the %s project.", $invite->project->name) }}
+                            <br/><br/>
+                            {{ t("Your invite is attached to your email address. Please use this same address when registering to get immediate access to the project data and forms. You may change your email address after registration if you would prefer to use a different one.") }}
                         </div>
                     @endif
                     <form method="POST" action="{{ route('register') }}">
@@ -72,13 +75,13 @@
                         </div>
                         <hr/>
                         <p class="form-text">
-                            In order to share ODK forms directly with you on Kobotoolbox, we need the username for your Kobotoolbox account.
+                            {{ t("In order to share ODK forms directly with you on Kobotoolbox, we need the username for your Kobotoolbox account.") }}
                         </p>
                         <p class="form-text">
-                            We do not require your Kobotoolbox password, and will never ask for direct access to your Kobo account.
+                            {{ t("We do not require your Kobotoolbox password, and will never ask for direct access to your Kobo account.") }}
                         </p>
                         <div class="form-group row">
-                            <label for="kobo-id" class="col-md-4 col-form-label text-md-right">Kobotoolbox Username</label>
+                            <label for="kobo-id" class="col-md-4 col-form-label text-md-right">{{ t("Kobotoolbox Username") }}</label>
 
                             <div class="col-md-6">
                                 <input id="kobo-id" type="text" class="form-control" name="kobo_id">

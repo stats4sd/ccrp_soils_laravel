@@ -57,20 +57,20 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="removeUserModalLabel{{ $user->id }}">Remove User From {{ $project->name }}</h5>
+        <h5 class="modal-title" id="removeUserModalLabel{{ $user->id }}">{{ t("Remove User from %s", $project->name) }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Are you sure you wish to remove {{ $user->name }} from {{ $project->name }}? After removing, they will no longer have access to any project data or forms on Kobotoolbox.
+        {{ t("Are you sure you wish to remove %s from %s? After removing, they will no longer have access to any project data or forms on Kobotoolbox.", $user->name, $project->name ) }}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ t("Cancel") }}</button>
         <form action="{{ route('projectmembers.destroy', [$project, $user]) }}" method="POST">
             @csrf
             @method('delete')
-            <button type="submit" class="btn btn-primary">Confirm Remove</button>
+            <button type="submit" class="btn btn-primary">{{ t("Confirm Remove") }}</button>
         </form>
       </div>
     </div>
