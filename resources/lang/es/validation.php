@@ -7,13 +7,13 @@ return [
     'alpha'                => 'El :attribute solo puede contener letras.',
     'alpha_dash'           => 'El :attribute solo puede contener letras, números, guiones y guiones bajos.',
     'alpha_num'            => 'El :attribute solo puede contener letras y números.',
-    'array'                => 'El :attribute debe ser una matriz.',
+    'array'                => 'El :attribute debe ser un array.',
     'before'               => 'El :attribute debe ser una fecha anterior a :date.',
     'before_or_equal'      => 'El :attribute debe ser una fecha anterior o igual a :date.',
     'between'              => [
         'numeric' => 'El :attribute debe estar entre :min y :max.',
         'file'    => 'El :attribute debe estar entre :min y :max kilobytes.',
-        'string'  => 'El :attribute debe estar entre los caracteres :min y :max.',
+        'string'  => 'El :attribute debe tener entre los caracteres :min y :max.',
         'array'   => 'El :attribute debe tener entre :min y :max elementos.'
     ],
     'boolean'              => 'El campo :attribute debe ser verdadero o falso.',
@@ -22,9 +22,9 @@ return [
     'date_equals'          => 'El :attribute debe ser una fecha igual a :date.',
     'date_format'          => 'El :attribute no coincide con el formato :format.',
     'different'            => 'El :attribute y :other deben ser diferentes.',
-    'digits'               => 'Los :attribute deben ser dígitos :digits.',
-    'digits_between'       => 'El :attribute debe estar entre los dígitos de :min y :max.',
-    'dimensions'           => 'El :attribute tiene dimensiones de imagen no válidas.',
+    'digits'               => 'Los :attribute deben tener :digits dígitos .',
+    'digits_between'       => 'El :attribute debe estar entre :min y :max.',
+    'dimensions'           => 'El :attribute tiene dimensiones de imagen inválidas.',
     'distinct'             => 'El campo :attribute tiene un valor duplicado.',
     'email'                => 'El :attribute debe ser una dirección de correo electrónico válida.',
     'exists'               => 'El :attribute seleccionado no es válido.',
@@ -39,8 +39,8 @@ return [
     'gte'                  => [
         'numeric' => 'El :attribute debe ser mayor o igual que :value.',
         'file'    => 'El :attribute debe ser mayor o igual que :value kilobytes.',
-        'string'  => 'El :attribute debe ser mayor o igual que los caracteres :value.',
-        'array'   => 'El :attribute debe tener elementos :value o más.'
+        'string'  => 'El :attribute debe ser mayor o igual que :value caracteres.',
+        'array'   => 'El :attribute debe tener :value elementos o más.'
     ],
     'image'                => 'El :attribute debe ser una imagen.',
     'in'                   => 'El :attribute seleccionado no es válido.',
@@ -60,7 +60,7 @@ return [
         'numeric' => 'El :attribute debe ser menor o igual que :value.',
         'file'    => 'El :attribute debe ser menor o igual a :value kilobytes.',
         'string'  => 'El :attribute debe ser menor o igual a los caracteres :value.',
-        'array'   => 'El :attribute no debe tener más de :value artículos.'
+        'array'   => 'El :attribute no debe tener más de :value elementos.'
     ],
     'max'                  => [
         'numeric' => 'El :attribute no puede ser mayor que :max.',

@@ -1,11 +1,14 @@
 <?php
 
+Route::post('contact', 'ContactController@store')->name('contact.store');
+
 /**
  * Routes for making requests that require Authentication, but should not be translated
  */
 Route::group([
     'middleware' => ['auth'],
 ], function(){
+
 
     Route::get('projects/{project}/projectxlsforms', 'ProjectXlsformController@index')->name('projectxlsforms.get');
     Route::post('projectxlsforms/{project_xlsform}/deploytokobo', 'ProjectXlsformController@deployToKobo')->name('projectxlsforms.deploy');
@@ -34,11 +37,12 @@ Route::group([
     Route::view('qr-codes', 'qr_code')->name('qr-codes');
     Route::view('contact', 'contact')->name('contact');
 
-
     Route::post('qr-newcodes', 'QrController@newCodes')->name('qr-newcodes');
     Route::get('qr-print', 'QrController@printView')->name('qr-print');
 
     Route::get('downloads', 'DownloadsController@index')->name('downloads');
+
+
 
     Route::group([
         'middleware' => ['auth'],
