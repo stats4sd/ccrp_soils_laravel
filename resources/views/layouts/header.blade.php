@@ -8,24 +8,50 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">{{ t("Home") }}
+                    <a class="nav-link @if(Route::currentRouteName() === 'home') active @endif" href="{{ route('home') }}">{{ t("Home") }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('about') }}">{{ t("About") }}</a>
+                    <a class="nav-link @if(Route::currentRouteName() === 'about') active @endif" href="{{ route('about') }}">{{ t("About") }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('qr-codes') }}">{{ t("QR Codes") }}</a>
+                    <a class="nav-link @if(Route::currentRouteName() === 'qr-codes') active @endif" href="{{ route('qr-codes') }}">{{ t("QR Codes") }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('downloads') }}">{{ t("Downloads") }}</a>
+                    <a class="nav-link @if(Route::currentRouteName() === 'downloads') active @endif" href="{{ route('downloads') }}">{{ t("Downloads") }}</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ t("Change language") }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <form action="{{ route('language') }}" method="POST">
+
+                            @csrf
+                            <input type="hidden" name="lang" value="en">
+                            <input type="hidden" name="redirect" value="{{ Route::currentRouteName() }}">
+                            <button type="submit" class="dropdown-item">English</button>
+                        </form>
+                        <form action="{{ route('language') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="lang" value="fr">
+                            <input type="hidden" name="redirect" value="{{ Route::currentRouteName() }}">
+                            <button type="submit" class="dropdown-item">Français</button>
+                        </form>
+                        <form action="{{ route('language') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="lang" value="es">
+                            <input type="hidden" name="redirect" value="{{ Route::currentRouteName() }}">
+                            <button type="submit" class="dropdown-item">Español</button>
+                        </form>
+                    </div>
                 </li>
                 @if(auth()->guest())
                     <li class="nav-item ml-4">
-                        <a class="nav-link" href="{{ route('login') }}">{{ t("Login") }}</a>
+                        <a class="nav-link @if(Route::currentRouteName() === 'login') active @endif" href="{{ route('login') }}">{{ t("Login") }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ t("Register") }}</a>
+                        <a class="nav-link @if(Route::currentRouteName() === 'register') active @endif" href="{{ route('register') }}">{{ t("Register") }}</a>
                     </li>
                 @endif
                 @if(auth()->check())

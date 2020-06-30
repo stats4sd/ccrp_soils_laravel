@@ -1,7 +1,9 @@
 <?php
 
-Route::post('contact', 'ContactController@store')->name('contact.store');
+use App\Http\Controllers\LanguageController;
 
+Route::post('contact', 'ContactController@store')->name('contact.store');
+Route::post('langage', 'LanguageController@changeLanguage')->name('language');
 /**
  * Routes for making requests that require Authentication, but should not be translated
  */
