@@ -41,13 +41,21 @@
   		var qrNum = document.getElementById("qrNum").value;
   		text_code = qrNum.match(/([A-Z])/);
 		if(qrNum.length == 3){
-			qrNum += '_';		
+
+			qrNum += '-';		
 			qrNum = qrNum.toUpperCase();
 			document.getElementById("qrNum").value=qrNum;
+			} else if(!qrNum.match(/([A-Z])/)){
+				
+				document.getElementById("code_error").innerHTML = 'the code is wrong. Please follow the example below: PAZ-24234';
 			}
+
 		if(qrNum.length > 3 && !qrNum.substring(4,).match(/([0-9])/)){
-			document.getElementById("code_error").innerHTML = 'the code is wrong. Please follow the example below: PAZ_24234';
-		} else{
+
+			document.getElementById("code_error").innerHTML = 'the code is wrong. Please follow the example below: PAZ-24234';
+
+		} else {
+
 			document.getElementById("code_error").innerHTML = '';
 		}
 
