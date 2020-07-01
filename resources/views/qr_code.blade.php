@@ -17,11 +17,18 @@
 				<form method="post" action="{{ route('qr-newcodes') }}">
 					@csrf
 					<div class="form-group row">
+						<label for="qrNumber" class="col-sm-4">{{ t("Add characters for the code") }}</label>
+						<div class="col-sm-4">
+						<input type="text" class="form-control" id="qrChar" name="qrChar" onkeyup="standardCode()">
+						
+						</div>
+					</div>
+					<div class="form-group row">
+						
 						<label for="qrNumber" class="col-sm-4">{{ t("How many QR codes do you need?") }}</label>
 						<div class="col-sm-4">
-							<input type="text" class="form-control" id="qrNum" name="qrNum" onkeypress="standardCode()">
+							<input type="number" class="form-control" id="qrNum" name="qrNum">
 							<small id="passwordHelpBlock" class="form-text text-muted">{{ t("QR Codes will be split over multiple pages as necessary") }}</small>
-							<p id="code_error"></p>
 						</div>
 					</div>
 					<div class="row">
@@ -38,26 +45,9 @@
 <script type="text/javascript">
 	
 	function standardCode() {
-  		var qrNum = document.getElementById("qrNum").value;
-  		text_code = qrNum.match(/([A-Z])/);
-		if(qrNum.length == 3){
-
-			qrNum += '-';		
-			qrNum = qrNum.toUpperCase();
-			document.getElementById("qrNum").value=qrNum;
-			} else if(!qrNum.match(/([A-Z])/)){
-				
-				document.getElementById("code_error").innerHTML = 'the code is wrong. Please follow the example below: PAZ-24234';
-			}
-
-		if(qrNum.length > 3 && !qrNum.substring(4,).match(/([0-9])/)){
-
-			document.getElementById("code_error").innerHTML = 'the code is wrong. Please follow the example below: PAZ-24234';
-
-		} else {
-
-			document.getElementById("code_error").innerHTML = '';
-		}
+  		var qrChar = document.getElementById("qrChar").value;
+  		qrChar = qrChar.toUpperCase();
+		document.getElementById("qrChar").value=qrChar;
 
 	}  
 </script>

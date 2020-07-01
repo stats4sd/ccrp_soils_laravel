@@ -18,7 +18,7 @@ class QrController extends Controller
                 'code' => rand(pow(10, 3), pow(10, 4)-1),
                 'status' => 'new',
             ]);
-            $qrcode->code = $qrcode->id . '_' . $qrcode->code;
+            $qrcode->code = $request->qrChar . '_' . $qrcode->code;
             $qrcode->save();
 
             $qrcodes[] = $qrcode;

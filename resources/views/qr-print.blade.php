@@ -5,15 +5,15 @@
 
             @foreach($qrcodes as $qrcode)
 
-            <div class="card" style="width:33%; margin-top: 15px">
-                <div class="card-body d-flex justify-content-center">
+            {{-- <div class="card" style="width:100%; margin-top: 0px"> --}}
+                <div class="card justify-content-center" style="width:70mm;  height:36mm;">
                     {!! QrCode::size(200)->generate($qrcode->code) !!}
+                {{-- <div class="card-footer d-flex justify-content-center"> --}}
+                    <div class="font-weight-bold" style="text-align: center;">{{ $qrcode->code }}</div>
+                {{-- </div> --}}
                 </div>
-                <div class="card-footer d-flex justify-content-center">
-                    <div class="font-weight-bold">{{ $qrcode->code }}</div>
-                </div>
-            </div>
-                @if($loop->iteration % 12 == 0)
+            {{-- </div> --}}
+                @if($loop->iteration % 24 == 0)
                     {{-- End Row --}}
                     </div>
                     {{-- End page --}}
@@ -53,9 +53,9 @@
     .page {
       width: 21cm;
       min-height: 29.7cm;
-      padding: 2cm;
-      margin: 1cm auto;
-      border: 1px #D3D3D3 solid;
+      padding: 0cm;
+      margin: 0cm auto;
+      border: 0px #D3D3D3 solid;
       border-radius: 5px;
       background: white;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
