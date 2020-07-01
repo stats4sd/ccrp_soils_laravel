@@ -78,7 +78,7 @@
             width: 210mm;
             height: 297mm;
         }
-      .page {
+     /* .page {
         margin: 0;
         border: initial;
         border-radius: initial;
@@ -87,6 +87,6 @@
         box-shadow: initial;
         background: initial;
         page-break-after: always;
-      }
+      }*/
     }
 </style>
