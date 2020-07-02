@@ -17,7 +17,7 @@
 				<form method="post" action="{{ route('qr-newcodes') }}">
 					@csrf
 					<div class="form-group row">
-						<label for="qrNumber" class="col-sm-4">{{ t("Add characters for the code") }}</label>
+						<label for="qrChar" class="col-sm-4">{{ t("Add characters for the code") }}</label>
 						<div class="col-sm-4">
 						<input type="text" class="form-control" id="qrChar" name="qrChar" onkeyup="standardCode()">
 						
@@ -29,6 +29,22 @@
 						<div class="col-sm-4">
 							<input type="number" class="form-control" id="qrNum" name="qrNum">
 							<small id="passwordHelpBlock" class="form-text text-muted">{{ t("QR Codes will be split over multiple pages as necessary") }}</small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="sheetSize" class="col-sm-4">{{ t("Select the size of the sheet.") }}</label>
+						<div class="col-sm-6">
+						<div class="form-check-inline">
+						  <label class="form-check-label">
+						    <input type="radio" class="form-check-input" name="optradio">21 Labels
+						  </label>
+						</div>
+						<div class="form-check-inline">
+						  <label class="form-check-label">
+						    <input type="radio" class="form-check-input" name="optradio">14 Labels
+						  </label>
+						</div>
+						
 						</div>
 					</div>
 					<div class="row">
