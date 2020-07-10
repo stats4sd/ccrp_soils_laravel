@@ -102,7 +102,6 @@ class Sample extends Model
             }
             return $this->analysis_poxc->avg('poxc_soil');
         }
-
         return null;
     }
 

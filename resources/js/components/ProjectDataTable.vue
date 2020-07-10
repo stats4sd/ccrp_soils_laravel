@@ -32,9 +32,9 @@
                     <td>{{ sample.p_result }} </td>
                     <td>{{ sample.ph_result }}</td>
                     <td style="border-right: 1px solid darkgray">{{ sample.pom_result }}</td>
-                    <td style="border-left: 1px solid darkgray">{{ sample.twomm_aggreg_pct_result }} %</td>
-                    <td style="border-right: 1px solid lightgray">{{ sample.twofiftymicron_aggreg_pct_result }} %</td>
-                    <td style="border-left: 1px solid lightgray">{{ sample.total_stableaggregates }} %</td>
+                    <td style="border-left: 1px solid darkgray">{{ sample.twomm_aggreg_pct_result }} <span v-if="sample.twomm_aggreg_pct_result">%</span></td>
+                    <td style="border-right: 1px solid lightgray">{{ sample.twofiftymicron_aggreg_pct_result }} <span v-if="sample.twofiftymicron_aggreg_pct_result">%</span></td></td>
+                    <td style="border-left: 1px solid lightgray">{{ sample.total_stableaggregates }} <span v-if="sample.total_stableaggregates">%</span></td></td>
                 </tr>
             </table>
 
@@ -55,11 +55,19 @@ export default {
         console.log("hi");
         // round things for display
         this.samplesDisplay = this.samples.map((sample) => {
-            sample.poxc_result = sample.poxc_result.toFixed(2);
-            sample.p_result = sample.p_result.toFixed(2);
-            sample.ph_result = sample.ph_result.toFixed(2);
-
-            sample.total_stableaggregates = sample.total_stableaggregates.toFixed(1);
+            console.log("sample:", sample);
+            if(sample.poxc_result) {
+                sample.poxc_result = sample.poxc_result.toFixed(2);
+            }
+            if(sample.p_result) {
+                sample.p_result = sample.p_result.toFixed(2);
+            }
+            if(sample.ph_result) {
+                sample.ph_result = sample.ph_result.toFixed(2);
+            }
+            if(sample.total_stableaggregates) {
+                sample.total_stableaggregates = sample.total_stableaggregates.toFixed(1);
+            }
 
             return sample;
 
