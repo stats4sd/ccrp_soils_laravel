@@ -11,7 +11,7 @@ class QrController extends Controller
     {
         $num = $request->qrNum;
         $labelSize = $request->labelSize;
-        
+
         if($labelSize==21){
 
             $rowNumbers=3;
@@ -27,7 +27,7 @@ class QrController extends Controller
                 'code' => rand(pow(10, 3), pow(10, 4)-1),
                 'status' => 'new',
             ]);
-            $qrcode->code = $request->qrChar . '_' . $qrcode->code;
+            $qrcode->code = $request->qrChar . '_' . sprintf('%06d', $qrcode->id);
             $qrcode->save();
 
             $qrcodes[] = $qrcode;
