@@ -13,7 +13,7 @@
                 </div>
                 </div>
             {{-- </div> --}}
-                @if($loop->iteration % 21 == 0)
+                @if($loop->iteration % $labelSize == 0)
                     {{-- End Row --}}
                     </div>
                     {{-- End page --}}
@@ -23,7 +23,7 @@
                         {{-- Start New Row --}}
                         <div class="d-flex justify-content-center">
 
-                @elseif($loop->iteration % 3 == 0)
+                @elseif($loop->iteration % $rowNumbers == 0)
                     {{-- End Row --}}
                     </div>
                     {{-- Start New Row --}}
@@ -70,27 +70,24 @@
 
     @page {
       size: A4;
-      margin-top: 1mm;
-      margin-bottom: 1mm;
+     /* margin-top: 16mm;
+      margin-bottom: 16mm;*/
       margin: 0cm;
-      width: 21cm;
-      min-height: 29.7cm;
+      width: 23.5cm;
+      min-height: 32cm;
     }
 
     @media print {
         html, body {
           background: white;
-          margin: 0cm;
-         /* margin-top: 1mm;
-          margin-bottom: 1mm;*/
+          zoom:120%;
         }
+
       .page {
-        /*width: 826px; 
-        height: 1122px;
-        margin-top: 1mm;
-        margin-bottom: 1mm;
-        border-radius: initial;
-        box-shadow: initial;*/
+        margin-top: 8mm !important;
+        margin-bottom: 8mm;
+        margin-left: 4mm;
+        margin-right: 4mm;
         page-break-after: always;
       }
     }

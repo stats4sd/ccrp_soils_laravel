@@ -36,12 +36,12 @@
 						<div class="col-sm-6">
 						<div class="form-check-inline">
 						  <label class="form-check-label">
-						    <input type="radio" class="form-check-input" name="optradio">21 Labels
+						    <input type="radio" class="form-check-input" value="21" name="labelSize">21 Labels
 						  </label>
 						</div>
 						<div class="form-check-inline">
 						  <label class="form-check-label">
-						    <input type="radio" class="form-check-input" name="optradio">14 Labels
+						    <input type="radio" class="form-check-input" value="14" name="labelSize">14 Labels
 						  </label>
 						</div>
 						
@@ -64,6 +64,5 @@
   		var qrChar = document.getElementById("qrChar").value;
   		qrChar = qrChar.toUpperCase();
 		document.getElementById("qrChar").value=qrChar;
-
 	}  
 </script>

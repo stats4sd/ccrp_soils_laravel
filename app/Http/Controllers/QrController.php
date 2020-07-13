@@ -10,6 +10,15 @@ class QrController extends Controller
     public function newCodes (Request $request)
     {
         $num = $request->qrNum;
+        $labelSize = $request->labelSize;
+        
+        if($labelSize==21){
+
+            $rowNumbers=3;
+        }else{
+
+            $rowNumbers=2;
+        }
         //create new QR code entries
         $qrcodes = [];
 
@@ -24,7 +33,7 @@ class QrController extends Controller
             $qrcodes[] = $qrcode;
         }
 
-        return redirect(route('qr-print'))->with('qrcodes', $qrcodes);
+        return view('qr-print', ['qrcodes'=>$qrcodes, 'labelSize'=>$labelSize, 'rowNumbers'=>$rowNumbers]);
     }
 
     public function printView ()
