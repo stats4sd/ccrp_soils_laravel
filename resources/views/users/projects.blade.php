@@ -15,23 +15,28 @@
                         </li>
                     </a>
                 @endforeach
+
+                <a href="{{ route('projects.create') }}">
+                    <li class="list-group-item align-items-center d-flex flex-row">{{ t("Create a new project") }}</li>
+                </a>
+
             </ul>
         </div>
     @else
         @if($user === auth()->user())
             <div class="alert alert-info">
-                It looks like you are not a member of any projects. To use the platform, you can either:
+                {{ t("It looks like you are not a member of any projects. To use the platform, you can either find your existing CCRP project, or create it:") }}
                 <ul>
                     <li>
-                        <a href="{{ route('projects.index') }}">Check if your CCRP Project is already on the platform</a>
+                        <a href="{{ route('projects.index') }}">{{ t("Check if your CCRP Project is already on the platform") }}</a>
                     </li>
                     <li>
-                        <a href="{{ route('projects.create') }}">Create a new project</a>
+                        <a href="{{ route('projects.create') }}">{{ t("Create a new project") }}</a>
                     </li>
                 </ul>
             </div>
         @else
-            <p>User is not a member of any projects</p>
+            <p>{{ t("User is not a member of any projects") }}</p>
         @endif
     @endif
 </div>

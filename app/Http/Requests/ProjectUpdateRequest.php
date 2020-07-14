@@ -28,7 +28,7 @@ class ProjectUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'max:255'],
             'description' => ['required', 'max:2000'],
-            'creator_id' => ['required'],
+            'creator_id' => ['sometimes'],
             'avatar' => ['nullable'],
             'share_data' => ['boolean'],
         ];

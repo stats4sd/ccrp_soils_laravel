@@ -11,7 +11,7 @@
 			  <h4 class="mb-4"><b>{{$xlsform->title}}:</b></h4>
 			  <p>{{$xlsform->description}}</p>
 			  <p><a target="_blank" href="{{$xlsform->link_page}}"><u>{{ t("View protocol online") }}</u></a> {{ t("(redirects to smallholder.sha.org)") }}</p>
-			  <p><a href="{{$xlsform->xlsfile}}"><u>{{ t("Download") }}</u></a></p>
+			  <p><a href="{{ Storage::url($xlsform->xlsfile) }}"><u>{{ t("Download") }}</u></a></p>
 			</section>
 		@endforeach
 	</div>
