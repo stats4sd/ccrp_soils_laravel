@@ -7,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-06-30T09:46:16+00:00\n"
-"PO-Revision-Date: 2020-06-30 11:46+0200\n"
+"POT-Creation-Date: 2020-07-14T16:08:32+00:00\n"
+"PO-Revision-Date: 2020-07-14 18:08+0200\n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
@@ -222,7 +222,7 @@ msgid "MY ACCOUNT"
 msgstr "Mi cuenta"
 
 #: resources/views/layouts/account.blade.php:17
-#: resources/views/layouts/header.blade.php:41
+#: resources/views/layouts/header.blade.php:68
 msgid "Logout"
 msgstr "Cerrar Sesión"
 
@@ -239,7 +239,7 @@ msgid "Remember Password"
 msgstr "Recordar contraseña"
 
 #: resources/views/layouts/account.blade.php:70
-#: resources/views/layouts/header.blade.php:26
+#: resources/views/layouts/header.blade.php:53
 msgid "Login"
 msgstr "Iniciar sesión"
 
@@ -259,11 +259,15 @@ msgstr "Inicio"
 msgid "QR Codes"
 msgstr "Códigos QR"
 
-#: resources/views/layouts/header.blade.php:29
+#: resources/views/layouts/header.blade.php:26
+msgid "Change language"
+msgstr "Cambiar idioma"
+
+#: resources/views/layouts/header.blade.php:56
 msgid "Register"
 msgstr "Registrar"
 
-#: resources/views/layouts/header.blade.php:35
+#: resources/views/layouts/header.blade.php:62
 msgid "Admin Panel"
 msgstr "Panel de administrador"
 
@@ -316,12 +320,12 @@ msgid "Project Details"
 msgstr "detalles del proyecto"
 
 #: resources/views/projects/create.blade.php:23
-#: resources/views/projects/tab-settings.blade.php:18
+#: resources/views/projects/tab-settings.blade.php:19
 msgid "Project Name"
 msgstr "Nombre del proyecto"
 
 #: resources/views/projects/create.blade.php:59
-#: resources/views/projects/tab-settings.blade.php:48
+#: resources/views/projects/tab-settings.blade.php:49
 msgid "Brief Description"
 msgstr "Breve descripción"
 
@@ -330,45 +334,39 @@ msgid "Add an image to identify the project"
 msgstr "Agregar una imagen para identificar el proyecto"
 
 #: resources/views/projects/create.blade.php:139
-#: resources/views/projects/tab-settings.blade.php:116
-msgid ""
-"\n"
-"\n"
-"            #### Project Privacy Settings\n"
-"\n"
-"            As part of this platform, we would like to be able to use aggregated summaries to support broader research into soil quality in smallholder farms across the CCRP network and beyond. If you would like your project's data to contribute to this aggregation, please tick the box below.\n"
-"\n"
-"            The data will be suitably anonymised before sharing. Any instances where individual data points might be recognisable will be discussed with the project before being shared publically.\n"
-"\n"
-""
-msgstr ""
-"\n"
-"\n"
-"            #### Configuración de privacidad del proyecto\n"
-"\n"
-"            Como parte de esta plataforma, nos gustaría poder usar resúmenes agregados para respaldar una investigación más amplia sobre la calidad del suelo en las parcelas de pequeños productores en toda la red CCRP y más allá. Si desea que los datos de su proyecto contribuyan a esta agregación, marque la casilla a continuación.\n"
-"\n"
-"            Los datos serán adecuadamente anonimizados antes de compartirlos. Cualquier circunstancia en la que los puntos de datos individuales puedan ser reconocidos será discutida con el proyecto antes de ser compartida públicamente."
+#: resources/views/projects/tab-settings.blade.php:117
+msgid "Project Privacy Settings"
+msgstr "Configuración de privacidad del proyecto"
 
-#: resources/views/projects/create.blade.php:152
+#: resources/views/projects/create.blade.php:141
+#: resources/views/projects/tab-settings.blade.php:119
+msgid "As part of this platform, we would like to be able to use aggregated summaries to support broader research into soil quality in smallholder farms across the CCRP network and beyond. If you would like your project's data to contribute to this aggregation, please tick the box below."
+msgstr "Como parte de esta plataforma, nos gustaría poder usar resúmenes agregados para respaldar una investigación más amplia sobre la calidad del suelo en las parcelas de pequeños productores en toda la red CCRP y más allá. Si desea que los datos de su proyecto contribuyan a esta agregación, marque la casilla a continuación."
+
+#: resources/views/projects/create.blade.php:145
+#: resources/views/projects/tab-settings.blade.php:123
+msgid "The data will be suitably anonymised before sharing. Any instances where individual data points might be recognisable will be discussed with the project before being shared publically."
+msgstr "Los datos serán adecuadamente anonimizados antes de compartirlos. Cualquier circunstancia en la que los puntos de datos individuales puedan ser reconocidos será discutida con el proyecto antes de ser compartida públicamente."
+
+#: resources/views/projects/create.blade.php:151
 msgid "Data Sharing"
 msgstr "Compartir datos"
 
-#: resources/views/projects/create.blade.php:171
-#: resources/views/projects/tab-settings.blade.php:142
+#: resources/views/projects/create.blade.php:170
+#: resources/views/projects/tab-settings.blade.php:144
 msgid "I agree to have this project's data to be included in anonymous summaries produced by the CCRP Soils Cross-cutting Project."
 msgstr "Acepto que los datos de este proyecto se incluyan en resúmenes anónimos producidos por el Proyecto transversal de suelos CCRP."
 
-#: resources/views/projects/create.blade.php:192
-#: resources/views/projects/tab-settings.blade.php:157
+#: resources/views/projects/create.blade.php:191
+#: resources/views/projects/tab-settings.blade.php:159
 msgid "Do not include this project's data in summaries produced by the platform for use outside of this project's team."
 msgstr "No incluya los datos de este proyecto en resúmenes producidos por la plataforma para su uso fuera del equipo de este proyecto."
 
-#: resources/views/projects/create.blade.php:214
+#: resources/views/projects/create.blade.php:213
 msgid "Terms of Use"
 msgstr "Términos de Uso"
 
-#: resources/views/projects/create.blade.php:230
+#: resources/views/projects/create.blade.php:229
 msgid "I agree to the terms of use laid out in the site policy page"
 msgstr "Acepto los términos de uso establecidos en la página de la poítica del sitio"
 
@@ -436,33 +434,37 @@ msgstr "Editar"
 msgid "REMOVE"
 msgstr "Quitar"
 
-#: resources/views/projects/tab-members.blade.php:54
+#: resources/views/projects/tab-members.blade.php:55
 msgid "INVITE MEMBERS"
 msgstr "INVITAR A LOS MIEMBROS"
 
-#: resources/views/projects/tab-members.blade.php:61
+#: resources/views/projects/tab-members.blade.php:63
 msgid "Remove User from :projectName"
 msgstr "Eliminar usuario de :projectName"
 
-#: resources/views/projects/tab-members.blade.php:67
+#: resources/views/projects/tab-members.blade.php:69
 msgid "Are you sure you wish to remove :userName from :projectName? After removing, they will no longer have access to any project data or forms on Kobotoolbox."
 msgstr "¿Está seguro de que desea eliminar :userName de :projectName? Después de eliminarlo, ya esta persona no tendrá acceso a los datos o formularios del proyecto en Kobotoolbox."
 
-#: resources/views/projects/tab-members.blade.php:71
+#: resources/views/projects/tab-members.blade.php:73
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: resources/views/projects/tab-members.blade.php:75
+#: resources/views/projects/tab-members.blade.php:77
 msgid "Confirm Remove"
 msgstr "Confirme la eliminación"
 
-#: resources/views/projects/tab-settings.blade.php:15
+#: resources/views/projects/tab-settings.blade.php:16
 msgid "Edit Project Details"
 msgstr "Editar detalles del proyecto"
 
-#: resources/views/projects/tab-settings.blade.php:78
+#: resources/views/projects/tab-settings.blade.php:79
 msgid "Replace the project image"
 msgstr "Reemplazar la imagen del proyecto"
+
+#: resources/views/projects/tab-settings.blade.php:190
+msgid "You do not have access to update the project settings. Please contact a project administrator"
+msgstr ""
 
 #: resources/views/qr_code.blade.php:5
 msgid "Generate QR Codes"
@@ -477,16 +479,41 @@ msgid "Click the button below to generate a sheet of sample codes for printing. 
 msgstr "Haga clic en el botón de abajo para generar una hoja de códigos para sus muestras que puede imprimir. Cada código será único dentro del sistema. Simplemente genere e imprima tantas hojas como necesite para su trabajo."
 
 #: resources/views/qr_code.blade.php:18
+msgid "Enter the prefix to use for the codes"
+msgstr "Ingrese el prefijo a usar para los códigos"
+
+#: resources/views/qr_code.blade.php:26
 msgid "How many QR codes do you need?"
 msgstr "¿Cuántos códigos QR necesitas?"
 
-#: resources/views/qr_code.blade.php:21
+#: resources/views/qr_code.blade.php:29
 msgid "QR Codes will be split over multiple pages as necessary"
 msgstr "Los códigos QR se dividirán en varias páginas según sea necesario"
 
-#: resources/views/qr_code.blade.php:26
+#: resources/views/qr_code.blade.php:33
+msgid "Select the number of labels per sheet."
+msgstr "Seleccione el número de etiquetas por hoja."
+
+#: resources/views/qr_code.blade.php:50
 msgid "GENERATE CODE SHEET FOR PRINTING"
 msgstr "GENERAR HOJA DE CÓDIGOS PARA IMPRIMIR"
+
+#: resources/views/users/projects.blade.php:20
+#: resources/views/users/projects.blade.php:35
+msgid "Create a new project"
+msgstr "Crear un nuevo proyecto"
+
+#: resources/views/users/projects.blade.php:28
+msgid "It looks like you are not a member of any projects. To use the platform, you can either find your existing CCRP project, or create it:"
+msgstr ""
+
+#: resources/views/users/projects.blade.php:32
+msgid "Check if your CCRP Project is already on the platform"
+msgstr ""
+
+#: resources/views/users/projects.blade.php:40
+msgid "User is not a member of any projects"
+msgstr ""
 
 #: resources/views/users/show.blade.php:28
 msgid "Kobotoolbox Account:"
