@@ -14,7 +14,7 @@ class AddTokenToInvitesTable extends Migration
     public function up()
     {
         Schema::table('invites', function (Blueprint $table) {
-            $table->string('token');
+            $table->renameColumn('key_confirm', 'token');
         });
     }
 
@@ -26,7 +26,7 @@ class AddTokenToInvitesTable extends Migration
     public function down()
     {
         Schema::table('invites', function (Blueprint $table) {
-        $table->dropColumn('token');
+            $table->renameColumn('token', 'key_confirm');
         });
     }
 }
