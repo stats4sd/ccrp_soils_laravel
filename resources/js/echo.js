@@ -8,12 +8,13 @@ import Echo from 'laravel-echo';
 
 window.Pusher = require('pusher-js');
 
+
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
     wsHost: window.location.hostname,
-    wsPort: process.env.MIX_APP_ENV === 'local' ? 6001 : 6002,
-    wssPort: process.env.MIX_APP_ENV === 'local' ? 6001 : 6002,
+    wsPort: process.env.MIX_PUSHER_PROXY_PORT,
+    wssPort: process.env.MIX_PUSHER_PROXY_PORT,
     disableStats: true,
     encrypted: true,
     enabledTransports: ['ws', 'wss'],
