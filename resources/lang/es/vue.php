@@ -20,5 +20,6 @@ return [
     'Update to Latest Form'     => 'Refrescar con el formulario más reciente',
     'Re-deploy Form'            => 'Re-publicar el formulario',
     'Archive Form'              => 'Archivar el formulario',
-    'Get data from KoBoToolbox' => 'Obtener datos de KoBoToolbox'
+    'Get data from KoBoToolbox' => 'Obtener datos de KoBoToolbox',
+    'Num Submissions'           => 'Número de entregas'
 ];

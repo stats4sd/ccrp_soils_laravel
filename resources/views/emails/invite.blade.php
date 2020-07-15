@@ -12,10 +12,9 @@
 
 {{ t("If you do not wish to register, or you have been sent this email by mistake, please ignore this message.") }}
 
-{{t("Best regards,<br/>
-Site Admin,<br/>
-<br/>
-CCRP Soils Data Platform<br/>
-Soils and RMS Cross Cutting projects")}}
+{{ t("Best regards") }},
+{{ t("Site Admin") }},
+{{ t("CCRP Soils Data Platform") }}
+{{ t("Soils and RMS Cross Cutting projects")}}
 
 @endcomponent

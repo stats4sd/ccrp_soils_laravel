@@ -21,5 +21,6 @@ return [
     'Update to Latest Form'     => 'Mise à jour du dernier formulaire',
     'Re-deploy Form'            => 'Formulaire redéployé',
     'Archive Form'              => 'Formulaire d\'archive',
-    'Get data from KoBoToolbox' => 'Obtenir les données à partir de KoBoToolbox'
+    'Get data from KoBoToolbox' => 'Obtenir les données à partir de KoBoToolbox',
+    'Num Submissions'           => 'No. Soumissions'
 ];

@@ -7,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-07-14T16:08:32+00:00\n"
-"PO-Revision-Date: 2020-07-14 18:08+0200\n"
+"POT-Creation-Date: 2020-07-15T12:53:51+00:00\n"
+"PO-Revision-Date: 2020-07-15 14:53+0200\n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
@@ -75,6 +75,66 @@ msgstr ""
 "Para ver todos los formularios disponibles, vaya a nuestra página de descargas.\n"
 ""
 
+#: resources/views/auth/login.blade.php:6
+#: resources/views/auth/login.blade.php:84
+#: resources/views/layouts/account.blade.php:70
+#: resources/views/layouts/header.blade.php:53
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: resources/views/auth/login.blade.php:13
+#: resources/views/auth/passwords/email.blade.php:20
+#: resources/views/auth/passwords/reset.blade.php:15
+#: resources/views/auth/register.blade.php:50
+msgid "E-Mail Address"
+msgstr ""
+
+#: resources/views/auth/login.blade.php:41
+#: resources/views/auth/passwords/confirm.blade.php:16
+#: resources/views/auth/passwords/reset.blade.php:43
+#: resources/views/auth/register.blade.php:85
+#: resources/views/layouts/account.blade.php:52
+msgid "Password"
+msgstr "Contraseña"
+
+#: resources/views/auth/login.blade.php:74
+msgid "Remember Me"
+msgstr ""
+
+#: resources/views/auth/login.blade.php:90
+#: resources/views/auth/passwords/confirm.blade.php:52
+msgid "Forgot Your Password?"
+msgstr ""
+
+#: resources/views/auth/login.blade.php:104
+msgid "Don't have an account?"
+msgstr ""
+
+#: resources/views/auth/login.blade.php:109
+msgid "Register here"
+msgstr ""
+
+#: resources/views/auth/passwords/confirm.blade.php:6
+#: resources/views/auth/passwords/confirm.blade.php:46
+#: resources/views/auth/passwords/reset.blade.php:71
+#: resources/views/auth/register.blade.php:113
+msgid "Confirm Password"
+msgstr ""
+
+#: resources/views/auth/passwords/confirm.blade.php:9
+msgid "Please confirm your password before continuing."
+msgstr ""
+
+#: resources/views/auth/passwords/email.blade.php:6
+#: resources/views/auth/passwords/reset.blade.php:6
+#: resources/views/auth/passwords/reset.blade.php:81
+msgid "Reset Password"
+msgstr ""
+
+#: resources/views/auth/passwords/email.blade.php:50
+msgid "Send Password Reset Link"
+msgstr ""
+
 #: resources/views/auth/register.blade.php:6
 msgid "Create an Account"
 msgstr "Crea una Cuenta"
@@ -86,6 +146,12 @@ msgstr "Has sido invitado a unirte al proyecto :projectName."
 #: resources/views/auth/register.blade.php:14
 msgid "Your invite is attached to your email address. Please use this same address when registering to get immediate access to the project data and forms. You may change your email address after registration if you would prefer to use a different one."
 msgstr "Su invitación se adjunta a su dirección de correo electrónico. Utilice esta misma dirección cuando se registre para obtener acceso inmediato a los datos y formularios del proyecto. Puede cambiar su dirección de correo electrónico después del registro si prefiere utilizar una diferente."
+
+#: resources/views/auth/register.blade.php:22
+#: resources/views/contact.blade.php:26
+#: resources/views/projects/tab-members.blade.php:6
+msgid "Name"
+msgstr "Nombre"
 
 #: resources/views/auth/register.blade.php:121
 msgid "In order to share ODK forms directly with you on Kobotoolbox, we need the username for your Kobotoolbox account."
@@ -99,6 +165,31 @@ msgstr "No requerimos su contraseña de Kobotoolbox, y nunca le pediremos acceso
 msgid "Kobotoolbox Username"
 msgstr "Nombre de usuario de Kobotoolbox"
 
+#: resources/views/auth/register.blade.php:140
+#: resources/views/layouts/header.blade.php:56
+msgid "Register"
+msgstr "Registrar"
+
+#: resources/views/auth/verify.blade.php:6
+msgid "Verify Your Email Address"
+msgstr ""
+
+#: resources/views/auth/verify.blade.php:11
+msgid "A fresh verification link has been sent to your email address."
+msgstr ""
+
+#: resources/views/auth/verify.blade.php:16
+msgid "Before proceeding, please check your email for a verification link."
+msgstr ""
+
+#: resources/views/auth/verify.blade.php:18
+msgid "If you did not receive the email"
+msgstr ""
+
+#: resources/views/auth/verify.blade.php:18
+msgid "click here to request another"
+msgstr ""
+
 #: resources/views/contact.blade.php:4
 #: resources/views/contact.blade.php:47
 #: resources/views/home.blade.php:35
@@ -108,11 +199,6 @@ msgstr "Contáctenos"
 #: resources/views/contact.blade.php:5
 msgid "Have questions about the platform, or need some direct support for your CCRP Project? Use the form below to contact the RMS and Soils Cross-cutting teams. We will respond as soon as possible."
 msgstr "¿Tiene preguntas sobre la plataforma o necesita algún soporte directo para su proyecto CCRP? Use el formulario a continuación para contactar a los equipos de Suelos y Apoyo a Métodos de Investigación. Le responderemos lo antes posible."
-
-#: resources/views/contact.blade.php:26
-#: resources/views/projects/tab-members.blade.php:6
-msgid "Name"
-msgstr "Nombre"
 
 #: resources/views/contact.blade.php:28
 msgid "Enter Name"
@@ -178,18 +264,22 @@ msgid "If you do not wish to register, or you have been sent this email by mista
 msgstr "Si no desea registrarse o si se le ha enviado este correo electrónico por error, ignore este mensaje."
 
 #: resources/views/emails/invite.blade.php:24
-msgid ""
-"Best regards,<br/>\n"
-"Site Admin,<br/>\n"
-"<br/>\n"
-"CCRP Soils Data Platform<br/>\n"
-"Soils and RMS Cross Cutting projects"
-msgstr "Atentamente, <br/> Administrador del sitio, <br/><br/> Plataforma de Datos de Suelos CCRP <br/> Proyecto Suelos y Proyecto de Apoyo a Métodos de Investigación"
+msgid "Best regards"
+msgstr ""
 
+#: resources/views/emails/invite.blade.php:25
+msgid "Site Admin"
+msgstr ""
+
+#: resources/views/emails/invite.blade.php:26
 #: resources/views/home.blade.php:2
 #: resources/views/layouts/header.blade.php:4
 msgid "CCRP Soils Data Platform"
 msgstr "Plataforma de Datos de Suelos CCRP"
+
+#: resources/views/emails/invite.blade.php:28
+msgid "Soils and RMS Cross Cutting projects"
+msgstr ""
 
 #: resources/views/home.blade.php:3
 msgid "Providing a low cost, simplified means to quantify soil contexts and change"
@@ -230,18 +320,9 @@ msgstr "Cerrar Sesión"
 msgid "MY PROJECTS"
 msgstr "Mis proyectos"
 
-#: resources/views/layouts/account.blade.php:52
-msgid "Password"
-msgstr "Contraseña"
-
 #: resources/views/layouts/account.blade.php:65
 msgid "Remember Password"
 msgstr "Recordar contraseña"
-
-#: resources/views/layouts/account.blade.php:70
-#: resources/views/layouts/header.blade.php:53
-msgid "Login"
-msgstr "Iniciar sesión"
 
 #: resources/views/layouts/account.blade.php:73
 msgid "Register an Account"
@@ -262,10 +343,6 @@ msgstr "Códigos QR"
 #: resources/views/layouts/header.blade.php:26
 msgid "Change language"
 msgstr "Cambiar idioma"
-
-#: resources/views/layouts/header.blade.php:56
-msgid "Register"
-msgstr "Registrar"
 
 #: resources/views/layouts/header.blade.php:62
 msgid "Admin Panel"
