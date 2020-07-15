@@ -81,10 +81,11 @@
                             {{ t("We do not require your Kobotoolbox password, and will never ask for direct access to your Kobo account.") }}
                         </p>
                         <div class="form-group row">
-                            <label for="kobo-id" class="col-md-4 col-form-label text-md-right">{{ t("Kobotoolbox Username") }}</label>
+                            <label for="kobo_id" class="col-md-4 col-form-label text-md-right">{{ t("Kobotoolbox Username") }}</label>
 
                             <div class="col-md-6">
-                                <input id="kobo-id" type="text" class="form-control" name="kobo_id">
+                                <input id="kobo_id" type="text" class="form-control @error('kobo_id') is-invalid @enderror" name="kobo_id">
+
                                 @error('kobo_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
