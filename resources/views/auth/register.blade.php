@@ -85,6 +85,11 @@
 
                             <div class="col-md-6">
                                 <input id="kobo-id" type="text" class="form-control" name="kobo_id">
+                                @error('kobo_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <hr/>

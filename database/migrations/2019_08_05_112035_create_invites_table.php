@@ -18,7 +18,7 @@ class CreateInvitesTable extends Migration
             $table->string('email');
             $table->integer('project_id');
             $table->tinyInteger('inviter_id');
-            $table->string('key_confirm');
+            $table->string('token');
             $table->tinyInteger('is_confirmed')->default(0);
             $table->timestamps();
         });

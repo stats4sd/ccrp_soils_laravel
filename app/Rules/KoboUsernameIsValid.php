@@ -54,6 +54,6 @@ class KoboUsernameIsValid implements Rule
      */
     public function message()
     {
-        return t('That username cannot be found on kf.kobotoolbox.org. Please use an active username.');
+        return t('That username cannot be found on kf.kobotoolbox.org. Please use an active username. If you do not have a Kobotoolbox account, leave the field empty.');
     }
 }
