@@ -11,13 +11,8 @@ return [
     'Deployed' => 'Deployed',
     'Uploaded' => 'Uploaded',
     'Archived' => 'Archived',
-    'Show on KoBoToolbox' => 'Show on KoBoToolbox',
 
     'Deploy Form' => 'Deploy Form',
-    'Update to latest form' => 'Update to latest form',
-    'Re-deploy form' => 'Re-deploy form',
-    'Archive form' => 'Archive form',
-    'Get data from KoBoToolbox' => 'Get data from KoBoToolbox',
 
 
     'samples-count' => 'Number of soil samples in the database',
@@ -35,10 +30,10 @@ return [
     'No. Submissions' => 'No. Submissions',
     'Status' => 'Status',
     'Action' => 'Action',
-    'SHow on KoBoToolbox' => 'SHow on KoBoToolbox',
-    'Update to Latest Form' => 'Update to Latest Form',
-    'Re-deploy Form' => 'Re-deploy Form',
-    'Archive Form' => 'Archive Form',
+    'Show on KoBoToolbox' => 'Show on KoBoToolbox',
+    'Update to latest form' => 'Update to Latest Form',
+    'Re-deploy form' => 'Re-deploy Form',
+    'Archive form' => 'Archive Form',
     'Get data from KoBoToolbox' => 'Get data from KoBoToolbox',
 
 
