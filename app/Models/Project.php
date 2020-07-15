@@ -120,7 +120,6 @@ class Project extends Model
         ->withPivot([
             'kobo_id',
             'kobo_version_id',
-            'records',
         ]);
     }
 
