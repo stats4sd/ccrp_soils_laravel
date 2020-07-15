@@ -16,7 +16,7 @@
                 <td>{{ form.title }}</td>
                 <td>{{ form.records }}</td>
                 <td>
-                    <p v-if="!form.kobo_id">{{ __("vue.undeployed") }}</p>
+                    <p v-if="!form.kobo_id">{{ __("vue.Undeployed") }}</p>
                     <p v-if="form.kobo_id && form.is_active">
                         {{ __("vue.Deployed") }} -
                         <a target="_blank" :href="'https://kf.kobotoolbox.org/#/forms/'+form.kobo_id+'/summary'">{{ __("vue.Show on KoBoToolbox") }}</a>
