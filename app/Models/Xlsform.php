@@ -103,6 +103,10 @@ class Xlsform extends Model
        return $this->hasMany(ProjectXlsform::class);
     }
 
+    public function private_project ()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
 
     public function submissions ()
     {
