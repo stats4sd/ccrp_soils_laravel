@@ -95,6 +95,7 @@ class CheckKoboUpload implements ShouldQueue
 
 
             SetKoboFormToActive::withChain([
+                new UploadMediaFileAttachmentsToKoboForm($this->form),
                 new UpdateFormNameOnKobo($this->form),
                 new ShareFormWithProjectMembers($this->form),
                 new DeploymentSuccessMessage($this->user, $this->form),
