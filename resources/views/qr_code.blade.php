@@ -16,34 +16,37 @@
 
 				<form method="post" action="{{ route('qr-newcodes') }}">
 					@csrf
-					<div class="form-group row">
-						<label for="qrChar" class="col-sm-4">{{ t("Enter the prefix to use for the codes") }}</label>
+					<div class="form-group row {{ $errors->has('prefix') ? 'has-error' : '' }}">
+						<label for="prefix" class="col-sm-4">{{ t("Enter the prefix to use for the codes") }}</label>
 						<div class="col-sm-4">
-						<input type="text" class="form-control" id="qrChar" name="qrChar" onkeyup="standardCode()">
-
+						<input type="text" class="form-control" id="prefix" name="prefix" onkeyup="standardCode()">
+                        <span class="text-danger">{{ $errors->first('prefix') }}</span>
 						</div>
 					</div>
-					<div class="form-group row">
+					<div class="form-group row {{ $errors->has('code_number') ? 'has-error' : '' }}">
 
-						<label for="qrNumber" class="col-sm-4">{{ t("How many QR codes do you need?") }}</label>
+						<label for="code_numberber" class="col-sm-4">{{ t("How many QR codes do you need?") }}</label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control" id="qrNum" name="qrNum">
+							<input type="number" class="form-control" id="code_number" name="code_number">
 							<small id="passwordHelpBlock" class="form-text text-muted">{{ t("QR Codes will be split over multiple pages as necessary") }}</small>
+                            <span class="text-danger">{{ $errors->first('code_number') }}</span>
+
 						</div>
 					</div>
-					<div class="form-group row">
+					<div class="form-group row {{ $errors->has('label_number') ? 'has-error' : '' }}">
 						<label for="sheetSize" class="col-sm-4">{{ t("Select the number of labels per sheet.") }}</label>
 						<div class="col-sm-6">
 						<div class="form-check-inline">
 						  <label class="form-check-label">
-						    <input type="radio" class="form-check-input" value="21" name="labelSize">21 Labels
+						    <input type="radio" class="form-check-input" value="21" name="label_number" selected>21 Labels
 						  </label>
 						</div>
 						<div class="form-check-inline">
 						  <label class="form-check-label">
-						    <input type="radio" class="form-check-input" value="14" name="labelSize">14 Labels
+						    <input type="radio" class="form-check-input" value="14" name="label_number">14 Labels
 						  </label>
 						</div>
+                        <span class="text-danger">{{ $errors->first('label_number') }}</span>
 
 						</div>
 					</div>

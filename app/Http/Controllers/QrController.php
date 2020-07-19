@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\QrCode;
-use Illuminate\Http\Request;
+use App\Http\Requests\QrCodeRequest;
 
 class QrController extends Controller
 {
-    public function newCodes (Request $request)
+    public function newCodes (QrCodeRequest $request)
     {
-        $num = $request->qrNum;
-        $labelSize = $request->labelSize;
 
-        if($labelSize==21){
+        $num = $request->qrNum;
+        $label_number = $request->label_number;
+
+        if($label_number==21){
 
             $rowNumbers=3;
         }else{
@@ -27,13 +28,13 @@ class QrController extends Controller
                 'code' => rand(pow(10, 3), pow(10, 4)-1),
                 'status' => 'new',
             ]);
-            $qrcode->code = $request->qrChar . '_' . sprintf('%06d', $qrcode->id);
+            $qrcode->code = $request->prefix . '_' . sprintf('%06d', $qrcode->id);
             $qrcode->save();
 
             $qrcodes[] = $qrcode;
         }
 
-        return view('qr-print', ['qrcodes'=>$qrcodes, 'labelSize'=>$labelSize, 'rowNumbers'=>$rowNumbers]);
+        return view('qr-print', ['qrcodes'=>$qrcodes, 'labelSize'=>$label_number, 'rowNumbers'=>$rowNumbers]);
     }
 
     public function printView ()
