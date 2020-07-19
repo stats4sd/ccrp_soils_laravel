@@ -51,7 +51,7 @@ class UploadMediaFileAttachementsToKoboForm implements ShouldQueue
         foreach($koboform['metadata'] as $metadata) {
             if($metadata['data_type'] === "media") {
                 Http::withBasicAuth(config('services.kobo.username'),config('services.kobo.password'))
-                ->delete(config('services.kobo.old_endpoint').'/api/v1/metadata/'.$metadata->id)
+                ->delete(config('services.kobo.old_endpoint').'/api/v1/metadata/'.$metadata['id'])
                 ->throw();
             }
         }
