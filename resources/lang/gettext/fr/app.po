@@ -7,10 +7,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-06-30T09:46:16+00:00\n"
-"PO-Revision-Date: 2020-06-30 11:46+0200\n"
+"POT-Creation-Date: 2020-07-15T17:58:46+00:00\n"
+"PO-Revision-Date: 2020-07-15 19:58+0200\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
+
+#: app/Rules/KoboUsernameIsValid.php:57
+msgid "That username cannot be found on kf.kobotoolbox.org. Please use an active username. If you do not have a Kobotoolbox account, leave the field empty."
+msgstr ""
 
 #: resources/views/about.blade.php:2
 #: resources/views/layouts/header.blade.php:16
@@ -77,6 +81,66 @@ msgstr ""
 "Pour voir tous les formulaires disponibles, rendez-vous sur notre page de téléchargements.\n"
 ""
 
+#: resources/views/auth/login.blade.php:6
+#: resources/views/auth/login.blade.php:84
+#: resources/views/layouts/account.blade.php:70
+#: resources/views/layouts/header.blade.php:53
+msgid "Login"
+msgstr "Identifiant"
+
+#: resources/views/auth/login.blade.php:13
+#: resources/views/auth/passwords/email.blade.php:20
+#: resources/views/auth/passwords/reset.blade.php:15
+#: resources/views/auth/register.blade.php:50
+msgid "E-Mail Address"
+msgstr ""
+
+#: resources/views/auth/login.blade.php:41
+#: resources/views/auth/passwords/confirm.blade.php:16
+#: resources/views/auth/passwords/reset.blade.php:43
+#: resources/views/auth/register.blade.php:85
+#: resources/views/layouts/account.blade.php:52
+msgid "Password"
+msgstr "Mot de passe"
+
+#: resources/views/auth/login.blade.php:74
+msgid "Remember Me"
+msgstr ""
+
+#: resources/views/auth/login.blade.php:90
+#: resources/views/auth/passwords/confirm.blade.php:52
+msgid "Forgot Your Password?"
+msgstr ""
+
+#: resources/views/auth/login.blade.php:104
+msgid "Don't have an account?"
+msgstr ""
+
+#: resources/views/auth/login.blade.php:109
+msgid "Register here"
+msgstr ""
+
+#: resources/views/auth/passwords/confirm.blade.php:6
+#: resources/views/auth/passwords/confirm.blade.php:46
+#: resources/views/auth/passwords/reset.blade.php:71
+#: resources/views/auth/register.blade.php:113
+msgid "Confirm Password"
+msgstr ""
+
+#: resources/views/auth/passwords/confirm.blade.php:9
+msgid "Please confirm your password before continuing."
+msgstr ""
+
+#: resources/views/auth/passwords/email.blade.php:6
+#: resources/views/auth/passwords/reset.blade.php:6
+#: resources/views/auth/passwords/reset.blade.php:81
+msgid "Reset Password"
+msgstr ""
+
+#: resources/views/auth/passwords/email.blade.php:50
+msgid "Send Password Reset Link"
+msgstr ""
+
 #: resources/views/auth/register.blade.php:6
 msgid "Create an Account"
 msgstr "Créer un compte"
@@ -88,6 +152,12 @@ msgstr "Vous avez été invité à rejoindre le projet :projectName."
 #: resources/views/auth/register.blade.php:14
 msgid "Your invite is attached to your email address. Please use this same address when registering to get immediate access to the project data and forms. You may change your email address after registration if you would prefer to use a different one."
 msgstr "Votre invitation est liée à votre adresse e-mail. Veuillez utiliser cette même adresse lors de votre inscription pour avoir un accès immédiat aux données et formulaires du projet. Vous pouvez changer votre adresse e-mail après l'enregistrement si vous préférez en utiliser une autre."
+
+#: resources/views/auth/register.blade.php:22
+#: resources/views/contact.blade.php:26
+#: resources/views/projects/tab-members.blade.php:6
+msgid "Name"
+msgstr "Nom"
 
 #: resources/views/auth/register.blade.php:121
 msgid "In order to share ODK forms directly with you on Kobotoolbox, we need the username for your Kobotoolbox account."
@@ -101,6 +171,31 @@ msgstr "Nous n'avons pas besoin de votre mot de passe Kobotoolbox et ne vous dem
 msgid "Kobotoolbox Username"
 msgstr "Nom d'utilisateur Kobotoolbox"
 
+#: resources/views/auth/register.blade.php:160
+#: resources/views/layouts/header.blade.php:56
+msgid "Register"
+msgstr "S'inscrire"
+
+#: resources/views/auth/verify.blade.php:6
+msgid "Verify Your Email Address"
+msgstr ""
+
+#: resources/views/auth/verify.blade.php:11
+msgid "A fresh verification link has been sent to your email address."
+msgstr ""
+
+#: resources/views/auth/verify.blade.php:16
+msgid "Before proceeding, please check your email for a verification link."
+msgstr ""
+
+#: resources/views/auth/verify.blade.php:18
+msgid "If you did not receive the email"
+msgstr ""
+
+#: resources/views/auth/verify.blade.php:18
+msgid "click here to request another"
+msgstr ""
+
 #: resources/views/contact.blade.php:4
 #: resources/views/contact.blade.php:47
 #: resources/views/home.blade.php:35
@@ -110,11 +205,6 @@ msgstr "Contactez-nous"
 #: resources/views/contact.blade.php:5
 msgid "Have questions about the platform, or need some direct support for your CCRP Project? Use the form below to contact the RMS and Soils Cross-cutting teams. We will respond as soon as possible."
 msgstr "Vous avez des questions sur la plateforme ou vous avez besoin d'une assistance pour votre projet CCRP? Utilisez le formulaire ci-dessous pour contacter les équipes transversales RMS et Santé des Sols. Nous vous répondrons dans les plus brefs délais."
-
-#: resources/views/contact.blade.php:26
-#: resources/views/projects/tab-members.blade.php:6
-msgid "Name"
-msgstr "Nom"
 
 #: resources/views/contact.blade.php:28
 msgid "Enter Name"
@@ -180,18 +270,22 @@ msgid "If you do not wish to register, or you have been sent this email by mista
 msgstr "Si vous ne souhaitez pas vous inscrire ou si cet e-mail vous a été envoyé par erreur, veuillez ignorer ce message."
 
 #: resources/views/emails/invite.blade.php:24
-msgid ""
-"Best regards,<br/>\n"
-"Site Admin,<br/>\n"
-"<br/>\n"
-"CCRP Soils Data Platform<br/>\n"
-"Soils and RMS Cross Cutting projects"
-msgstr "Bien cordialement, <br/> Administrateur du site, <br/><br/> Plateforme de données des sols du CCRP <br/> Projets transversaux Santé des sols et Support en méthodes de recherche (RMS)"
+msgid "Best regards"
+msgstr "Bien cordialement"
 
+#: resources/views/emails/invite.blade.php:25
+msgid "Site Admin"
+msgstr "Administrateur du site,"
+
+#: resources/views/emails/invite.blade.php:26
 #: resources/views/home.blade.php:2
 #: resources/views/layouts/header.blade.php:4
 msgid "CCRP Soils Data Platform"
 msgstr "Platforme de données des sols du CCRP"
+
+#: resources/views/emails/invite.blade.php:28
+msgid "Soils and RMS Cross Cutting projects"
+msgstr "Projets transversaux Santé des sols et Support en méthodes de recherche (RMS)"
 
 #: resources/views/home.blade.php:3
 msgid "Providing a low cost, simplified means to quantify soil contexts and change"
@@ -224,7 +318,7 @@ msgid "MY ACCOUNT"
 msgstr "MON COMPTE"
 
 #: resources/views/layouts/account.blade.php:17
-#: resources/views/layouts/header.blade.php:41
+#: resources/views/layouts/header.blade.php:68
 msgid "Logout"
 msgstr "Déconnexion"
 
@@ -232,18 +326,9 @@ msgstr "Déconnexion"
 msgid "MY PROJECTS"
 msgstr "MES PROJETS"
 
-#: resources/views/layouts/account.blade.php:52
-msgid "Password"
-msgstr "Mot de passe"
-
 #: resources/views/layouts/account.blade.php:65
 msgid "Remember Password"
 msgstr "Se souvenir du mot de passe"
-
-#: resources/views/layouts/account.blade.php:70
-#: resources/views/layouts/header.blade.php:26
-msgid "Login"
-msgstr "Identifiant"
 
 #: resources/views/layouts/account.blade.php:73
 msgid "Register an Account"
@@ -261,11 +346,11 @@ msgstr "Page d'accueil"
 msgid "QR Codes"
 msgstr "Codes QR"
 
-#: resources/views/layouts/header.blade.php:29
-msgid "Register"
-msgstr "S'inscrire"
+#: resources/views/layouts/header.blade.php:26
+msgid "Change language"
+msgstr ""
 
-#: resources/views/layouts/header.blade.php:35
+#: resources/views/layouts/header.blade.php:62
 msgid "Admin Panel"
 msgstr "Panneau d'administration"
 
@@ -318,12 +403,12 @@ msgid "Project Details"
 msgstr "Renseignements liés au projet"
 
 #: resources/views/projects/create.blade.php:23
-#: resources/views/projects/tab-settings.blade.php:18
+#: resources/views/projects/tab-settings.blade.php:19
 msgid "Project Name"
 msgstr "Nom du projet"
 
 #: resources/views/projects/create.blade.php:59
-#: resources/views/projects/tab-settings.blade.php:48
+#: resources/views/projects/tab-settings.blade.php:49
 msgid "Brief Description"
 msgstr "Bref descriptif"
 
@@ -332,47 +417,39 @@ msgid "Add an image to identify the project"
 msgstr "Ajouter une image pour représenter le projet"
 
 #: resources/views/projects/create.blade.php:139
-#: resources/views/projects/tab-settings.blade.php:116
-msgid ""
-"\n"
-"\n"
-"            #### Project Privacy Settings\n"
-"\n"
-"            As part of this platform, we would like to be able to use aggregated summaries to support broader research into soil quality in smallholder farms across the CCRP network and beyond. If you would like your project's data to contribute to this aggregation, please tick the box below.\n"
-"\n"
-"            The data will be suitably anonymised before sharing. Any instances where individual data points might be recognisable will be discussed with the project before being shared publically.\n"
-"\n"
-""
+#: resources/views/projects/tab-settings.blade.php:117
+msgid "Project Privacy Settings"
 msgstr ""
-"\n"
-"\n"
-"            #### Paramètres de confidentialité du projet\n"
-"\n"
-"            Par le biais de cette plateforme, nous aimerions pouvoir utiliser des résumés statistiques agrégés pour soutenir la recherche sur la qualité des sols chez les petites exploitations agricoles du réseau CCRP et au-delà. Si vous souhaitez que les données de votre projet contribuent à cette agrégation, veuillez cocher la case ci-dessous.\n"
-"\n"
-"            Les données seront convenablement anonymisées avant d'être partagées. Dés que des données semblent permettre l'identification d'individus, celles-ci seront discutées avec le projet avant d'être partagé publiquement.\n"
-"\n"
-""
 
-#: resources/views/projects/create.blade.php:152
+#: resources/views/projects/create.blade.php:141
+#: resources/views/projects/tab-settings.blade.php:119
+msgid "As part of this platform, we would like to be able to use aggregated summaries to support broader research into soil quality in smallholder farms across the CCRP network and beyond. If you would like your project's data to contribute to this aggregation, please tick the box below."
+msgstr ""
+
+#: resources/views/projects/create.blade.php:145
+#: resources/views/projects/tab-settings.blade.php:123
+msgid "The data will be suitably anonymised before sharing. Any instances where individual data points might be recognisable will be discussed with the project before being shared publically."
+msgstr ""
+
+#: resources/views/projects/create.blade.php:151
 msgid "Data Sharing"
 msgstr "Partage de données"
 
-#: resources/views/projects/create.blade.php:171
-#: resources/views/projects/tab-settings.blade.php:142
+#: resources/views/projects/create.blade.php:170
+#: resources/views/projects/tab-settings.blade.php:144
 msgid "I agree to have this project's data to be included in anonymous summaries produced by the CCRP Soils Cross-cutting Project."
 msgstr "J'accepte que les données de ce projet soient incluses dans les résumés statistiques et anonymes produits par le projet CCRP transversal Santé des sols."
 
-#: resources/views/projects/create.blade.php:192
-#: resources/views/projects/tab-settings.blade.php:157
+#: resources/views/projects/create.blade.php:191
+#: resources/views/projects/tab-settings.blade.php:159
 msgid "Do not include this project's data in summaries produced by the platform for use outside of this project's team."
 msgstr "N'incluez pas les données de ce projet dans les résumés statistiques produits par la plateforme pour une utilisation externe au projet."
 
-#: resources/views/projects/create.blade.php:214
+#: resources/views/projects/create.blade.php:213
 msgid "Terms of Use"
 msgstr "Conditions d'utilisation"
 
-#: resources/views/projects/create.blade.php:230
+#: resources/views/projects/create.blade.php:229
 msgid "I agree to the terms of use laid out in the site policy page"
 msgstr "J'accepte les conditions d'utilisation énoncées sur la page décrivant les regles d'utilisation de ce site"
 
@@ -440,33 +517,37 @@ msgstr "MODIF"
 msgid "REMOVE"
 msgstr "SUPPRIMER"
 
-#: resources/views/projects/tab-members.blade.php:54
+#: resources/views/projects/tab-members.blade.php:55
 msgid "INVITE MEMBERS"
 msgstr "INVITER DES MEMBRES"
 
-#: resources/views/projects/tab-members.blade.php:61
+#: resources/views/projects/tab-members.blade.php:63
 msgid "Remove User from :projectName"
 msgstr "Supprimer l'utilisateur de :projectName"
 
-#: resources/views/projects/tab-members.blade.php:67
+#: resources/views/projects/tab-members.blade.php:69
 msgid "Are you sure you wish to remove :userName from :projectName? After removing, they will no longer have access to any project data or forms on Kobotoolbox."
 msgstr "Voulez-vous vraiment supprimer :userName de :projectName? Après la suppression, ils n'auront plus accès aux données ou formulaires du projet sur Kobotoolbox."
 
-#: resources/views/projects/tab-members.blade.php:71
+#: resources/views/projects/tab-members.blade.php:73
 msgid "Cancel"
 msgstr "Annuler"
 
-#: resources/views/projects/tab-members.blade.php:75
+#: resources/views/projects/tab-members.blade.php:77
 msgid "Confirm Remove"
 msgstr "Confirmer la suppression"
 
-#: resources/views/projects/tab-settings.blade.php:15
+#: resources/views/projects/tab-settings.blade.php:16
 msgid "Edit Project Details"
 msgstr "Modifier les renseignements liés au projet"
 
-#: resources/views/projects/tab-settings.blade.php:78
+#: resources/views/projects/tab-settings.blade.php:79
 msgid "Replace the project image"
 msgstr "Remplacez l'image du projet"
+
+#: resources/views/projects/tab-settings.blade.php:190
+msgid "You do not have access to update the project settings. Please contact a project administrator"
+msgstr ""
 
 #: resources/views/qr_code.blade.php:5
 msgid "Generate QR Codes"
@@ -481,16 +562,41 @@ msgid "Click the button below to generate a sheet of sample codes for printing. 
 msgstr "Cliquez sur le bouton ci-dessous pour générer une feuille d'exemples de codes à imprimer. Chaque code sera unique au sein du système. Vous pouvez simplement générer et imprimer autant de feuilles que nécessaire pour votre travail."
 
 #: resources/views/qr_code.blade.php:18
+msgid "Enter the prefix to use for the codes"
+msgstr ""
+
+#: resources/views/qr_code.blade.php:26
 msgid "How many QR codes do you need?"
 msgstr "De combien de codes QR avez-vous besoin?"
 
-#: resources/views/qr_code.blade.php:21
+#: resources/views/qr_code.blade.php:29
 msgid "QR Codes will be split over multiple pages as necessary"
 msgstr "Les codes QR seront répartis sur plusieurs pages si nécessaire"
 
-#: resources/views/qr_code.blade.php:26
+#: resources/views/qr_code.blade.php:33
+msgid "Select the number of labels per sheet."
+msgstr ""
+
+#: resources/views/qr_code.blade.php:50
 msgid "GENERATE CODE SHEET FOR PRINTING"
 msgstr "GÉNÉRER UNE FEUILLE DE CODE A IMPRIMER"
+
+#: resources/views/users/projects.blade.php:20
+#: resources/views/users/projects.blade.php:35
+msgid "Create a new project"
+msgstr ""
+
+#: resources/views/users/projects.blade.php:28
+msgid "It looks like you are not a member of any projects. To use the platform, you can either find your existing CCRP project, or create it:"
+msgstr ""
+
+#: resources/views/users/projects.blade.php:32
+msgid "Check if your CCRP Project is already on the platform"
+msgstr ""
+
+#: resources/views/users/projects.blade.php:40
+msgid "User is not a member of any projects"
+msgstr ""
 
 #: resources/views/users/show.blade.php:28
 msgid "Kobotoolbox Account:"

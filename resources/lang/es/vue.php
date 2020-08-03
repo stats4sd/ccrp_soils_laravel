@@ -16,9 +16,15 @@ return [
     ],
     'Status'                    => 'Estado',
     'Action'                    => 'Acción',
-    'SHow on KoBoToolbox'       => 'Mostrar en KoBoToolbox',
-    'Update to Latest Form'     => 'Refrescar con el formulario más reciente',
-    'Re-deploy Form'            => 'Re-publicar el formulario',
-    'Archive Form'              => 'Archivar el formulario',
-    'Get data from KoBoToolbox' => 'Obtener datos de KoBoToolbox'
+    'Get data from KoBoToolbox' => 'Obtener datos de KoBoToolbox',
+    'Num Submissions'           => 'Número de entregas',
+    'Undeployed'                => 'No desplegado',
+    'Deployed'                  => 'Desplegado',
+    'Uploaded'                  => 'Subido',
+    'Archived'                  => 'Archivado',
+    'Deploy Form'               => 'Publicar el formulario',
+    'Update to latest form'     => 'Refrescar con el formulario más reciente
+',
+    'Re-deploy form'            => 'Re-publicar el formulario',
+    'Archive form'              => 'Archiver el formulario'
 ];

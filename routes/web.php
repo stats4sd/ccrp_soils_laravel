@@ -1,15 +1,25 @@
 <?php
 
 use App\Http\Controllers\LanguageController;
+use App\Jobs\UploadMediaFileAttachementsToKoboForm;
+use App\Models\Xlsform;
 
 Route::post('contact', 'ContactController@store')->name('contact.store');
 Route::post('langage', 'LanguageController@changeLanguage')->name('language');
+
+Route::get('testingmediaupload', function () {
+    $form = Xlsform::find(14);
+    UploadMediaFileAttachementsToKoboForm::dispatchNow($form);
+});
+
 /**
  * Routes for making requests that require Authentication, but should not be translated
  */
 Route::group([
     'middleware' => ['auth'],
 ], function(){
+
+
 
 
     Route::get('projects/{project}/projectxlsforms', 'ProjectXlsformController@index')->name('projectxlsforms.get');

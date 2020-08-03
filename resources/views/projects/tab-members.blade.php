@@ -50,7 +50,9 @@
         @endforeach
     </ul>
 </div>
-<a class="btn btn-dark btn-sm mt-5" href="{{ route('projectmembers.create', $project) }}">{{ t("INVITE MEMBERS") }}</a>
+@can('update', $project)
+    <a class="btn btn-dark btn-sm mt-5" href="{{ route('projectmembers.create', $project) }}">{{ t("INVITE MEMBERS") }}</a>
+@endcan
 
 @foreach($project->users as $user)
 <div class="modal fade" id="removeUserModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="removeUserModalLabel{{ $user->id }}" aria-hidden="true">

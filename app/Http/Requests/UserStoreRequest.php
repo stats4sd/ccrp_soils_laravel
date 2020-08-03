@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\Rules\KoboUsernameIsValid;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserStoreRequest extends FormRequest
@@ -29,7 +30,7 @@ class UserStoreRequest extends FormRequest
             'name' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'kobo_id' => ['nullable', 'string', 'max:255'],
+            'kobo_id' => ['nullable', 'string', 'max:255', new KoboUsernameIsValid],
         ];
     }
 

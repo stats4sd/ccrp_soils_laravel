@@ -2,6 +2,19 @@
 
 return [
 
+    'Form Name' => 'Form Name',
+    'Num Submissions' => 'No. Submissions',
+    'Status' => 'Status',
+    'Action' => 'Action',
+
+    'Undeployed' => 'Undeployed',
+    'Deployed' => 'Deployed',
+    'Uploaded' => 'Uploaded',
+    'Archived' => 'Archived',
+
+    'Deploy Form' => 'Deploy Form',
+
+
     'samples-count' => 'Number of soil samples in the database',
     'Sample ID' => 'Sample ID',
     'POXC Value' => 'POXC Value',
@@ -17,10 +30,10 @@ return [
     'No. Submissions' => 'No. Submissions',
     'Status' => 'Status',
     'Action' => 'Action',
-    'SHow on KoBoToolbox' => 'SHow on KoBoToolbox',
-    'Update to Latest Form' => 'Update to Latest Form',
-    'Re-deploy Form' => 'Re-deploy Form',
-    'Archive Form' => 'Archive Form',
+    'Show on KoBoToolbox' => 'Show on KoBoToolbox',
+    'Update to latest form' => 'Update to Latest Form',
+    'Re-deploy form' => 'Re-deploy Form',
+    'Archive form' => 'Archive Form',
     'Get data from KoBoToolbox' => 'Get data from KoBoToolbox',
 
 

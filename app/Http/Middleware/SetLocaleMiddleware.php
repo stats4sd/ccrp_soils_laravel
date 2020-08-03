@@ -23,7 +23,6 @@ class SetLocaleMiddleware
                 !in_array($request->segment(1), $availableLocales)) {
                 # based on the Tio set.locale middleware
                 # Choose the most appropriate "default locale"
-                // ddd($request->segment(1));
                 $priorityLocales = [
                     session('locale'),
                     $request->getPreferredLanguage($availableLocales),

@@ -29,19 +29,19 @@
 
                             @csrf
                             <input type="hidden" name="lang" value="en">
-                            <input type="hidden" name="redirect" value="{{ Route::currentRouteName() }}">
+                            <input type="hidden" name="redirect" value="{{ URL::full() }}">
                             <button type="submit" class="dropdown-item">English</button>
                         </form>
                         <form action="{{ route('language') }}" method="POST">
                             @csrf
                             <input type="hidden" name="lang" value="fr">
-                            <input type="hidden" name="redirect" value="{{ Route::currentRouteName() }}">
+                            <input type="hidden" name="redirect" value="{{ URL::full() }}">
                             <button type="submit" class="dropdown-item">Français</button>
                         </form>
                         <form action="{{ route('language') }}" method="POST">
                             @csrf
                             <input type="hidden" name="lang" value="es">
-                            <input type="hidden" name="redirect" value="{{ Route::currentRouteName() }}">
+                            <input type="hidden" name="redirect" value="{{ URL::full() }}">
                             <button type="submit" class="dropdown-item">Español</button>
                         </form>
                     </div>

@@ -26,7 +26,7 @@
                 <div class="list-group-item">
                     <a href="{{ route('projects.show', $project) }}">
                         <div class="img_group">
-                            <img src="{{ url($project->avatar) }}" alt="Person" width="96" height="96" class="mr-4">
+                            <img src="{{ Storage::url($project->avatar) }}" alt="Person" width="96" height="96" class="mr-4">
                             {{ $project->name }}
                         </div>
                     </a>

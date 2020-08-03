@@ -13,6 +13,7 @@ use Backpack\CRUD\app\Library\Widget;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\XlsformRequest as StoreRequest;
 use App\Http\Requests\XlsformRequest as UpdateRequest;
+use App\Models\Project;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -77,6 +78,18 @@ class XlsformCrudController extends CrudController
                 'type' => 'boolean',
             ],
             [
+                'name' => 'public',
+                'label' => 'Is Form linked to ALL projects?',
+                'type' => 'boolean',
+            ],
+            [
+                'name' => 'private_project',
+                'label' => 'Private form project',
+                'attribute' => 'name',
+                'model' => Project::class,
+                'entity' => 'private_project',
+            ],
+            [
                 'name' => 'link_page',
                 'label' => 'Associated Guide(s)',
                 'type' => "closure",
@@ -122,6 +135,18 @@ class XlsformCrudController extends CrudController
                 'name' => 'live',
                 'label' => 'Is Form Available to Projects?',
                 'type' => 'boolean',
+            ],
+            [
+                'name' => 'public',
+                'label' => 'Is the form a public form? (Is it available to ALL Projects)?',
+                'hint' => 'If this is not ticked, the form should be owned by a single project.',
+                'type' => 'boolean',
+            ],
+            [
+                'name' => 'project_id',
+                'entity' => 'private_project',
+                'label' => 'If form is not public, which project is it owned by?',
+                'type' => 'relationship',
             ],
             [
                 'name' => 'link_page',

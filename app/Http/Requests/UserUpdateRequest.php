@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\Rules\KoboUsernameIsValid;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserUpdateRequest extends FormRequest
@@ -29,7 +30,7 @@ class UserUpdateRequest extends FormRequest
             'name' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['confirmed'],
-            'kobo_id' => ['nullable', 'string', 'max:255'],
+            'kobo_id' => ['nullable', 'string', new KoboUsernameIsValid],
         ];
     }
 

@@ -3,10 +3,10 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Form Name</th>
-                <th>No. Submissions</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>{{ __("vue.Form Name") }}</th>
+                <th>{{ __("vue.Num Submissions") }}</th>
+                <th>{{ __("vue.Status") }}</th>
+                <th>{{ __("vue.Action") }}</th>
             </tr>
         </thead>
         <tbody>
@@ -16,18 +16,18 @@
                 <td>{{ form.title }}</td>
                 <td>{{ form.records }}</td>
                 <td>
-                    <p v-if="!form.kobo_id">undeployed</p>
+                    <p v-if="!form.kobo_id">{{ __("vue.Undeployed") }}</p>
                     <p v-if="form.kobo_id && form.is_active">
-                        Deployed -
-                        <a target="_blank" :href="'https://kf.kobotoolbox.org/#/forms/'+form.kobo_id+'/summary'">Show on Kobotoolbox</a>
+                        {{ __("vue.Deployed") }} -
+                        <a target="_blank" :href="'https://kf.kobotoolbox.org/#/forms/'+form.kobo_id+'/summary'">{{ __("vue.Show on KoBoToolbox") }}</a>
                     </p>
                     <p v-if="form.kobo_id && !form.is_active">
-                        Uploaded -
-                        <a target="_blank" :href="'https://kf.kobotoolbox.org/#/forms/'+form.kobo_id+'/summary'">Show on Kobotoolbox</a>
+                        {{ __("vue.Uploaded") }} -
+                        <a target="_blank" :href="'https://kf.kobotoolbox.org/#/forms/'+form.kobo_id+'/summary'">{{ __("vue.Show on KoBoToolbox") }}</a>
                     </p>
                     <p v-if="form.kobo_id && form.kobo_version_id && !form.is_active">
-                        Archived -
-                        <a target="_blank" :href="'https://kf.kobotoolbox.org/#/forms/'+form.kobo_id+'/summary'">Show on Kobotoolbox</a>
+                        {{ __("vue.Archived") }} -
+                        <a target="_blank" :href="'https://kf.kobotoolbox.org/#/forms/'+form.kobo_id+'/summary'">{{ __("vue.Show on KoBoToolbox") }}</a>
                     </p>
                 </td>
                 <td class="d-flex justify-content-start">
@@ -38,8 +38,8 @@
                     :disabled="form.processing==1"
                     >
                         <span v-if="!form.kobo_id">Deploy Form</span>
-                        <span v-if="form.kobo_id && form.is_active">Update to Latest Form</span>
-                        <span v-if="form.kobo_id && !form.is_active">Re-deploy Form</span>
+                        <span v-if="form.kobo_id && form.is_active">{{ __("vue.Update to latest form") }}</span>
+                        <span v-if="form.kobo_id && !form.is_active">{{ __("vue.Re-deploy form") }}</span>
                     </button>
                     <button
                     v-if="form.kobo_id && form.is_active"
@@ -47,7 +47,7 @@
                     @click="archiveForm(index)"
                     :disabled="form.processing==1"
                     >
-                        Archive Form
+                        {{ __("vue.Archive form") }}
                     </button>
                     <div v-if="form.processing==1">
                         <span class="spinner-border spinner-border-sm text-muted"></span>
@@ -61,7 +61,7 @@
     @click="getData()"
     class="btn btn-success"
     :disabled="anyProcessing==true"
-    >Get data from KoboToolBox</button>
+    >{{ __("vue.Get data from KoBoToolbox") }}</button>
 </div>
 </template>
 
@@ -117,10 +117,6 @@
             })
 
             .listen('KoboGetDataReturnedSuccess', (payload) => {
-
-                console.log("BOOM!", payload);
-
-
 
                 axios.post(rootUrl+'/projectxlsforms/'+payload.form.id+'/getdata')
                 .then((response) => {

@@ -113,14 +113,13 @@ class Project extends Model
        return $this->hasMany(Invite::class);
     }
 
-
+    // which public forms are attached to the project?
     public function xls_forms ()
     {
         return $this->belongsToMany(Xlsform::class)->using(ProjectXlsform::class)
         ->withPivot([
             'kobo_id',
             'kobo_version_id',
-            'records',
         ]);
     }
 

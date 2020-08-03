@@ -19,11 +19,7 @@ class XlsformObserver
      */
     public function created(Xlsform $xlsform)
     {
-        if($xlsform->live) {
-            $projects = Project::all()->pluck('id')->toArray();
-            $xlsform->projects()->sync($projects);
-        }
-
+        $this->syncFormWithProject($xlsform);
     }
 
     /**
@@ -34,10 +30,7 @@ class XlsformObserver
      */
     public function updated(Xlsform $xlsform)
     {
-        if ($xlsform->live) {
-            $projects = Project::all()->pluck('id')->toArray();
-            $xlsform->projects()->sync($projects);
-        }
+        $this->syncFormWithProject($xlsform);
     }
 
     /**
@@ -50,6 +43,20 @@ class XlsformObserver
     {
         // dispatch( new DeleteKobotoolsForm($xlsform->kobo_id));
     }
+
+    public function syncFormWithProject (Xlsform $xlsform)
+    {
+        if ($xlsform->live) {
+
+            if ($xlsform->public) {
+                $projects = Project::all()->pluck('id')->toArray();
+                $xlsform->projects()->sync($projects);
+            } else {
+                $xlsform->projects()->sync($xlsform->project_id);
+            }
+        }
+    }
+
 
 
 }

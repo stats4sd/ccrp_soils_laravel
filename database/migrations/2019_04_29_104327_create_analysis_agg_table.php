@@ -33,15 +33,6 @@ class CreateAnalysisAggTable extends Migration
             $table->decimal('validation_check', 25, 20)->nullable();
             $table->date('analysis_date');
             $table->timestamps();
-
-
-
-
-
-
-
-
-            $table->timestamps();
         });
     }
 
