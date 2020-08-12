@@ -43,7 +43,7 @@
                     </button>
                     <button
                     v-if="form.kobo_id && form.is_active"
-                    class="btn btn-warning btn-sm"
+                    class="btn btn-warning btn-sm mr-3"
                     @click="archiveForm(index)"
                     :disabled="form.processing==1"
                     >
@@ -52,6 +52,16 @@
                     <div v-if="form.processing==1">
                         <span class="spinner-border spinner-border-sm text-muted"></span>
                     </div>
+
+                    <button
+                    class="btn btn-success btn-sm"
+                    @click="download(index)"
+                    >
+                        <!-- {{ __("vue.Download") }} -->
+                    <i class="fa fa-download"></i>
+                    </button>
+                   
+
 
                 </td>
             </tr>
@@ -150,6 +160,18 @@
                     }
 
                 });
+            },
+
+            download(index){
+                
+                axios.post(rootUrl+'/projectxlsforms/' + this.projectForms[index].id + '/download')
+                .then((result) => {
+
+                    window.location.href = result.data['path'];
+                }, (error) => {
+
+                    console.log(error);
+                });          
             }
         }
     }

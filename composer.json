@@ -27,6 +27,7 @@
         "pusher/pusher-php-server": "~4.0",
         "simplesoftwareio/simple-qrcode": "^2.0",
         "stats4sd/laravel-sql-views": "^1.0",
+        "symfony/process": "^5.0",
         "tio/laravel": "^1.6"
     },
     "require-dev": {
@@ -43,7 +44,11 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "ext-pcntl": "7.3",
+            "ext-posix": "7.3"
+        }
     },
     "extra": {
         "laravel": {

@@ -1,29 +1,36 @@
-#!/usr/bin/python3
+
 from mysql.connector import MySQLConnection, Error
 import sys
-import csv
-#import requests
-import json
-from datetime import datetime
 import dbConfig as config
+import pandas as pd
+import json 
 
-path = sys.argv[1] + '/storage/app/public/data/'
+path = sys.argv[1] + '/storage/app/public/merged_sample/'
 name_file = sys.argv[2]
-json = "select content from project_submissions WHERE project_xlsform_id = " + 1
+id = sys.argv[3]
+query = "SELECT content FROM project_submissions WHERE project_xlsform_id = " + str(id)
 
 try:
+	#create connnection with the database
 	con = MySQLConnection(**config.dbConfig)
 	cursor = con.cursor()
-	print("query", query)
 	cursor.execute(query)
 
-	with open(path + name_file,'w', newline='') as csv_file:
-	    column_names = [i[0] for i in cursor.description]
-	    writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-	    writer.writerow(column_names)
-	   
-	    for row in cursor.fetchall():
-	    	writer.writerow(row)
+	#get the content column from project_submissions table
+	content = list(cursor.fetchall())
+	# 
+	df = pd.DataFrame()
+
+	for element in content:
+		element = str(element)
+		element = element.replace("('", "")
+		element = element.replace("',)", "")
+		json_element = json.loads(element)
+		df_from_json = pd.json_normalize(json_element)
+		df = pd.concat([df, df_from_json])
+		
+	df.to_csv(path + name_file, index=False)
+
 	con.commit()
 
 	

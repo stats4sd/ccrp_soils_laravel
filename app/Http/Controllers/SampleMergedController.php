@@ -15,4 +15,5 @@ class SampleMergedController extends Controller
         return (new SampleMergedExport)->forProject($project->id)->download($project->name.'-all_sample_data-'.$date.".xlsx");
     }
 
+  
 }
