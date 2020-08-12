@@ -52,7 +52,7 @@ export default {
         }
     },
     mounted: function(){
-        console.log("hi");
+        
         // round things for display
         this.samplesDisplay = this.samples.map((sample) => {
             console.log("sample:", sample);

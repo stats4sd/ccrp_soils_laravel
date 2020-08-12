@@ -14,6 +14,7 @@ use App\Models\AnalysisPoxc;
 use Illuminate\Http\Request;
 use App\Jobs\ImportAttachmentFromKobo;
 use App\Models\ProjectSubmission;
+use Illuminate\Support\Facades\Log;
 
 class DataMapController extends Controller
 {
@@ -27,24 +28,23 @@ class DataMapController extends Controller
         // handle sample ID
         if($dataMap->id == 'sample') {
             $newModel['project_id'] = $projectId ?: null;
-            $newModel['id'] = isset($data['sample_id']) ? $data['sample_id'] : $data['no_bar_code'];
+            $newModel['id'] = isset($data['sample_id']) ? $data['sample_id'] : null;
         }
         else {
             $newModel['sample_id'] = isset($data['sample_id']) ? $data['sample_id'] : $data['no_bar_code'];
         }
+     
 
-
-
-        if($dataMap->has_location && isset($data['location']) && $data['location']) {
-            $location = explode(" ", $data['location']);
+        if($dataMap->location && isset($data['gps_coordinates']) && $data['gps_coordinates']) {
+            $location = explode(" ", $data['gps_coordinates']);
             $newModel["longitude"] = isset($location[1]) ? $location[1] : null;
             $newModel["latitude"] = isset($location[0]) ? $location[0] : null;
             $newModel["altitude"] = isset($location[2]) ? $location[2] : null;
             $newModel["accuracy"] = isset($location[3]) ? $location[3] : null;
         }
-
+       
         foreach($dataMap->variables as $variable) {
-
+           
             // if the variable is new (i.e. hasn't been manually added to the database)
             if($variable['in_db'] == 0) {
                 //don't actually process it (as the SQL Insert will fail)
@@ -115,7 +115,7 @@ class DataMapController extends Controller
                 $newModel[$variableName] = $value;
             }
         }
-
+        
         $class = 'App\\Models\\'.$dataMap->model;
         $newItem = new $class();
 

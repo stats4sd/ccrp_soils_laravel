@@ -26,6 +26,7 @@ Route::group([
     Route::post('projectxlsforms/{project_xlsform}/deploytokobo', 'ProjectXlsformController@deployToKobo')->name('projectxlsforms.deploy');
     Route::post('projectxlsforms/{project_xlsform}/syncdata', 'ProjectXlsformController@syncData')->name('projectxlsforms.sync');
     Route::post('projectxlsforms/{project_xlsform}/getdata', 'ProjectXlsformController@getData')->name('projectxlsforms.getdata');
+    Route::post('projectxlsforms/{project_xlsform}/download', 'ProjectXlsformController@download')->name('projectxlsforms.download');
 });
 
 /**
