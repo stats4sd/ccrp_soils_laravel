@@ -1,9 +1,25 @@
 
 from mysql.connector import MySQLConnection, Error
 import sys
-import dbConfig as config
 import pandas as pd
 import json 
+from pathlib import Path  # Python 3.6+ only
+from dotenv import load_dotenv
+import os
+
+env_path = Path(sys.argv[1]) / '.env'
+load_dotenv(dotenv_path=env_path)
+DB_USERNAME = os.getenv("DB_USERNAME")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_DATABASE = os.getenv("DB_DATABASE")
+
+dbConfig = {
+            'user': DB_USERNAME,
+            'password': DB_PASSWORD,
+            'host': DB_HOST,
+            'db': DB_DATABASE
+            }
 
 path = sys.argv[1] + '/storage/app/public/merged_sample/'
 name_file = sys.argv[2]
@@ -12,7 +28,7 @@ query = "SELECT content FROM project_submissions WHERE project_xlsform_id = " + 
 
 try:
 	#create connnection with the database
-	con = MySQLConnection(**config.dbConfig)
+	con = MySQLConnection(**dbConfig)
 	cursor = con.cursor()
 	cursor.execute(query)
 
