@@ -63,17 +63,18 @@ class ProjectXlsformController extends Controller
     }
 
     public function download (ProjectXlsform $project_xlsform)
-    {    
-        
-        $scriptPath = base_path() . '/scripts/download_samples_from_project_submissions_csv.py';
+    {
+
+        $scriptPath = base_path('/scripts/download_samples_from_project_submissions_csv.py');
         $base_path = base_path();
-        $title = str_replace("-","",$project_xlsform->title);
-        $file_name = str_replace(" ", "_",$title.".csv");
-      
-        $process = new Process(['python3',$scriptPath, $base_path, $file_name, $project_xlsform->id]);
-        
+        $project_xlsform_id = $project_xlsform->id;
+        $title = str_replace("-", "", $project_xlsform->title);
+        $file_name = str_replace(" ", "_", $title . ".csv");
+
+        $process = new Process(["pipenv", "run", "python3", $scriptPath, $base_path, $file_name, $project_xlsform_id]);
+
         $process->run();
-       
+
         if(!$process->isSuccessful()) {
 
            throw new ProcessFailedException($process);
