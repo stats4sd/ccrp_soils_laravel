@@ -18,6 +18,7 @@ use App\Events\KoboGetDataReturnedSuccess;
 use App\Http\Controllers\DataMapController;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 
 class GetDataFromKobo implements ShouldQueue
 {
@@ -80,7 +81,6 @@ class GetDataFromKobo implements ShouldQueue
                 $projectSubmission->save();
 
                 $dataMap = DataMap::findorfail($this->form->xlsform->data_map_id);
-
                 $submissionId = $newSubmission['_id'];
                 $projectId = $this->form->project->id;
                 $data = $newSubmission;

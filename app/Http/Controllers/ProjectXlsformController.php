@@ -9,6 +9,9 @@ use App\Jobs\Projects\ArchiveKoboForm;
 use App\Jobs\Projects\GetDataFromKobo;
 use App\Jobs\Projects\DeployFormToKobo;
 use App\Jobs\Projects\DeploymentSuccessMessage;
+use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class ProjectXlsformController extends Controller
 {
@@ -57,6 +60,32 @@ class ProjectXlsformController extends Controller
             'title' => $project_xlsform->title,
             'user' => auth()->user()->email,
         ]);
+    }
+
+    public function download (ProjectXlsform $project_xlsform)
+    {
+
+        $scriptPath = base_path('/scripts/download_samples_from_project_submissions_csv.py');
+        $base_path = base_path();
+        $project_xlsform_id = $project_xlsform->id;
+        $title = str_replace("-", "", $project_xlsform->title);
+        $file_name = str_replace(" ", "_", $title . ".csv");
+
+        $process = new Process(["pipenv", "run", "python3", $scriptPath, $base_path, $file_name, $project_xlsform_id]);
+
+        $process->run();
+
+        if(!$process->isSuccessful()) {
+
+           throw new ProcessFailedException($process);
+
+        } else {
+
+            $process->getOutput();
+        }
+
+        $path_download =  Storage::url('/merged_sample/' . $file_name);
+        return response()->json(['path' => $path_download]);
     }
 
 }
