@@ -35,7 +35,7 @@ class DataMapController extends Controller
                 $project = Project::find($projectId);
 
                 forEach($project->identifiers as $identifier) {
-                    $newModel['identifiers'][$identifier['Terminal']] = isset($data[$identifier['name']]) ? $data[$identifier['name']] : null;
+                    $newModel['identifiers'][$identifier['name']] = isset($data[$identifier['name']]) ? $data[$identifier['name']] : null;
                 }
             }
 
