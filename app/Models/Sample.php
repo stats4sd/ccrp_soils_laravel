@@ -78,6 +78,9 @@ class Sample extends Model
 {
     public $incrementing = false;
     public $guarded = [];
+    public $casts = [
+        'identifiers' => 'array',
+    ];
 
     public $appends = [
         'poxc_result',

@@ -12,8 +12,8 @@ class SampleMergedController extends Controller
     public function download (Project $project)
     {
         $date = Carbon::now()->toDateTimeString();
-        return (new SampleMergedExport)->forProject($project->id)->download($project->name.'-all_sample_data-'.$date.".xlsx");
+        return (new SampleMergedExport)->forProject($project)->download($project->name.'-all_sample_data-'.$date.".xlsx");
     }
 
-  
+
 }

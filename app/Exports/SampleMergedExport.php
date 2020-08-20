@@ -2,7 +2,9 @@
 
 namespace App\Exports;
 
+use App\Models\Project;
 use App\Models\Views\SampleMerged;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -13,9 +15,9 @@ class SampleMergedExport implements FromCollection, WithHeadings, ShouldAutoSize
 
     use Exportable;
 
-    public function forProject (int $projectId)
+    public function forProject (Project $project)
     {
-       $this->projectId = $projectId;
+       $this->project = $project;
        return $this;
     }
 
@@ -30,7 +32,9 @@ class SampleMergedExport implements FromCollection, WithHeadings, ShouldAutoSize
     */
     public function collection()
     {
-        return SampleMerged::where('project_id', $this->projectId)
-        ->orderBy('sample_id','asc')->get();
+        return DB::table($this->project->merged_view)
+            ->where('project_id', $this->project->id)
+            ->orderBy('sample_id','asc')
+            ->get();
     }
 }

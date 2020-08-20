@@ -70,6 +70,7 @@ class Project extends Model
 
     protected $casts = [
         'share_data' => 'boolean',
+        'identifiers' => 'array',
     ];
 
     /*
@@ -107,6 +108,11 @@ class Project extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function creator ()
+    {
+        return $this->belongsTo(User::class, 'creator_id');
+    }
 
     public function invites ()
     {
