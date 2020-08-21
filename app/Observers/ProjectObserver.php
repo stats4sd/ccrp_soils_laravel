@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Http\Controllers\SampleMergedController;
 use App\Models\Project;
 use App\Models\Xlsform;
 use App\Models\User;
@@ -22,17 +23,23 @@ class ProjectObserver
 
         $project->xls_forms()->sync(Xlsform::where('live', '=', true)->where('public', '=', true)->get());
 
+        if ($project->isDirty('identifiers') && $project->identifiers) {
+            $project->merged_view = SampleMergedController::createCustomView($project);
+        }
+
     }
 
     /**
-     * Handle the project "updated" event.
+     * Handle the project "updating" event.
      *
      * @param  \App\App\Models\Project  $project
      * @return void
      */
-    public function updated(Project $project)
+    public function updating(Project $project)
     {
-        //
+        if ($project->isDirty('identifiers') && $project->identifiers) {
+            $project->merged_view = SampleMergedController::createCustomView($project);
+        }
     }
 
     /**

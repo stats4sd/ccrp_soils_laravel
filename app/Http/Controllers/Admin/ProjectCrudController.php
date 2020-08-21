@@ -62,6 +62,12 @@ class ProjectCrudController extends CrudController
                 'type' => 'text',
                 'limit' => 20
             ],
+            [
+                'name' => 'identifiers',
+                'label' => 'Custom Identifiers',
+                'type' => 'multidimensional_array',
+                'visible_key' => 'label',
+            ],
         ]);
     }
 
@@ -75,7 +81,7 @@ class ProjectCrudController extends CrudController
                 'name' => 'creator_id',
                 'label' => 'Creator of the Project',
                 'type' => 'select2',
-                'entity' => 'users',
+                'entity' => 'creator',
                 'attribute' => 'name',
                 'model' => User::class,
             ],
@@ -92,12 +98,31 @@ class ProjectCrudController extends CrudController
             [
                 'name' => 'avatar',
                 'label' => 'Project Image',
-                'type' => 'upload',
+                'type' => 'image',
             ],
             [
                 'name' => 'share_data',
                 'label' => 'Does this project consent to share aggregated / anonymised data?',
                 'type' => 'boolean',
+            ],
+            [
+                'name' => 'identifiers',
+                'label' => 'enter any custom identifiers that the project uses in the sample collection form',
+                'type' => 'repeatable',
+                'fields' => [
+                    [
+                        'name' => 'name',
+                        'label' => 'Variable Name',
+                        'type' => 'text',
+                        'wrapper' => ['class' => 'form-group col-md-4'],
+                    ],
+                    [
+                        'name' => 'label',
+                        'label' => 'Label',
+                        'type' => 'text',
+                        'wrapper' => ['class' => 'form-group col-md-4'],
+                    ],
+                ],
             ],
         ]);
     }
