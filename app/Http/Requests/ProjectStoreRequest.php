@@ -29,6 +29,8 @@ class ProjectStoreRequest extends FormRequest
             'name' => ['required', 'max:255'],
             'description' => ['required', 'max:2000'],
             'creator_id' => ['required'],
+            'identifiers' => ['sometimes'],
+            'merged_view' => ['sometime'],
             'avatar' => ['nullable'],
             'share_data' => ['boolean'],
         ];

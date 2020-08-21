@@ -124,11 +124,6 @@ class ProjectCrudController extends CrudController
                     ],
                 ],
             ],
-            [
-                'name' => 'merged_view',
-                'label' => 'enter the name of the MySQL view that this project uses when downloading merged sample data',
-                'default' => 'samples_merged',
-            ],
         ]);
     }
 
