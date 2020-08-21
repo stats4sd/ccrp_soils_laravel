@@ -23,7 +23,9 @@ class ProjectObserver
 
         $project->xls_forms()->sync(Xlsform::where('live', '=', true)->where('public', '=', true)->get());
 
-        SampleMergedController::createCustomView($project);
+        if ($project->isDirty('identifiers') && $project->identifiers) {
+            $project->merged_view = SampleMergedController::createCustomView($project);
+        }
 
     }
 
@@ -35,8 +37,7 @@ class ProjectObserver
      */
     public function updating(Project $project)
     {
-        if ($project->isDirty('identifiers')) {
-
+        if ($project->isDirty('identifiers') && $project->identifiers) {
             $project->merged_view = SampleMergedController::createCustomView($project);
         }
     }
