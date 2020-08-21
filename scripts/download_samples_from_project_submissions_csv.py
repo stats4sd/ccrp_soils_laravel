@@ -42,7 +42,7 @@ try:
 		element = str(element)
 		element = element.replace("('", "")
 		element = element.replace("',)", "")
-        element = re.sub(r'(?<!\\)\\(?!["\\/bfnrt]|u[0-9a-fA-F]{4})', r'', element)
+		element = re.sub(r'(?<!\\)\\(?!["\\/bfnrt]|u[0-9a-fA-F]{4})', r'', element)
 		json_element = json.loads(element)
 		df_from_json = pd.json_normalize(json_element)
 		df = pd.concat([df, df_from_json])
