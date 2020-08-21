@@ -38,14 +38,14 @@
                 <tr v-for="sample in samplesDisplay" :key="sample.id">
                     <td>{{ sample.id }}</td>
 
-                    <div v-if="sample.identifiers">
-                        <td
-                            v-for="identifier in project.identifiers"
-                            :key="identifier.name"
-                            rowspan="2">
-                            {{ sample.identifiers[identifier.name] }}
-                        </td>
-                    </div>
+
+                    <td
+                        v-for="identifier in project.identifiers"
+                        :key="identifier.name"
+                    >
+                        {{ sample.identifiers ? sample.identifiers[identifier.name] : ''}}
+                    </td>
+
 
                     <td>{{ sample.poxc_result }} </td>
                     <td>{{ sample.p_result }} </td>
