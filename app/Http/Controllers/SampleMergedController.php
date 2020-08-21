@@ -108,9 +108,9 @@ class SampleMergedController extends Controller
         LEFT JOIN `analysis_agg` ON ((`samples`.`id` = `analysis_agg`.`sample_id`)))";
 
         // create or update file in databases views folder
-        $projectSnakeName = Str::of($project->name)->slug('_');
+        $projectSnakeName = "samples_merged_".Str::of($project->name)->slug('_');
 
-        file_put_contents(base_path('database/views/samples_merged_'.$projectSnakeName.'.sql'),$query);
+        file_put_contents(base_path('database/views/'.$projectSnakeName.'.sql'),$query);
 
         // rerun view creation
         Artisan::call('updatesql');
