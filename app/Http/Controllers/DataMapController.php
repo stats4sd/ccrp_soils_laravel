@@ -31,8 +31,13 @@ class DataMapController extends Controller
             $newModel['project_id'] = $projectId ?: null;
             $newModel['id'] = isset($data['sample_id']) ? $data['sample_id'] : null;
 
+            Log::info("dealing with identifiers");
+            Log::info($projectId);
+
             if ($projectId){
                 $project = Project::find($projectId);
+
+                Log::info($project->identifiers);
 
                 forEach($project->identifiers as $identifier) {
                     $newModel['identifiers'][$identifier['name']] = isset($data[$identifier['name']]) ? $data[$identifier['name']] : null;

@@ -101,6 +101,8 @@ class GetDataFromKobo implements ShouldQueue
                 }
 
                 \Log::info("Mapping data to correct model / tables...");
+                \Log::info($newSubmission);
+
                 DataMapController::newRecord($dataMap, $newSubmission, $projectId);
 
             }
