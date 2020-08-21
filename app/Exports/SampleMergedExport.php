@@ -23,7 +23,15 @@ class SampleMergedExport implements FromCollection, WithHeadings, ShouldAutoSize
 
     public function headings (): array
     {
-       return array_keys(SampleMerged::first()->toArray());
+       $first =
+        DB::table($this->project->merged_view)
+            ->where('project_id', $this->project->id)
+            ->orderBy('sample_id', 'asc')
+            ->first();
+
+            // hack to convert stdClass to array and get keys
+            return array_keys(json_decode(json_encode($first), true));
+
     }
 
 
