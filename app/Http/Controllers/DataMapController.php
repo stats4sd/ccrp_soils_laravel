@@ -38,10 +38,10 @@ class DataMapController extends Controller
             if ($projectId) {
                 $project = Project::find($projectId);
 
-                Log::info($project->identifiers);
-
-                foreach ($project->identifiers as $identifier) {
-                    $newModel['identifiers'][$identifier['name']] = isset($data[$identifier['name']]) ? $data[$identifier['name']] : null;
+                if (is_array($project->identifiers)) {
+                    foreach ($project->identifiers as $identifier) {
+                        $newModel['identifiers'][$identifier['name']] = isset($data[$identifier['name']]) ? $data[$identifier['name']] : null;
+                    }
                 }
             }
         } else {
