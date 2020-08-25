@@ -26,17 +26,46 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectSubmission whereSubmittedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectSubmission whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectSubmission whereUuid($value)
- * @mixin \Eloquent
+ * @mixin \Eloquent19
  */
 class ProjectSubmission extends Model
 {
     protected $table = 'project_submissions';
     protected $guarded = [];
 
-    public function project_xlsform ()
+    public function project_xlsform()
     {
-       return $this->belongsTo(ProjectXlsform::class, 'project_xlsform_id');
+        return $this->belongsTo(ProjectXlsform::class, 'project_xlsform_id');
+    }
+
+    public function samples()
+    {
+        return $this->hasMany(Sample::class);
     }
 
 
+    public function analysis_agg()
+    {
+        return $this->hasMany(AnalysisAgg::class);
+    }
+
+    public function analysis_p()
+    {
+        return $this->hasMany(AnalysisP::class);
+    }
+
+    public function analysis_ph()
+    {
+        return $this->hasMany(AnalysisPh::class);
+    }
+
+    public function analysis_pom()
+    {
+        return $this->hasMany(AnalysisPom::class);
+    }
+
+    public function analysis_poxc()
+    {
+        return $this->hasMany(AnalysisPoxc::class);
+    }
 }

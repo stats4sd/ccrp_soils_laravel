@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\ProjectObserver;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -22,4 +23,10 @@ class AnalysisAgg extends Model
     {
         return $this->belongsTo(Sample::class);
     }
+
+    public function project_submission ()
+    {
+        return $this->belongsTo(ProjectSubmission::class)
+    }
+
 }

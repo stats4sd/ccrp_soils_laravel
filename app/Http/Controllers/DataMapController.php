@@ -2,55 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\NewDataVariableSpotted;
 use Carbon\Carbon;
 use App\Models\Sample;
 use App\Models\DataMap;
+use App\Models\Project;
+use App\Models\Xlsform;
 use App\Models\AnalysisP;
 use App\Models\AnalysisPh;
 use App\Models\AnalysisAgg;
 use App\Models\AnalysisPom;
 use App\Models\AnalysisPoxc;
 use Illuminate\Http\Request;
-use App\Jobs\ImportAttachmentFromKobo;
-use App\Models\Project;
+use App\Models\ProjectXlsform;
 use App\Models\ProjectSubmission;
 use Illuminate\Support\Facades\Log;
+use App\Events\NewDataVariableSpotted;
+use App\Jobs\ImportAttachmentFromKobo;
 
 class DataMapController extends Controller
 {
-
-    public static function newRecord(DataMap $dataMap, Array $data, Int $projectId = null)
+    public static function newRecord(DataMap $dataMap, array $data, Int $projectId = null)
     {
         $newModel = [
             "project_submission_id" => $data['_id'],
         ];
 
         // handle sample ID
-        if($dataMap->id == 'sample') {
+        if ($dataMap->id == 'sample') {
             $newModel['project_id'] = $projectId ?: null;
             $newModel['id'] = isset($data['sample_id']) ? $data['sample_id'] : null;
 
             Log::info("dealing with identifiers");
             Log::info($projectId);
 
-            if ($projectId){
+            if ($projectId) {
                 $project = Project::find($projectId);
 
                 Log::info($project->identifiers);
 
-                forEach($project->identifiers as $identifier) {
+                foreach ($project->identifiers as $identifier) {
                     $newModel['identifiers'][$identifier['name']] = isset($data[$identifier['name']]) ? $data[$identifier['name']] : null;
                 }
             }
-
-        }
-        else {
+        } else {
             $newModel['sample_id'] = isset($data['sample_id']) ? $data['sample_id'] : $data['no_bar_code'];
         }
 
 
-        if($dataMap->location && isset($data['gps_coordinates']) && $data['gps_coordinates']) {
+        if ($dataMap->location && isset($data['gps_coordinates']) && $data['gps_coordinates']) {
             $location = explode(" ", $data['gps_coordinates']);
             $newModel["longitude"] = isset($location[1]) ? $location[1] : null;
             $newModel["latitude"] = isset($location[0]) ? $location[0] : null;
@@ -58,10 +57,10 @@ class DataMapController extends Controller
             $newModel["accuracy"] = isset($location[3]) ? $location[3] : null;
         }
 
-        foreach($dataMap->variables as $variable) {
+        foreach ($dataMap->variables as $variable) {
 
             // if the variable is new (i.e. hasn't been manually added to the database)
-            if($variable['in_db'] == 0) {
+            if ($variable['in_db'] == 0) {
                 //don't actually process it (as the SQL Insert will fail)
                 //just tell the admin about it!
                 NewDataVariableSpotted::dispatch();
@@ -96,7 +95,7 @@ class DataMapController extends Controller
                 break;
 
                 case 'photo':
-                    if(isset($data[$variableName]) && $data[$variableName]) {
+                    if (isset($data[$variableName]) && $data[$variableName]) {
                         $value = $data[$variableName];
                         ImportAttachmentFromKobo::dispatch($value, $data);
                     }
@@ -126,7 +125,7 @@ class DataMapController extends Controller
                 break;
             }
 
-            if(!is_null($value)) {
+            if (!is_null($value)) {
                 $newModel[$variableName] = $value;
             }
         }
@@ -139,6 +138,29 @@ class DataMapController extends Controller
 
         \Log::info($class . " created");
         \Log::info("values: " . json_encode($newModel));
+    }
 
+    public function updateAllRecords(Xlsform $xlsform)
+    {
+        $projectFormIds = $xlsform->project_xlsforms->pluck('id');
+
+
+        $submissions = ProjectSubmission::whereIn('project_xlsform_id', $projectFormIds)
+        ->get();
+
+        $dataMap = $xlsform->data_map;
+
+        foreach ($submissions as $submission) {
+            $model = 'App\\Models\\'.$dataMap->model;
+
+            $model::where('project_submission_id', '=', $submission->id)
+            ->delete();
+
+            Log::info($submission->content);
+
+            $this->newRecord($dataMap, json_decode($submission->content, true), $submission->project_xlsform->project->id);
+        }
+
+        return count($submissions);
     }
 }

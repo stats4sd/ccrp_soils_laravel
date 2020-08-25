@@ -62,6 +62,11 @@ class AnalysisPoxc extends Model
         return $this->belongsTo(Sample::class);
     }
 
+    public function project_submission ()
+    {
+        return $this->belongsTo(ProjectSubmission::class)
+    }
+
     public function getResultAttribute ()
     {
         return $this->poxc_soil;

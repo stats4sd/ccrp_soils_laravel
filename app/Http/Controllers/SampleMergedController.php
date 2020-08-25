@@ -41,8 +41,6 @@ class SampleMergedController extends Controller
         `samples`.`altitude` AS `altitude`,
         `samples`.`accuracy` AS `accuracy`,
         `samples`.`comment` AS `comment`,
-        `samples`.`farmer_quick` AS `farmer_quick`,
-        `samples`.`community_quick` AS `community_quick`,
         `analysis_p`.`analysis_date` AS `analysis_p-date`,
         `analysis_p`.`weight_soil` AS `analysis_p-weight_soil`,
         `analysis_p`.`vol_extract` AS `analysis_p-vol_extract`,

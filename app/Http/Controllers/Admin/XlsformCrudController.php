@@ -189,6 +189,10 @@ class XlsformCrudController extends CrudController
         ->stack('line')
         ->view('crud::buttons.archive');
 
+        Crud::button('updaterecords')
+        ->stack('line')
+        ->view('crud::buttons.updaterecords');
+
         $form = $this->crud->getCurrentEntry();
 
         Widget::add([
