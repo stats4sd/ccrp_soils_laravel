@@ -49,12 +49,18 @@ class DataMapController extends Controller
         }
 
 
-        if ($dataMap->location && isset($data['gps_coordinates']) && $data['gps_coordinates']) {
-            $location = explode(" ", $data['gps_coordinates']);
-            $newModel["longitude"] = isset($location[1]) ? $location[1] : null;
-            $newModel["latitude"] = isset($location[0]) ? $location[0] : null;
-            $newModel["altitude"] = isset($location[2]) ? $location[2] : null;
-            $newModel["accuracy"] = isset($location[3]) ? $location[3] : null;
+        if ($dataMap->location) {
+            if (isset($data['gps_coordinates']) && $data['gps_coordinates']) {
+                $location = explode(" ", $data['gps_coordinates']);
+            } elseif (isset($data['_geolocation']) && $data['_geolocation']) {
+                $location = explode(" ", $data['_geolocation']);
+            }
+            if ($location) {
+                $newModel["longitude"] = isset($location[1]) ? $location[1] : null;
+                $newModel["latitude"] = isset($location[0]) ? $location[0] : null;
+                $newModel["altitude"] = isset($location[2]) ? $location[2] : null;
+                $newModel["accuracy"] = isset($location[3]) ? $location[3] : null;
+            }
         }
 
         foreach ($dataMap->variables as $variable) {
