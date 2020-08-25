@@ -51,7 +51,7 @@ class AnalysisPh extends Model
 
     public function project_submission ()
     {
-        return $this->belongsTo(ProjectSubmission::class)
+        return $this->belongsTo(ProjectSubmission::class);
     }
 
     public function getResultAttribute ()

@@ -38,22 +38,21 @@ use Illuminate\Database\Eloquent\Model;
  */
 class AnalysisPom extends Model
 {
-
     public $table = "analysis_pom";
     protected $guarded = [];
 
 
-    public function sample ()
+    public function sample()
     {
         return $this->belongsTo(Sample::class);
     }
 
-    public function project_submission ()
+    public function project_submission()
     {
-        return $this->belongsTo(ProjectSubmission::class)
+        return $this->belongsTo(ProjectSubmission::class);
     }
 
-    public function getResultAttribute ()
+    public function getResultAttribute()
     {
         return $this->percent_pom;
     }
