@@ -53,7 +53,7 @@ class DataMapController extends Controller
             if (isset($data['gps_coordinates']) && $data['gps_coordinates']) {
                 $location = explode(" ", $data['gps_coordinates']);
             } elseif (isset($data['_geolocation']) && $data['_geolocation']) {
-                $location = explode(" ", $data['_geolocation']);
+                $location = $data['_geolocation'];
             }
             if ($location) {
                 $newModel["longitude"] = isset($location[1]) ? $location[1] : null;
