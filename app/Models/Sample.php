@@ -92,15 +92,15 @@ class Sample extends Model
         'twofiftymicron_aggreg_pct_result',
     ];
 
-    public function project ()
+    public function project()
     {
         return $this->belongsTo(Project::class);
     }
 
-    public function getPoxcResultAttribute ()
+    public function getPoxcResultAttribute()
     {
-        if($this->analysis_poxc) {
-            if($this->analysis_poxc->avg('poxc_soil_corrected')) {
+        if ($this->analysis_poxc) {
+            if ($this->analysis_poxc->avg('poxc_soil_corrected')) {
                 return $this->analysis_poxc->avg('poxc_soil_corrected');
             }
             return $this->analysis_poxc->avg('poxc_soil');
@@ -166,22 +166,22 @@ class Sample extends Model
     }
 
 
-    public function analysis_p ()
+    public function analysis_p()
     {
         return $this->hasMany(AnalysisP::class);
     }
 
-    public function analysis_ph ()
+    public function analysis_ph()
     {
         return $this->hasMany(AnalysisPh::class);
     }
 
-    public function analysis_pom ()
+    public function analysis_pom()
     {
         return $this->hasMany(AnalysisPom::class);
     }
 
-    public function analysis_poxc ()
+    public function analysis_poxc()
     {
         return $this->hasMany(AnalysisPoxc::class);
     }
