@@ -1,4 +1,4 @@
-1<?php
+<?php
 
 namespace App\Jobs\Projects;
 
@@ -56,7 +56,7 @@ class GetDataFromKobo implements ShouldQueue
         \Log::info(json_encode($response->json()));
 
         if ($response->failed()) {
-            if($response->status() === 504) {
+            if ($response->status() === 504) {
                 $this->release('5');
             }
             event(new KoboGetDataReturnedError($this->user, $this->form, json_encode($response->json())));
@@ -68,8 +68,8 @@ class GetDataFromKobo implements ShouldQueue
         //compare
         $submissions = ProjectSubmission::where('project_xlsform_id', '=', $this->form->id)->get();
 
-        foreach($data as $newSubmission) {
-            if(!in_array($newSubmission['_id'], $submissions->pluck('id')->toArray())) {
+        foreach ($data as $newSubmission) {
+            if (!in_array($newSubmission['_id'], $submissions->pluck('id')->toArray())) {
                 $projectSubmission = new ProjectSubmission;
 
                 $projectSubmission->id = $newSubmission['_id'];
@@ -86,12 +86,14 @@ class GetDataFromKobo implements ShouldQueue
                 $data = $newSubmission;
 
                 // go through submission variables and remove any group names
-                foreach($newSubmission as $key => $value) {
+                foreach ($newSubmission as $key => $value) {
 
                     // Keep this as it forms part of the media download url
-                    if($key == 'formhub/uuid') continue;
+                    if ($key == 'formhub/uuid') {
+                        continue;
+                    }
 
-                    if(Str::contains($key,'/')){
+                    if (Str::contains($key, '/')) {
                         // e.g. replace $newSubmission['groupname/subgroup/name'] with $newSubmission['name']
                         unset($newSubmission[$key]);
                         $key = explode('/', $key);
@@ -104,7 +106,6 @@ class GetDataFromKobo implements ShouldQueue
                 \Log::info($newSubmission);
 
                 DataMapController::newRecord($dataMap, $newSubmission, $projectId);
-
             }
         }
 
@@ -112,6 +113,5 @@ class GetDataFromKobo implements ShouldQueue
             $this->user,
             $this->form
         ));
-
     }
 }
