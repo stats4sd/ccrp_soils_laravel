@@ -38,12 +38,12 @@
 						<div class="col-sm-6">
 						<div class="form-check-inline">
 						  <label class="form-check-label">
-						    <input type="radio" class="form-check-input" value="21" name="label_number" selected>21 Labels
+						    <input type="radio" class="form-check-input" value="21" name="label_number" selected>{{ t("21 Labels") }}
 						  </label>
 						</div>
 						<div class="form-check-inline">
 						  <label class="form-check-label">
-						    <input type="radio" class="form-check-input" value="14" name="label_number">14 Labels
+						    <input type="radio" class="form-check-input" value="14" name="label_number">{{ t("14 Labels") }}
 						  </label>
 						</div>
                         <span class="text-danger">{{ $errors->first('label_number') }}</span>

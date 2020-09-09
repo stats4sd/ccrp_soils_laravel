@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <br>
-                    <small>{{ t("Press :plus for another field", ['plus' => "<span class='fa fa-plus gs'></span>"]) }}</small>
+                    <small>{{ t("Press") }} <span class='fa fa-plus gs'></span> {{ t(" for another field") }}</small>
                     @error('emails')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

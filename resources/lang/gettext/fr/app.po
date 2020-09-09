@@ -7,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-07-15T17:58:46+00:00\n"
-"PO-Revision-Date: 2020-07-15 19:58+0200\n"
+"POT-Creation-Date: 2020-09-09T11:40:14+00:00\n"
+"PO-Revision-Date: 2020-09-09 13:40+0200\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
@@ -379,8 +379,12 @@ msgid "Enter the email addresses to send invites to. You can add as many email a
 msgstr "Saisissez les adresses e-mail auxquelles envoyer les invitations. Vous pouvez ajouter autant d'adresses e-mail que vous le souhaitez."
 
 #: resources/views/project_members/create.blade.php:89
-msgid "Press :plus for another field"
-msgstr "Appuyez sur :plus pour un autre champ"
+msgid "Press"
+msgstr ""
+
+#: resources/views/project_members/create.blade.php:89
+msgid " for another field"
+msgstr ""
 
 #: resources/views/project_members/edit.blade.php:12
 msgid "Edit Access to Project :projectName"
@@ -573,11 +577,19 @@ msgstr "De combien de codes QR avez-vous besoin?"
 msgid "QR Codes will be split over multiple pages as necessary"
 msgstr "Les codes QR seront répartis sur plusieurs pages si nécessaire"
 
-#: resources/views/qr_code.blade.php:33
+#: resources/views/qr_code.blade.php:35
 msgid "Select the number of labels per sheet."
 msgstr ""
 
-#: resources/views/qr_code.blade.php:50
+#: resources/views/qr_code.blade.php:39
+msgid "21 Labels"
+msgstr ""
+
+#: resources/views/qr_code.blade.php:45
+msgid "14 Labels"
+msgstr ""
+
+#: resources/views/qr_code.blade.php:55
 msgid "GENERATE CODE SHEET FOR PRINTING"
 msgstr "GÉNÉRER UNE FEUILLE DE CODE A IMPRIMER"
 

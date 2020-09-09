@@ -28,6 +28,4 @@ class QrCode extends Model
 {
     protected $table = "barcodes";
     protected $guarded = ['id'];
-
-
 }

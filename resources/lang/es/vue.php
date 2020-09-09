@@ -22,6 +22,7 @@ return [
     'Deployed'                  => 'Desplegado',
     'Uploaded'                  => 'Subido',
     'Archived'                  => 'Archivado',
+    'Show on KoBoToolbox'       => 'Mostrar en KoBoToolbox',
     'Deploy Form'               => 'Publicar el formulario',
     'Update to latest form'     => 'Refrescar con el formulario más reciente
 ',
