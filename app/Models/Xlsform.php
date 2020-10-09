@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Submission;
 use App\Models\Variable;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -65,7 +66,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Xlsform extends Model
 {
-    use CrudTrait;
+    use CrudTrait, HasTranslations;
 
     /*
     |--------------------------------------------------------------------------
@@ -84,12 +85,17 @@ class Xlsform extends Model
         'media' => 'array'
     ];
 
+    protected $translatable = [
+        'title',
+        'description',
+    ];
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function projects ()
+    public function projects()
     {
         return $this->belongsToMany(Project::class)->using(ProjectXlsform::class)
         ->withPivot([
@@ -98,24 +104,24 @@ class Xlsform extends Model
             ]);
     }
 
-    public function project_xlsforms ()
+    public function project_xlsforms()
     {
-       return $this->hasMany(ProjectXlsform::class);
+        return $this->hasMany(ProjectXlsform::class);
     }
 
-    public function private_project ()
+    public function private_project()
     {
         return $this->belongsTo(Project::class, 'project_id');
     }
 
-    public function submissions ()
+    public function submissions()
     {
         return $this->hasMany(Submission::class);
     }
 
-    public function data_map ()
+    public function data_map()
     {
-       return $this->belongsTo(DataMap::class);
+        return $this->belongsTo(DataMap::class);
     }
 
 
@@ -159,7 +165,6 @@ class Xlsform extends Model
 
             // 3. Save the complete path to the database
             $this->attributes[$attribute_name] = $file_path;
-
         }
     }
 
@@ -174,7 +179,7 @@ class Xlsform extends Model
         $this->uploadMultipleFilesToDisk($value, $attribute_name, $disk, $destination_path);
     }
 
-     public function uploadMultipleFilesToDisk($value, $attribute_name, $disk, $destination_path)
+    public function uploadMultipleFilesToDisk($value, $attribute_name, $disk, $destination_path)
     {
         $request = \Request::instance();
         if (! is_array($this->{$attribute_name})) {
@@ -201,7 +206,7 @@ class Xlsform extends Model
                 if ($file->isValid()) {
 
                     // 1. Move the new file to the correct path with the original name
-                    $file_path = $file->storeAs($destination_path,$file->getClientOriginalName(), $disk);
+                    $file_path = $file->storeAs($destination_path, $file->getClientOriginalName(), $disk);
 
                     // 2. Add the public path to the database
                     $attribute_value[] = $file_path;
@@ -211,7 +216,4 @@ class Xlsform extends Model
 
         $this->attributes[$attribute_name] = json_encode($attribute_value);
     }
-
-
-
 }

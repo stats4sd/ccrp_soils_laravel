@@ -5,7 +5,7 @@
 
 <div class="card">
     <div class="card-header">
-        <b>Add New Project</b>
+        <b>{{ t("Add New Project") }}</b>
     </div>
     <div class="card-body">
         <form method="POST" action="{{ route('projects.store')}}" enctype="multipart/form-data">
@@ -165,7 +165,7 @@
             <div class="form-group row mb-0">
                 <div class="col-md-10 d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">
-                        {{ __('Submit') }}
+                        {{ t('Submit') }}
                     </button>
                 </div>
             </div>

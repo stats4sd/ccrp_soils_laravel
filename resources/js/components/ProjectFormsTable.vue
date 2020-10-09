@@ -60,7 +60,7 @@
                         <!-- {{ __("vue.Download") }} -->
                     <i class="fa fa-download"></i>
                     </button>
-                   
+
 
 
                 </td>
@@ -79,7 +79,7 @@
 
     const rootUrl = process.env.MIX_APP_URL
     export default {
-        props: ['project','userId'],
+        props: ['project','userId', 'project-forms'],
         data() {
             return {
                 projectForms: [],
@@ -94,10 +94,7 @@
 
         mounted() {
 
-            axios.get(rootUrl+'/projects/'+this.project.slug+'/projectxlsforms')
-            .then((response) => {
-                this.projectForms = response.data
-            })
+            this.projectForms = this.project_forms
 
             this.$echo.private('App.User.'+this.userId)
             .listen('KoboUploadReturnedError', (payload) => {
@@ -163,7 +160,7 @@
             },
 
             download(index){
-                
+
                 axios.post(rootUrl+'/projectxlsforms/' + this.projectForms[index].id + '/download')
                 .then((result) => {
 
@@ -171,7 +168,7 @@
                 }, (error) => {
 
                     console.log(error);
-                });          
+                });
             }
         }
     }

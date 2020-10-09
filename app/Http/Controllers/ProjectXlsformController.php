@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\ProjectXlsform;
@@ -15,14 +16,13 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class ProjectXlsformController extends Controller
 {
-
-    public function index (Project $project)
+    public function index(Project $project)
     {
         return $project->project_xlsforms->toJson();
     }
 
 
-    public function deployToKobo (ProjectXlsform $project_xlsform)
+    public function deployToKobo(ProjectXlsform $project_xlsform)
     {
         $project_xlsform->update([
             'processing' => true,
@@ -62,9 +62,8 @@ class ProjectXlsformController extends Controller
         ]);
     }
 
-    public function download (ProjectXlsform $project_xlsform)
+    public function download(ProjectXlsform $project_xlsform)
     {
-
         $scriptPath = base_path('/scripts/download_samples_from_project_submissions_csv.py');
         $base_path = base_path();
         $project_xlsform_id = $project_xlsform->id;
@@ -75,17 +74,13 @@ class ProjectXlsformController extends Controller
 
         $process->run();
 
-        if(!$process->isSuccessful()) {
-
-           throw new ProcessFailedException($process);
-
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
         } else {
-
             $process->getOutput();
         }
 
         $path_download =  Storage::url('/merged_sample/' . $file_name);
         return response()->json(['path' => $path_download]);
     }
-
 }

@@ -25,7 +25,6 @@ class AddIdentifiersToSamplesTable extends Migration
      */
     public function down()
     {
-
         Schema::table('samples', function (Blueprint $table) {
             $table->dropColumn("identifiers");
         });

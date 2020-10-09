@@ -7,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-09-09T11:40:14+00:00\n"
-"PO-Revision-Date: 2020-09-09 13:40+0200\n"
+"POT-Creation-Date: 2020-09-09T15:51:17+00:00\n"
+"PO-Revision-Date: 2020-09-09 17:51+0200\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
@@ -402,6 +402,10 @@ msgstr "Membre du projet"
 msgid "Project Administrator"
 msgstr "Administrateur de projet"
 
+#: resources/views/projects/create.blade.php:5
+msgid "Add New Project"
+msgstr ""
+
 #: resources/views/projects/create.blade.php:20
 msgid "Project Details"
 msgstr "Renseignements liés au projet"
@@ -456,6 +460,10 @@ msgstr "Conditions d'utilisation"
 #: resources/views/projects/create.blade.php:229
 msgid "I agree to the terms of use laid out in the site policy page"
 msgstr "J'accepte les conditions d'utilisation énoncées sur la page décrivant les regles d'utilisation de ce site"
+
+#: resources/views/projects/create.blade.php:251
+msgid "Submit"
+msgstr ""
 
 #: resources/views/projects/header.blade.php:17
 msgid "Admins"

@@ -26,6 +26,7 @@
         "predis/predis": "^1.1",
         "pusher/pusher-php-server": "~4.0",
         "simplesoftwareio/simple-qrcode": "^2.0",
+        "spatie/laravel-translatable": "^4.4",
         "stats4sd/laravel-sql-views": "dev-master",
         "symfony/process": "^5.0",
         "tio/laravel": "^1.6"
