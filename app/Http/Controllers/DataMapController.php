@@ -17,6 +17,7 @@ use App\Models\ProjectXlsform;
 use App\Models\ProjectSubmission;
 use Illuminate\Support\Facades\Log;
 use App\Events\NewDataVariableSpotted;
+use App\Helpers\GenericHelper;
 use App\Jobs\ImportAttachmentFromKobo;
 
 class DataMapController extends Controller
@@ -162,9 +163,10 @@ class DataMapController extends Controller
             $model::where('project_submission_id', '=', $submission->id)
             ->delete();
 
-            Log::info($submission->content);
+            $content = GenericHelper::remove_group_names_from_kobo_data(json_decode($submission->content, true));
+            Log::info($content);
 
-            $this->newRecord($dataMap, json_decode($submission->content, true), $submission->project_xlsform->project->id);
+            $this->newRecord($dataMap, $content, $submission->project_xlsform->project->id);
         }
 
         return count($submissions);
