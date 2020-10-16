@@ -11,18 +11,18 @@ use Artisan;
 
 class SampleMergedController extends Controller
 {
-    public function download (Project $project)
+    public function download(Project $project)
     {
         $date = Carbon::now()->toDateTimeString();
         return (new SampleMergedExport)->forProject($project)->download($project->name.'-all_sample_data-'.$date.".xlsx");
     }
 
-    public static function createCustomView (Project $project)
+    public static function createCustomView(Project $project)
     {
         $query = "SELECT
         `samples`.`project_id` AS `project_id`,";
 
-        forEach($project->identifiers as $identifier) {
+        foreach ($project->identifiers as $identifier) {
             if ($identifier['name'] && $identifier['name'] != "") {
                 $query .= '`samples`.`identifiers`->"$.' . $identifier['name'] . '" as `' . $identifier['name'] . '`,';
             }
@@ -41,6 +41,20 @@ class SampleMergedController extends Controller
         `samples`.`altitude` AS `altitude`,
         `samples`.`accuracy` AS `accuracy`,
         `samples`.`comment` AS `comment`,
+        `samples.simple_texture` AS `simple_texture`,
+        `samples.ball_yn` AS `ball_yn`,
+        `samples.ribbon_yn` AS `ribbon_yn`,
+        `samples.ribbon_break_length` AS `ribbon_break_length`,
+        `samples.usda_gritty` AS `usda_gritty`,
+        `samples.final_texture_type_usda` AS `final_texture_type_usda`,
+        `samples.second_texture_type_usda` AS `second_texture_type_usda`,
+        `samples.ball_yn_fao` AS `ball_yn_fao`,
+        `samples.sausage_yn_fao` AS `sausage_yn_fao`,
+        `samples.pencil_fao_yn` AS `pencil_fao_yn`,
+        `samples.halfcircle_fao_yn` AS `halfcircle_fao_yn`,
+        `samples.soil_circle_choice` AS `soil_circle_choice`,
+        `samples.final_texture_type_fao` AS `final_texture_type_fao`,
+        `samples.second_texture_type_fao` AS `second_texture_type_fao`,
         `analysis_p`.`analysis_date` AS `analysis_p-date`,
         `analysis_p`.`weight_soil` AS `analysis_p-weight_soil`,
         `analysis_p`.`vol_extract` AS `analysis_p-vol_extract`,
@@ -108,11 +122,10 @@ class SampleMergedController extends Controller
         // create or update file in databases views folder
         $projectSnakeName = "samples_merged_".Str::of($project->name)->slug('_');
 
-        file_put_contents(base_path('database/views/'.$projectSnakeName.'.sql'),$query);
+        file_put_contents(base_path('database/views/'.$projectSnakeName.'.sql'), $query);
 
         // rerun view creation
         Artisan::call('updatesql');
         return $projectSnakeName;
     }
-
 }
