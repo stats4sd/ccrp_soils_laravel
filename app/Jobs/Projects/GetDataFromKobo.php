@@ -15,6 +15,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Events\KoboGetDataReturnedError;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Events\KoboGetDataReturnedSuccess;
+use App\Helpers\GenericHelper;
 use App\Http\Controllers\DataMapController;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -85,22 +86,7 @@ class GetDataFromKobo implements ShouldQueue
                 $projectId = $this->form->project->id;
                 $data = $newSubmission;
 
-                // go through submission variables and remove any group names
-                foreach ($newSubmission as $key => $value) {
-
-                    // Keep this as it forms part of the media download url
-                    if ($key == 'formhub/uuid') {
-                        continue;
-                    }
-
-                    if (Str::contains($key, '/')) {
-                        // e.g. replace $newSubmission['groupname/subgroup/name'] with $newSubmission['name']
-                        unset($newSubmission[$key]);
-                        $key = explode('/', $key);
-                        $key = end($key);
-                        $newSubmission[$key] = $value;
-                    }
-                }
+                $newSubmission = GenericHelper::remove_group_names_from_kobo_data($newSubmission);
 
                 \Log::info("Mapping data to correct model / tables...");
                 \Log::info($newSubmission);
