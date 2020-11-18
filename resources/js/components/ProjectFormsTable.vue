@@ -60,7 +60,7 @@
                         <!-- {{ __("vue.Download") }} -->
                     <i class="fa fa-download"></i>
                     </button>
-                   
+
 
 
                 </td>
@@ -147,6 +147,15 @@
                 })
             },
 
+            archiveForm(index) {
+                this.projectForms[index].processing = true;
+
+                axios.post(rootUrl+'/projectxlsforms/'+this.projectForms[index]['id']+'/archive')
+                .then((response) => {
+                    console.log(response);
+                })
+            }
+
             getData() {
 
                 this.projectForms.forEach((projectForm, index) => {
@@ -163,7 +172,7 @@
             },
 
             download(index){
-                
+
                 axios.post(rootUrl+'/projectxlsforms/' + this.projectForms[index].id + '/download')
                 .then((result) => {
 
@@ -171,7 +180,7 @@
                 }, (error) => {
 
                     console.log(error);
-                });          
+                });
             }
         }
     }
