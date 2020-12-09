@@ -28,7 +28,7 @@ class GetDataFromKobo implements ShouldQueue
 
     public $form;
     public $user;
-    public $tries = 1;
+    public $tries = 10;
 
     /**
      * Create a new job instance.
