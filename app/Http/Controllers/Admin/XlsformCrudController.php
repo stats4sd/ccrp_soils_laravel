@@ -40,7 +40,6 @@ class XlsformCrudController extends CrudController
         CRUD::setModel('App\Models\Xlsform');
         CRUD::setRoute(config('backpack.base.route_prefix') . '/xlsform');
         CRUD::setEntityNameStrings('xlsform', 'xlsforms');
-
     }
 
     protected function setupListOperation()
@@ -65,8 +64,8 @@ class XlsformCrudController extends CrudController
                 'name' => 'kobo_id',
                 'label' => 'View on Kobotools',
                 'type' => 'closure',
-                'function' => function($entry) {
-                    if($entry->kobo_id) {
+                'function' => function ($entry) {
+                    if ($entry->kobo_id) {
                         return "<a target='_blank' href='https://kf.kobotoolbox.org/#/forms/".$entry->kobo_id."'>Kobotoolbox Link</a>";
                     }
                     return "<span class='text-secondary'>Not Deployed</span>";
@@ -93,7 +92,7 @@ class XlsformCrudController extends CrudController
                 'name' => 'link_page',
                 'label' => 'Associated Guide(s)',
                 'type' => "closure",
-                'function' => function($entry){
+                'function' => function ($entry) {
                     $page = $entry->link_page;
                     return '<a href="'.url(''.$page.'').'" target="_blank">'.$page.'</a>';
                 },
@@ -109,7 +108,6 @@ class XlsformCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-
         $this->crud->addFields([
 
             [
@@ -125,12 +123,33 @@ class XlsformCrudController extends CrudController
                 'label' => 'Upload the XLS Form file',
             ],
             [
+                'name' => 'data_header',
+                'type' => 'custom_html',
+                'value' => '<hr/><h5>Data Mapping</h5><p>The platform will import data collected using this form. Choose a data map to use for this import, and then add any extra custom variables that should be added for this form specifically.</p>'
+            ],
+            [
                 'name' => 'data_map_id',
                 'type' => 'relationship',
                 'label' => 'Which data table does this form link to?',
                 'hint' => 'This determines how the variables from the XLS form are matched to the database `sample` and `analysis` tables',
                 'default' => 'none',
             ],
+            [
+                'name' => 'extra_data',
+                'type' => 'repeatable',
+                'label' => 'Add extra variables here. These variables will be added to every submission of the form, and will all have the same value - defined here. This could be used, for example, to distinguish submissions from this form with ones from another form that uses the same data map (E.g. HR version of the Phosphorus test vs LR version)',
+                'fields' => [
+                    [
+                        'name' => 'variable',
+                        'label' => 'Database variable name',
+                    ],
+                    [
+                        'name' => 'value',
+                        'label' => 'Enter the value to give each submission from this form.'
+                    ],
+                ],
+            ],
+
             [
                 'name' => 'live',
                 'label' => 'Is Form Available to Projects?',
@@ -173,7 +192,7 @@ class XlsformCrudController extends CrudController
         $this->setupCreateOperation();
     }
 
-    public function setupShowOperation ()
+    public function setupShowOperation()
     {
         $this->crud->set('show.setFromDb', false);
 
@@ -212,7 +231,7 @@ class XlsformCrudController extends CrudController
                 'label' => 'Guide for this Form',
                 'type' => 'text',
                 'wrapper' => [
-                    'href' => function($crud, $column, $entry, $related_key) {
+                    'href' => function ($crud, $column, $entry, $related_key) {
                         return $entry->link_page;
                     },
                     'target' => "_blank",
@@ -253,7 +272,7 @@ class XlsformCrudController extends CrudController
         ]);
     }
 
-    public function syncData (Xlsform $xlsform)
+    public function syncData(Xlsform $xlsform)
     {
         GetDataFromKobo::dispatchNow(auth()->user(), $xlsform);
 
@@ -262,16 +281,13 @@ class XlsformCrudController extends CrudController
         return $submissions->toJson();
     }
 
-    public function archiveOnKobo (Xlsform $xlsform)
+    public function archiveOnKobo(Xlsform $xlsform)
     {
-       ArchiveKoboForm::dispatch(auth()->user(), $xlsform);
+        ArchiveKoboForm::dispatch(auth()->user(), $xlsform);
 
-       return response()->json([
-           'title' => $xlsform->title,
-           'user' => auth()->user()->email,
-       ]);
-
+        return response()->json([
+            'title' => $xlsform->title,
+            'user' => auth()->user()->email,
+        ]);
     }
-
-
 }

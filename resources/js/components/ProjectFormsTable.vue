@@ -134,6 +134,15 @@
                     this.projectForms[index]['records'] = response.data.length;
                     this.projectForms[index]['processing'] = false;
                 })
+            })
+
+            .listen('KoboGetDataReturnedError', (payload) => {
+
+                axios.post(rootUrl+'/projectxlsforms/'+payload.form.id+'/getdata')
+                .then((response) => {
+                    const index = this.projectForms.findIndex(x => x.id === payload.form.id);
+                    this.projectForms[index]['processing'] = false;
+                })
             });
         },
 
@@ -154,7 +163,7 @@
                 .then((response) => {
                     console.log(response);
                 })
-            }
+            },
 
             getData() {
 
