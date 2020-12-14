@@ -20,6 +20,8 @@ return [
     'POXC Value' => 'POXC Value',
     'POXC Units' => 'Mg C/kg soil',
     'p Value' => 'p Value',
+    'p HR Value' => 'p HR Value',
+    'p Custom R Value' => 'p Custom R Value',
     'P Units' =>  'Mg P/kg soil',
     'pH Value' => 'pH Value',
     'POM Value' => 'POM Value',

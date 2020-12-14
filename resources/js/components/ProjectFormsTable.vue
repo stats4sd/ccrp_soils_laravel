@@ -60,7 +60,7 @@
                         <!-- {{ __("vue.Download") }} -->
                     <i class="fa fa-download"></i>
                     </button>
-                   
+
 
 
                 </td>
@@ -134,6 +134,15 @@
                     this.projectForms[index]['records'] = response.data.length;
                     this.projectForms[index]['processing'] = false;
                 })
+            })
+
+            .listen('KoboGetDataReturnedError', (payload) => {
+
+                axios.post(rootUrl+'/projectxlsforms/'+payload.form.id+'/getdata')
+                .then((response) => {
+                    const index = this.projectForms.findIndex(x => x.id === payload.form.id);
+                    this.projectForms[index]['processing'] = false;
+                })
             });
         },
 
@@ -142,6 +151,15 @@
                 this.projectForms[index].processing = true;
 
                 axios.post(rootUrl+'/projectxlsforms/'+this.projectForms[index]['id']+'/deploytokobo/')
+                .then((response) => {
+                    console.log(response);
+                })
+            },
+
+            archiveForm(index) {
+                this.projectForms[index].processing = true;
+
+                axios.post(rootUrl+'/projectxlsforms/'+this.projectForms[index]['id']+'/archive')
                 .then((response) => {
                     console.log(response);
                 })
@@ -163,7 +181,7 @@
             },
 
             download(index){
-                
+
                 axios.post(rootUrl+'/projectxlsforms/' + this.projectForms[index].id + '/download')
                 .then((result) => {
 
@@ -171,7 +189,7 @@
                 }, (error) => {
 
                     console.log(error);
-                });          
+                });
             }
         }
     }

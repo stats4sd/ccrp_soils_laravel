@@ -82,6 +82,16 @@
 
                 console.log(e);
             })
+            .listen('KoboGetDataReturnedError', (e) => {
+                new Noty({
+                    type: "error",
+                    text: "<b>{{ t('Form') }}: "+e.form.title+"</b><br/><br/> {{ t('Submissions could not be retrieves from the form. An error was returned') }}<hr/>{{ t('Error Type') }}: <b>"+e.errorType+"</b><hr/>{{ t('Error Message') }}: <b>"+e.errorMessage+"</b> }}",
+                    timeout: false
+                }).show();
+
+
+                console.log(e);
+            })
 
             // ARCHIVE MESSAGES
             .listen('KoboArchiveRequestReturnedSuccess', (e) => {

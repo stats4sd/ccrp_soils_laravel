@@ -2,24 +2,25 @@
 
 namespace App\Jobs\Projects;
 
+use Throwable;
 use App\Models\User;
 use App\Models\Sample;
 use App\Models\DataMap;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
+use App\Helpers\GenericHelper;
 use App\Models\ProjectXlsform;
 use App\Models\ProjectSubmission;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use App\Events\GetDataFromKoboFailed;
 use Illuminate\Queue\SerializesModels;
 use App\Events\KoboGetDataReturnedError;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Events\KoboGetDataReturnedSuccess;
-use App\Helpers\GenericHelper;
 use App\Http\Controllers\DataMapController;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\Log;
 
 class GetDataFromKobo implements ShouldQueue
 {
@@ -27,7 +28,7 @@ class GetDataFromKobo implements ShouldQueue
 
     public $form;
     public $user;
-    public $tries = 50;
+    public $tries = 10;
 
     /**
      * Create a new job instance.
@@ -71,6 +72,17 @@ class GetDataFromKobo implements ShouldQueue
 
         foreach ($data as $newSubmission) {
             if (!in_array($newSubmission['_id'], $submissions->pluck('id')->toArray())) {
+
+                // include any static extra data variables from the form definition
+
+                if ($this->form->xlsform->extra_data && is_array($this->form->xlsform->extra_data)) {
+                    foreach ($this->form->xlsform->extra_data as $field) {
+                        $variable = $field['variable'];
+
+                        $newSubmission[$variable] = $field['value'];
+                    }
+                }
+
                 $projectSubmission = new ProjectSubmission;
 
                 $projectSubmission->id = $newSubmission['_id'];
@@ -98,6 +110,15 @@ class GetDataFromKobo implements ShouldQueue
         event(new KoboGetDataReturnedSuccess(
             $this->user,
             $this->form
+        ));
+    }
+
+    public function failed(Throwable $exception)
+    {
+        event(new KoboGetDataReturnedError(
+            $this->user,
+            $this->form,
+            $exception
         ));
     }
 }
