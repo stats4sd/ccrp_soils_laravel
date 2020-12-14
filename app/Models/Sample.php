@@ -200,7 +200,7 @@ class Sample extends Model
 
     public function getTotalStableaggregatesAttribute()
     {
-        if ($this->analysis_pom->count() > 0) {
+        if ($this->analysis_agg->count() > 0) {
             return $this->analysis_agg()->first()->total_stableaggregates;
         }
 
