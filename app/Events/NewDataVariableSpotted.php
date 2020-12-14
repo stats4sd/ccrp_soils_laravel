@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\DataMap;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -21,10 +22,11 @@ class NewDataVariableSpotted implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(String $variableName)
+    public function __construct(String $variableName, DataMap $dataMap)
     {
         //
         $this->variableName = $variableName;
+        $this->dataMap = $dataMap;
     }
 
     /**
@@ -34,6 +36,6 @@ class NewDataVariableSpotted implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel("App.User.{$this->user->id}");
+        // return new PrivateChannel("App.User.{$this->user->id}");
     }
 }

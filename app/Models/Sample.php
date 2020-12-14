@@ -9,6 +9,7 @@ use App\Models\AnalysisPom;
 use App\Models\AnalysisPoxc;
 use App\Models\Views\SampleMerged;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 /**
  * App\Models\Sample
@@ -85,6 +86,9 @@ class Sample extends Model
     public $appends = [
         'poxc_result',
         'p_result',
+        'lr_p_result',
+        'hr_p_result',
+        'custom_r_p_result',
         'ph_result',
         'pom_result',
         'total_stableaggregates',
@@ -99,31 +103,85 @@ class Sample extends Model
 
     public function getPoxcResultAttribute()
     {
-        if ($this->analysis_poxc) {
-            if ($this->analysis_poxc->avg('poxc_soil_corrected')) {
-                return $this->analysis_poxc->avg('poxc_soil_corrected');
+        if ($this->analysis_poxc->count() > 0) {
+            if ($this->analysis_poxc()->first()->poxc_soil_corrected) {
+                return $this->analysis_poxc()->first()->poxc_soil_corrected;
             }
-            return $this->analysis_poxc->avg('poxc_soil');
+            return $this->analysis_poxc()->first()->poxc_soil;
         }
         return null;
     }
 
+    //P is split into LR and HR / custom R results:
     public function getPResultAttribute()
     {
-        if ($this->analysis_p) {
-            if ($this->analysis_poxc->avg('olsen_p_corrected')) {
-                return $this->analysis_poxc->avg('olsen_p_corrected');
+        if ($this->analysis_p->count() > 0) {
+            if ($this->analysis_p()->first()->olsen_p_corrected) {
+                return $this->analysis_p()->first()->olsen_p_corrected;
             }
-            return $this->analysis_p->avg('olsen_p');
+            return $this->analysis_p()->first()->olsen_p;
         }
 
         return null;
     }
+
+    // This really needs refactoring...
+    public function getLrPResultAttribute()
+    {
+        if ($this->analysis_p->count() > 0) {
+            $result = $this->analysis_p->filter(function ($analysis) {
+                return $analysis->reagents == "LR";
+            });
+
+            if ($result->first()->olsen_p_corrected) {
+                return $result->first()->olsen_p_corrected;
+            }
+            return $result->first()->olsen_p;
+        }
+
+        return null;
+    }
+
+    public function getHrPResultAttribute()
+    {
+        if ($this->analysis_p->count() > 0) {
+            $result = $this->analysis_p->filter(function ($analysis) {
+                return $analysis->reagents == "HR";
+            });
+
+            if ($result->count()) {
+                if ($result->first()->olsen_p_corrected) {
+                    return $result->first()->olsen_p_corrected;
+                }
+                return $result->first()->olsen_p;
+            }
+        }
+
+        return null;
+    }
+    public function getCustomRPResultAttribute()
+    {
+        if ($this->analysis_p->count() > 0) {
+            $result = $this->analysis_p->filter(function ($analysis) {
+                return $analysis->reagents == "Custom";
+            });
+
+            if ($result->count() > 0) {
+                if ($result->first()->olsen_p_corrected) {
+                    return $result->first()->olsen_p_corrected;
+                }
+                return $result->first()->olsen_p;
+            }
+        }
+
+        return null;
+    }
+
 
     public function getPhResultAttribute()
     {
-        if ($this->analysis_ph) {
-            return $this->analysis_ph->avg('reading_ph');
+        if ($this->analysis_ph->count() > 0) {
+            return $this->analysis_ph()->first()->reading_ph;
         }
 
         return null;
@@ -131,8 +189,8 @@ class Sample extends Model
 
     public function getPomResultAttribute()
     {
-        if ($this->analysis_pom) {
-            return $this->analysis_pom->avg('percent_pom');
+        if ($this->analysis_pom->count() > 0) {
+            return $this->analysis_pom()->first()->percent_pom;
         }
 
         return null;
@@ -140,8 +198,8 @@ class Sample extends Model
 
     public function getTotalStableaggregatesAttribute()
     {
-        if ($this->analysis_pom) {
-            return $this->analysis_agg->avg('total_stableaggregates');
+        if ($this->analysis_pom->count() > 0) {
+            return $this->analysis_agg()->first()->total_stableaggregates;
         }
 
         return null;
@@ -149,8 +207,8 @@ class Sample extends Model
 
     public function getTwommAggregPctResultAttribute()
     {
-        if ($this->analysis_agg) {
-            return $this->analysis_agg->avg('twomm_aggreg_pct_result');
+        if ($this->analysis_agg->count() > 0) {
+            return $this->analysis_agg()->first()->twomm_aggreg_pct_result;
         }
 
         return null;
@@ -158,8 +216,8 @@ class Sample extends Model
 
     public function getTwofiftymicronAggregPctResultAttribute()
     {
-        if ($this->analysis_agg) {
-            return $this->analysis_agg->avg('twofiftymicron_aggreg_pct_result');
+        if ($this->analysis_agg->count() > 0) {
+            return $this->analysis_agg()->first()->twofiftymicron_aggreg_pct_result;
         }
 
         return null;

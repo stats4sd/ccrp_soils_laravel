@@ -25,6 +25,14 @@
                         {{ __("vue.p Value") }}
                         <br/>({{ __("vue.P Units")}})
                     </th>
+                    <th rowspan="2" v-if="hasHR">
+                        {{ __("vue.p HR Value") }}
+                        <br/>( {{ __("vue.p Units") }})
+                    </th>
+                    <th rowspan="2" v-if="hasCustomR">
+                        {{ __("vue.p Custom R Value") }}
+                        <br/>( {{ __("vue.p Units") }})
+                    </th>
                     <th rowspan="2">{{ __("vue.pH Value") }}</th>
                     <th rowspan="2" style="border-right: 1px solid darkgray">{{__("vue.POM Value") }}</th>
                     <th colspan="3" style="border-left: 1px solid darkgray">{{__("vue.Stable Aggregates") }}</th>
@@ -48,7 +56,9 @@
 
 
                     <td>{{ sample.poxc_result }} </td>
-                    <td>{{ sample.p_result }} </td>
+                    <td>{{ sample.lr_p_result }} </td>
+                    <td v-if="hasHR">{{ sample.hr_p_result }} </td>
+                    <td v-if="hasCustomR">{{ sample.custom_r_p_result }} </td>
                     <td>{{ sample.ph_result }}</td>
                     <td style="border-right: 1px solid darkgray">{{ sample.pom_result }}</td>
                     <td style="border-left: 1px solid darkgray">{{ sample.twomm_aggreg_pct_result }} <span v-if="sample.twomm_aggreg_pct_result">%</span></td>
@@ -68,6 +78,8 @@ export default {
     data() {
         return {
             samplesDisplay: [],
+            hasHR: false,
+            hasCustomR: false,
         }
     },
     mounted: function(){
@@ -78,16 +90,27 @@ export default {
         this.samplesDisplay = this.samples.map((sample) => {
             console.log("sample:", sample);
             if(sample.poxc_result) {
-                sample.poxc_result = sample.poxc_result.toFixed(2);
+                sample.poxc_result = Number(sample.poxc_result).toFixed(2);
             }
             if(sample.p_result) {
-                sample.p_result = sample.p_result.toFixed(2);
+                sample.p_result = Number(sample.p_result).toFixed(2);
+            }
+            if(sample.lr_p_result) {
+                sample.lr_p_result = Number(sample.lr_p_result).toFixed(2);
+            }
+            if(sample.hr_p_result) {
+                sample.hr_p_result = Number(sample.hr_p_result).toFixed(2);
+                this.hasHR = true
+            }
+            if(sample.custom_r_p_result) {
+                sample.custom_r_p_result = Number(sample.custom_r_p_result).toFixed(2);
+                this.hasCustomR = true
             }
             if(sample.ph_result) {
-                sample.ph_result = sample.ph_result.toFixed(2);
+                sample.ph_result = Number(sample.ph_result).toFixed(2);
             }
             if(sample.total_stableaggregates) {
-                sample.total_stableaggregates = sample.total_stableaggregates.toFixed(1);
+                sample.total_stableaggregates = Number(sample.total_stableaggregates).toFixed(1);
             }
 
             return sample;
