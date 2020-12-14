@@ -30,9 +30,11 @@ class ProjectStoreRequest extends FormRequest
             'description' => ['required', 'max:2000'],
             'creator_id' => ['required'],
             'identifiers' => ['sometimes'],
-            'merged_view' => ['sometime'],
+            'merged_view' => ['sometimes'],
             'avatar' => ['nullable'],
             'share_data' => ['boolean'],
+            'highR' => ['sometimes','boolean'],
+            'customR' => ['sometimes', 'boolean'],
         ];
     }
 

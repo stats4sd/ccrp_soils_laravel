@@ -30,9 +30,11 @@ class ProjectUpdateRequest extends FormRequest
             'description' => ['required', 'max:2000'],
             'creator_id' => ['sometimes'],
             'identifiers' => ['sometimes'],
-            'merged_view' => ['sometime'],
+            'merged_view' => ['sometimes'],
             'avatar' => ['nullable'],
             'share_data' => ['boolean'],
+            'highR' => ['sometimes','boolean'],
+            'customR' => ['sometimes', 'boolean'],
         ];
     }
 
