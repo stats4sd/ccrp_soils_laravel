@@ -72,11 +72,15 @@ class GetDataFromKobo implements ShouldQueue
 
         foreach ($data as $newSubmission) {
             if (!in_array($newSubmission['_id'], $submissions->pluck('id')->toArray())) {
-                // include any static extra data variables from the form definition
-                foreach ($this->form->xlsform->extra_data as $field) {
-                    $variable = $field['variable'];
 
-                    $newSubmission[$variable] = $field['value'];
+                // include any static extra data variables from the form definition
+
+                if ($this->form->xlsform->extra_data && is_array($this->form->xlsform->extra_data)) {
+                    foreach ($this->form->xlsform->extra_data as $field) {
+                        $variable = $field['variable'];
+
+                        $newSubmission[$variable] = $field['value'];
+                    }
                 }
 
                 $projectSubmission = new ProjectSubmission;

@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Exports\SampleMergedExport;
 use Artisan;
+use Illuminate\Database\Eloquent\Builder;
 
 class SampleMergedController extends Controller
 {
@@ -22,9 +23,11 @@ class SampleMergedController extends Controller
         $query = "SELECT
         `samples`.`project_id` AS `project_id`,";
 
-        foreach ($project->identifiers as $identifier) {
-            if ($identifier['name'] && $identifier['name'] != "") {
-                $query .= '`samples`.`identifiers`->"$.' . $identifier['name'] . '" as `' . $identifier['name'] . '`,';
+        if ($project->identifiers) {
+            foreach ($project->identifiers as $identifier) {
+                if ($identifier['name'] && $identifier['name'] != "") {
+                    $query .= '`samples`.`identifiers`->"$.' . $identifier['name'] . '" as `' . $identifier['name'] . '`,';
+                }
             }
         }
         $query .= "
@@ -55,22 +58,73 @@ class SampleMergedController extends Controller
         `samples`.`soil_circle_choice` AS `soil_circle_choice`,
         `samples`.`final_texture_type_fao` AS `final_texture_type_fao`,
         `samples`.`second_texture_type_fao` AS `second_texture_type_fao`,
-        `analysis_p`.`analysis_date` AS `analysis_p-date`,
-        `analysis_p`.`weight_soil` AS `analysis_p-weight_soil`,
-        `analysis_p`.`vol_extract` AS `analysis_p-vol_extract`,
-        `analysis_p`.`vol_topup` AS `analysis_p-vol_topup`,
-        `analysis_p`.`cloudy` AS `analysis_p-cloudy`,
-        `analysis_p`.`color` AS `analysis_p-color`,
-        `analysis_p`.`raw_conc` AS `analysis_p-raw_conc`,
-        `analysis_p`.`olsen_p` AS `analysis_p-olsen_p`,
-        `analysis_p`.`blank_water` AS `analysis_p-blank_water`,
-        `analysis_p`.`correct_moisture` AS `analysis_p-correct_moisture`,
-        `analysis_p`.`moisture` AS `analysis_p-moisture`,
-        `analysis_p`.`olsen_p_corrected` AS `analysis_p-olsen_p_corrected`,
-        `analysis_p`.`raw_conc_rounded` AS `analysis_p-raw_conc_rounded`,
-        `analysis_p`.`moisture_rounded` AS `analysis_p-moisture_rounded`,
-        `analysis_p`.`moisture_level_as_percentage` AS `analysis_p-moisture_level_as_percentage`,
-        `analysis_p`.`soil_conc_rounded` AS `analysis_p-soil_conc_rounded`,
+        `analysis_p_lr`.`analysis_date` AS `analysis_p-date`,
+        `analysis_p_lr`.`weight_soil` AS `analysis_p-weight_soil`,
+        `analysis_p_lr`.`vol_extract` AS `analysis_p-vol_extract`,
+        `analysis_p_lr`.`vol_topup` AS `analysis_p-vol_topup`,
+        `analysis_p_lr`.`cloudy` AS `analysis_p-cloudy`,
+        `analysis_p_lr`.`color` AS `analysis_p-color`,
+        `analysis_p_lr`.`raw_conc` AS `analysis_p-raw_conc`,
+        `analysis_p_lr`.`olsen_p` AS `analysis_p-olsen_p`,
+        `analysis_p_lr`.`blank_water` AS `analysis_p-blank_water`,
+        `analysis_p_lr`.`correct_moisture` AS `analysis_p-correct_moisture`,
+        `analysis_p_lr`.`moisture` AS `analysis_p-moisture`,
+        `analysis_p_lr`.`olsen_p_corrected` AS `analysis_p-olsen_p_corrected`,
+        `analysis_p_lr`.`raw_conc_rounded` AS `analysis_p-raw_conc_rounded`,
+        `analysis_p_lr`.`moisture_rounded` AS `analysis_p-moisture_rounded`,
+        `analysis_p_lr`.`moisture_level_as_percentage` AS `analysis_p-moisture_level_as_percentage`,
+        `analysis_p_lr`.`soil_conc_rounded` AS `analysis_p-soil_conc_rounded`,";
+
+        //check if project has any P analyses with High or Custom Reagents
+        if ($project->samples->filter(function ($sample) {
+            return $sample->whereHas('analysis_p', function (Builder $query) {
+                $query->where('reagents', '=', 'HR');
+            });
+        })->count() > 0) {
+            $query .= "
+            `analysis_p_hr`.`analysis_date` AS `analysis_p_hr-date`,
+            `analysis_p_hr`.`weight_soil` AS `analysis_p_hr-weight_soil`,
+            `analysis_p_hr`.`vol_extract` AS `analysis_p_hr-vol_extract`,
+            `analysis_p_hr`.`vol_topup` AS `analysis_p_hr-vol_topup`,
+            `analysis_p_hr`.`cloudy` AS `analysis_p_hr-cloudy`,
+            `analysis_p_hr`.`color` AS `analysis_p_hr-color`,
+            `analysis_p_hr`.`raw_conc` AS `analysis_p_hr-raw_conc`,
+            `analysis_p_hr`.`olsen_p` AS `analysis_p_hr-olsen_p`,
+            `analysis_p_hr`.`blank_water` AS `analysis_p_hr-blank_water`,
+            `analysis_p_hr`.`correct_moisture` AS `analysis_p_hr-correct_moisture`,
+            `analysis_p_hr`.`moisture` AS `analysis_p_hr-moisture`,
+            `analysis_p_hr`.`olsen_p_corrected` AS `analysis_p_hr-olsen_p_corrected`,
+            `analysis_p_hr`.`raw_conc_rounded` AS `analysis_p_hr-raw_conc_rounded`,
+            `analysis_p_hr`.`moisture_rounded` AS `analysis_p_hr-moisture_rounded`,
+            `analysis_p_hr`.`moisture_level_as_percentage` AS `analysis_p_hr-moisture_level_as_percentage`,
+            `analysis_p_hr`.`soil_conc_rounded` AS `analysis_p_hr-soil_conc_rounded`,";
+        }
+
+        if ($project->samples->filter(function ($sample) {
+            return $sample->whereHas('analysis_p', function (Builder $query) {
+                $query->where('reagents', '=', 'Custom R');
+            });
+        })->count() > 0) {
+            $query .= "
+            `analysis_p_customr`.`analysis_date` AS `analysis_p_custom_r-date`,
+            `analysis_p_customr`.`weight_soil` AS `analysis_p_custom_r-weight_soil`,
+            `analysis_p_customr`.`vol_extract` AS `analysis_p_custom_r-vol_extract`,
+            `analysis_p_customr`.`vol_topup` AS `analysis_p_custom_r-vol_topup`,
+            `analysis_p_customr`.`cloudy` AS `analysis_p_custom_r-cloudy`,
+            `analysis_p_customr`.`color` AS `analysis_p_custom_r-color`,
+            `analysis_p_customr`.`raw_conc` AS `analysis_p_custom_r-raw_conc`,
+            `analysis_p_customr`.`olsen_p` AS `analysis_p_custom_r-olsen_p`,
+            `analysis_p_customr`.`blank_water` AS `analysis_p_custom_r-blank_water`,
+            `analysis_p_customr`.`correct_moisture` AS `analysis_p_custom_r-correct_moisture`,
+            `analysis_p_customr`.`moisture` AS `analysis_p_custom_r-moisture`,
+            `analysis_p_customr`.`olsen_p_corrected` AS `analysis_p_custom_r-olsen_p_corrected`,
+            `analysis_p_customr`.`raw_conc_rounded` AS `analysis_p_custom_r-raw_conc_rounded`,
+            `analysis_p_customr`.`moisture_rounded` AS `analysis_p_custom_r-moisture_rounded`,
+            `analysis_p_customr`.`moisture_level_as_percentage` AS `analysis_p_custom_r-moisture_level_as_percentage`,
+            `analysis_p_customr`.`soil_conc_rounded` AS `analysis_p_custom_r-soil_conc_rounded`,";
+        }
+
+        $query .= "
         `analysis_ph`.`analysis_date` AS `analysis_ph-date`,
         `analysis_ph`.`weight_soil` AS `analysis_ph-weight_soil`,
         `analysis_ph`.`vol_water` AS `analysis_ph-vol_water`,
@@ -113,7 +167,9 @@ class SampleMergedController extends Controller
         `analysis_agg`.`validation_check` AS `analysis_agg-validation_check`,
         `analysis_agg`.`analysis_date` AS `analysis_agg-analysis_date`
     FROM (((((`samples`
-                    LEFT JOIN `analysis_p` ON ((`samples`.`id` = `analysis_p`.`sample_id`)))
+                    LEFT JOIN `analysis_p` `analysis_p_lr` ON ((`samples`.`id` = `analysis_p_lr`.`sample_id` and `analysis_p_lr`.`reagents` = 'LR')))
+                    LEFT JOIN `analysis_p` `analysis_p_hr` ON ((`samples`.`id` = `analysis_p_hr`.`sample_id` and `analysis_p_hr`.`reagents` = 'HR'))
+                    LEFT JOIN `analysis_p` `analysis_p_customr` ON ((`samples`.`id` = `analysis_p_customr`.`sample_id` and `analysis_p_customr`.`reagents` = 'Custom R'))
                 LEFT JOIN `analysis_ph` ON ((`samples`.`id` = `analysis_ph`.`sample_id`)))
             LEFT JOIN `analysis_poxc` ON ((`samples`.`id` = `analysis_poxc`.`sample_id`)))
         LEFT JOIN `analysis_pom` ON ((`samples`.`id` = `analysis_pom`.`sample_id`)))
