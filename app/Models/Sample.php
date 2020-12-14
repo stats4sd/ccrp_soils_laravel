@@ -165,7 +165,7 @@ class Sample extends Model
     {
         if ($this->analysis_p->count() > 0) {
             $result = $this->analysis_p->filter(function ($analysis) {
-                return $analysis->reagents == "Custom";
+                return $analysis->reagents == "Custom R";
             });
 
             if ($result->count() > 0) {
