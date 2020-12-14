@@ -76,11 +76,7 @@ class SampleMergedController extends Controller
         `analysis_p_lr`.`soil_conc_rounded` AS `analysis_p-soil_conc_rounded`,";
 
         //check if project has any P analyses with High or Custom Reagents
-        if ($project->samples->filter(function ($sample) {
-            return $sample->whereHas('analysis_p', function (Builder $query) {
-                $query->where('reagents', '=', 'HR');
-            });
-        })->count() > 0) {
+        if ($project->highR) {
             $query .= "
             `analysis_p_hr`.`analysis_date` AS `analysis_p_hr-date`,
             `analysis_p_hr`.`weight_soil` AS `analysis_p_hr-weight_soil`,
@@ -100,11 +96,7 @@ class SampleMergedController extends Controller
             `analysis_p_hr`.`soil_conc_rounded` AS `analysis_p_hr-soil_conc_rounded`,";
         }
 
-        if ($project->samples->filter(function ($sample) {
-            return $sample->whereHas('analysis_p', function (Builder $query) {
-                $query->where('reagents', '=', 'Custom R');
-            });
-        })->count() > 0) {
+        if ($project->customR) {
             $query .= "
             `analysis_p_customr`.`analysis_date` AS `analysis_p_custom_r-date`,
             `analysis_p_customr`.`weight_soil` AS `analysis_p_custom_r-weight_soil`,

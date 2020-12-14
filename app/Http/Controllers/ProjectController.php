@@ -30,10 +30,10 @@ class ProjectController extends Controller
      * shows the projects in 'All Projects' page that are not deleted and not hidden status.
      * @return [Collection] [projects]
      */
-	public function index()
+    public function index()
     {
-    	$projects = Project::all();
-    	return view('projects.index', compact('projects'));
+        $projects = Project::all();
+        return view('projects.index', compact('projects'));
     }
 
 
@@ -44,26 +44,25 @@ class ProjectController extends Controller
      */
     public function show(Project $project, $tab = null)
     {
-
-        $project = $project->load([
-            'users' => function($q) {
-                $q->orderBy('pivot_admin', 'desc');
-            },
-            'project_xlsforms.xlsform',
+        $project = $project->load(
+            [
+                'users' => function ($q) {
+                    $q->orderBy('pivot_admin', 'desc');
+                },
+                'project_xlsforms.xlsform',
             ]
         );
 
         return view('projects.show', compact('project'));
     }
 
-    public function create ()
+    public function create()
     {
         return view('projects.create');
     }
 
-    public function store (ProjectStoreRequest $request)
+    public function store(ProjectStoreRequest $request)
     {
-
         $validatedData = $request->validated();
 
         $validatedData['creator_id'] = auth()->user()->id;
@@ -74,14 +73,12 @@ class ProjectController extends Controller
         return redirect()->route('projects.show', [$project]);
     }
 
-    public function update (ProjectUpdateRequest $request, Project $project)
+    public function update(ProjectUpdateRequest $request, Project $project)
     {
-
         $this->authorize('update', $project);
-
         $validatedData = $request->validated();
 
-        $project->update(array_filter($validatedData));
+        $project->update($validatedData);
 
         return redirect()->route('projects.show', [$project]);
     }
@@ -99,7 +96,4 @@ class ProjectController extends Controller
 
         return redirect()->route('projects.index');
     }
-
-    
-
 }

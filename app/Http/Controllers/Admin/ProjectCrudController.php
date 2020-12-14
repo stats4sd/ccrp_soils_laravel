@@ -37,7 +37,6 @@ class ProjectCrudController extends CrudController
         | CrudPanel Configuration
         |--------------------------------------------------------------------------
         */
-
     }
 
     protected function setupListOperation()
@@ -124,6 +123,16 @@ class ProjectCrudController extends CrudController
                     ],
                 ],
             ],
+            [
+                'name' => 'highR',
+                'label' => 'Does this project need P Analysis outputs split between LR and HR?',
+                'type' => 'boolean',
+            ],
+            [
+                'name' => 'customR',
+                'label' => 'Does this project need extra P Analysis outputs for Custom Reagents?',
+                'type' => 'boolean',
+            ],
         ]);
     }
 
@@ -133,6 +142,5 @@ class ProjectCrudController extends CrudController
     {
         $this->setupCreateOperation();
         $this->crud->setValidation(UpdateRequest::class);
-
     }
 }

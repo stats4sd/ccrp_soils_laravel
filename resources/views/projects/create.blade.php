@@ -92,6 +92,66 @@
                     </figure>
                 </div>
             </div>
+            <div class="form-group row">
+                <h5 class="col-md-4 col-form-label text-md-right">
+                    {{ t("Do you need Olsen P Analysis Outputs split between LR and HR?") }}
+                </h5>
+                <div class="form-check mb-3">
+                    <input
+                        class="form-check-input @error('highR') is-invalid @enderror"
+                        type="radio"
+                        name="highR"
+                        value="1"
+                        id="highR1">
+                    <label class="form-check-label" for="highR1">
+                        {{ t("Yes") }}
+                    </label>
+
+                </div>
+
+                <div class="form-check mb-3">
+                    <input
+                        class="form-check-input @error('highR') is-invalid @enderror"
+                        type="radio"
+                        name="highR"
+                        value="0"
+                        id="highR_1">
+                    <label class="form-check-label" for="highR_1">
+                        {{ t("No") }}
+                    </label>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <h5 class="col-md-4 col-form-label text-md-right">
+                    {{ t("Do you need additional Olsen P Analysis Output columns for Custom Reagent packs?") }}
+                </h5>
+                <div class="form-check mb-3">
+                    <input
+                        class="form-check-input @error('customR') is-invalid @enderror"
+                        type="radio"
+                        name="customR"
+                        value="1"
+                        id="customR1">
+                    <label class="form-check-label" for="customR1">
+                        {{ t("Yes") }}
+                    </label>
+
+                </div>
+
+                <div class="form-check mb-3">
+                    <input
+                        class="form-check-input @error('customR') is-invalid @enderror"
+                        type="radio"
+                        name="customR"
+                        value="0"
+                        id="customR_1">
+                    <label class="form-check-label" for="customR_1">
+                        {{ t("No") }}
+                    </label>
+
+                </div>
+            </div>
 
             <hr/>
             <h3>{{ t("Project Privacy Settings") }}</h3>
