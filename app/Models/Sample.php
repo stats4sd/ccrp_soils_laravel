@@ -133,10 +133,12 @@ class Sample extends Model
                 return $analysis->reagents == "LR";
             });
 
-            if ($result->first()->olsen_p_corrected) {
-                return $result->first()->olsen_p_corrected;
+            if ($result->count() > 0) {
+                if ($result->first()->olsen_p_corrected) {
+                    return $result->first()->olsen_p_corrected;
+                }
+                return $result->first()->olsen_p;
             }
-            return $result->first()->olsen_p;
         }
 
         return null;
@@ -149,7 +151,7 @@ class Sample extends Model
                 return $analysis->reagents == "HR";
             });
 
-            if ($result->count()) {
+            if ($result->count() > 0) {
                 if ($result->first()->olsen_p_corrected) {
                     return $result->first()->olsen_p_corrected;
                 }
