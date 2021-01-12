@@ -24,7 +24,10 @@ return [
     'p Custom R Value' => 'p Custom R Value',
     'P Units' =>  'Mg P/kg soil',
     'pH Value' => 'pH Value',
-    'POM Value' => 'POM Value',
+    'POM Percent' => 'POM Percent',
+    'POM Percent Units' => '%',
+    'POM Diameter' => 'POM Diameter',
+    'POM Diameter Units' => 'cm',
     'Stable Aggregates' => 'Stable Aggregates',
 
     'Total' => 'Total',

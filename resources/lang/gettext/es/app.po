@@ -7,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-12-14T11:55:02+00:00\n"
-"PO-Revision-Date: 2020-12-14 12:55+0100\n"
+"POT-Creation-Date: 2021-01-12T13:29:53+00:00\n"
+"PO-Revision-Date: 2021-01-12 14:29+0100\n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
@@ -419,39 +419,63 @@ msgid "Add an image to identify the project"
 msgstr "Agregar una imagen para identificar el proyecto"
 
 #: resources/views/projects/create.blade.php:139
-#: resources/views/projects/tab-settings.blade.php:117
+#: resources/views/projects/tab-settings.blade.php:118
+msgid "Do you need Olsen P Analysis Outputs split between LR and HR?"
+msgstr ""
+
+#: resources/views/projects/create.blade.php:157
+#: resources/views/projects/create.blade.php:204
+#: resources/views/projects/tab-settings.blade.php:138
+#: resources/views/projects/tab-settings.blade.php:188
+msgid "Yes"
+msgstr ""
+
+#: resources/views/projects/create.blade.php:178
+#: resources/views/projects/create.blade.php:225
+#: resources/views/projects/tab-settings.blade.php:161
+#: resources/views/projects/tab-settings.blade.php:210
+msgid "No"
+msgstr ""
+
+#: resources/views/projects/create.blade.php:186
+#: resources/views/projects/tab-settings.blade.php:169
+msgid "Do you need additional Olsen P Analysis Output columns for Custom Reagent packs?"
+msgstr ""
+
+#: resources/views/projects/create.blade.php:233
+#: resources/views/projects/tab-settings.blade.php:218
 msgid "Project Privacy Settings"
 msgstr "Configuración de privacidad del proyecto"
 
-#: resources/views/projects/create.blade.php:141
-#: resources/views/projects/tab-settings.blade.php:119
+#: resources/views/projects/create.blade.php:235
+#: resources/views/projects/tab-settings.blade.php:220
 msgid "As part of this platform, we would like to be able to use aggregated summaries to support broader research into soil quality in smallholder farms across the CCRP network and beyond. If you would like your project's data to contribute to this aggregation, please tick the box below."
 msgstr "Como parte de esta plataforma, nos gustaría poder usar resúmenes agregados para respaldar una investigación más amplia sobre la calidad del suelo en las parcelas de pequeños productores en toda la red CCRP y más allá. Si desea que los datos de su proyecto contribuyan a esta agregación, marque la casilla a continuación."
 
-#: resources/views/projects/create.blade.php:145
-#: resources/views/projects/tab-settings.blade.php:123
+#: resources/views/projects/create.blade.php:239
+#: resources/views/projects/tab-settings.blade.php:224
 msgid "The data will be suitably anonymised before sharing. Any instances where individual data points might be recognisable will be discussed with the project before being shared publically."
 msgstr "Los datos serán adecuadamente anonimizados antes de compartirlos. Cualquier circunstancia en la que los puntos de datos individuales puedan ser reconocidos será discutida con el proyecto antes de ser compartida públicamente."
 
-#: resources/views/projects/create.blade.php:151
+#: resources/views/projects/create.blade.php:245
 msgid "Data Sharing"
 msgstr "Compartir datos"
 
-#: resources/views/projects/create.blade.php:170
-#: resources/views/projects/tab-settings.blade.php:144
+#: resources/views/projects/create.blade.php:264
+#: resources/views/projects/tab-settings.blade.php:243
 msgid "I agree to have this project's data to be included in anonymous summaries produced by the CCRP Soils Cross-cutting Project."
 msgstr "Acepto que los datos de este proyecto se incluyan en resúmenes anónimos producidos por el Proyecto transversal de suelos CCRP."
 
-#: resources/views/projects/create.blade.php:191
-#: resources/views/projects/tab-settings.blade.php:159
+#: resources/views/projects/create.blade.php:285
+#: resources/views/projects/tab-settings.blade.php:258
 msgid "Do not include this project's data in summaries produced by the platform for use outside of this project's team."
 msgstr "No incluya los datos de este proyecto en resúmenes producidos por la plataforma para su uso fuera del equipo de este proyecto."
 
-#: resources/views/projects/create.blade.php:213
+#: resources/views/projects/create.blade.php:307
 msgid "Terms of Use"
 msgstr "Términos de Uso"
 
-#: resources/views/projects/create.blade.php:229
+#: resources/views/projects/create.blade.php:323
 msgid "I agree to the terms of use laid out in the site policy page"
 msgstr "Acepto los términos de uso establecidos en la página de la poítica del sitio"
 
@@ -547,7 +571,7 @@ msgstr "Editar detalles del proyecto"
 msgid "Replace the project image"
 msgstr "Reemplazar la imagen del proyecto"
 
-#: resources/views/projects/tab-settings.blade.php:190
+#: resources/views/projects/tab-settings.blade.php:289
 msgid "You do not have access to update the project settings. Please contact a project administrator"
 msgstr "No tiene acceso para actualizar la configuración del proyecto. Por favor contacte a un administrador de proyecto"
 

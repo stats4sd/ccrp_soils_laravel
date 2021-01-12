@@ -47,6 +47,7 @@ try:
 		df_from_json = pd.json_normalize(json_element)
 		df = pd.concat([df, df_from_json])
 
+
 	df.to_csv(path + name_file, index=False)
 
 	con.commit()
