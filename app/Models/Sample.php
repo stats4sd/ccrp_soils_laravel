@@ -90,7 +90,8 @@ class Sample extends Model
         'hr_p_result',
         'custom_r_p_result',
         'ph_result',
-        'pom_result',
+        'pom_percent',
+        'pom_diameter',
         'total_stableaggregates',
         'twomm_aggreg_pct_result',
         'twofiftymicron_aggreg_pct_result',
@@ -189,7 +190,7 @@ class Sample extends Model
         return null;
     }
 
-    public function getPomResultAttribute()
+    public function getPomPercentAttribute()
     {
         if ($this->analysis_pom->count() > 0) {
             return $this->analysis_pom()->first()->percent_pom;
@@ -197,6 +198,16 @@ class Sample extends Model
 
         return null;
     }
+
+    public function getPomDiameterAttribute()
+    {
+        if ($this->analysis_pom->count() > 0) {
+            return $this->analysis_pom()->first()->diameter_circ_pom;
+        }
+
+        return null;
+    }
+
 
     public function getTotalStableaggregatesAttribute()
     {

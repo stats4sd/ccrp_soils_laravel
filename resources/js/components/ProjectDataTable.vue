@@ -27,14 +27,15 @@
                     </th>
                     <th rowspan="2" v-if="hasHR">
                         {{ __("vue.p HR Value") }}
-                        <br/>( {{ __("vue.p Units") }})
+                        <br/>( {{ __("vue.P Units") }})
                     </th>
                     <th rowspan="2" v-if="hasCustomR">
                         {{ __("vue.p Custom R Value") }}
-                        <br/>( {{ __("vue.p Units") }})
+                        <br/>( {{ __("vue.P Units") }})
                     </th>
-                    <th rowspan="2">{{ __("vue.pH Value") }}</th>
-                    <th rowspan="2" style="border-right: 1px solid darkgray">{{__("vue.POM Value") }}</th>
+                    <th rowspan="2" style="border-right: 1px solid darkgray">{{ __("vue.pH Value") }}</th>
+                    <th rowspan="2">{{__("vue.POM Percent") }}<br>({{ __("vue.POM Percent Units") }})</th>
+                    <th rowspan="2" style="border-right: 1px solid darkgray">{{__("vue.POM Diameter") }}<br>({{ __("vue.POM Diameter Units")}})</th>
                     <th colspan="3" style="border-left: 1px solid darkgray">{{__("vue.Stable Aggregates") }}</th>
                 </tr>
                 <tr class="w-100">
@@ -59,8 +60,9 @@
                     <td>{{ sample.lr_p_result }} </td>
                     <td v-if="hasHR">{{ sample.hr_p_result }} </td>
                     <td v-if="hasCustomR">{{ sample.custom_r_p_result }} </td>
-                    <td>{{ sample.ph_result }}</td>
-                    <td style="border-right: 1px solid darkgray">{{ sample.pom_result }}</td>
+                    <td style="border-right: 1px solid darkgray">{{ sample.ph_result }}</td>
+                    <td>{{ sample.pom_percent }}</td>
+                    <td style="border-right: 1px solid darkgray">{{ sample.pom_diameter }}</td>
                     <td style="border-left: 1px solid darkgray">{{ sample.twomm_aggreg_pct_result }} <span v-if="sample.twomm_aggreg_pct_result">%</span></td>
                     <td style="border-right: 1px solid lightgray">{{ sample.twofiftymicron_aggreg_pct_result }} <span v-if="sample.twofiftymicron_aggreg_pct_result">%</span></td></td>
                     <td style="border-left: 1px solid lightgray">{{ sample.total_stableaggregates }} <span v-if="sample.total_stableaggregates">%</span></td></td>
