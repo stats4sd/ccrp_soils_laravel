@@ -55,7 +55,7 @@
                     </li>
                 @endif
                 @if(auth()->check())
-                    @if(auth()->user()->isAdmin())
+                    @if(auth()->user()->isAdmin() || auth()->user()->isProjectAdmin())
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('backpack') }}">{{ t("Admin Panel") }}</a>
                         </li>

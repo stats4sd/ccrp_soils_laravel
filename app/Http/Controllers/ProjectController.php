@@ -44,6 +44,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project, $tab = null)
     {
+        $this->authorize('view', $project);
         $project = $project->load(
             [
                 'users' => function ($q) {

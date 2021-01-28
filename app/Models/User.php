@@ -78,9 +78,20 @@ class User extends Authenticatable
 
     public $incrementing = true;
 
-    public function isAdmin ()
+    public function isAdmin()
     {
         return $this->admin ?: false;
+    }
+
+    public function isProjectAdmin()
+    {
+        foreach ($this->projects as $project) {
+            if ($project->pivot->admin) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
@@ -94,13 +105,16 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Project', 'projects_members')->withPivot('admin');
     }
 
+    public function projects_with_admin_role()
+    {
+        return $this->belongsToMany('App\Models\Project', 'projects_members', 'project_id', 'user_id')->wherePivot('admin', 1);
+    }
+
+
     public function setAvatarAttribute($value)
-       {
-           $disk = "public";
-           $destination_path = "users/avatars";
-           $this->uploadFileToDisk($value, "avatar", $disk, $destination_path);
-       }
-
-
-
+    {
+        $disk = "public";
+        $destination_path = "users/avatars";
+        $this->uploadFileToDisk($value, "avatar", $disk, $destination_path);
+    }
 }

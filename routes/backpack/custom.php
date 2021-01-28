@@ -21,4 +21,6 @@ Route::group([
     Route::crud('project', 'ProjectCrudController');
     Route::crud('user', 'UserCrudController');
     Route::crud('datamap', 'DataMapCrudController');
+    Route::crud('sample', 'SampleCrudController');
+    Route::crud('projectsubmission', 'ProjectSubmissionCrudController');
 }); // this should be the absolute last line of this file
