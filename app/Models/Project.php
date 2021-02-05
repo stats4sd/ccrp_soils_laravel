@@ -91,15 +91,15 @@ class Project extends Model
         $this->uploadFileToDisk($value, "avatar", $disk, $destination_path);
     }
 
-    public function sendInvites ($emails)
+    public function sendInvites($emails)
     {
-       foreach($emails as $email) {
+        foreach ($emails as $email) {
             $this->invites()->create([
                 'email' => $email,
                 'inviter_id' => auth()->user()->id,
                 'token' => str_random(24),
             ]);
-       }
+        }
     }
 
 
@@ -109,18 +109,18 @@ class Project extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function creator ()
+    public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
     }
 
-    public function invites ()
+    public function invites()
     {
-       return $this->hasMany(Invite::class);
+        return $this->hasMany(Invite::class);
     }
 
     // which public forms are attached to the project?
-    public function xls_forms ()
+    public function xls_forms()
     {
         return $this->belongsToMany(Xlsform::class)->using(ProjectXlsform::class)
         ->withPivot([
@@ -140,32 +140,28 @@ class Project extends Model
     }
 
     // Filtered sets of users();
-    public function admins ()
+    public function admins()
     {
-       return $this->users()->wherePivot('admin', 1);
+        return $this->users()->wherePivot('admin', 1);
     }
 
-    public function members ()
+    public function members()
     {
-       return $this->users()->wherePivot('admin', 0);
+        return $this->users()->wherePivot('admin', 0);
     }
 
-    public function submissions ()
+    public function submissions()
     {
         return $this->hasMany(Submission::class);
     }
 
-    public function samples ()
+    public function samples()
     {
         return $this->hasMany(Sample::class);
     }
 
-    public function samples_merged ()
+    public function samples_merged()
     {
-       return $this->hasMany(SampleMerged::class);
+        return $this->hasMany(SampleMerged::class);
     }
-
-
-
-
 }

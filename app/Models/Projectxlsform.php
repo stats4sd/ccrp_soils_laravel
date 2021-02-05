@@ -74,14 +74,17 @@ class ProjectXlsform extends Pivot
     |--------------------------------------------------------------------------
     */
 
-    public function getTitleAttribute ()
+    public function getTitleAttribute()
     {
-       return $this->project->name.' - '.$this->xlsform->title;
+        $project_name = str_replace('/', '_', $this->project->name);
+        $form_name = str_replace('/', '_', $this->xlsform->name);
+
+        return $project_name.' - '.$form_name;
     }
 
-    public function getRecordsAttribute ()
+    public function getRecordsAttribute()
     {
-       return $this->project_submissions->count();
+        return $this->project_submissions->count();
     }
 
 
@@ -101,10 +104,8 @@ class ProjectXlsform extends Pivot
         return $this->belongsTo(Xlsform::class);
     }
 
-    public function project_submissions ()
+    public function project_submissions()
     {
-       return $this->hasMany(ProjectSubmission::class, 'project_xlsform_id');
+        return $this->hasMany(ProjectSubmission::class, 'project_xlsform_id');
     }
-
-
 }

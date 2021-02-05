@@ -77,6 +77,7 @@ use Illuminate\Database\Query\Builder;
  */
 class Sample extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     public $incrementing = false;
     public $guarded = [];
     public $casts = [
@@ -101,6 +102,12 @@ class Sample extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function project_submission()
+    {
+        return $this->belongsTo(ProjectSubmission::class);
+    }
+
 
     public function getPoxcResultAttribute()
     {

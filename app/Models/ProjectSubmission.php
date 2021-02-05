@@ -2,8 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\AnalysisP;
+use App\Models\AnalysisPh;
+use App\Models\AnalysisAgg;
+use App\Models\AnalysisPom;
+use App\Models\AnalysisPoxc;
 use App\Models\ProjectXlsform;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * App\Models\ProjectSubmission
@@ -30,17 +37,44 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ProjectSubmission extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     protected $table = 'project_submissions';
     protected $guarded = [];
+
+    protected static function booted()
+    {
+        static::addGlobalScope('project', function (Builder $builder) {
+            if (! Auth::user()->isAdmin()) {
+                $userProjects = Auth::user()->projects()->get()->pluck('id')->toArray();
+
+                $builder->whereIn('project_submissions.project_id', $userProjects);
+            }
+        });
+    }
+
+    public function getSampleId()
+    {
+        $content = json_decode($this->content);
+
+        if (isset($content->sample_id)) {
+            return $content->sample_id;
+        }
+
+        if (isset($content->no_bar_code)) {
+            return $content->no_bar_code;
+        }
+
+        return null;
+    }
 
     public function project_xlsform()
     {
         return $this->belongsTo(ProjectXlsform::class, 'project_xlsform_id');
     }
 
-    public function samples()
+    public function project()
     {
-        return $this->hasMany(Sample::class);
+        return $this->belongsTo(Project::class);
     }
 
 

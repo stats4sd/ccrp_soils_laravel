@@ -126,6 +126,4 @@ class ProjectXlsformCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
-
-
 }

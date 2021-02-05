@@ -88,6 +88,7 @@ class GetDataFromKobo implements ShouldQueue
                 $projectSubmission->id = $newSubmission['_id'];
                 $projectSubmission->uuid = $newSubmission['_uuid'];
                 $projectSubmission->project_xlsform_id = $this->form->id;
+                $projectSubmission->project_id = $this->form->project->id;
                 $projectSubmission->content = json_encode($newSubmission);
                 $projectSubmission->submitted_at = $newSubmission['_submission_time'];
 

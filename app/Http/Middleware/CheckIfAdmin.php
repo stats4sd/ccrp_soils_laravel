@@ -22,7 +22,13 @@ class CheckIfAdmin
      */
     private function checkIfUserIsAdmin($user)
     {
-        return ($user->isAdmin() == 1 ? true : false);
+        if ($user->isAdmin()
+         || $user->isProjectAdmin()
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
