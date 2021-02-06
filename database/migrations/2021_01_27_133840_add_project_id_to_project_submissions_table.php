@@ -18,7 +18,7 @@ class AddProjectIdToProjectSubmissionsTable extends Migration
             $table->unsignedBigInteger('project_id');
         });
 
-        DB::update('update project_submissions set project_id = (select coalesce(project_xlsform.project_id, 0) from project_xlsform where project_xlsform.id = project_submissions.project_xlsform_id limit 1);');
+        DB::update('update project_submissions set project_id = (select project_xlsform.project_id from project_xlsform where project_xlsform.id = project_submissions.project_xlsform_id limit 1);');
     }
 
     /**
