@@ -15,6 +15,9 @@
             <a href="#data" class="nav-link" id="data-tab" data-toggle="tab" role="tab" aria-controls="data" aria-selected="true">{{ t("Project Data") }}</a>
         </li>
         <li class="nav-item">
+            <a href="#nutrients" class="nav-link" id="nutrients-tab" data-toggle="tab" role="tab" aria-controls="nutrients" aria-selected="true">{{ t("Project Nutrients Data") }}</a>
+        </li>
+        <li class="nav-item">
             <a href="#members" class="nav-link" id="members-tab" data-toggle="tab" role="tab" aria-controls="members" aria-selected="true">{{ t("Project Members") }}</a>
         </li>
         <li class="nav-item">
@@ -46,6 +49,12 @@
                 :samples="{{ $project->samples->toJson() }}"
             ></project-data-table>
             <a href="{{ route('projects.downloadsamples', $project) }}" class="btn btn-info">{{ t("Download Merged Sample Data") }}</a>
+        </div>
+        <div class="tab-pane fade wide-table" id="nutrients" role="tabpanel" aria-labelledby="nutrients-tab">
+            <project-nutrients-table
+                :project="{{ $project->toJson() }}"
+                :user-id="{{ auth()->user()->id }}">
+            </project-nutrients-table>
         </div>
         <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
             @include('projects.tab-members')

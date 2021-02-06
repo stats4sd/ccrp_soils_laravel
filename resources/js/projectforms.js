@@ -1,8 +1,11 @@
 import Vue from 'vue';
 import ProjectFormsTable from './components/ProjectFormsTable'
 import ProjectDataTable from './components/ProjectDataTable'
+import ProjectNutrientsTable from './components/ProjectNutrientsTable'
 
 import VueEcho from 'vue-echo-laravel';
+
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 Vue.mixin(require('./trans'))
 
@@ -17,10 +20,12 @@ Vue.use(VueEcho, {
     enabledTransports: ['ws', 'wss'],
 });
 
+Vue.use(BootstrapVue)
+
 
 Vue.component("project-forms-table",ProjectFormsTable)
 Vue.component("project-data-table", ProjectDataTable)
-
+Vue.component("project-nutrients-table", ProjectNutrientsTable)
 let app = new Vue({
     el: '#vue-app',
 });

@@ -23,4 +23,8 @@ Route::group([
     Route::crud('datamap', 'DataMapCrudController');
     Route::crud('sample', 'SampleCrudController');
     Route::crud('projectsubmission', 'ProjectSubmissionCrudController');
+    Route::crud('nutrientbalance', 'NutrientBalanceCrudController');
+    Route::crud('farmerfield', 'FarmerFieldCrudController');
+
+
 }); // this should be the absolute last line of this file
