@@ -42,8 +42,8 @@ class DataMapCrudController extends CrudController
                 'name' => 'variables',
                 'label' => 'Number of variables',
                 'type' => 'closure',
-                'function' => function($entity) {
-                    if(isset($entity->variables) && is_countable($entity->variables)) {
+                'function' => function ($entity) {
+                    if (isset($entity->variables) && is_countable($entity->variables)) {
                         return count($entity->variables);
                     }
                     return '';
@@ -53,7 +53,7 @@ class DataMapCrudController extends CrudController
     }
 
     protected function setupCreateOperation()
-{
+    {
         $this->crud->setValidation(DataMapStoreRequest::class);
 
         $this->crud->addFields([
@@ -78,6 +78,7 @@ class DataMapCrudController extends CrudController
                     'AnalysisPh' => 'analysis_ph',
                     'AnalysisPom' => 'analysis_pom',
                     'AnalysisPoxc' => 'analysis_poxc',
+                    'FarmerField' => 'nutrient balance',
                 ],
             ],
             [

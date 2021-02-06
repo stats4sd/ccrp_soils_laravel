@@ -13,3 +13,5 @@
 @endif
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('projectsubmission') }}'><i class='nav-icon la la-question'></i> ProjectSubmissions</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('nutrientbalance') }}'><i class='nav-icon la la-question'></i> NutrientBalances</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('farmerfield') }}'><i class='nav-icon la la-question'></i> FarmerFields</a></li>

@@ -23,6 +23,8 @@ Route::group([
     Route::post('projectxlsforms/{project_xlsform}/syncdata', 'ProjectXlsformController@syncData')->name('projectxlsforms.sync');
     Route::post('projectxlsforms/{project_xlsform}/getdata', 'ProjectXlsformController@getData')->name('projectxlsforms.getdata');
     Route::post('projectxlsforms/{project_xlsform}/download', 'ProjectXlsformController@download')->name('projectxlsforms.download');
+
+    Route::get('nutrientbalance/{project_id}/json', 'Admin\NutrientBalanceCrudController@getJson');
 });
 
 /**
