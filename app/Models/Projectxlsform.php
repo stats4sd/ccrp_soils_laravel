@@ -65,7 +65,6 @@ class ProjectXlsform extends Pivot
 
     public $appends = [
         'title',
-        'records',
     ];
 
     /*
