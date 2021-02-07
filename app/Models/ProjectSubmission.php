@@ -44,10 +44,12 @@ class ProjectSubmission extends Model
     protected static function booted()
     {
         static::addGlobalScope('project', function (Builder $builder) {
-            if (! Auth::user()->isAdmin()) {
-                $userProjects = Auth::user()->projects()->get()->pluck('id')->toArray();
+            if (Auth::check()) {
+                if (! Auth::user()->isAdmin()) {
+                    $userProjects = Auth::user()->projects()->get()->pluck('id')->toArray();
 
-                $builder->whereIn('project_submissions.project_id', $userProjects);
+                    $builder->whereIn('project_submissions.project_id', $userProjects);
+                }
             }
         });
     }
