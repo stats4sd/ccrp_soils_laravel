@@ -161,10 +161,13 @@ class DataMapController extends Controller
         \Log::info("values: " . json_encode($newModel));
     }
 
-    public static function updateAllRecords(Xlsform $xlsform)
+    public static function updateAllRecords(Xlsform $xlsform, Project $project = null)
     {
-        $projectFormIds = $xlsform->project_xlsforms->pluck('id');
-
+        if ($project) {
+            $projectFormIds = $xlsform->project_xlsforms->where('project_id', $project->id)->pluck('id');
+        } else {
+            $projectFormIds = $xlsform->project_xlsforms->pluck('id');
+        }
 
         $submissions = ProjectSubmission::whereIn('project_xlsform_id', $projectFormIds)
         ->get();

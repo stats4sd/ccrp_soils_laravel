@@ -512,6 +512,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectSubmission whereUuid($value)
  * @mixin \Eloquent19
  * @property int $project_id
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\AnalysisAgg[] $analysis_agg
  * @property-read int|null $analysis_agg_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\AnalysisP[] $analysis_p
@@ -522,8 +523,15 @@ namespace App\Models{
  * @property-read int|null $analysis_pom_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\AnalysisPoxc[] $analysis_poxc
  * @property-read int|null $analysis_poxc_count
+ * @property-read mixed $sample_id
  * @property-read \App\Models\Project $project
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Venturecraft\Revisionable\Revision[] $revisionHistory
+ * @property-read int|null $revision_history_count
+ * @method static \Illuminate\Database\Query\Builder|ProjectSubmission onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectSubmission whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectSubmission whereProjectId($value)
+ * @method static \Illuminate\Database\Query\Builder|ProjectSubmission withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|ProjectSubmission withoutTrashed()
  */
 	class ProjectSubmission extends \Eloquent {}
 }

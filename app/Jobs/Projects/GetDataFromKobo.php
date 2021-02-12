@@ -68,7 +68,7 @@ class GetDataFromKobo implements ShouldQueue
         $data = $response['results'];
 
         //compare
-        $submissions = ProjectSubmission::withoutGlobalScope('project')->where('project_id', $this->form->project->id)->where('project_xlsform_id', '=', $this->form->id)->get();
+        $submissions = ProjectSubmission::withTrashed()->withoutGlobalScope('project')->where('project_id', $this->form->project->id)->where('project_xlsform_id', '=', $this->form->id)->get();
 
         foreach ($data as $newSubmission) {
             if (!in_array($newSubmission['_id'], $submissions->pluck('id')->toArray())) {

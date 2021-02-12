@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Project;
 use App\Models\AnalysisP;
 use App\Models\AnalysisPh;
 use App\Models\AnalysisAgg;
@@ -11,6 +12,7 @@ use App\Models\ProjectXlsform;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 
@@ -40,7 +42,8 @@ use Venturecraft\Revisionable\RevisionableTrait;
 class ProjectSubmission extends Model
 {
     use CrudTrait,
-    RevisionableTrait;
+    RevisionableTrait,
+    SoftDeletes;
 
     protected $table = 'project_submissions';
     protected $guarded = [];
@@ -112,5 +115,10 @@ class ProjectSubmission extends Model
     public function analysis_poxc()
     {
         return $this->hasMany(AnalysisPoxc::class);
+    }
+
+    public function samples()
+    {
+        return $this->hasMany(Sample::class);
     }
 }

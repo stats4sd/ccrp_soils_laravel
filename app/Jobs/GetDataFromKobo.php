@@ -49,8 +49,8 @@ class GetDataFromKobo implements ShouldQueue
         //compare
         $submissions = Submission::where('xlsform_id', '=', $this->form->id)->get();
 
-        foreach($data as $newSubmission) {
-            if(!in_array($newSubmission['_id'], $submissions->pluck('id')->toArray())) {
+        foreach ($data as $newSubmission) {
+            if (!in_array($newSubmission['_id'], $submissions->pluck('id')->toArray())) {
                 Submission::create([
                     'id' => $newSubmission['_id'],
                     'uuid' => $newSubmission['_uuid'],
@@ -60,6 +60,5 @@ class GetDataFromKobo implements ShouldQueue
                 ]);
             }
         }
-
     }
 }
