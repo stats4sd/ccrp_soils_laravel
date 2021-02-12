@@ -42,9 +42,9 @@ class ProjectSubmissionCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->query = $this->crud->query->leftJoin('project_xlsform', 'project_xlsform.id', '=', 'project_submissions.project_xlsform_id')
-            ->leftJoin('projects', 'projects.id', '=', 'project_xlsform.project_id')
-            ->leftJoin('xlsforms', 'xlsforms.id', '=', 'project_xlsform.xlsform_id');
+        // $this->crud->query = $this->crud->query->leftJoin('project_xlsform', 'project_xlsform.id', '=', 'project_submissions.project_xlsform_id')
+        //     ->leftJoin('projects', 'projects.id', '=', 'project_xlsform.project_id')
+        //     ->leftJoin('xlsforms', 'xlsforms.id', '=', 'project_xlsform.xlsform_id');
 
         if (Auth::user()->isAdmin()) {
             CRUD::column('project_xlsform.project.name')->label('project');
@@ -54,15 +54,23 @@ class ProjectSubmissionCrudController extends CrudController
             'element' => 'div',
             'class' => 'd-block text-wrap',
         ])->orderLogic(function ($query, $column, $columnDirection) {
-            return $query
+            return $query->leftJoin('project_xlsform', 'project_xlsform.id', '=', 'project_submissions.project_xlsform_id')
+            ->leftJoin('projects', 'projects.id', '=', 'project_xlsform.project_id')
+            ->leftJoin('xlsforms', 'xlsforms.id', '=', 'project_xlsform.xlsform_id')
             ->orderBy('projects.name', $columnDirection)
             ->orderBy('xlsforms.title', $columnDirection)
             ->select('project_submissions.*')
             ;
         })->orderable(true)
             ->searchLogic(function ($query, $column, $searchTerm) {
-                $query->orWhere('xlsforms.title', 'like', '%'.$searchTerm.'%')
-                ->orWhere('projects.name', 'like', '%'.$searchTerm.'%');
+                $query->orWhereHas('project_xlsform', function ($q) use ($column, $searchTerm) {
+                    $q->whereHas('xlsform', function ($qx) use ($column, $searchTerm) {
+                        $qx->where('title', 'like', '%'.$searchTerm.'%');
+                    })
+                    ->orWhereHas('project', function ($qp) use ($column, $searchTerm) {
+                        $qp->where('name', 'like', '%'.$searchTerm.'%');
+                    });
+                });
             });
 
 
