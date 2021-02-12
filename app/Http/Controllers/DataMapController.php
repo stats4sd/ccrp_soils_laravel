@@ -161,7 +161,7 @@ class DataMapController extends Controller
         \Log::info("values: " . json_encode($newModel));
     }
 
-    public function updateAllRecords(Xlsform $xlsform)
+    public static function updateAllRecords(Xlsform $xlsform)
     {
         $projectFormIds = $xlsform->project_xlsforms->pluck('id');
 
@@ -181,7 +181,7 @@ class DataMapController extends Controller
             $content = GenericHelper::remove_group_names_from_kobo_data(json_decode($submission->content, true));
             Log::info($content);
 
-            $this->newRecord($dataMap, $content, $submission->project_xlsform->project->id);
+            DataMapController::newRecord($dataMap, $content, $submission->project_xlsform->project->id);
         }
 
         return count($submissions);

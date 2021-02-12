@@ -59,7 +59,10 @@ class ProjectSubmissionCrudController extends CrudController
         })->orderable(true);
         ;
         CRUD::column('id')->label('kobo_submission_id');
-        CRUD::column('content')->type('model_function')->function_name('getSampleId')->label('Soil Sample ID');
+        CRUD::column('sample_id')->label('Soil Sample ID')->searchLogic(function ($query, $column, $searchTerm) {
+            $query->orWhere('project_submissions.content->sample_id', 'like', '%'.$searchTerm.'%')
+            ->orWhere('project_submissions.content->no_bar_code', 'like', '%'.$searchTerm.'%');
+        });
     }
 
     protected function setupShowOperation()
@@ -81,30 +84,37 @@ class ProjectSubmissionCrudController extends CrudController
     {
         $content = json_decode($this->crud->getCurrentEntry()->content, true);
 
-        $content = GenericHelper::remove_group_names_from_kobo_data($content);
+        //$content = GenericHelper::remove_group_names_from_kobo_data($content);
 
 
 
-        $dataMap = $this->crud->getCurrentEntry()->project_xlsform->xlsform->data_map;
-        $dataMapVariables = collect($dataMap->variables)->map(fn ($variable) => [ 'name' => $variable['name'], 'label' => $variable['label'] ])->toArray();
+        // $dataMap = $this->crud->getCurrentEntry()->project_xlsform->xlsform->data_map;
+        // $dataMapVariables = collect($dataMap->variables)->map(fn ($variable) => [ 'name' => $variable['name'], 'label' => $variable['label'] ])->toArray();
 
-        $projectVariables = $this->crud->getCurrentEntry()->project->identifiers;
+        // $projectVariables = $this->crud->getCurrentEntry()->project->identifiers;
 
-        if ($content['sample_id']) {
-            $sampleVariable = [['name' => 'sample_id', 'label' => 'Soil Sample ID']];
-        } else {
-            $sampleVariable = [['name' => 'no_bar_code', 'label' => 'Soil Sample ID from manual typing']];
+        foreach ($content as $field => $value) {
+            dump($field, $value);
+            if (is_array($value)) {
+                $value = json_encode($value);
+            }
+            CRUD::field($field)->type('text')->value((string) $value)->fake('true')->store_in('content');
         }
+        // if ($content['sample_id']) {
+        //     $sampleVariable = [['name' => 'sample_id', 'label' => 'Soil Sample ID']];
+        // } else {
+        //     $sampleVariable = [['name' => 'no_bar_code', 'label' => 'Soil Sample ID from manual typing']];
+        // }
 
 
-        $allVars = array_merge($projectVariables, $dataMapVariables);
-        $allVars = array_merge($sampleVariable, $allVars);
+        // $allVars = array_merge($projectVariables, $dataMapVariables);
+        // $allVars = array_merge($sampleVariable, $allVars);
 
-        foreach ($allVars as $variable) {
-            $value = isset($content[$variable['name']]) ? $content[$variable['name']] : null;
+        // foreach ($allVars as $variable) {
+        //     $value = isset($content[$variable['name']]) ? $content[$variable['name']] : null;
 
-            CRUD::field($variable['name'])->value($value)->label($variable['label'])->fake(true)->store_in('content');
-        }
+        //     CRUD::field($variable['name'])->value($value)->label($variable['label'])->fake(true)->store_in('content');
+        // }
     }
 
     // /**

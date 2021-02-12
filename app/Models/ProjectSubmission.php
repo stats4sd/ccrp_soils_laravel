@@ -54,7 +54,7 @@ class ProjectSubmission extends Model
         });
     }
 
-    public function getSampleId()
+    public function getSampleIdAttribute()
     {
         $content = json_decode($this->content);
 
