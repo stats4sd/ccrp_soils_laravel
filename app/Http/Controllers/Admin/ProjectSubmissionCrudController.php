@@ -42,6 +42,10 @@ class ProjectSubmissionCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $this->crud->query = $this->crud->query->leftJoin('project_xlsform', 'project_xlsform.id', '=', 'project_submissions.project_xlsform_id')
+            ->leftJoin('projects', 'projects.id', '=', 'project_xlsform.project_id')
+            ->leftJoin('xlsforms', 'xlsforms.id', '=', 'project_xlsform.xlsform_id');
+
         if (Auth::user()->isAdmin()) {
             CRUD::column('project_xlsform.project.name')->label('project');
         }
@@ -51,16 +55,20 @@ class ProjectSubmissionCrudController extends CrudController
             'class' => 'd-block text-wrap',
         ])->orderLogic(function ($query, $column, $columnDirection) {
             return $query
-            ->leftJoin('project_xlsform', 'project_xlsform.id', '=', 'project_submissions.project_xlsform_id')
-            ->leftJoin('projects', 'projects.id', '=', 'project_xlsform.project_id')
-            ->leftJoin('xlsforms', 'xlsforms.id', '=', 'project_xlsform.xlsform_id')
             ->orderBy('projects.name', $columnDirection)
             ->orderBy('xlsforms.title', $columnDirection)
             ->select('project_submissions.*')
             ;
-        })->orderable(true);
-        ;
-        CRUD::column('id')->label('kobo_submission_id');
+        })->orderable(true)
+            ->searchLogic(function ($query, $column, $searchTerm) {
+                $query->orWhere('xlsforms.title', 'like', '%'.$searchTerm.'%')
+                ->orWhere('projects.name', 'like', '%'.$searchTerm.'%');
+            });
+
+
+        CRUD::column('id')->label('kobo_submission_id')->searchLogic(function ($query, $column, $searchTerm) {
+            $query->orWhere('project_submissions.id', 'like', '%'.$searchTerm.'%');
+        });
         CRUD::column('sample_id')->label('Soil Sample ID')->searchLogic(function ($query, $column, $searchTerm) {
             $query->orWhere('project_submissions.content->sample_id', 'like', '%'.$searchTerm.'%')
             ->orWhere('project_submissions.content->no_bar_code', 'like', '%'.$searchTerm.'%');

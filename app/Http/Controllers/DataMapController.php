@@ -163,6 +163,10 @@ class DataMapController extends Controller
 
     public static function updateAllRecords(Xlsform $xlsform, Project $project = null)
     {
+        Log::info('updating records');
+        Log::info('form - ' . $xlsform->title);
+        Log::info('project - ' . $project->name);
+
         if ($project) {
             $projectFormIds = $xlsform->project_xlsforms->where('project_id', $project->id)->pluck('id');
         } else {
@@ -171,6 +175,9 @@ class DataMapController extends Controller
 
         $submissions = ProjectSubmission::whereIn('project_xlsform_id', $projectFormIds)
         ->get();
+
+        Log::info('submissions found');
+        Log::info($submissions);
 
         $dataMap = $xlsform->data_map;
 

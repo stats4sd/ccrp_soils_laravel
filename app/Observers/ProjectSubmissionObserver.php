@@ -2,8 +2,9 @@
 
 namespace App\Observers;
 
-use App\Http\Controllers\DataMapController;
 use App\Models\ProjectSubmission;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\DataMapController;
 
 class ProjectSubmissionObserver
 {
@@ -25,6 +26,8 @@ class ProjectSubmissionObserver
 
     public function deleting(ProjectSubmission $projectSubmission)
     {
+        Log::info('deleting submission');
+        Log::Info($projectSubmission);
         $projectSubmission->analysis_p()->delete();
         $projectSubmission->analysis_ph()->delete();
         $projectSubmission->analysis_agg()->delete();
@@ -39,6 +42,8 @@ class ProjectSubmissionObserver
         $form = $projectSubmission->project_xlsform->xlsform;
         $project = $projectSubmission->project;
 
+        Log::Info('project submission deleted');
+        Log::Info($projectSubmission);
         DataMapController::updateAllRecords($form, $project);
     }
 }
