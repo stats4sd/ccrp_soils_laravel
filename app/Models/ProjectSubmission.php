@@ -11,6 +11,8 @@ use App\Models\ProjectXlsform;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 /**
  * App\Models\ProjectSubmission
@@ -37,7 +39,9 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class ProjectSubmission extends Model
 {
-    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+    use CrudTrait,
+    RevisionableTrait;
+
     protected $table = 'project_submissions';
     protected $guarded = [];
 
@@ -52,6 +56,11 @@ class ProjectSubmission extends Model
                 }
             }
         });
+    }
+
+    public function identifiableName()
+    {
+        return $this->project_xlsform->title . ' - SAMPLE_ID: ' . $this->sample_id;
     }
 
     public function getSampleIdAttribute()
