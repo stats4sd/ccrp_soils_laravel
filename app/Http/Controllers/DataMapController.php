@@ -164,8 +164,8 @@ class DataMapController extends Controller
     public static function updateAllRecords(Xlsform $xlsform, Project $project = null)
     {
         Log::info('updating records');
-        Log::info('form - ' . $xlsform->title);
-        Log::info('project - ' . $project->name);
+        Log::info('form - ' . $xlsform);
+        Log::info('project - ' . $project);
 
         if ($project) {
             $projectFormIds = $xlsform->project_xlsforms->where('project_id', $project->id)->pluck('id');
