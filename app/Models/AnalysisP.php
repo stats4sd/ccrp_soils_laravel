@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Sample;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\AnalysisP
@@ -52,19 +53,20 @@ use Illuminate\Database\Eloquent\Model;
 class AnalysisP extends Model
 {
     public $table = "analysis_p";
+
     protected $guarded = [];
 
-    public function sample ()
+    public function sample()
     {
         return $this->belongsTo(Sample::class);
     }
 
-    public function project_submission ()
+    public function project_submission()
     {
         return $this->belongsTo(ProjectSubmission::class);
     }
 
-    public function getResultAttribute ()
+    public function getResultAttribute()
     {
         return $this->olsen_p;
     }

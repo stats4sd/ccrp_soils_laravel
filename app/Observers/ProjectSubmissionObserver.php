@@ -2,8 +2,9 @@
 
 namespace App\Observers;
 
-use App\Http\Controllers\DataMapController;
 use App\Models\ProjectSubmission;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\DataMapController;
 
 class ProjectSubmissionObserver
 {
@@ -13,48 +14,36 @@ class ProjectSubmissionObserver
      * @param  \App\Models\ProjectSubmission  $projectSubmission
      * @return void
      */
-    public function created(ProjectSubmission $projectSubmission)
+    public function updated(ProjectSubmission $projectSubmission)
     {
         // // find out what form it came from
-        // $form = $projectSubmission->project_xlsform->xlsform;
+        $form = $projectSubmission->project_xlsform->xlsform;
+        $project = $projectSubmission->project;
 
-        // \Log::info($form);
+        // re-process submissions from this form
+        DataMapController::updateAllRecords($form, $project);
+    }
+
+    public function deleting(ProjectSubmission $projectSubmission)
+    {
+        Log::info('deleting submission');
+        Log::Info($projectSubmission);
+        $projectSubmission->analysis_p()->delete();
+        $projectSubmission->analysis_ph()->delete();
+        $projectSubmission->analysis_agg()->delete();
+        $projectSubmission->analysis_pom()->delete();
+        $projectSubmission->analysis_poxc()->delete();
+        $projectSubmission->samples()->delete();
+    }
 
 
-        // $submissionId = $projectSubmission->id;
-        // $data = $projectSubmission->content;
-        // $data->project_id = $projectSubmission->project_xlsform->project->id;
+    public function deleted(ProjectSubmission $projectSubmission)
+    {
+        $form = $projectSubmission->project_xlsform->xlsform;
+        $project = $projectSubmission->project;
 
-        // // Do the funky mapping dance
-        // switch ($form->data_map) {
-        //     case 'sample':
-        //         DataMapController::sample($data, $submissionId);
-        //         break;
-
-        //     case 'analysis_p':
-        //         DataMapController::analysis_p($data, $submissionId);
-        //         break;
-
-        //     case 'analysis_ph':
-        //         DataMapController::analysis_ph($data, $submissionId);
-        //         break;
-
-        //     case 'analysis_poxc':
-        //         DataMapController::analysis_poxc($data, $submissionId);
-        //         break;
-
-        //     case 'analysis_pom':
-        //         DataMapController::analysis_pom($data, $submissionId);
-        //         break;
-
-        //     case 'analysis_agg':
-        //         DataMapController::analysis_agg($data, $submissionId);
-        //         break;
-
-        //     default:
-        //         \Log::warning('No Mapping Found');
-        //         break;
-        // }
-
+        Log::Info('project submission deleted');
+        Log::Info($projectSubmission);
+        DataMapController::updateAllRecords($form, $project);
     }
 }

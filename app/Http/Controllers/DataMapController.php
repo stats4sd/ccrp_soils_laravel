@@ -161,13 +161,23 @@ class DataMapController extends Controller
         \Log::info("values: " . json_encode($newModel));
     }
 
-    public function updateAllRecords(Xlsform $xlsform)
+    public static function updateAllRecords(Xlsform $xlsform, Project $project = null)
     {
-        $projectFormIds = $xlsform->project_xlsforms->pluck('id');
+        Log::info('updating records');
+        Log::info('form - ' . $xlsform);
+        Log::info('project - ' . $project);
 
+        if ($project) {
+            $projectFormIds = $xlsform->project_xlsforms->where('project_id', $project->id)->pluck('id');
+        } else {
+            $projectFormIds = $xlsform->project_xlsforms->pluck('id');
+        }
 
         $submissions = ProjectSubmission::whereIn('project_xlsform_id', $projectFormIds)
         ->get();
+
+        Log::info('submissions found');
+        Log::info($submissions);
 
         $dataMap = $xlsform->data_map;
 
@@ -181,7 +191,7 @@ class DataMapController extends Controller
             $content = GenericHelper::remove_group_names_from_kobo_data(json_decode($submission->content, true));
             Log::info($content);
 
-            $this->newRecord($dataMap, $content, $submission->project_xlsform->project->id);
+            DataMapController::newRecord($dataMap, $content, $submission->project_xlsform->project->id);
         }
 
         return count($submissions);

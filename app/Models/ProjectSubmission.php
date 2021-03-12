@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Project;
 use App\Models\AnalysisP;
 use App\Models\AnalysisPh;
 use App\Models\AnalysisAgg;
@@ -11,6 +12,9 @@ use App\Models\ProjectXlsform;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 /**
  * App\Models\ProjectSubmission
@@ -37,7 +41,10 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class ProjectSubmission extends Model
 {
-    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+    use CrudTrait,
+    RevisionableTrait,
+    SoftDeletes;
+
     protected $table = 'project_submissions';
     protected $guarded = [];
 
@@ -54,7 +61,12 @@ class ProjectSubmission extends Model
         });
     }
 
-    public function getSampleId()
+    public function identifiableName()
+    {
+        return $this->project_xlsform->title . ' - SAMPLE_ID: ' . $this->sample_id;
+    }
+
+    public function getSampleIdAttribute()
     {
         $content = json_decode($this->content);
 
@@ -103,5 +115,10 @@ class ProjectSubmission extends Model
     public function analysis_poxc()
     {
         return $this->hasMany(AnalysisPoxc::class);
+    }
+
+    public function samples()
+    {
+        return $this->hasMany(Sample::class);
     }
 }
