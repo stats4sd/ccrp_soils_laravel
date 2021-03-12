@@ -46,7 +46,7 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $invite = null;
-        if(request()->has('token')) {
+        if (request()->has('token')) {
             $invite = Invite::where('token', '=', request()->token)->first();
         }
         return view('auth.register', compact('invite'));

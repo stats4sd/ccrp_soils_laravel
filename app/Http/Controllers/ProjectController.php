@@ -51,6 +51,7 @@ class ProjectController extends Controller
                     $q->orderBy('pivot_admin', 'desc');
                 },
                 'project_xlsforms.xlsform',
+                'samples',
             ]
         );
 

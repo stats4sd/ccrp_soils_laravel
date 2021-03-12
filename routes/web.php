@@ -63,7 +63,8 @@ Route::group([
         ]);
 
         Route::get('projects/{project}#{tab?}', 'ProjectController@show')->name('projects.show');
-        Route::get('projects/{project}/downloadsamples', 'SampleMergedController@download')->name('projects.downloadsamples');
+        Route::get('projects/{project}/samples/download-wide', 'SampleMergedController@download')->name('projects.samples.download-wide');
+        Route::get('projects/{project}/samples/download-long', 'SampleController@download')->name('projects.samples.download-long');
 
         // // Modified Resource Controller for ProjectMember
         Route::get('projects/{project}/projectmembers/create', 'ProjectMemberController@create')->name('projectmembers.create');
@@ -81,12 +82,5 @@ Route::group([
 
         Route::get('xlsforms/{xlsform}/downloadsubmissions', 'SubmissionController@download')->name('xlsforms.downloadsubmissions');
         Route::post('admin/xlsform/{xlsform}/updaterecords', 'DataMapController@updateAllRecords')->name('xlsforms.updaterecords');
-
-        // //User
-        // Route::post('/users/{id}/upload', 'UserController@upload');
-        // Route::post('/users/{id}/validateDetails', 'UserController@validateDetails');
-        // Route::post('/users/{id}/changePassword', 'UserController@changePassword');
-        // Route::post('/users/{id}/deleteProfile', 'UserController@deleteProfile');
-        // Route::post('/users/{id}/kobo-user', 'UserController@koboUser');
     });
 });
