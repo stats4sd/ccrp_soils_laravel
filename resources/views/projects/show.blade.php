@@ -48,7 +48,23 @@
                 :user-id="{{ auth()->user()->id }}"
                 :samples="{{ $project->samples->toJson() }}"
             ></project-data-table>
-            <a href="{{ route('projects.downloadsamples', $project) }}" class="btn btn-info">{{ t("Download Merged Sample Data") }}</a>
+            <h4>Downloads</h4>
+            <div class="alert alert-info">
+                Two download options are available. Choose "wide" format to receive:
+                <ul>
+                    <li>A single worksheet containing 1 row per sample</li>
+                    <li>Only the first analysis record entered for a specific sample</li>
+                </ul>
+                Choose "split" format to revceive:
+                <ul>
+                    <li>One worksheet for sample data</li>
+                    <li>One worksheet for each type of analysis</li>
+                    <li>Each analysis record is linked to a sample via the sample_id column</li>
+                    <li>If there is more than 1 anlysis record for a specific sample, all the records will be shown.</li>
+                </ul>
+            </div>
+            <a href="{{ route('projects.samples.download-wide', $project) }}" class="btn btn-success">{{ t("Download sample data in wide Format") }}</a>
+            <a href="{{ route('projects.samples.download-long', $project) }}" class="btn btn-success">{{ t("Download sample data in split format") }}</a>
         </div>
         <div class="tab-pane fade wide-table" id="nutrients" role="tabpanel" aria-labelledby="nutrients-tab">
             <project-nutrients-table
