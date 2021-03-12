@@ -16,5 +16,5 @@ npm-debug.log
 yarn-error.log
 docs/.*
 _ide_helper.php
-
+*.DS_Store
 /database/views/samples_merged*

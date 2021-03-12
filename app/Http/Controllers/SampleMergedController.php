@@ -98,6 +98,7 @@ class SampleMergedController extends Controller
 
         if ($project->customR) {
             $query .= "
+            `analysis_p_customr`.`Reagent_type` AS `analysis_p_custom_r-Reagent_type`,
             `analysis_p_customr`.`analysis_date` AS `analysis_p_custom_r-date`,
             `analysis_p_customr`.`weight_soil` AS `analysis_p_custom_r-weight_soil`,
             `analysis_p_customr`.`vol_extract` AS `analysis_p_custom_r-vol_extract`,
