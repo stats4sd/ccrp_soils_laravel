@@ -228,7 +228,7 @@ class DataMapController extends Controller
             'balance_K' => isset($data['balance_K_an4']) ? $data['balance_K_an4'] : null,
         ]);
 
-        if ($data['additional_an3'] === 'yes') {
+        if (isset($data['additional_an3']) && $data['additional_an3'] === 'yes') {
             NutrientBalance::create([
                 'project_id' => $projectId,
                 'farmer_field_id' => $farmerField->id,
@@ -248,7 +248,7 @@ class DataMapController extends Controller
             ]);
         }
 
-        if ($data['additional_an2'] === 'yes') {
+        if (isset($data['additional_an2']) && $data['additional_an2'] === 'yes') {
             NutrientBalance::create([
                 'project_id' => $projectId,
                 'farmer_field_id' => $farmerField->id,
@@ -269,7 +269,7 @@ class DataMapController extends Controller
         }
 
 
-        if ($data['additional_an1'] === 'yes') {
+        if (isset($data['additional_an1']) && $data['additional_an1'] === 'yes') {
             NutrientBalance::create([
                 'project_id' => $projectId,
                 'farmer_field_id' => $farmerField->id,
